@@ -1,0 +1,6 @@
+XMODIFIERS="@im=ibus"
+XIM="ibus"
+XIM_PROGRAM="ibus"
+GTK_IM_MODULE="ibus"
+QT_IM_MODULE="ibus"
+

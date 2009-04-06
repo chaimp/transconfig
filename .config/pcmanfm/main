@@ -1,0 +1,14 @@
+[General]
+show_thumbnail=0
+big_icon_size=72
+small_icon_size=32
+open_bookmark_method=2
+terminal=lxterminal
+
+[Window]
+width=1916
+height=1163
+splitter_pos=186
+maximized=0
+
+[Desktop]

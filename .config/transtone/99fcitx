@@ -1,0 +1,7 @@
+XMODIFIERS="@im=fcitx"
+XIM=fcitx
+XIM_PROGRAM="fcitx"
+XIM_ARGS="-d"
+GTK_IM_MODULE=XIM
+QT_IM_MODULE=XIM
+

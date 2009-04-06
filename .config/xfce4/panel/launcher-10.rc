@@ -1,0 +1,8 @@
+[Entry 0]
+Name=网页浏览器
+Exec=exo-open --launch WebBrowser
+Terminal=false
+StartupNotify=false
+Comment=网上冲浪
+X-XFCE-IconCategory=7
+

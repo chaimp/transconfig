@@ -1,0 +1,8 @@
+[Entry 0]
+Name=编辑器
+Exec=mousepad
+Terminal=false
+StartupNotify=true
+Comment=编辑文本文件
+X-XFCE-IconCategory=1
+

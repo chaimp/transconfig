@@ -1,0 +1,8 @@
+break-countdown-seconds=1800
+lock-countdown-seconds=300
+postpone-countdown-seconds=120
+enabled=false
+display-seconds=false
+display-hours=false
+display-time=false
+

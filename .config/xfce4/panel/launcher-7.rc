@@ -1,0 +1,8 @@
+[Entry 0]
+Name=命令提示符
+Exec=QTerm
+Terminal=false
+StartupNotify=true
+Comment=X 终端模拟器
+X-XFCE-IconCategory=13
+
