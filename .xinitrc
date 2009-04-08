@@ -8,7 +8,7 @@ xrdb .Xresources
 #export GTK_IM_MODULE="ibus"
 #export QT_IM_MODULE="ibus"
 
-
+export GTK2_RC_FILES="`pwd`/.gtkrc-2.0"
 
 export XIM=fcitx
 export XIM_PROGRAM=fcitx
