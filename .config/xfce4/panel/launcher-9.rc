@@ -1,8 +1,10 @@
 [Entry 0]
 Name=文件管理器
+Comment=管理文件及文件夹
 Exec=thunar
 Terminal=false
-StartupNotify=true
-Comment=管理文件及文件夹
-X-XFCE-IconCategory=2
+
+[Global]
+MoveFirst=false
+ArrowPosition=0
 

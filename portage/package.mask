@@ -1,1 +1,7 @@
->=dev-libs/libusb-1.0.9999
+=dev-libs/libusb-1.0.9999
+=app-misc/fprint_demo-9999
+=media-libs/libfprint-9999
+=sys-auth/pam_fprint-9999
+=x11-misc/fqterm-9999
+
+=x11-libs/xcb-util-0.3.4

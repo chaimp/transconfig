@@ -3,6 +3,8 @@ alias rm="rm -i"
 alias ls="ls --color=auto"
 alias l="ls -ail"
 alias cl="clear"
+alias nano="nano -w"
+alias man="man -P most"
 
 alias cvs="cvs -z3"
 

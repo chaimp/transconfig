@@ -50,6 +50,7 @@ floatapps =
 {
     -- by class
     ["MPlayer"] = true,
+    ["vlc"] = true,
     ["pinentry"] = true,
     ["gimp"] = true,
     -- by instance
@@ -86,9 +87,9 @@ for s = 1, screen.count() do
 end
 
 tags[1][1].name = "冲浪"
-tags[1][1].layout = layouts[7]
+tags[1][1].layout = awful.layout.suit.magnifier
 tags[1][2].name = "虚拟机"
-tags[1][2].layout = layouts[12]
+tags[1][2].layout = awful.layout.suit.floating
 tags[1][3].name = "影音"
 tags[1][4].name = "学习"
 tags[1][5].name = "游戏"
@@ -256,8 +257,7 @@ globalkeys =
 
     -- 自定义设置
     key({ modkey }, "r", function () awful.util.spawn("dmenu_run") end),
-    key({ modkey }, "p", function () awful.util.spawn("dmenu_path | dmenu -b") end),
---    key { modkey = {"Mod4"} key = "p" command = "spawn" arg = "exec `dmenu_path | dmenu -b`" }
+--    key({ modkey }, "p", function () awful.util.spawn("dmenu_path | dmenu -b") end),
 
     -- 音量调节
     --key({ }, "#121", function () awful.util.spawn("mute") end),
@@ -265,8 +265,8 @@ globalkeys =
     key({ }, "#123", function () awful.util.spawn("amixer -q sset PCM 2dB+") end),
 
     -- 待机与休眠
-    --key({ }, "#150", function () awful.util.spawn("gksudo pm-suspend") end):add()
-    --key({ }, "#127", function () awful.util.spawn("gksudo pm-hibernate") end):add()
+    key({ }, "#150", function () awful.util.spawn("gksudo pm-suspend") end),
+    key({ }, "#244", function () awful.util.spawn("gksudo pm-hibernate") end),
 
     -- 锁屏
     key({ modkey }, "s", function () awful.util.spawn("xlock") end),
@@ -472,9 +472,9 @@ autorunApps =
 --    "emacs",
 --    "xscreensaver",
 --    "ibus",
-    "fcitx",
-    "parcellite",
---    "tilda"
+--    "fcitx",
+--    "parcellite",
+--    "wicd-client"
 }
 
 if autorun then

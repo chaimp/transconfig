@@ -711,3 +711,476 @@ read_ini_string: assertion `value' failed
 
 ** LOGGING STOPPED AT Thu Apr  2 21:18:16 2009
 
+
+** LOGGING STARTED AT Thu Apr  9 11:01:50 2009
+
+Loaded plugin (/usr/lib64/audacious/Input/aac.so)
+Loaded plugin (/usr/lib64/audacious/Input/alac.so)
+Loaded plugin (/usr/lib64/audacious/Input/cdaudio-ng.so)
+Loaded plugin (/usr/lib64/audacious/Input/console.so)
+Loaded plugin (/usr/lib64/audacious/Input/cuesheet.so)
+Loaded plugin (/usr/lib64/audacious/Input/demac.so)
+Loaded plugin (/usr/lib64/audacious/Input/flacng.so)
+Loaded plugin (/usr/lib64/audacious/Input/madplug.so)
+Loaded plugin (/usr/lib64/audacious/Input/metronom.so)
+Loaded plugin (/usr/lib64/audacious/Input/sexypsf.so)
+Loaded plugin (/usr/lib64/audacious/Input/sndfile.so)
+Loaded plugin (/usr/lib64/audacious/Input/tonegen.so)
+Loaded plugin (/usr/lib64/audacious/Input/tta.so)
+Loaded plugin (/usr/lib64/audacious/Input/vorbis.so)
+Loaded plugin (/usr/lib64/audacious/Input/vtx.so)
+Loaded plugin (/usr/lib64/audacious/Input/wavpack.so)
+Loaded plugin (/usr/lib64/audacious/Input/wma.so)
+Loaded plugin (/usr/lib64/audacious/Output/ALSA.so)
+Loaded plugin (/usr/lib64/audacious/Output/ESD.so)
+Loaded plugin (/usr/lib64/audacious/Output/filewriter.so)
+Loaded plugin (/usr/lib64/audacious/Output/null.so)
+Loaded plugin (/usr/lib64/audacious/Effect/audiocompress.so)
+Loaded plugin (/usr/lib64/audacious/Effect/crystalizer.so)
+Loaded plugin (/usr/lib64/audacious/Effect/echo.so)
+Loaded plugin (/usr/lib64/audacious/Effect/ladspa.so)
+Loaded plugin (/usr/lib64/audacious/Effect/sndstretch.so)
+Loaded plugin (/usr/lib64/audacious/Effect/stereo.so)
+Loaded plugin (/usr/lib64/audacious/Effect/voice_removal.so)
+Loaded plugin (/usr/lib64/audacious/General/alarm.so)
+Loaded plugin (/usr/lib64/audacious/General/aosd.so)
+Loaded plugin (/usr/lib64/audacious/General/evdev-plug.so)
+Loaded plugin (/usr/lib64/audacious/General/hotkey.so)
+Loaded plugin (/usr/lib64/audacious/General/mtp_up.so)
+Loaded plugin (/usr/lib64/audacious/General/scrobbler.so)
+Loaded plugin (/usr/lib64/audacious/General/song_change.so)
+Loaded plugin (/usr/lib64/audacious/General/statusicon.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/blur_scope.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/paranormal.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/rocklight.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/spectrum.so)
+Loaded plugin (/usr/lib64/audacious/Container/m3u.so)
+Loaded plugin (/usr/lib64/audacious/Container/pls.so)
+Loaded plugin (/usr/lib64/audacious/Container/xspf.so)
+Loaded plugin (/usr/lib64/audacious/Transport/lastfm.so)
+Loaded plugin (/usr/lib64/audacious/Transport/mms.so)
+Loaded plugin (/usr/lib64/audacious/Transport/neon.so)
+Loaded plugin (/usr/lib64/audacious/Transport/stdio.so)
+device: default
+playlistwin_item_visible: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_update_list: assertion `playlistwin_list' failed
+dbus_g_proxy_add_signal: assertion `DBUS_IS_G_PROXY (proxy)' failed
+dbus_g_proxy_add_signal: assertion `DBUS_IS_G_PROXY (proxy)' failed
+dbus_g_proxy_add_signal: assertion `DBUS_IS_G_PROXY (proxy)' failed
+D-Bus support has been activated
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+Shutting down plugin system
+(Gtk) gtk_widget_get_display: assertion `GTK_IS_WIDGET (widget)' failed
+
+** LOGGING STARTED AT Sun Apr 12 23:57:53 2009
+
+Loaded plugin (/usr/lib64/audacious/Input/flacng.so)
+Loaded plugin (/usr/lib64/audacious/Input/console.so)
+Loaded plugin (/usr/lib64/audacious/Input/tonegen.so)
+Loaded plugin (/usr/lib64/audacious/Input/madplug.so)
+Loaded plugin (/usr/lib64/audacious/Input/metronom.so)
+Loaded plugin (/usr/lib64/audacious/Input/alac.so)
+Loaded plugin (/usr/lib64/audacious/Input/cuesheet.so)
+Loaded plugin (/usr/lib64/audacious/Input/aac.so)
+Loaded plugin (/usr/lib64/audacious/Input/sndfile.so)
+Loaded plugin (/usr/lib64/audacious/Input/vorbis.so)
+Loaded plugin (/usr/lib64/audacious/Input/cdaudio-ng.so)
+Loaded plugin (/usr/lib64/audacious/Input/demac.so)
+Loaded plugin (/usr/lib64/audacious/Input/wavpack.so)
+Loaded plugin (/usr/lib64/audacious/Input/vtx.so)
+Loaded plugin (/usr/lib64/audacious/Input/tta.so)
+Loaded plugin (/usr/lib64/audacious/Input/wma.so)
+Loaded plugin (/usr/lib64/audacious/Input/sexypsf.so)
+Loaded plugin (/usr/lib64/audacious/Output/ESD.so)
+Loaded plugin (/usr/lib64/audacious/Output/filewriter.so)
+Loaded plugin (/usr/lib64/audacious/Output/null.so)
+Loaded plugin (/usr/lib64/audacious/Output/ALSA.so)
+Loaded plugin (/usr/lib64/audacious/Effect/crystalizer.so)
+Loaded plugin (/usr/lib64/audacious/Effect/audiocompress.so)
+Loaded plugin (/usr/lib64/audacious/Effect/ladspa.so)
+Loaded plugin (/usr/lib64/audacious/Effect/stereo.so)
+Loaded plugin (/usr/lib64/audacious/Effect/echo.so)
+Loaded plugin (/usr/lib64/audacious/Effect/voice_removal.so)
+Loaded plugin (/usr/lib64/audacious/Effect/sndstretch.so)
+Loaded plugin (/usr/lib64/audacious/General/hotkey.so)
+Loaded plugin (/usr/lib64/audacious/General/evdev-plug.so)
+Loaded plugin (/usr/lib64/audacious/General/alarm.so)
+Loaded plugin (/usr/lib64/audacious/General/statusicon.so)
+Loaded plugin (/usr/lib64/audacious/General/scrobbler.so)
+Loaded plugin (/usr/lib64/audacious/General/aosd.so)
+Loaded plugin (/usr/lib64/audacious/General/mtp_up.so)
+Loaded plugin (/usr/lib64/audacious/General/song_change.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/blur_scope.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/paranormal.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/spectrum.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/rocklight.so)
+Loaded plugin (/usr/lib64/audacious/Container/xspf.so)
+Loaded plugin (/usr/lib64/audacious/Container/m3u.so)
+Loaded plugin (/usr/lib64/audacious/Container/pls.so)
+Loaded plugin (/usr/lib64/audacious/Transport/stdio.so)
+Loaded plugin (/usr/lib64/audacious/Transport/mms.so)
+Loaded plugin (/usr/lib64/audacious/Transport/neon.so)
+Loaded plugin (/usr/lib64/audacious/Transport/lastfm.so)
+device: default
+playlistwin_item_visible: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_update_list: assertion `playlistwin_list' failed
+dbus_g_proxy_add_signal: assertion `DBUS_IS_G_PROXY (proxy)' failed
+dbus_g_proxy_add_signal: assertion `DBUS_IS_G_PROXY (proxy)' failed
+dbus_g_proxy_add_signal: assertion `DBUS_IS_G_PROXY (proxy)' failed
+D-Bus support has been activated
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+Shutting down plugin system
+
+** LOGGING STOPPED AT Mon Apr 13 00:00:28 2009
+
+
+** LOGGING STARTED AT Sat Apr 25 16:59:44 2009
+
+Loaded plugin (/usr/lib64/audacious/Input/flacng.so)
+Loaded plugin (/usr/lib64/audacious/Input/console.so)
+Loaded plugin (/usr/lib64/audacious/Input/tonegen.so)
+Loaded plugin (/usr/lib64/audacious/Input/madplug.so)
+Loaded plugin (/usr/lib64/audacious/Input/metronom.so)
+Loaded plugin (/usr/lib64/audacious/Input/alac.so)
+Loaded plugin (/usr/lib64/audacious/Input/cuesheet.so)
+Loaded plugin (/usr/lib64/audacious/Input/aac.so)
+Loaded plugin (/usr/lib64/audacious/Input/sndfile.so)
+Loaded plugin (/usr/lib64/audacious/Input/vorbis.so)
+Loaded plugin (/usr/lib64/audacious/Input/cdaudio-ng.so)
+Loaded plugin (/usr/lib64/audacious/Input/demac.so)
+Loaded plugin (/usr/lib64/audacious/Input/wavpack.so)
+Loaded plugin (/usr/lib64/audacious/Input/vtx.so)
+Loaded plugin (/usr/lib64/audacious/Input/tta.so)
+Loaded plugin (/usr/lib64/audacious/Input/wma.so)
+Loaded plugin (/usr/lib64/audacious/Input/sexypsf.so)
+Loaded plugin (/usr/lib64/audacious/Output/ESD.so)
+Loaded plugin (/usr/lib64/audacious/Output/pulse_audio.so)
+Loaded plugin (/usr/lib64/audacious/Output/filewriter.so)
+Loaded plugin (/usr/lib64/audacious/Output/null.so)
+Loaded plugin (/usr/lib64/audacious/Output/ALSA.so)
+Loaded plugin (/usr/lib64/audacious/Effect/crystalizer.so)
+Loaded plugin (/usr/lib64/audacious/Effect/audiocompress.so)
+Loaded plugin (/usr/lib64/audacious/Effect/ladspa.so)
+Loaded plugin (/usr/lib64/audacious/Effect/stereo.so)
+Loaded plugin (/usr/lib64/audacious/Effect/echo.so)
+Loaded plugin (/usr/lib64/audacious/Effect/voice_removal.so)
+Loaded plugin (/usr/lib64/audacious/Effect/sndstretch.so)
+Loaded plugin (/usr/lib64/audacious/General/hotkey.so)
+Loaded plugin (/usr/lib64/audacious/General/evdev-plug.so)
+Loaded plugin (/usr/lib64/audacious/General/alarm.so)
+Loaded plugin (/usr/lib64/audacious/General/statusicon.so)
+Loaded plugin (/usr/lib64/audacious/General/scrobbler.so)
+Loaded plugin (/usr/lib64/audacious/General/aosd.so)
+Loaded plugin (/usr/lib64/audacious/General/mtp_up.so)
+Loaded plugin (/usr/lib64/audacious/General/song_change.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/blur_scope.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/paranormal.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/spectrum.so)
+Loaded plugin (/usr/lib64/audacious/Visualization/rocklight.so)
+Loaded plugin (/usr/lib64/audacious/Container/xspf.so)
+Loaded plugin (/usr/lib64/audacious/Container/m3u.so)
+Loaded plugin (/usr/lib64/audacious/Container/pls.so)
+Loaded plugin (/usr/lib64/audacious/Transport/stdio.so)
+Loaded plugin (/usr/lib64/audacious/Transport/mms.so)
+Loaded plugin (/usr/lib64/audacious/Transport/neon.so)
+Loaded plugin (/usr/lib64/audacious/Transport/lastfm.so)
+device: default
+playlistwin_item_visible: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_list_get_visible_count: assertion `UI_SKINNED_IS_PLAYLIST(playlistwin_list)' failed
+playlistwin_update_list: assertion `playlistwin_list' failed
+dbus_g_proxy_add_signal: assertion `DBUS_IS_G_PROXY (proxy)' failed
+dbus_g_proxy_add_signal: assertion `DBUS_IS_G_PROXY (proxy)' failed
+dbus_g_proxy_add_signal: assertion `DBUS_IS_G_PROXY (proxy)' failed
+D-Bus support has been activated
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+skin_pixmap_free: assertion `p->pixbuf != NULL' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+read_ini_string: assertion `value' failed
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+(Gtk) GtkSpinButton: setting an adjustment with non-zero page size is deprecated
+Shutting down plugin system
+
+** LOGGING STOPPED AT Sat Apr 25 17:02:23 2009
+

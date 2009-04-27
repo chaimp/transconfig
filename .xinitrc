@@ -1,24 +1,27 @@
 #!/bin/sh
 
 xrdb .Xresources
-
-#export XMODIFIERS="@im=ibus"
-#export XIM="ibus"
-#export XIM_PROGRAM="ibus"
-#export GTK_IM_MODULE="ibus"
-#export QT_IM_MODULE="ibus"
-
 export GTK2_RC_FILES="`pwd`/.gtkrc-2.0"
-
-export XIM=fcitx
-export XIM_PROGRAM=fcitx
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-#exec fcitx &
+#export SAL_USE_VCLPLUGIN="gtk"
+export OOO_FORCE_DESKTOP="gnome"
 
 #xcompmgr &
+#xcompmgr -cCfF -r7 -o.65 -l-10 -t-8 -D7 &
+
 xsetroot -cursor_name left_ptr &
 
+#ibus &
+fcitx &
+parcellite &
+wicd-client &
+
+
+#DEFAULT_SESSION=awesome
+#case $1 in
+#  awesome) exec /usr/bin/awesome ;;
+#  xfce4) exec /usr/bin/tartxfce4 ;;
+#  xmonad) exec /usr/bin/xmonad ;;
+#  *) exec $DEFAULT_SESSION ;;
+#esac
+
 exec /usr/bin/awesome
-#exec /usr/bin/xmonad

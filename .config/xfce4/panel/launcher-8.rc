@@ -1,8 +1,10 @@
 [Entry 0]
 Name=编辑器
+Comment=编辑文本文件
 Exec=mousepad
 Terminal=false
-StartupNotify=true
-Comment=编辑文本文件
-X-XFCE-IconCategory=1
+
+[Global]
+MoveFirst=false
+ArrowPosition=0
 

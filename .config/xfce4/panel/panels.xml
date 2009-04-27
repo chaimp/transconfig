@@ -3,12 +3,12 @@
 <panels>
 	<panel>
 		<properties>
-			<property name="size" value="44"/>
+			<property name="size" value="31"/>
 			<property name="monitor" value="0"/>
 			<property name="screen-position" value="11"/>
 			<property name="fullwidth" value="1"/>
 			<property name="xoffset" value="0"/>
-			<property name="yoffset" value="1155"/>
+			<property name="yoffset" value="868"/>
 			<property name="handlestyle" value="0"/>
 			<property name="autohide" value="0"/>
 			<property name="transparency" value="20"/>
@@ -23,11 +23,9 @@
 			<item name="launcher" id="9"/>
 			<item name="launcher" id="10"/>
 			<item name="tasklist" id="3"/>
-			<item name="cpugraph" id="12270285723"/>
 			<item name="separator" id="11"/>
 			<item name="systray" id="12270284482"/>
 			<item name="clock" id="14"/>
-			<item name="xfce4-time-out-plugin" id="12270284321"/>
 			<item name="actions" id="12"/>
 		</items>
 	</panel>

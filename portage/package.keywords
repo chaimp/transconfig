@@ -5,5 +5,5 @@ app-emulation/dynagen **
 #=app-i18n/ibus-table-wubi-9999 **
 #=app-i18n/ibus-9999 **
 =app-i18n/fcitx-9999 **
-#=x11-themes/gtk-engines-murrine-9999 **
-app-dicts/WyabdcRealPeopleTTS **
+x11-misc/fqterm **
+media-video/vlc **
