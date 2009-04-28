@@ -1,7 +1,7 @@
 (load "/usr/share/emacs/site-lisp/site-gentoo")
 (add-to-list 'load-path "~/.emacs.d/93free")
 (add-to-list 'load-path "~/.emacs.d/lisps")
-;;(add-to-list 'load-path "~/.emacs.d/lisps/yasnippet")
+(add-to-list 'load-path "~/.emacs.d/lisps/themes")
 ;; 载入elisp文件
 
 
@@ -190,7 +190,8 @@
 ;;(set-scroll-bar-mode 'right)		; scroll-bar 靠右显示。
 (scroll-bar-mode -1)                    ; 不要 scroll-bar
 (display-battery-mode 1)
-;;(tool-bar-mode -1)			; 不要 tool-bar。
+(tool-bar-mode -1)			; 不要 tool-bar。
+(global-linum-mode 1)                   ; 显示行号
 
 (autoload 'table-insert "table" "WYGIWYS table editor")
 ;; 可以识别文本文件里本来就存在的表格，而且可以把表格输出为 HTML 和 TeX。
@@ -272,8 +273,14 @@
 
 
 (require 'color-theme)
-(color-theme-initialize)
-(color-theme-sitaramv-nt)
+(setq theme-load-from-file t)
+;;(color-theme-initialize)
+;;(color-theme-sitaramv-nt)
+
+(load-file "~/.emacs.d/lisps/themes/color-theme-tango-light.el")
+(load-file "~/.emacs.d/lisps/themes/color-theme-awesome.el")
+(load-file "~/.emacs.d/lisps/themes/color-theme-tango-2.el")
+(color-theme-tango-2)
 
 ;;(require 'tex-site)
 (require 'compile)
