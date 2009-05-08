@@ -4,6 +4,8 @@
 
 inherit webapp eutils depend.php
 
+SLOT="6.11"
+
 MY_PV=${PV:0:3}.0
 
 DESCRIPTION="PHP-based open-source platform and content management system"
