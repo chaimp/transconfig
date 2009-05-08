@@ -5,3 +5,5 @@
 =x11-misc/fqterm-9999
 
 =x11-libs/xcb-util-0.3.4
+
+>=x11-drivers/ati-drivers-8.582

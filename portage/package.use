@@ -1,3 +1,5 @@
+dev-util/git -gtk subversion
+dev-util/subversion -dso
 dev-lang/python sqlite
 dev-lang/ghc binary 
 xfce-base/xfce4 minimal -alsa -oss 
@@ -8,6 +10,8 @@ xfce-base/xfce-utils -lock
 xfce-extra/exo libnotify
 x11-wm/fvwm -gtk stroke
 x11-libs/cairo cleartype
+x11-themes/redhat-artwork  audacious cursors gdm icons 
+x11-apps/xinit minimal
 media-sound/audacious chardet
 media-plugins/audacious-plugins chardet wma tta sndfile
 media-video/mplayer -gtk -live -oss -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger radio quicktime realcodecs rar dvb
@@ -17,6 +21,7 @@ media-libs/libmng lcms
 media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
 media-tv/gmlive sopcast -totem
+app-arch/p7zip wxwidgets rar
 app-admin/conky hddtemp mpd nano-syntax rss vim-syntax wifi
 app-cdr/recorder vcd
 app-cdr/brasero -totem -cdrtools cdrkit libburn -nautilus 
@@ -40,9 +45,9 @@ www-client/opera qt-static
 www-client/mozilla-firefox mozdevelop java iceweasel
 www-servers/nginx status pcre zlib
 www-servers/lighttpd minimal
-www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp
+www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp 
 www-plugins/adobe-flash -32bit
-dev-lang/php -truetype cgi curl discard-path force-cgi-redirect threads bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
+dev-lang/php -truetype apache2 filter unicode cgi curl discard-path force-cgi-redirect threads bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
 dev-db/mysql embedded 
 dev-util/subversion -berkdb
 net-ftp/proftpd  authfile clamav softquota vroot rewrite
@@ -56,9 +61,11 @@ net-misc/nxserver-freenx nxclient
 net-misc/nxnode rdesktop -vnc
 net-misc/wicd ioctl
 net-wireless/aircrack-ng wifi
+net-libs/xulrunner java
 sys-apps/hal laptop
 sys-apps/tuxonice-userui fbsplash
 sys-apps/hwdata-gentoo  binary-drivers
 sys-apps/busybox -savedconfig
+sys-apps/man-pages -nls -linguas_zh_CN
 sys-libs/pam -nls
 sys-fs/ntfs3g suid
