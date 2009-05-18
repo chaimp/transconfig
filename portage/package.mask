@@ -6,4 +6,5 @@
 
 =x11-libs/xcb-util-0.3.4
 
->=x11-drivers/ati-drivers-8.582
+>=x11-drivers/ati-drivers-8.593
+>x11-misc/dmenu-3.9
