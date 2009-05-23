@@ -36,7 +36,7 @@ app-text/texlive -truetype
 app-text/acroread minimal
 app-emulation/ies4linux -gtk -kde
 app-emulation/qemu-softmmu kqemu
-app-emulation/kvm -esd
+app-emulation/kvm esd
 app-office/openoffice-bin gnome java
 app-portage/layman git subversion
 media-sound/amarok mp3tunes  
@@ -50,7 +50,7 @@ www-servers/nginx status pcre zlib
 www-servers/lighttpd minimal
 www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp 
 www-plugins/adobe-flash -32bit
-dev-lang/php -truetype apache2 filter unicode cgi curl discard-path force-cgi-redirect threads bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
+dev-lang/php -truetype apache2 filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
 dev-db/mysql embedded 
 dev-util/subversion -berkdb
 net-ftp/proftpd  authfile clamav softquota vroot rewrite
@@ -63,8 +63,10 @@ net-analyzer/tcpdump -samba
 net-misc/nxserver-freenx nxclient
 net-misc/nxnode rdesktop -vnc
 net-misc/wicd ioctl
+net-misc/rdesktop oss
 net-wireless/aircrack-ng wifi
 net-libs/xulrunner java
+net-libs/libsoup gnome
 sys-apps/hal laptop
 sys-apps/tuxonice-userui fbsplash
 sys-apps/hwdata-gentoo  binary-drivers
