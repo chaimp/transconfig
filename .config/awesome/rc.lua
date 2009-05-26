@@ -461,27 +461,27 @@ end)
 -- Hook called every minute
 awful.hooks.timer.register(60, function ()
 --    mytextbox.text = os.date(" %a %b %d, %H:%M ")
-    mytextbox.text = os.date("%Y年%m月%d日%a %H:%M")
+    mytextbox.text = os.date(" %Y年%m月%d日%a %H:%M ")
 end)
 
 -- Autorun programs
---autorun = "true"
---autorunApps = 
---{       
---    "xsetroot -cursor_name left_ptr",
+autorun = "true"
+autorunApps = 
+{       
+    "xsetroot -cursor_name left_ptr",
 --    "emacs",
 --    "xscreensaver",
 --    "ibus",
 --    "fcitx",
 --    "parcellite",
 --    "wicd-client"
---}
+}
 
---if autorun then
---    for app = 1, #autorunApps do
---        awful.util.spawn(autorunApps[app])
---    end
---end
+if autorun then
+    for app = 1, #autorunApps do
+        awful.util.spawn(autorunApps[app])
+    end
+end
 
 
 -- }}}
