@@ -4,7 +4,18 @@ Xft.hinting: 1
 Xft.hintstyle: hintslight
 Xft.rgba: rgb
 Xft.font: Microsoft Yahei
-!Emacs.font: Envy Code R-15
+!Emacs.font: Envy Code R-20
 Emacs.font: Envy Code R-10
+!Emacs.font: WenQuanYi Zen Hei Mono-10
 Emacs.useXIM: true 
 
+
+xterm*locale:true
+xterm*utf8:true
+xterm*utf8Title:true
+xterm*fontMenu*fontdefault*Label:Default
+xterm*faceName:Monaco:antialias=true:pixelsize=10
+xterm*faceNameDoublesize:Droid Sans Fallback Pro:antialias=true:pixelsize=10
+xterm*xftAntialias:true
+xterm*cjkWidth:false
+xterm*preeditType:Root
