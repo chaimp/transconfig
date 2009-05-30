@@ -1,0 +1,37 @@
+;;设置个人信息
+(setq user-full-name "93free");;名字
+(setq user-mail-address "zm3345@gmail.com");邮箱地址
+;设置nntp服务器，现在国内很全的就是这两个了
+(setq gnus-select-method '(nntp "south.newsfan.net"));全中文的新帆新闻组，这个是电信的服务器，还有一个北方的服务器 news.newsfan.net.
+(add-to-list 'gnus-secondary-select-methods '(nntp "news.yaako.com"));这个服务器上有很多中文的组，具体的上面的pdf有说明。
+(gnus-agentize);打开代理，允许离线阅读
+(add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ;使用话题模式，更适合阅读
+(setq gnus-summary-show-article-charset-alist
+     '((1 . cn-gb-2312) (2 . big5) (3 . gbk) (4 . utf-8))) ;设置解码顺序
+(eval-after-load "mm-decode"
+      '(progn
+      (add-to-list 'mm-discouraged-alternatives "text/html")
+      (add-to-list 'mm-discouraged-alternatives "text/richtext")));阅读的时候把html的头部什么的去掉，只要text部分
+
+;; pop
+(setq mail-sources
+  '((pop :server "pop.gmail.com"
+         :port 995
+         :user "zm3345"
+         :connection ssl
+         :leave t)))
+ 
+;; Smtp
+(setq message-send-mail-function 'smtpmail-send-it)
+(setq smtpmail-default-smtp-server "smtp.gmail.com")
+(setq smtpmail-smtp-service 587)
+(setq smtpmail-starttls-credentials
+  '(("smtp.gmail.com"
+     587
+     nil
+     nil)))
+(setq smtpmail-auth-credentials
+  '(("smtp.gmail.com"
+     587
+     "zm3345"
+     nil))) 

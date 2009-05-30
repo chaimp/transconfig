@@ -1,0 +1,30 @@
+"2.0b1 (created: 2009/02/09 17:07:55)
+"set guioptions=m
+set editor=emacsclient -f
+
+set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
+set previouspattern=\s*上一页|上一张|上一篇|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
+
+"键盘映射
+map <S-Up> :set go=m<CR>
+map <S-Down> :set go=<CR>
+map <S-Left> :set go=T<CR>
+map <S-Right> :set go=b<CR>
+map <S-Home> :set go=mTb<CR> 
+noremap j 2j
+noremap k 2k
+noremap J <C-d>
+noremap K <C-u>
+noremap h gT
+noremap l gt
+noremap <C-x><C-s> :saveas<CR>
+
+"复制粘帖键映射
+:imap <C-y> <S-Ins> 
+:map <C-y> <S-Ins>
+map <A-w> Y
+
+autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader).*/.test(buffer.URL)
+
+"source! ~/_vimperatorrc.local
+" vim: set ft=vimperator:

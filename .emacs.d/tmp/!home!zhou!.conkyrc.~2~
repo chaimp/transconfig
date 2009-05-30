@@ -1,0 +1,85 @@
+background no
+override_utf8_locale yes
+#font DejaVu Sans:size=8
+#xftfont DejaVu Sans:size=8
+use_xft yes
+xftalpha 0.1
+
+update_interval 1.0
+total_run_times 0
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+minimum_size 165 5
+maximum_width 165
+
+#alignment top_left
+#alignment top_right
+#alignment bottom_left
+alignment bottom_right
+#alignment none
+gap_x 5
+gap_y 45
+no_buffers yes
+cpu_avg_samples 2
+override_utf8_locale yes
+uppercase no # set to yes if you want all text to be in uppercase
+use_spacer none
+out_to_console no
+
+
+default_color white
+default_shade_color black
+default_outline_color grey90
+
+
+
+TEXT
+${color}${font Monaco:pixelsize=22}${time %H:%M}${font DejaVu Sans:size=8}${time %m.%d/%Y} ${font OpenLogos:size=18}[
+${voffset -20}${color}${font StyleBats:size=12}O ${font}${color slate grey}UpTime:$alignr${color }$uptime
+${color}${font StyleBats:size=12}Q ${font}${color slate grey}Kern:$alignr${color }$kernel
+${color}${font StyleBats:size=12}A ${font}${color slate grey}CPU:$alignr${color } $cpu% ${acpitemp}C
+${cpugraph 20,160 000000 ffffff}
+${color slate grey}Processes:$alignr${color }$processes  ($running_processes running)
+${color}${font Webdings:size=12}i${font}${color slate grey}Highest CPU:$alignr -PID-  CPU%
+${color #ddaa00}${top name 1}$alignr${top pid 1}${top cpu 1}
+${color lightgrey}${top name 2}$alignr${top pid 2}${top cpu 2}
+${color lightgrey}${top name 3}$alignr${top pid 3}${top cpu 3}
+${color}${font Webdings:size=12}i${font}${color slate grey}Highest MEM:$alignr -PID-  MEM%
+${color #ddaa00}${top_mem name 1}$alignr${top_mem pid 1}${top_mem mem 1}
+${color lightgrey}${top_mem name 2}$alignr${top_mem pid 2}${top_mem mem 2}
+${color lightgrey}${top_mem name 3}$alignr${top_mem pid 3}${top_mem mem 3}
+${color slate grey}MEM:${color} $memperc%$alignr$mem/$memmax
+${membar 3,160}
+${color slate grey}SWAP:${color} $swapperc%$alignr$swap/$swapmax
+${swapbar 3,160}
+${color slate grey}ROOT:$alignr${color}${fs_free /}/${fs_size /}
+${fs_bar 3,160 /}
+${color slate grey}HOME:$alignr${color}${fs_free /home}/${fs_size /home}
+${fs_bar 3,160 /home}
+${color slate grey}Disk Read:${alignr}${color}$diskio_read
+${color}${diskiograph_read /dev/sda 10,160 000000 ffffff}
+${color slate grey}Disk Write:${alignr}${color}$diskio_write
+${color}${diskiograph_write /dev/sda 10,160 000000 ffffff}
+${color slate grey}Internet:
+${color}${font PizzaDude Bullets:size=12}M${font} Tot.up. ${totalup eth0} Kb/s
+${voffset 1}${color}${font PizzaDude Bullets:size=12}v${font} Up: ${color }${upspeed eth0}k/s
+${upspeedgraph eth0 20,160 000000 ffffff}
+${voffset 6}${color}${font PizzaDude Bullets:size=12}S${font} Tot.dow. ${totaldown eth0} Kb/s
+${voffset 1}${color}${font PizzaDude Bullets:size=12}r${font} Down: ${color }${downspeed eth0}k/s
+${downspeedgraph eth0 20,160 000000 ffffff}
+${color}${font weather:size=22}${execi 600 ~/scripts/conditions.sh}${color slate grey}${font} Weather:
+${color}      ${font}${execi 1800 ~/scripts/pogodynka.sh}
+${color}${font SimpMusic Base:size=22}~${color slate grey}${font}  Music:
+${color slate grey}State:${alignr}${color}Now $mpd_status
+${color slate grey}Title:${color}${font DejaVu Sans YuanTi:size=8}${alignr}$mpd_title
+${color slate grey}${font}Artist:${color}${font DejaVu Sans YuanTi:size=8}${alignr}$mpd_artist
+${color slate grey}${font}Volume:${color}$mpd_vol%${alignr}${color slate grey}Bitrate:${color}$mpd_bitrate kbps
+${color}${mpd_bar 3,160}
+

@@ -1,0 +1,41 @@
+[QUOTE=acevery;1930104]没有这么简单，我现在用的也是xorg-server-1.5.3，emacs也可以用ibus输入的。
+之前在xorg-server-1.5.2下emacs也不能用ibus输入。[/QUOTE]
+
+恩，就算不是 xorg-server 本身，也是其相关组件引起的。
+
+[code]
+[I] x11-drivers/xf86-input-evdev
+     Installed versions:  2.0.8(03:28:52 PM 12/26/2008)(hal -debug)
+
+[I] x11-drivers/xf86-input-keyboard
+     Installed versions:  1.3.1(03:29:54 PM 12/26/2008)(-debug)
+
+[U] x11-drivers/xf86-input-mouse
+     Available versions:  1.2.2 (~)1.2.2-r1 1.2.3 (~)1.3.0 (~)9999[1] {debug}
+     Installed versions:  1.3.0(03:30:11 PM 12/26/2008)(-debug)
+     Homepage:            http://git.or.cz/
+     Description:         X.Org driver for mouse input devices
+
+[U] x11-drivers/xf86-input-synaptics
+     Available versions:  (~)0.15.2-r2 (~)0.99.1 (~)0.99.2 (~)0.99.2-r1 (~)0.99.3 (~)9999[1] {debug hal}
+     Installed versions:  0.99.3(03:53:28 PM 12/26/2008)(-debug)
+     Homepage:            http://cgit.freedesktop.org/xorg/driver/xf86-input-synaptics/
+     Description:         Driver for Synaptics touchpads
+
+[I] x11-drivers/xf86-video-fbdev
+     Available versions:  0.3.1 (~)0.4.0 {debug}
+     Installed versions:  0.4.0(02:57:16 PM 12/26/2008)(-debug)
+     Homepage:            http://xorg.freedesktop.org/
+     Description:         video driver for framebuffer device
+
+[I] x11-drivers/xf86-video-vesa
+     Available versions:  1.3.0 (~)2.0.0 {debug}
+     Installed versions:  2.0.0(11:23:18 AM 12/20/2008)(-debug)
+     Homepage:            http://xorg.freedesktop.org/
+     Description:         Generic VESA video driver
+
+[1] "x11" /usr/local/portage/layman/x11
+
+Found 6 matches.
+
+[/code]

@@ -1,0 +1,10 @@
+Xft.dpi:96
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.font: Microsoft Yahei
+!Emacs.font: Envy Code R-20
+Emacs.font: Envy Code R-14
+Emacs.useXIM: true 
+

@@ -1,0 +1,21 @@
+todo 
+tips文档
+hp功能键
+服务器安装测试(lighttpd, nginx, postgres, bind, vsftpd, squid, nfs, nis, ntp, 
+samba, postfix, 远程桌面 )
+软件使用学习（amarok, emacs, gsopcast, openoffice, screen, gimp, compiz-fusion 
+php, fastcgi, iptables/shorewall, f-prot/clamav, quota, lvm, raid, 
+wireshark/其他网络软件）
+Linux无盘服务器研究
+
+
+bugs:
+xfce登录时提示主机名错误
+音量及其他快捷键还无法使用
+unknown media type ……
+
+
+emacs tips:
+全选 C-x h
+wrap f3
+刷新 f5

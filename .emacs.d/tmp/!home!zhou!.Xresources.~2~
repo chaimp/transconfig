@@ -1,0 +1,43 @@
+!Xft.dpi:96
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.font: Microsoft Yahei
+Emacs.font: Envy Code R-9
+
+!Xcursor.size: 36
+! Color setting
+!URxvt.geometry:85x42
+!URxvt.cursorColor:Indianred
+!URxvt.foreground:gainsboro
+!URxvt.background:grey30
+
+! transparent setting
+!URxvt.inheritPixmap:true
+!URxvt.tintColor:lightgray
+!URxvt.shading:20
+
+! normal setting
+!URxvt.termName:xterm
+!URxvt.cursorBlink:true
+!URxvt.saveLines:65535
+!URxvt.scrollBar_right:true
+!URxvt.scrollWithBuffer:false
+!URxvt.scrollTtyKeypress:true
+
+!italicFont and boldItalicFont undefined 
+!URxvt.font:xft:Consolas:Regular:size=10:antialias=False,xft:Microsoft YaHei:Normal:size=10:antialias=False 
+!URxvt*imFont:xft:Consolas:Regular:size=10:antialias=False,xft:Microsoft YaHei:Normal:size=10:antialias=False 
+!URxvt*inputMethod:Fcitx 
+!URxvt*preeditType: OverTheSpot 
+!URxvt*multichar_encoding:noenc 
+
+
+!XTerm*preeditType:     Root 
+!XTerm*font: -microsoft-consolas-medium-r-normal--0-0-0-0-m-0-iso10646-1 
+!XTerm*wideFont: -microsoft-microsoft yahei-medium-r-normal--0-0-0-0-p-0-iso10646-1 
+!Xterm*cjkWidth: True 
+!URxvt.preeditType:Root
+
+!Emacs.font: Monaco-10

@@ -1,0 +1,54 @@
+ 
+1	www-450	00-E0-61-07-A8-B0	192.168.1.100	18:25:57
+2	071FDB1	00-13-8F-48-0A-DC	192.168.1.5	14:47:12
+3	MICROSO	00-02-3F-03-8E-8E	192.168.1.4	13:17:53
+4	none	00-15-60-C0-50-57	192.168.1.6	05:29:35
+
+
+建立一个pppoe拨号服务器，自动分配ip地址。
+
+
+妥协： 
+amarok:  kde4 xine
+brasero: gstreamer
+texlive: ghostscript
+
+emacs
+文件名自动完成问题，我的配置文件中默认起用了ido作为文件名的自动完成，
+ido中忽略自动完成的快捷键是C-f
+http://jasonal.blogspot.com/2006/06/emacs-idoel.html
+
+
+
+今天扫荡了一遍portabelapp.com，收获不少，但也有些许失望。
+这里还有两个网站： 
+http://usb.smithtech.us/index.php 
+http://www.portablefreeware.com/
+http://www.portablesoft.cn/
+
+保留软件：
+firefox
+filezilla
+putty
+dosbox
+xampp
+7-zip
+试用软件：
+eraser
+lightscreen
+winget
+不能正常使用：
+mplayer
+xenon
+有更好的替代：
+amsn (emesene)
+mplayer (smplayer/mplayer-ww)
+
+
+
+
+
+
+emacs:
+emerge -pv elscreen emhacks emacs-updater erobot lua-mode app-emacs/zenirc
+

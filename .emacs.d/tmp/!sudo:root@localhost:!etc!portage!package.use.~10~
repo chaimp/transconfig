@@ -1,0 +1,77 @@
+dev-util/git -gtk subversion
+dev-util/subversion -dso
+dev-lang/python sqlite
+dev-lang/ghc ghcquickbuild
+xfce-base/xfce4 minimal -alsa -oss 
+xfce-base/xfdesktop -file-icons
+xfce-base/thunar -trash-plugin
+xfce-base/xfce4-settings libnotify sound
+xfce-base/xfce-utils -lock
+xfce-extra/exo libnotify
+x11-wm/fvwm -gtk stroke
+x11-libs/cairo cleartype
+x11-themes/redhat-artwork  audacious cursors gdm icons 
+x11-apps/xinit minimal
+media-sound/audacious chardet 
+media-plugins/audacious-plugins gnome chardet wma tta sndfile scrobbler
+media-video/mplayer -gtk -live -oss -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger radio quicktime realcodecs rar dvb
+media-video/vlc -nsplugin dvd ffmpeg mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio live
+media-libs/realcodecs -win32codecs
+media-libs/freetype ubuntu
+media-libs/libmng lcms
+media-libs/sdl-mixer mikmod
+media-gfx/comix rar
+media-gfx/gfxboot themes speech animate beep
+media-tv/gmlive sopcast -totem
+app-arch/p7zip wxwidgets rar
+app-admin/conky hddtemp mpd nano-syntax rss vim-syntax wifi
+app-admin/testdisk ntfs reiserfs
+app-cdr/recorder vcd
+app-cdr/brasero -totem -cdrtools cdrkit libburn -nautilus 
+app-editors/nano -nls
+app-editors/emacs-cvs toolkit-scroll-bars gtk -sound spell
+app-dicts/stardict  -festival pronounce qqwry spell 
+app-text/poppler-bindings gtk cairo
+app-text/texlive -truetype
+app-text/acroread minimal
+app-emulation/ies4linux -gtk -kde
+app-emulation/qemu-softmmu kqemu
+app-emulation/kvm esd
+app-office/openoffice-bin gnome java
+app-portage/layman git subversion
+media-sound/amarok mp3tunes  
+media-sound/mpd audiofile id3 lame ao
+media-sound/sonata lyrics
+media-sound/aumix -gpm
+media-gfx/splashutils fbcondecor
+www-client/opera qt-static
+www-client/mozilla-firefox mozdevelop java iceweasel
+www-servers/nginx status pcre zlib
+www-servers/lighttpd minimal
+www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp 
+www-plugins/adobe-flash -32bit
+dev-lang/php -truetype apache2 filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
+dev-db/mysql embedded 
+dev-util/subversion -berkdb
+net-ftp/proftpd  authfile clamav softquota vroot rewrite
+net-ftp/pure-ftpd anondel anonperm anonren anonres paranoidmsg vchroot noiplog
+net-dns/bind resolvconf
+net-dialup/ppp activefilter dhcp radius
+net-dialup/rp-pppoe -X
+net-analyzer/snort inline
+net-analyzer/tcpdump -samba
+net-misc/nxserver-freenx nxclient
+net-misc/nxnode rdesktop -vnc
+net-misc/wicd ioctl
+net-misc/rdesktop oss
+net-wireless/aircrack-ng wifi
+net-libs/xulrunner java
+net-libs/libsoup gnome
+sys-apps/hal laptop
+sys-apps/tuxonice-userui fbsplash
+sys-apps/hwdata-gentoo  binary-drivers
+sys-apps/busybox -savedconfig
+sys-apps/man-pages -nls -linguas_zh_CN
+sys-libs/pam -nls
+sys-fs/ntfs3g suid
+sys-boot/grub netboot

@@ -3,31 +3,31 @@
 ;; Copyright (C) 2006, 2007, 2008 William Xu
 
 ;; Author: William Xu <william.xwl@gmail.com>
-;; Version: 0.82
+;; Version: 1.0
 ;; Url: http://williamxu.net9.org/ref/cal-china-x.el
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
+;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
-;;
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-;;
+
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+
 ;; You should have received a copy of the GNU General Public License
-;; along with this program; if not, write to the Free Software
-;; Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+;; along with this program; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
+;; MA 02110-1301, USA.
 
 ;;; Commentary:
 
-;; This package adds more chinese calendar supports and others,
-;; including:
+;; This extension mainly adds the following extra features:
 ;;
 ;;   - Chinese localizations
 ;;   - Display holiday, lunar, horoscope, zodiac, solar term info on mode line
-;;   - Can define holidays using `holiday-lunar', `holiday-solar-term'
+;;   - Define holidays using `holiday-lunar', `holiday-solar-term'
 ;;   - Highlight holidays based on different priorities
 ;;   - Add `cal-china-x-chinese-holidays', `cal-china-x-japanese-holidays'.
 ;;
@@ -48,8 +48,7 @@
 (require 'calendar)
 (require 'holidays)
 (require 'cal-china)
-(eval-when-compile
-  (require 'cl))
+(eval-when-compile (require 'cl))
 
 ;;; Variables
 
@@ -73,13 +72,14 @@
    "卅一" "卅二" "卅三" "卅四" "卅五" "卅六" "卅七" "卅八" "卅九" "卅十"])
 
 (defvar chinese-date-diary-pattern
-  '((year " *年" month " *月" day " *日 *[^\年0-9]") ; " *星期")
-    (year "-" month "-" day "[^0-9]")
-    (day "/" month "[^/0-9]")
-    (day "/" month "/" year "[^0-9]")
-    (backup day " *" monthname "\\W+\\<\\([^*0-9]\\|\\([0-9]+[:aApP]\\)\\)")
-    (day " *" monthname " *" year "[^0-9]")
-    (dayname "\\W")))
+  `((year "年" month "月" day "日" " 星期[" ,(mapconcat 'identity cal-china-x-days "") "]")
+    ,@(if (> emacs-major-version 22)
+          diary-iso-date-forms
+        '((month "[-/]" day "[^-/0-9]")
+          (year "[-/]" month "[-/]" day "[^0-9]")
+          (monthname "-" day "[^-0-9]")
+          (year "-" monthname "-" day "[^0-9]")
+          (dayname "\\W")))))
 
 (defconst cal-china-x-horoscope-name
   '(((3  21) (4  19) "白羊")
@@ -213,38 +213,51 @@ calendar."
 ;;;###autoload
 (defun holiday-lunar (lunar-month lunar-day string &optional num)
   "Like `holiday-fixed', but with LUNAR-MONTH and LUNAR-DAY.
-When there are multiple days(like Run yue, 闰月), we use NUM to define
-which day(s) as holidays. The rules are:
+When there are multiple days(like Run Yue or 闰月, e.g.,
+2006-08-30), we use NUM to define which day(s) as holidays. The
+rules are:
 
 NUM = 0, only the earlier day.
 NUM = 1, only the later day.
-NUM with other values(default), both days."
-  (let ((cn-years (chinese-year displayed-year))
-        (ret '()))
-    (unless (and num (= num 1))
-      (let ((date (calendar-gregorian-from-absolute
-                   (+ (cadr (assoc lunar-month cn-years)) (1- lunar-day)))))
-        (setq ret (append ret
-                          (holiday-fixed (car date)
-                                         (cadr date)
-                                         string)))))
-    ;; 闰月, e.g., 2006-08-30
-    (unless (and num (= num 0))
-      (when (> (length cn-years) 12)
-        (let ((run (car (remove-if 'null
-                                   (mapcar
-                                    (lambda (el)
-                                      (unless (integerp (car el))
-                                        el))
-                                    cn-years)))))
-          (when (= lunar-month (floor (car run)))
-            (let ((date (calendar-gregorian-from-absolute
-                         (+ (cadr run) (1- lunar-day)))))
-              (setq ret (append ret
-                                (holiday-fixed (car date)
-                                               (cadr date)
-                                               string))))))))
-    ret))
+NUM with other values(default), all days(maybe one or two)."
+  (unless (integerp num)
+    (setq num 2))
+  (let* ((cn-years (calendar-chinese-year displayed-year))
+         (ret '()))
+    (setq ret (append ret (holiday-lunar-1 (assoc lunar-month cn-years)
+                                           lunar-day
+                                           string)))
+    (when (and (> (length cn-years) 12) (not (zerop num)))
+      (let ((run-yue '())
+            (years cn-years)
+            (i '()))
+        (while years
+          (setq i (car years)
+                years (cdr years))
+          (unless (integerp (car i))
+            (setq run-yue i)
+            (setq years nil)))
+        (when (= lunar-month (floor (car run-yue)))
+          (setq ret (append ret (holiday-lunar-1 run-yue
+                                                 lunar-day
+                                                 string))))))
+    (cond ((= num 0)
+           (when (car ret)
+             (list (car ret))))
+          ((= num 1)
+           (if (cadr ret)
+               (list (cadr ret))
+             ret))
+          (t
+           ret))))
+
+(defun holiday-lunar-1 (run-yue lunar-day string)
+  (let* ((date (calendar-gregorian-from-absolute
+                (+ (cadr run-yue) (1- lunar-day))))
+         (holiday (holiday-fixed (car date) (cadr date) string)))
+    ;; Same year?
+    (when (and holiday (= (nth 2 (caar holiday)) (nth 2 date)))
+      holiday)))
 
 ;;;###autoload
 (defun holiday-solar-term (solar-term str)
@@ -294,91 +307,11 @@ See `cal-china-x-solar-term-name' for a list of solar term names ."
   ;; chinese month and year
   (setq calendar-font-lock-keywords
         (append calendar-font-lock-keywords
-                '(("[0-9]+年\\ *[0-9]+月"
-                   . font-lock-function-name-face))))
-
-  (setq calendar-mode-line-format
-        (list
-         (concat
-          (propertize "<"
-                      'help-echo "mouse-1: previous month"
-                      'mouse-face 'mode-line-highlight
-                      'keymap (make-mode-line-mouse-map 'mouse-1
-                                                        'calendar-scroll-right))
-          " " calendar-buffer)
-
-         '(cal-china-x-get-holiday date) ; FIXME: how to ignore this column when it is "" ?
-         '(calendar-date-string date t)
-         '(cal-china-x-chinese-date-string date)
-
-         (concat
-          (propertize
-           (substitute-command-keys
-            "\\<calendar-mode-map>\\[calendar-goto-info-node] info")
-           'help-echo "mouse-1: read Info on Calendar"
-           'mouse-face 'mode-line-highlight
-           'keymap (make-mode-line-mouse-map 'mouse-1 'calendar-goto-info-node))
-          " / "
-          (propertize
-           (substitute-command-keys
-            " \\<calendar-mode-map>\\[calendar-other-month] other")
-           'help-echo "mouse-1: choose another month"
-           'mouse-face 'mode-line-highlight
-           'keymap (make-mode-line-mouse-map
-                    'mouse-1 'mouse-calendar-other-month))
-          " / "
-          (propertize
-           (substitute-command-keys
-            "\\<calendar-mode-map>\\[calendar-goto-today] today")
-           'help-echo "mouse-1: go to today's date"
-           'mouse-face 'mode-line-highlight
-           'keymap (make-mode-line-mouse-map 'mouse-1 #'calendar-goto-today)))
-
-         ;; FIXME: This right `>' can not be displayed correctly. Also,
-         ;; it looks like if i don't append an additional "" at end,
-         ;; even more right partial info will disappear.
-         (propertize ">"
-                     'help-echo "mouse-1: next month"
-                     'mouse-face 'mode-line-highlight
-                     'keymap (make-mode-line-mouse-map
-                              'mouse-1 'calendar-scroll-left))
-         ""))
-
-  (add-hook 'calendar-move-hook 'calendar-update-mode-line)
+                '(("[0-9]+年\\ *[0-9]+月" . font-lock-function-name-face))))
 
   (setq chinese-calendar-celestial-stem cal-china-x-celestial-stem
-	chinese-calendar-terrestrial-branch cal-china-x-terrestrial-branch))
-
-(if (fboundp 'calendar-mark-holidays)
-    (defadvice calendar-mark-holidays (around mark-different-holidays activate)
-      "Mark extra `xwl-important-holidays'."
-      (let ((calendar-holiday-marker 'cal-china-x-priority1-holiday-face)
-            (calendar-holidays cal-china-x-priority1-holidays))
-        ad-do-it)
-      (let ((calendar-holiday-marker 'cal-china-x-priority2-holiday-face)
-            (calendar-holidays cal-china-x-priority2-holidays))
-        ad-do-it)
-      (let ((calendar-holidays
-             (remove-if (lambda (i)
-                          (or (member i cal-china-x-priority1-holidays)
-                              (member i cal-china-x-priority2-holidays)))
-                        calendar-holidays)))
-        ad-do-it))
-
-  (defadvice mark-calendar-holidays (around mark-different-holidays activate)
-    "Mark extra `xwl-important-holidays'."
-    (let ((calendar-holiday-marker 'cal-china-x-priority1-holiday-face)
-          (calendar-holidays cal-china-x-priority1-holidays))
-      ad-do-it)
-    (let ((calendar-holiday-marker 'cal-china-x-priority2-holiday-face)
-          (calendar-holidays cal-china-x-priority2-holidays))
-      ad-do-it)
-    (let ((calendar-holidays
-           (remove-if (lambda (i)
-                        (or (member i cal-china-x-priority1-holidays)
-                            (member i cal-china-x-priority2-holidays)))
-                      calendar-holidays)))
-      ad-do-it)))
+	chinese-calendar-terrestrial-branch cal-china-x-terrestrial-branch)
+  )
 
 
 ;;; Implementations
@@ -414,7 +347,7 @@ in a week."
     (if (< m 5)
         (let ((chinese-new-year
                (calendar-gregorian-from-absolute
-                (cadr (assoc 1 (chinese-year y))))))
+                (cadr (assoc 1 (calendar-chinese-year y))))))
           (if (calendar-date-is-visible-p chinese-new-year)
 	      `((,chinese-new-year
                  ,(format "%s年春节"
@@ -503,60 +436,234 @@ extra day appended."
   "The N-th name of the Chinese sexagesimal cycle.
 N congruent to 1 gives the first name, N congruent to 2 gives the second name,
 ..., N congruent to 60 gives the sixtieth name."
-  ;; "%s-%s" -> "%s%s", since Chinese characters are tight one by one,
-  ;; no extra `-' needed.
+  ;; Change "%s-%s" to "%s%s", since adding the extra `-' between two Chinese
+  ;; characters looks stupid.
   (format "%s%s"
           (aref chinese-calendar-celestial-stem (% (1- n) 10))
           (aref chinese-calendar-terrestrial-branch (% (1- n) 12))))
 
-(defun generate-calendar-month (month year indent)
-  "Produce a calendar for MONTH, YEAR on the Gregorian calendar.
+
+;;; Compatabilities
+
+(if (> emacs-major-version 22)
+    (progn
+      (defadvice calendar-mark-holidays (around mark-different-holidays activate)
+        "Mark holidays with different priorities."
+        (let ((calendar-holiday-marker 'cal-china-x-priority1-holiday-face)
+              (calendar-holidays cal-china-x-priority1-holidays))
+          ad-do-it)
+        (let ((calendar-holiday-marker 'cal-china-x-priority2-holiday-face)
+              (calendar-holidays cal-china-x-priority2-holidays))
+          ad-do-it)
+        (let ((calendar-holidays
+               (remove-if (lambda (i)
+                            (or (member i cal-china-x-priority1-holidays)
+                                (member i cal-china-x-priority2-holidays)))
+                          calendar-holidays)))
+          ad-do-it))
+
+      (defun calendar-generate-month (month year indent)
+        "Produce a calendar for MONTH, YEAR on the Gregorian calendar.
+The calendar is inserted at the top of the buffer in which point is currently
+located, but indented INDENT spaces.  The indentation is done from the first
+character on the line and does not disturb the first INDENT characters on the
+line."
+        (let ((blank-days               ; at start of month
+               (mod
+                (- (calendar-day-of-week (list month 1 year))
+                   calendar-week-start-day)
+                7))
+              (last (calendar-last-day-of-month month year))
+              (trunc (min calendar-intermonth-spacing
+                          (1- calendar-left-margin)))
+              (day 1)
+              string)
+          (goto-char (point-min))
+          (calendar-move-to-column indent)
+          (insert
+           (calendar-string-spread
+            (list (format "%d年%2d月" year month))
+            ?\s calendar-month-digit-width))
+          (calendar-ensure-newline)
+          (calendar-insert-at-column indent calendar-intermonth-header trunc)
+          ;; Use the first two characters of each day to head the columns.
+          (dotimes (i 7)
+            (insert
+             (progn
+               (setq string
+                     (calendar-day-name (mod (+ calendar-week-start-day i) 7) nil t))
+               ;; (cal-china-x-day-short-name (mod (+ calendar-week-start-day i) 7)))
+               (if enable-multibyte-characters
+                   (truncate-string-to-width string calendar-day-header-width)
+                 (substring string 0 calendar-day-header-width)))
+             (make-string (- calendar-column-width calendar-day-header-width) ?\s)))
+          (calendar-ensure-newline)
+          (calendar-insert-at-column indent calendar-intermonth-text trunc)
+          ;; Add blank days before the first of the month.
+          (insert (make-string (* blank-days calendar-column-width) ?\s))
+          ;; Put in the days of the month.
+          (dotimes (i last)
+            (setq day (1+ i))
+            ;; TODO should numbers be left-justified, centered...?
+            (insert (format (format "%%%dd%%s" calendar-day-digit-width) day
+                            (make-string
+                             (- calendar-column-width calendar-day-digit-width) ?\s)))
+            ;; 'date property prevents intermonth text confusing re-searches.
+            ;; (Tried intangible, it did not really work.)
+            (set-text-properties
+             (- (point) (1+ calendar-day-digit-width)) (1- (point))
+             `(mouse-face highlight help-echo ,(eval calendar-date-echo-text)
+                          date t))
+            (when (and (zerop (mod (+ day blank-days) 7))
+                       (/= day last))
+              (calendar-ensure-newline)
+              (setq day (1+ day))       ; first day of next week
+              (calendar-insert-at-column indent calendar-intermonth-text trunc)))))
+
+      ;; I'd like it to occupy all horizontal space as in 22.
+      (add-hook 'window-size-change-functions
+                (lambda (_)
+                  (setq calendar-right-margin (- (frame-width) calendar-left-margin))))
+
+      (setq calendar-mode-line-format
+            (list
+             (calendar-mode-line-entry 'calendar-scroll-right "previous month" "<")
+             "Calendar"
+
+             '(cal-china-x-get-holiday date)
+             '(calendar-date-string date t)
+             '(cal-china-x-chinese-date-string date)
+
+             (concat
+              (calendar-mode-line-entry 'calendar-goto-info-node "read Info on Calendar"
+                                        nil "info")
+              " / "
+              (calendar-mode-line-entry 'calendar-other-month "choose another month"
+                                        nil "other")
+              " / "
+              (calendar-mode-line-entry 'calendar-goto-today "go to today's date"
+                                        nil "today"))
+             ;; '(calendar-date-string (calendar-current-date) t)
+             (calendar-mode-line-entry 'calendar-scroll-left "next month" ">")
+             ""))
+      )
+  ;; <= 22
+  (defalias 'calendar-update-mode-line 'update-calendar-mode-line)
+  (defalias 'calendar-chinese-year 'chinese-year)
+
+  (defadvice mark-calendar-holidays (around mark-different-holidays activate)
+    "Mark holidays with different priorities."
+    (let ((calendar-holiday-marker 'cal-china-x-priority1-holiday-face)
+          (calendar-holidays cal-china-x-priority1-holidays))
+      ad-do-it)
+    (let ((calendar-holiday-marker 'cal-china-x-priority2-holiday-face)
+          (calendar-holidays cal-china-x-priority2-holidays))
+      ad-do-it)
+    (let ((calendar-holidays
+           (remove-if (lambda (i)
+                        (or (member i cal-china-x-priority1-holidays)
+                            (member i cal-china-x-priority2-holidays)))
+                      calendar-holidays)))
+      ad-do-it))
+
+  (defun generate-calendar-month (month year indent)
+    "Produce a calendar for MONTH, YEAR on the Gregorian calendar.
 The calendar is inserted in the buffer starting at the line on which point
 is currently located, but indented INDENT spaces.  The indentation is done
 from the first character on the line and does not disturb the first INDENT
 characters on the line."
-  (let* ((blank-days ;; at start of month
-          (mod
-           (- (calendar-day-of-week (list month 1 year))
-              calendar-week-start-day)
-           7))
-	 (last (calendar-last-day-of-month month year)))
-    (goto-char (point-min))
-    (calendar-insert-indented
-     (calendar-string-spread
-      (list (format "%d年%2d月" year month)) ?  20)
-     indent t)
-    (calendar-insert-indented "" indent) ;; Go to proper spot
-    (calendar-for-loop i from 0 to 6 do
-       (insert
-	(let ((string
-	       (calendar-day-name (mod (+ calendar-week-start-day i) 7) nil t)))
-	  (if enable-multibyte-characters
-	      (truncate-string-to-width string 2)
-	    (substring string 0 2)))
-	" "))
-    ;; FIXME: Seems it's uneasy to make chinese align correctly
-;;     (calendar-for-loop i from 0 to 6 do
-;;        (insert
-;; 	(let ((string
-;; 	       (cal-china-x-day-short-name i)))
-;; 	  string)
-;; 	"  "))
-    (calendar-insert-indented "" 0 t)	 ;; Force onto following line
-    (calendar-insert-indented "" indent) ;; Go to proper spot
-    ;; Add blank days before the first of the month
-    (calendar-for-loop i from 1 to blank-days do (insert "   "))
-    ;; Put in the days of the month
-    (calendar-for-loop i from 1 to last do
-       (insert (format "%2d " i))
-       (add-text-properties
-	(- (point) 3) (1- (point))
-	'(mouse-face highlight
-		     help-echo "mouse-2: menu of operations for this date"))
-       (and (zerop (mod (+ i blank-days) 7))
-	    (/= i last)
-           (calendar-insert-indented "" 0 t)    ;; Force onto following line
-           (calendar-insert-indented "" indent)))));; Go to proper spot
+    (let* ((blank-days ;; at start of month
+            (mod
+             (- (calendar-day-of-week (list month 1 year))
+                calendar-week-start-day)
+             7))
+           (last (calendar-last-day-of-month month year)))
+      (goto-char (point-min))
+      (calendar-insert-indented
+       (calendar-string-spread
+        (list (format "%d年%2d月" year month)) ?  20)
+       indent t)
+      (calendar-insert-indented "" indent) ;; Go to proper spot
+      (calendar-for-loop i from 0 to 6 do
+        (insert
+         (let ((string
+                (calendar-day-name (mod (+ calendar-week-start-day i) 7) nil t)))
+           (if enable-multibyte-characters
+               (truncate-string-to-width string 2)
+             (substring string 0 2)))
+         " "))
+      ;; FIXME: Seems it's uneasy to make chinese align correctly
+      ;;     (calendar-for-loop i from 0 to 6 do
+      ;;        (insert
+      ;; 	(let ((string
+      ;; 	       (cal-china-x-day-short-name i)))
+      ;; 	  string)
+      ;; 	"  "))
+      (calendar-insert-indented "" 0 t)	 ;; Force onto following line
+      (calendar-insert-indented "" indent) ;; Go to proper spot
+      ;; Add blank days before the first of the month
+      (calendar-for-loop i from 1 to blank-days do (insert "   "))
+      ;; Put in the days of the month
+      (calendar-for-loop i from 1 to last do
+        (insert (format "%2d " i))
+        (add-text-properties
+         (- (point) 3) (1- (point))
+         '(mouse-face highlight
+                      help-echo "mouse-2: menu of operations for this date"))
+        (and (zerop (mod (+ i blank-days) 7))
+             (/= i last)
+             (calendar-insert-indented "" 0 t)      ;; Force onto following line
+             (calendar-insert-indented "" indent))))) ;; Go to proper spot
+
+  (setq calendar-mode-line-format
+        (list
+         (concat
+          (propertize "<"
+                      'help-echo "mouse-1: previous month"
+                      'mouse-face 'mode-line-highlight
+                      'keymap (make-mode-line-mouse-map 'mouse-1
+                                                        'calendar-scroll-right))
+          " " calendar-buffer)
+
+         '(cal-china-x-get-holiday date)
+         '(calendar-date-string date t)
+         '(cal-china-x-chinese-date-string date)
+
+         (concat
+          (propertize
+           (substitute-command-keys
+            "\\<calendar-mode-map>\\[calendar-goto-info-node] info")
+           'help-echo "mouse-1: read Info on Calendar"
+           'mouse-face 'mode-line-highlight
+           'keymap (make-mode-line-mouse-map 'mouse-1 'calendar-goto-info-node))
+          " / "
+          (propertize
+           (substitute-command-keys
+            " \\<calendar-mode-map>\\[calendar-other-month] other")
+           'help-echo "mouse-1: choose another month"
+           'mouse-face 'mode-line-highlight
+           'keymap (make-mode-line-mouse-map
+                    'mouse-1 'mouse-calendar-other-month))
+          " / "
+          (propertize
+           (substitute-command-keys
+            "\\<calendar-mode-map>\\[calendar-goto-today] today")
+           'help-echo "mouse-1: go to today's date"
+           'mouse-face 'mode-line-highlight
+           'keymap (make-mode-line-mouse-map 'mouse-1 #'calendar-goto-today)))
+
+         ;; FIXME: This right `>' can not be displayed correctly. Also,
+         ;; it looks like if i don't append an additional "" at end,
+         ;; even more right partial info will disappear.
+         (propertize ">"
+                     'help-echo "mouse-1: next month"
+                     'mouse-face 'mode-line-highlight
+                     'keymap (make-mode-line-mouse-map
+                              'mouse-1 'calendar-scroll-left))
+         ""))
+  )
+
+(add-hook 'calendar-move-hook 'calendar-update-mode-line)
 
 
 ;; setup

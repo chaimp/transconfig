@@ -1,0 +1,39 @@
+<DIV DIR="ltr">
+<h2>系统相关文档小总结</h2>
+<h3>机房学习系统</h3>
+<ul>
+  <li>系统及其相关工具
+  
+<ul>
+  <li>Windows Server 2003（nLite自定义版）</li>
+  <li>金山arp防火墙, 金山清理专家（检查并自动安装系统补丁）</li>
+  <li>Retunil</li>
+  <li>Sandboxie</li>
+  <li>Freewb+Google输入法</li>
+  <li>移动工具箱（绿色软件）xplorer2, firefox, filezilla, p7zip, netbox, putty, xampp, notepad2, twickUI, fonts</li>
+  <li>Acroread, flashplugin, powerword, TypeEeasy, filezilla server</li>
+  </ul>
+</li>
+  <li>教学软件
+    
+<ul>
+      <li>Microsoft Office 2003</li>
+      <li>SQL Server 2000 sp4</li>
+      <li>Auto CAD 2004</li>
+      <li>Dreamweaver CS3</li>
+      <li>PhotoShop 8</li>
+      <li>Bison NetSim</li>
+      <li>GNS3（Dynamips）</li>
+      <li>Cygwin &amp;&amp; Colinux</li>
+      
+    </ul>
+  </li>
+  
+</ul>
+<ul>
+  <li><a href="#">系统光盘准备</a></li>
+</ul>
+
+
+
+</DIV>

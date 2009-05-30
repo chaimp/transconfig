@@ -1,0 +1,10 @@
+/sudo:root@localhost:/etc/ppp/radius/radiusclient.conf
+#_asudo_broot@localhost_b_aetc_appp_aradius_aradiusclient.conf#
+/sudo:root@localhost:/etc/ppp/radius/servers
+#_asudo_broot@localhost_b_aetc_appp_aradius_aservers#
+/sudo:root@localhost:/etc/ppp/pppoe.conf
+#_asudo_broot@localhost_b_aetc_appp_apppoe.conf#
+/sudo:root@localhost:/etc/ppp/pppoe-server-options
+#_asudo_broot@localhost_b_aetc_appp_apppoe-server-options#
+/sudo:root@localhost:/etc/ppp/pap-secrets
+#_asudo_broot@localhost_b_aetc_appp_apap-secrets#

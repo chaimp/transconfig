@@ -1,0 +1,150 @@
+<div id="fpss-container">
+        <div id="fpss-slider">
+            <div id="slide-loading" style="display: none;"/>
+            <div id="slide-wrapper" style="display: block;">
+                <div id="slide-outer">
+					
+	<div class="slide" style="display: none;">
+		<div class="slide-inner">
+			<a class="fpss_img" href="/welcome-community">
+				<span>
+					<span style="background: transparent url(http://linux.com/components/com_fpss/images/guru_slideshow.jpg) no-repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;">
+						<span>
+							<img alt="Click on the slide!" src="http://linux.com/components/com_fpss/images/guru_slideshow.jpg"/>
+						</span>
+					</span>
+				</span>
+			</a>
+			<div class="fpss-introtext">
+				<div class="slidetext"><h1><a href="/welcome-community">Are You the Next Ultimate Linux Guru?</a></h1>
+<h3>Showcase your skills and win a laptop signed by Linus.</h3>
+<p>Showcase your skills and win a laptop signed by Linus.</p>
+<a class="readon" href="/welcome-community">More...</a>
+</div>
+			</div>
+		</div>
+	</div>
+		
+	<div class="slide" style="display: none;">
+		<div class="slide-inner">
+			<a class="fpss_img" href="/learn/careers-training/363-the-linux-career-guide">
+				<span>
+					<span style="background: transparent url(http://linux.com/components/com_fpss/images/career_slideshow.jpg) no-repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;">
+						<span>
+							<img alt="Click on the slide!" src="http://linux.com/components/com_fpss/images/career_slideshow.jpg"/>
+						</span>
+					</span>
+				</span>
+			</a>
+			<div class="fpss-introtext">
+				<div class="slidetext"><h1><a href="/learn/careers-training/363-the-linux-career-guide">The Linux Career Guide</a></h1>
+<h2>Learn >> Careers/Training</h2>
+<h3>Be a Linux Professional</h3>
+<p>Need a job or keep your existing one? Here's some useful tips.</p>
+<a class="readon" href="/learn/careers-training/363-the-linux-career-guide">More...</a>
+</div>
+			</div>
+		</div>
+	</div>
+		
+	<div class="slide" style="display: none;">
+		<div class="slide-inner">
+			<a class="fpss_img" href="/news/enterprise/case-studies/364-iu-hoosiers-learn-benefits-of-linux-early">
+				<span>
+					<span style="background: transparent url(http://linux.com/components/com_fpss/images/iu_slideshow.jpg) no-repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;">
+						<span>
+							<img alt="Click on the slide!" src="http://linux.com/components/com_fpss/images/iu_slideshow.jpg"/>
+						</span>
+					</span>
+				</span>
+			</a>
+			<div class="fpss-introtext">
+				<div class="slidetext"><h1><a href="/news/enterprise/case-studies/364-iu-hoosiers-learn-benefits-of-linux-early">IU Hoosiers Learn Benefits of Linux Early</a></h1>
+<h2>Enterprise Computing >> Case Studies</h2>
+<h3>Early adoption pays big benefits</h3>
+<p>How Indiana University switched to Linux and gave it an A.</p>
+<a class="readon" href="/news/enterprise/case-studies/364-iu-hoosiers-learn-benefits-of-linux-early">More...</a>
+</div>
+			</div>
+		</div>
+	</div>
+		
+	<div class="slide" style="">
+		<div class="slide-inner">
+			<a class="fpss_img" href="/news/enterprise/case-studies/7981-linux-picked-in-gendarmerie-lineup">
+				<span>
+					<span style="background: transparent url(http://linux.com/components/com_fpss/images/gendarmarie_slide.jpg) no-repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;">
+						<span>
+							<img alt="Click on the slide!" src="http://linux.com/components/com_fpss/images/gendarmarie_slide.jpg"/>
+						</span>
+					</span>
+				</span>
+			</a>
+			<div class="fpss-introtext">
+				<div class="slidetext"><h1><a href="/news/enterprise/case-studies/7981-linux-picked-in-gendarmerie-lineup">Linux Picked in Gendarmerie Lineup</a></h1>
+<h2>Enterprise Computing >> Case Studies</h2>
+<h3>A  large-scale, smooth migration</h3>
+<p>It's no mystery: switching to Linux should save the French police force US$80 million in five years.</p>
+<a class="readon" href="/news/enterprise/case-studies/7981-linux-picked-in-gendarmerie-lineup">More...</a>
+</div>
+			</div>
+		</div>
+	</div>
+		                </div>
+            </div>
+        </div>        
+        <div id="navi-outer">
+            <div id="pseudobox"/>
+            <div class="ul_container">
+                <ul>        
+                        
+                    <li class="noimages"><a title="Previous" onclick="showPrev();clearSlide();" href="javascript:void(0);" id="fpss-container_prev">«</a></li>
+                    
+			<li>
+				<a title="Click to navigate!" href="javascript:void(0);" class="navi">
+					<span class="navbar-img"><img alt="Click to navigate!" src="http://linux.com/components/com_fpss/images/thumbs/guru_slideshow.jpg"/></span>
+					<span class="navbar-key">01</span>
+					<span class="navbar-title">Are You the Next Ultimate Linux Guru?</span>
+					<span class="navbar-tagline">Showcase your skills and win a laptop signed by Linus.</span>
+					<span class="navbar-clr"/>
+				</a>
+			</li>
+		
+			<li>
+				<a title="Click to navigate!" href="javascript:void(0);" class="navi">
+					<span class="navbar-img"><img alt="Click to navigate!" src="http://linux.com/components/com_fpss/images/thumbs/career_slideshow.jpg"/></span>
+					<span class="navbar-key">02</span>
+					<span class="navbar-title">The Linux Career Guide</span>
+					<span class="navbar-tagline">Be a Linux Professional</span>
+					<span class="navbar-clr"/>
+				</a>
+			</li>
+		
+			<li>
+				<a title="Click to navigate!" href="javascript:void(0);" class="navi">
+					<span class="navbar-img"><img alt="Click to navigate!" src="http://linux.com/components/com_fpss/images/thumbs/iu_slideshow.jpg"/></span>
+					<span class="navbar-key">03</span>
+					<span class="navbar-title">IU Hoosiers Learn Benefits of Linux Early</span>
+					<span class="navbar-tagline">Early adoption pays big benefits</span>
+					<span class="navbar-clr"/>
+				</a>
+			</li>
+		
+			<li>
+				<a title="Click to navigate!" href="javascript:void(0);" class="navi-active">
+					<span class="navbar-img"><img alt="Click to navigate!" src="http://linux.com/components/com_fpss/images/thumbs/gendarmarie_slide.jpg"/></span>
+					<span class="navbar-key">04</span>
+					<span class="navbar-title">Linux Picked in Gendarmerie Lineup</span>
+					<span class="navbar-tagline">A  large-scale, smooth migration</span>
+					<span class="navbar-clr"/>
+				</a>
+			</li>
+		                    <li class="noimages"><a title="Next" onclick="showNext();clearSlide();;void(0)" href="javascript:void(0);" id="fpss-container_next">»</a></li>
+                    <li class="noimages"><a title="Pause" onclick="ppButtonClicked();return false;;void(0)" href="javascript:void(0);" id="fpss-container_playButton">Pause</a></li>
+                
+                        
+                </ul>
+            </div>
+        </div> 
+        <div class="fpss-clr"/>
+    </div>

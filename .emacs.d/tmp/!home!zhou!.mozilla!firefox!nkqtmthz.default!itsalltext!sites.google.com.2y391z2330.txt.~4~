@@ -1,0 +1,43 @@
+<h2>系统相关文档小总结</h2>
+<h3>机房学习系统</h3>
+<ul>
+<li>系统及其相关工具 
+<ul>
+<li>Windows Server 2003（nLite自定义版）</li>
+<li>金山arp防火墙, 金山清理专家（检查并自动安装系统补丁）</li>
+<li>Retunil</li>
+<li>Sandboxie</li>
+<li>Freewb+Google输入法</li>
+<li>移动工具箱（绿色软件）: xplorer2, firefox, filezilla, p7zip, netbox, putty, notepad2, HyperSnap, FileBox, emesene, twickUI, fonts</li>
+<li>Acroread, flashplugin, powerword, TypeEasy, xampp, gvim</li>
+<li>.Net2.0/3.5</li>
+<li>Daemon Tools Lite</li>
+</ul>
+</li>
+<li>教学软件 
+<ul>
+<li>Microsoft Office 2003</li>
+<li>SQL Server 2000 sp4</li>
+<li>Microsoft Visual Basic</li>
+<li>Auto CAD 2004</li>
+<li>Dreamweaver CS3</li>
+<li>PhotoShop 8</li>
+<li>Bison NetSim</li>
+<li>GNS3（Dynamips）</li>
+<li>Cygwin &amp;&amp; Colinux</li>
+</ul>
+</li>
+<li>初始化设置 
+<ol>
+<li>安装好的软件都必须运行一次，进行注册与初始设置。</li>
+<li>运行金山清理专家修补系统漏洞</li>
+<li>安装驱动程序与相关服务（IIS），调整系统属性、显示属性、管理属性与TwickUI</li>
+<li>IE设置（安全选项，js, 首页, 编辑器等）</li>
+<li>Cygwin安装设置（sshd）</li>
+<li>Colinux安装设置</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><a href="http://sites.google.com/site/transtone/Home#">系统光盘准备</a></li>
+</ul>

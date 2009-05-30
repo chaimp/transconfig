@@ -1,0 +1,55 @@
+
+
+
+
+<div class="content"><script type="text/javascript"> 
+$(document).ready(function() { 
+    // add a feed manually  
+    $('#SourceForge').gFeed({  
+        url: 'http://sourceforge.net/export/rss_chblog.php', 
+        title: 'SourceForge.net',
+         max: 3
+    });
+   $('#Slashdot').gFeed({  
+        url: 'http://rss.slashdot.org/Slashdot/slashdot', 
+        title: 'Slashdot',
+         max: 3
+    });
+    $('#ThinkGeek').gFeed({  
+        url: 'http://www.thinkgeek.com/thinkgeek.rss', 
+        title: 'ThinkGeek',
+         max: 3
+    });     
+
+    $('#Freshmeat').gFeed({  
+        url: 'http://freshmeat.net/backend/fm-releases-global.xml', 
+        title: 'Freshmeat',
+         max: 3
+    });        
+$('<a href="http://slashdot.org" class="icon"><img src="/sites/all/themes/custom/sfc/img/slashdot.png" alt="Slashdot"" /><br />Learn more &rsaquo;</a>').prependTo('#Slashdot');
+$('<a href="http://thinkgeek.com" class="icon"><img src="/sites/all/themes/custom/sfc/img/thinkgeek.png" alt="ThinkGeek" /><br />Learn more &rsaquo;</a>').prependTo('#ThinkGeek');
+$('<a href="http://sourceforge.net" class="icon"><img src="/sites/all/themes/custom/sfc/img/sourceforge.png" alt="SourceForge.net" /><br />Learn more &rsaquo;</a>').prependTo('#SourceForge');
+$('<a href="http://freshmeat.net" class="icon"><img src="/sites/all/themes/custom/sfc/img/freshmeat.png" alt="freshmeat.net" /><br />Learn more &rsaquo;</a>').prependTo('#Freshmeat');
+}); 
+</script><div id="container2">
+<div id="Slashdot" class="ui-tabs-panel" style=""><a class="icon" href="http://slashdot.org"><img alt="Slashdot" src="/sites/all/themes/custom/sfc/img/slashdot.png"/><br/>Learn more ›</a><div class="gfc-control"><div class="gfc-resultsbox-visible"><div class="gfc-resultsRoot"><div class="gfc-resultsHeader"><div class="gfc-title">Slashdot</div></div><div class="gfc-results"><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/Z3_sEVEWN44/article.pl" class="gf-title" target="_self">North Korea Launches "Communication Satellite" Rocket</a></div><div class="gf-author">作者 timothy</div><div class="gf-spacer">-</div><div class="gf-relativePublishedDate">23 分钟前</div><div class="gf-snippet">Mad Ivan writes "The BBC has just reported that North Korea has launched a long-range rocket, which they say is a ...</div></div></div><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/42oa4dK6FBQ/article.pl" class="gf-title" target="_self">ARM — Heretic In the Church of Intel, Moore's Law</a></div><div class="gf-author">作者 timothy</div><div class="gf-spacer">-</div><div class="gf-relativePublishedDate">3 小时前</div><div class="gf-snippet">ericatcw writes "For 30+ years, the PC industry has been as obsessed with under-the-hood performance: MIPs, MHz, transistors ...</div></div></div><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/t2Uoe2155P4/article.pl" class="gf-title" target="_self">Chrome EULA Reserves the Right To Filter Your Web</a></div><div class="gf-author">作者 timothy</div><div class="gf-spacer">-</div><div class="gf-relativePublishedDate">6 小时前</div><div class="gf-snippet">An anonymous reader writes "Recently, I decided to try out Google Chrome. With my usual mistrust of Google, I decided to ...</div></div></div></div></div></div></div></div>
+<div id="ThinkGeek" class="ui-tabs-panel ui-tabs-hide" style=""><a class="icon" href="http://thinkgeek.com"><img alt="ThinkGeek" src="/sites/all/themes/custom/sfc/img/thinkgeek.png"/><br/>Learn more ›</a><div class="gfc-control"><div class="gfc-resultsbox-visible"><div class="gfc-resultsRoot"><div class="gfc-resultsHeader"><div class="gfc-title">ThinkGeek</div></div><div class="gfc-results"><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://www.thinkgeek.com/b9e7/" class="gf-title" target="_self">T-Shirts & Apparel : Slurm</a></div><div class="gf-relativePublishedDate">12 小时前</div><div class="gf-snippet">Slurm: it's highly addictive! And for women.  Slurm. It's still excreted the old fashioned way. And by "excreted" we mean we ...</div></div></div><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://www.thinkgeek.com/baae/" class="gf-title" target="_self">T-Shirts & Apparel : Personal Area Network Pack Windbreaker</a></div><div class="gf-relativePublishedDate">2009 年 4 月 03 日 </div><div class="gf-snippet">Ever wanted another pocket in your jacket? How about 17?  If you're that person with too many gadgets, always reaching for a ...</div></div></div><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://www.thinkgeek.com/b747/" class="gf-title" target="_self">Books : Pride and Prejudice and Zombies</a></div><div class="gf-relativePublishedDate">2009 年 3 月 28 日 </div><div class="gf-snippet">The classic regency romance - now with added-in, ultra-violent, zombie mayhem!  Take one part Jane Austin classic and pump it ...</div></div></div></div></div></div></div></div>
+<div id="SourceForge" class="ui-tabs-panel ui-tabs-hide" style=""><a class="icon" href="http://sourceforge.net"><img alt="SourceForge.net" src="/sites/all/themes/custom/sfc/img/sourceforge.png"/><br/>Learn more ›</a><div class="gfc-control"><div class="gfc-resultsbox-visible"><div class="gfc-resultsRoot"><div class="gfc-resultsHeader"><div class="gfc-title">SourceForge.net</div></div><div class="gfc-results"><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://rss.sourceforge.net/~r/SourceforgeCommunityHub/~3/NMD1sYFZpzU/" class="gf-title" target="_self">April Project of the Month</a></div><div class="gf-author">作者 Lisa Hoover</div><div class="gf-spacer">-</div><div class="gf-relativePublishedDate">2009 年 4 月 03 日 </div><div class="gf-snippet">You definitely need to check out dotProject, April’s Project of the Month. It’s a great information gathering and ...</div></div></div><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://rss.sourceforge.net/~r/SourceforgeCommunityHub/~3/SOl3V-fCJEk/" class="gf-title" target="_self">Open source in a recession</a></div><div class="gf-author">作者 Ross Turk</div><div class="gf-spacer">-</div><div class="gf-relativePublishedDate">2009 年 3 月 31 日 </div><div class="gf-snippet">I recently contributed a story to Rodrigues & Urlocker’s Open Sources column on InfoWorld that explores the ...</div></div></div><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://rss.sourceforge.net/~r/SourceforgeCommunityHub/~3/nLnKfG5G_xo/" class="gf-title" target="_self">Leo: Not Your Average Programming Editor</a></div><div class="gf-author">作者 Lisa Hoover</div><div class="gf-spacer">-</div><div class="gf-relativePublishedDate">2009 年 3 月 26 日 </div><div class="gf-snippet">If you’ve been watching the project news drift by on our home page (and I know you have been, right?), then you may have ...</div></div></div></div></div></div></div></div>
+<div id="Freshmeat" class="ui-tabs-panel ui-tabs-hide" style=""><a class="icon" href="http://freshmeat.net"><img alt="freshmeat.net" src="/sites/all/themes/custom/sfc/img/freshmeat.png"/><br/>Learn more ›</a><div class="gfc-control"><div class="gfc-resultsbox-visible"><div class="gfc-resultsRoot"><div class="gfc-resultsHeader"><div class="gfc-title">Freshmeat</div></div><div class="gfc-results"><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://feedproxy.google.com/~r/freshmeat/feeds/fm-releases-global/~3/UwclU6ISAAg/" class="gf-title" target="_self">Relational 0.9 (Default branch)</a></div><div class="gf-relativePublishedDate">2009 年 3 月 15 日 </div><div class="gf-snippet">
+Relational is an interface to load relations from
+a file, to write relational algebra queries, and
+to see their result. This ...</div></div></div><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://feedproxy.google.com/~r/freshmeat/feeds/fm-releases-global/~3/eqUW59TzTi4/" class="gf-title" target="_self">Relational 0.8 (Default branch)</a></div><div class="gf-relativePublishedDate">2009 年 3 月 15 日 </div><div class="gf-snippet">
+Relational is an interface to load relations from
+a file, to write relational algebra queries, and
+to see their result. This ...</div></div></div><div class="gfc-result"><div class="gf-result"><div class="gf-title"><a href="http://feedproxy.google.com/~r/freshmeat/feeds/fm-releases-global/~3/bLTjOkcWQkw/" class="gf-title" target="_self">TaDaPro 0.8.4 (Default branch)</a></div><div class="gf-relativePublishedDate">2009 年 3 月 15 日 </div><div class="gf-snippet">TaDaPro (Tabular Data Processor) is a command-line
+utility to operate with numerical column tabulated
+data. It is intended for ...</div></div></div></div></div></div></div></div>
+<ul class="tab ui-tabs-nav">
+<li class="ui-tabs-selected"><a href="#Slashdot"><span>Slashdot</span></a></li>
+<li class=""><a href="#ThinkGeek"><span>ThinkGeek</span></a></li>
+<li class=""><a href="#SourceForge"><span>SourceForge</span></a></li>
+<li class=""><a href="#Freshmeat"><span>Freshmeat</span></a></li>
+</ul>
+</div>
+<p> </p>
+</div>

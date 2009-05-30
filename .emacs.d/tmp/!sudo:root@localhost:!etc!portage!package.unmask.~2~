@@ -1,0 +1,17 @@
+>=virtual/emacs-23
+app-editors/emacs-cvs
+app-emacs/emacs-w3m
+app-emacs/emacs-daemon
+media-libs/realcodecs
+media-video/vlc
+
+www-client/opera
+dev-lang/ghc
+#dev-libs/libedit
+
+#awesome-3.3_rc
+x11-libs/xcb-util
+x11-proto/xproto
+x11-wm/awesome
+
+x11-base/xorg-server

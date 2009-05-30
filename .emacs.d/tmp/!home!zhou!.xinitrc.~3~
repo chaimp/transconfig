@@ -1,0 +1,21 @@
+#!/bin/sh
+
+xrdb .Xresources
+export GTK2_RC_FILES="`pwd`/.gtkrc-2.0"
+
+#xcompmgr &
+#xcompmgr -cCfF -r7 -o.65 -l-10 -t-8 -D7 &
+
+xsetroot -cursor_name left_ptr &
+
+#hsetroot -fill /home/zhou/slax.jpg &
+
+#DEFAULT_SESSION=awesome
+#case $1 in
+#  awesome) exec /usr/bin/awesome ;;
+#  xfce4) exec /usr/bin/tartxfce4 ;;
+#  xmonad) exec /usr/bin/xmonad ;;
+#  *) exec $DEFAULT_SESSION ;;
+#esac
+
+exec /usr/bin/awesome

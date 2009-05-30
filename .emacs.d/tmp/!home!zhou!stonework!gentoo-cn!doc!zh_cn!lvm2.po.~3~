@@ -1,0 +1,953 @@
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-05-16 09:13+0800\n"
+"PO-Revision-Date: 2009-05-16 18:02+0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: ENCODING"
+
+#. type: Attribute 'link' of: <guide>
+#: lvm2-en.xml:5
+#, no-wrap
+msgid "/doc/en/lvm2.xml"
+msgstr "/doc/zh_cn/lvm2.xml"
+
+#. type: Content of: <guide><title>
+#: lvm2-en.xml:6
+msgid "Gentoo LVM2 installation"
+msgstr "Gentoo LVM2安装指南"
+
+#. type: Attribute 'title' of: <guide><author>
+#: lvm2-en.xml:8
+#, no-wrap
+msgid "Author"
+msgstr "作者"
+
+#. type: Content of: <guide><author>
+#: lvm2-en.xml:9
+#, no-wrap
+msgid "  <mail link=\"avi@CFFtechnologies.com\">Avi Schwartz</mail>\n"
+msgstr ""
+
+#. type: Attribute 'title' of: <guide><author>
+#: lvm2-en.xml:11
+#, no-wrap
+msgid "Contributor"
+msgstr "贡献者"
+
+#. type: Content of: <guide><author>
+#: lvm2-en.xml:12
+#, no-wrap
+msgid "  <mail link=\"rajiv@gentoo.org\">Rajiv Manglani</mail>\n"
+msgstr ""
+
+#. type: Attribute 'title' of: <guide><author>
+#: lvm2-en.xml:14
+#, no-wrap
+msgid "Editor"
+msgstr "编辑"
+
+#. type: Content of: <guide><author>
+#: lvm2-en.xml:15
+#, no-wrap
+msgid "  <mail link=\"neysx@gentoo.org\">Xavier Neys</mail>\n"
+msgstr ""
+
+#. type: Content of: <guide><abstract>
+#: lvm2-en.xml:19
+msgid ""
+"This guide describes how to setup your Gentoo machine using the Logical "
+"Volume Manager version 2 (LVM2)."
+msgstr "该指南讲述该如何在你的Gentoo系统中使用逻辑卷管理器第二版（LVM2）"
+
+#. type: Content of: <guide><version>
+#: lvm2-en.xml:27
+#, no-wrap
+msgid "2.7"
+msgstr ""
+
+#. type: Content of: <guide><date>
+#: lvm2-en.xml:28
+#, no-wrap
+msgid "2009-02-10"
+msgstr ""
+
+#. type: Content of: <guide><chapter><title>
+#: lvm2-en.xml:31
+msgid "Introduction"
+msgstr "简介"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:36
+msgid ""
+"This guide is based on an example with two IDE hard disks.  It means that "
+"you will more than likely need to change the drive, partition names and "
+"partition sizes to match your own setup and needs."
+msgstr "本指南使用两个IDE硬盘做范例。这意味着你需要根据自己的实际情况，对磁盘、分区名以及分区大小等信息做些更改。"
+
+#. type: Content of: <guide><chapter><section><body><warn>
+#: lvm2-en.xml:42
+msgid ""
+"This document is not intended to be an LVM2 tutorial.  It serves as a "
+"supplement to the Gentoo installation procedure as described in the <uri "
+"link=\"/doc/en/handbook/handbook-x86.xml?part=1\">Handbook, Part "
+"1</uri>. Make sure you <e>read</e> the Gentoo Installation Manual "
+"<e>before</e> you start your installation process."
+msgstr "本文并不想成为一篇LVM2学习指南。它只是一个小笔记，作为<uri link=\"/doc/zh_cn/handbook/handbook-x86.xml?part=1\">Gentoo安装手册（第一部分）</uri>的补充。请<e>务必</e>在你动手安装<e>之前</e>阅读Gentoo安装手册。"
+
+#. type: Content of: <guide><chapter><section><body><note>
+#: lvm2-en.xml:50
+msgid ""
+"For a complete LVM HOWTO point your browser to "
+"<uri>http://tldp.org/HOWTO/LVM-HOWTO</uri>"
+msgstr "完整的LVM HOWTO在这里：<uri>http://tldp.org/HOWTO/LVM-HOWTO</uri>"
+
+#. type: Content of: <guide><chapter><section><title>
+#: lvm2-en.xml:57
+msgid "Initial requirements"
+msgstr "系统需求"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:61
+msgid ""
+"If you do a fresh install of Gentoo, you will need to use a bootable CD with "
+"LVM2 support such as a Gentoo Installation CD. You can find the Installation "
+"CDs for an x86 architecture on our <uri "
+"link=\"/main/en/mirrors.xml\">mirrors</uri> under "
+"<path>/releases/x86/current/installcd</path>. Other architectures might be "
+"supported as well."
+msgstr "如果你是全新安装gentoo系统，你需要有一张带LVM2支持的启动光盘，如Gentoo安装光盘。你可以在我们<uri link=\"/main/en/mirrors.xml\">镜像站点</uri>的<path>/releases/x86/current/installcd</path>目录下找到x86架构的Gentoo安装光盘。其他的架构的支持也应该能够在这里找到。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:69
+msgid ""
+"If you install LVM2 on a currently running system with some spare hard disk "
+"space, you will need to enable the LVM2 module (<path>dm-mod</path>). This "
+"module is available in <path>gentoo-sources</path>.  Compiling your kernel "
+"and getting LVM2 to work is covered later in this guide."
+msgstr "如果你想在一个正在运行的、有着空余硬盘空间的系统上安装LVM2，你需要启用LVM2模块（<path>dm-mod</path>）。这个模块已被包含在<path>gentoo-sources</path>之中。如何编译内核以便使LVM2正常工作，你会在稍后的文字中读到。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:76
+msgid "Not all 2.4 kernels provided by Gentoo support LVM2!"
+msgstr "并非所有Gentoo提供的2.4内核都支持LVM2！"
+
+#. type: Content of: <guide><chapter><section><title>
+#: lvm2-en.xml:82
+msgid "Partitions"
+msgstr "分区"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:86
+msgid ""
+"Our example system has two IDE hard disks and will be partitioned as "
+"follows:"
+msgstr "在我们的范例系统中有两个IDE硬盘，它们的分区是这样的："
+
+#. type: Content of: <guide><chapter><section><body><ul><li>
+#: lvm2-en.xml:90
+msgid "/dev/hda1 -- /boot"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><ul><li>
+#: lvm2-en.xml:91
+msgid "/dev/hda2 -- (swap)"
+msgstr "/dev/hda2 -- (交换分区)"
+
+#. type: Content of: <guide><chapter><section><body><ul><li>
+#: lvm2-en.xml:92
+msgid "/dev/hda3 -- /"
+msgstr "/dev/hda3 -- / (根分区)"
+
+#. type: Content of: <guide><chapter><section><body><ul><li>
+#: lvm2-en.xml:93
+msgid "/dev/hda4 -- Will be used by LVM2"
+msgstr "/dev/hda4 -- 将被用作LVM2"
+
+#. type: Content of: <guide><chapter><section><body><ul><li>
+#: lvm2-en.xml:94
+msgid "/dev/hdb1 -- Will be used by LVM2"
+msgstr "/dev/hdb1 -- 将被用作LVM2"
+
+#. type: Content of: <guide><chapter><section><body><impo>
+#: lvm2-en.xml:98
+msgid ""
+"Pay attention to the partition names as it is easy to confuse the a's and "
+"b's, and the partition numbers. One false move could wipe out the wrong "
+"partition.  You have been warned!"
+msgstr "请特别注意分区的名字，毕竟a和b常常被看错，那些数字也很容易被混淆。一个小小的失误将导致一整个分区被错误地覆盖掉。脚下留神！"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:104
+msgid "OK, time to start..."
+msgstr "OK, 开始把……"
+
+#. type: Content of: <guide><chapter><title>
+#: lvm2-en.xml:112
+msgid "Installation"
+msgstr "安装"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:117
+msgid ""
+"Follow the handbook, but with the following amendments to chapter <e>4.  "
+"Preparing the Disks</e>:"
+msgstr "先照着安装手册做，直到<e>第4章 ── 准备磁盘</e>"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:122
+msgid ""
+"Use <c>fdisk</c> as described in the handbook, but use the partition scheme "
+"mentioned above as an example. It is only <e>an example</e>, adapt it to "
+"your own needs."
+msgstr "使用安装手册上提及的<c>fdisk</c>，不过将分区划分成上面范例中的那样。它只是个<e>范例</e>，请调整它以符合自己的需求。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:128
+msgid ""
+"Create a small physical <path>/boot</path> partition (hda1). In this "
+"example, <path>/boot</path> will be not managed by LVM2. This partition will "
+"contain your bootloader and your kernel(s).  A 64MB partition should be well "
+"enough for quite a few kernel generations."
+msgstr "创建建一个小小的<path>/boot</path>分区(hda1)。在这个例子中，<path>/boot</path>不会被LVM2管理。这个分区里存放着内核和引导程序。相信一个64M的分区足够存放不少内核的了。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:135
+msgid "Create a swap partition (hda2)."
+msgstr "创建一个交换分区 (hda2)。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:139
+msgid ""
+"Create a / (root) partition (hda3). If you are interested in trying to put "
+"your root partition under LVM management (which we do not recommend), see "
+"the resources section at the end of this guide for a link to a mini-howto on "
+"how to do this. The size of the root partition need not be large if you will "
+"keep <path>/opt /usr /home /var</path> and <path>/tmp</path> in an LVM2 "
+"Volume Group (vg). In this case, 1GB should be sufficient."
+msgstr "创建根（root）分区（hda3）。如果你有兴趣尝试把根分区到LVM下管理（虽然我们不建议这样做），你可以参考本文末尾列出的资源。那里有一个mini-howto会告诉该如何下手。如果将<path>/opt /usr /home /var</path>和<path>/tmp</path>都放在LVM2卷组（vg）中的话，根分区也不用分得太大。在我们的例子中，1GB就足够了。"
+
+#. type: Content of: <guide><chapter><section><body><note>
+#: lvm2-en.xml:148
+msgid ""
+"It is <b>not</b> recommended to put the following directories in an LVM2 "
+"partition: <path>/etc</path>, <path>/lib</path>, <path>/mnt</path>, "
+"<path>/proc</path>, <path>/sbin</path>, <path>/dev</path>, and "
+"<path>/root</path>. This way, you would still be able to log into your "
+"system (crippled, but still somewhat usable, as root) if something goes "
+"terribly wrong."
+msgstr "我们<b>不建议</b>你将下列目录放在LVM2分区上：<path>/etc</path>， <path>/lib</path>， <path>/mnt</path>， <path>/proc</path>， <path>/sbin</path>， <path>/dev</path>以及<path>/root</path>。这样一来，如果有什么可怕的错误（系统严重受损，但对root来说还勉强可用）发生了，你还可以登入系统。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:156
+msgid ""
+"Assuming the <path>/boot</path>, swap and root partitions do not use the "
+"whole physical disk, create a fourth partition on this disk and set it to "
+"type 8e (Linux LVM).  If you have more physical drives you would like to use "
+"with LVM, create one partition on each and give them the same type (8e)."
+msgstr "假如<path>/boot</path>，交换分区和根分区还没能用完整个硬盘，可以创建第四个分区，并把它的类型设为8e（Linux LVM）。如果你还有其他供LVM使用的硬盘，请在每个硬盘上都创建一个分区，并把分区类型设为8e。"
+
+#. type: Content of: <guide><chapter><section><body><note>
+#: lvm2-en.xml:163
+msgid ""
+"Considering the huge size of current disks, you might consider splitting "
+"your hard disks into smaller partitions instead of creating a big partition "
+"that will be added to an LVM2 volume group in one block. LVM2 makes it easy "
+"to extend your volumes after all. This leaves you some unallocated "
+"partitions you might need to use outside of an LVM2 group. In short, don't "
+"use your disk space until you know you need it. As an example, one "
+"contributor had split his 160&nbsp;Gb hard disk into 8 partitions of "
+"20&nbsp;Gb each."
+msgstr "考虑到现在的硬盘都非常大，你也许想将你的硬盘分成几个小分区，而不是一个大的，然后全部添加到LVM2卷组。LVM2让分区扩充容量变得很简单，所以你可以留下一些未配置的分区，天知道你以后会不会在LVM2以外的地方用到它们。简而言之，在还没有确定拿分区做什么用之前，别先把它们用光了。举例来说吧，我们的一位投稿者就将他的160&nbsp;Gb硬盘分成了8个20&nbsp;Gb的分区来用。 "
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:173
+msgid ""
+"Create the filesystems on <path>/dev/hda1</path> and <path>/dev/hda3</path>, "
+"and create and activate the swap on <path>/dev/hda2</path> as described in "
+"the handbook."
+msgstr "按照安装手册的步骤，建立分区<path>/dev/hda1</path>和<path>/dev/hda3</path>的文件系统，并建立且激活交换分区<path>/dev/hda2</path>。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:179
+msgid "Load the LVM2 <path>dm-mod</path> module."
+msgstr "加载LVM2模块<path>dm-mod</path>。"
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:182
+#, no-wrap
+msgid "Loading the LVM2 module"
+msgstr "加载LVM2模块"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:183
+#, no-wrap
+msgid "# <i>modprobe dm-mod</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:187
+msgid ""
+"Before scanning and activating LVM, you might want to edit "
+"<path>/etc/lvm/lvm.conf</path> to exclude some devices. By default, LVM2 "
+"will scan all devices, even your CDROM which can generate error messages. In "
+"the following example, the line that allows scanning of all devices is "
+"replaced by one that rejects every device but our two IDE disks."
+msgstr "在扫描并激活LVM之前，你也许需要先编辑<path>/etc/lvm/lvm.conf</path>文件将一些设备排除在外。因为在默认情况下，LVM2会扫描所有的设备，包括会产生错误信息的光驱。在下面的例子中，我们替换掉了允许扫描所有设备的那行，改为除两个IDE硬盘外，不扫描其他任何设备。 "
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:194
+#, no-wrap
+msgid "Activating LVM"
+msgstr "激活LVM"
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:195
+#, no-wrap
+msgid "(Avoid scanning all devices but our disks)"
+msgstr "(避免扫描除了硬盘之外的所有其他设备)"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:196
+#, no-wrap
+msgid "# <i>nano -w /etc/lvm/lvm.conf</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:197
+#, no-wrap
+msgid "(Look for the following line)"
+msgstr "（查找下面的行）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:198
+#, no-wrap
+msgid "    filter = [ \"a/.*/\" ]\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:199
+#, no-wrap
+msgid ""
+"(Replace it with the following one to scan\n"
+"/dev/hda and /dev/hdb and reject anything else)"
+msgstr ""
+"（用下面内容来替换，保证只扫描\n"
+"/dev/hda和/dev/hdb）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:201
+#, no-wrap
+msgid "    filter = [ \"a|/dev/hd[ab]|\", \"r/.*/\" ]\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:202
+#, no-wrap
+msgid "(Save the file and quit nano)"
+msgstr "（保存文件并退出nano）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:203
+#, no-wrap
+msgid ""
+"# <i>vgscan</i>\n"
+"  Reading all physical volumes.  This may take a while...\n"
+"  No volume groups found\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:206
+#, no-wrap
+msgid "(Make any previously set up volume groups available)"
+msgstr "（启用之前创建的卷组）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:207 lvm2-en.xml:465
+#, no-wrap
+msgid "# <i>vgchange -a y</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:211
+msgid "Prepare the partitions."
+msgstr "准备磁盘分区。 "
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:214
+#, no-wrap
+msgid "Preparing the partitions"
+msgstr "准备磁盘分区 "
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:215
+#, no-wrap
+msgid ""
+"# <i>pvcreate /dev/hda4 /dev/hdb1</i>\n"
+"  No physical volume label read from /dev/hda4\n"
+"  Physical volume \"/dev/hda4\" successfully created\n"
+"  No physical volume label read from /dev/hdb1\n"
+"  Physical volume \"/dev/hdb1\" successfully created\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:223
+msgid ""
+"Setup a volume group. A volume group is the result of combining several "
+"physical units into a single logical device."
+msgstr "创建一个卷组。卷组是一些物理单元的逻辑集合。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:228
+msgid ""
+"In our example, <path>/dev/hda1</path>, <path>/dev/hda2</path> and "
+"<path>/dev/hda3</path> are the <path>/boot</path>, swap and root partitions "
+"so we need to combine <path>/dev/hda4</path> and <path>/dev/hdb1</path>. It "
+"can be done with a single command, but, as an example, we will create our "
+"volume group and extend it."
+msgstr "范例中<path>/dev/hda1</path>，<path>/dev/hda2</path>和<path>/dev/hda3</path>分别是<path>/boot</path>，交换分区和根分区。所以我们需要合并的是<path>/dev/hda4</path>和<path>/dev/hdb1</path>。尽管这用一个命令就可以完成，作为示范，我们还是先创建一个卷组，然后再扩充它。"
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:235
+#, no-wrap
+msgid "Creating and extending a volume group"
+msgstr "创建和扩充卷组"
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:236
+#, no-wrap
+msgid "(Create a volume group named vg)"
+msgstr "（创建一个名为vg的卷组）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:237
+#, no-wrap
+msgid ""
+"# <i>vgcreate vg /dev/hda4</i>\n"
+"  /etc/lvm/backup: fsync failed: Invalid argument "
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:238
+#, no-wrap
+msgid "(Ignore this warning)"
+msgstr "（忽略此警告）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:239
+#, no-wrap
+msgid "  Volume group \"vg\" successfully created\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:240
+#, no-wrap
+msgid "(Extending an existing volume group)"
+msgstr "（扩充已有的卷组）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:241
+#, no-wrap
+msgid ""
+"# <i>vgextend vg /dev/hdb1</i>\n"
+"  /etc/lvm/backup: fsync failed: Invalid argument "
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:242
+#, no-wrap
+msgid "(Ignore this warning, again and later as well)"
+msgstr "（再次忽略这个警告，以后也请继续忽略）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:243
+#, no-wrap
+msgid "  Volume group \"vg\" successfully extended\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:247
+msgid ""
+"Create the logical volumes.  Logical volumes are the equivalent of "
+"partitions you would create using fdisk in a non LVM2 environment. In our "
+"example, we create the following partitions:"
+msgstr "创建逻辑卷。逻辑卷类似于在非LVM2环境中用fdisk创建的磁盘分区。在这个例子中，我们创建了如下分区："
+
+#. type: Content of: <guide><chapter><section><body><table><tr><th>
+#: lvm2-en.xml:254
+msgid "Directory"
+msgstr "目录"
+
+#. type: Content of: <guide><chapter><section><body><table><tr><th>
+#: lvm2-en.xml:255
+msgid "Size"
+msgstr "大小"
+
+#. type: Content of: <guide><chapter><section><body><table><tr><ti>
+#: lvm2-en.xml:258
+msgid "/usr"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><table><tr><ti>
+#: lvm2-en.xml:259 lvm2-en.xml:271
+msgid "10 GB"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><table><tr><ti>
+#: lvm2-en.xml:262
+msgid "/home"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><table><tr><ti>
+#: lvm2-en.xml:263 lvm2-en.xml:267
+msgid "5 GB"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><table><tr><ti>
+#: lvm2-en.xml:266
+msgid "/opt"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><table><tr><ti>
+#: lvm2-en.xml:270
+msgid "/var"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><table><tr><ti>
+#: lvm2-en.xml:274
+msgid "/tmp"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><table><tr><ti>
+#: lvm2-en.xml:275
+msgid "2 GB"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:280
+msgid ""
+"Since we are going to use LVM2, we should not worry too much about partition "
+"sizes because they can always be expanded as needed."
+msgstr "由于我们正要使用的是LVM2，所以不必太在意分区的大小，因为扩充容量将会很容易。"
+
+#. type: Content of: <guide><chapter><section><body><note>
+#: lvm2-en.xml:285
+msgid ""
+"As Terje Kvernes commented, it is easier to increase the size of a partition "
+"then to shrink it.  You might therefore want to start with smaller "
+"partitions and increase their size as needed."
+msgstr "正如Terje Kvernes所评价的，增大分区要比缩小它容易得多。我想你可能会想要从小分区开始，然后在需要的时候才扩充它们。"
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:290
+#, no-wrap
+msgid "Creating and extending logical volumes"
+msgstr "创建和扩充逻辑卷"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:291
+#, no-wrap
+msgid ""
+"# <i>lvcreate -L10G -nusr  vg</i>\n"
+"  Logical volume \"usr\" created "
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:292
+#, no-wrap
+msgid "(Further similar messages not displayed)"
+msgstr "（以后的类似信息就不显示了）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:293
+#, no-wrap
+msgid ""
+"# <i>lvcreate -L5G  -nhome vg</i>\n"
+"# <i>lvcreate -L5G  -nopt  vg</i>\n"
+"# <i>lvcreate -L10G -nvar  vg</i>\n"
+"# <i>lvcreate -L2G  -ntmp  vg</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:297
+#, no-wrap
+msgid "(As an example, let's extend a logical volume with 5 extra Gbytes)"
+msgstr "（作为范例，让我们增加一个额外的5GB逻辑卷）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:298
+#, no-wrap
+msgid "# <i>lvextend -L+5G /dev/vg/home</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:302
+msgid ""
+"Create filesystems on the logical volumes the same way you would on a "
+"regular partition.  We use ext3 on the logical volumes but any filesystem of "
+"your choice will work:"
+msgstr "在逻辑卷中创建文件系统的步骤和在普通分区中相同。我们以使用ext3为例，当然你选用其他文件系统也行： "
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:307
+#, no-wrap
+msgid "Creating the filesystems"
+msgstr "创建文件系统"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:308
+#, no-wrap
+msgid ""
+"# <i>mke2fs -j /dev/vg/usr</i>\n"
+"# <i>mke2fs -j /dev/vg/home</i>\n"
+"# <i>mke2fs -j /dev/vg/opt</i>\n"
+"# <i>mke2fs -j /dev/vg/var</i>\n"
+"# <i>mke2fs -j /dev/vg/tmp</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:316
+msgid ""
+"Mount your partitions as described in the handbook and mount your LVM2 "
+"logical volumes as if they were partitions. Replace the usual "
+"<path>/dev/hdxx</path> with <path>/dev/vg/logical_volumename</path>."
+msgstr "按照安装手册中挂载分区的方法挂载你创建的LVM2逻辑卷，但请将<path>/dev/hdxx</path>替换为<path>/dev/vg/逻辑卷名</path>。"
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:321
+#, no-wrap
+msgid "Mounting your logical volumes"
+msgstr "挂载逻辑卷"
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:322
+#, no-wrap
+msgid ""
+"(Make sure you have mounted your root partition as described in the handbook "
+"first)"
+msgstr "（请依照安装手册中所述，先挂载根分区）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:323
+#, no-wrap
+msgid ""
+"# <i>mkdir /mnt/gentoo/usr</i>\n"
+"# <i>mount /dev/vg/usr /mnt/gentoo/usr</i>\n"
+"# <i>mkdir /mnt/gentoo/home</i>\n"
+"# <i>mount /dev/vg/home /mnt/gentoo/home</i>\n"
+"# <i>mkdir /mnt/gentoo/opt</i>\n"
+"# <i>mount /dev/vg/opt /mnt/gentoo/opt</i>\n"
+"# <i>mkdir /mnt/gentoo/var</i>\n"
+"# <i>mount /dev/vg/var /mnt/gentoo/var</i>\n"
+"# <i>mkdir /mnt/gentoo/tmp</i>\n"
+"# <i>mount /dev/vg/tmp /mnt/gentoo/tmp</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><note>
+#: lvm2-en.xml:336
+msgid ""
+"The rest of the installation handbook is mostly unchanged so we shall not "
+"walk you through it again except to point out differences."
+msgstr "接下来的步骤跟安装手册中提到的差不多，在这里我们只列出一些有差异的地方。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:341
+msgid ""
+"When configuring your kernel, make sure to configure your kernel to support "
+"LVM2 (not all 2.4 kernels do). Select the LVM2 module as follows:"
+msgstr "请在配置内核时确认已启用了LVM2支持（并非所有的2.4内核都支持）。选择下列LVM2模块："
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:345
+#, no-wrap
+msgid "Selecting the LVM2 module in a 2.4.x kernel"
+msgstr "选择2.4.x内核中的LVM2模块"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:346
+#, no-wrap
+msgid ""
+"Multi-device support (RAID and LVM)  ---&gt;\n"
+"  [*] Multiple devices driver support (RAID and LVM)\n"
+"  &lt; &gt;  RAID support\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:349
+#, no-wrap
+msgid "(Note that LVM is not selected on purpose, this was for LVM1)"
+msgstr "（注意，我们故意不选LVM，因为这是为LVM1准备的）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:350
+#, no-wrap
+msgid ""
+"  &lt; &gt;  Logical volume manager (LVM) support\n"
+"  &lt;M&gt;  Device-mapper support\n"
+"  &lt; &gt;   Mirror (RAID-1) support\n"
+msgstr ""
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:355
+#, no-wrap
+msgid "Selecting the LVM2 module in a 2.6.x kernel"
+msgstr "选择2.6.x内核中的LVM2模块"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:356
+#, no-wrap
+msgid ""
+"Device Drivers  ---&gt;\n"
+" Multi-device support (RAID and LVM)  ---&gt;\n"
+"   [*] Multiple devices driver support (RAID and LVM)\n"
+"   &lt; &gt;   RAID support\n"
+"   &lt;M&gt;   Device mapper support\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:364
+msgid "The compiled module is called <path>dm-mod.ko</path>"
+msgstr "编译完成的模块名为<path>dm-mod.ko</path>"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:368
+msgid ""
+"After you have built your kernel and installed its modules, add the "
+"following line to your <path>/etc/modules.autoload.d/kernel-{KV}</path> "
+"where {KV} represents your kernel version (2.4 or 2.6) so that the LVM2 "
+"module gets loaded when your machine is booted:"
+msgstr "在编译完内核并安装好模块之后，将下面这行加入你的<path>/etc/modules.autoload.d/kernel-{KV}</path>中，其中{KV}表示你的内核版本（2.4或2.6），以便在开机时自动加载LVM2： "
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:374
+#, no-wrap
+msgid "Adding the LVM2 module into /etc/modules.autoload.d/kernel-2.6"
+msgstr "在/etc/modules.autoload.d/kernel-2.6中添加LVM2模块"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:375
+#, no-wrap
+msgid "# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:376
+#, no-wrap
+msgid "(Add the following line)"
+msgstr "（添加下面这行）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:377
+#, no-wrap
+msgid "dm-mod\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:381
+msgid "Now, install the lvm2 package."
+msgstr "现在，安装lvm2包。"
+
+#. type: Content of: <guide><chapter><section><body><impo>
+#: lvm2-en.xml:385
+msgid ""
+"Make sure your <path>/usr/src/linux</path> link points to the kernel sources "
+"you are using because the lvm2 ebuild depends on the device-mapper ebuild "
+"which will check the presence of a required source file under "
+"<path>/usr/src/linux/include/linux</path>."
+msgstr "请确定你已将<path>/usr/src/linux</path>链接到了你现在使用的内核源代码，因为lvm2 ebuild所依赖的device-mapper ebuild会用到<path>/usr/src/linux/include/linux</path>下的源文件。 "
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:391
+#, no-wrap
+msgid "Emerging the LVM2 package"
+msgstr "emerging lvm2 软件包"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:392
+#, no-wrap
+msgid "# <i>emerge lvm2</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:396
+msgid ""
+"Edit <path>/etc/lvm/lvm.conf</path> as described <uri "
+"link=\"#doc_chap2_pre2\">earlier</uri>. The file you previously edited is "
+"part of your installation environment and will disappear after the next "
+"reboot.  This time, you edit the real one inside your new Gentoo install."
+msgstr "按照前面的方法编辑文件<path>/etc/lvm/lvm.conf</path>。你<uri link=\"#doc_chap2_pre2\">先前</uri>修改过的那个配置文件是宿主系统中的文件，重启之后就不存在了。你得在新安装的Gentoo系统中再重新编辑一次。"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:403
+msgid ""
+"When editing your <path>/etc/fstab</path> file, follow the handbook and add "
+"your LVM2 logical volumes as needed.  Again, here are a few lines needed for "
+"our example:"
+msgstr "在编辑<path>/etc/fstab</path>文件时，照着安装手册上说的，加入你的LVM2逻辑卷。重申一下，以下内容是我们范例中所必需的： "
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:408
+#, no-wrap
+msgid "Extract of /etc/fstab"
+msgstr "/etc/fstab文件的部分内容"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:409
+#, no-wrap
+msgid ""
+"/dev/hda1     /boot   ext3    noauto,noatime 1 2\n"
+"/dev/hda2     none    swap    sw             0 0\n"
+"/dev/hda3     /       ext3    noatime        0 1\n"
+"# Logical volumes\n"
+"/dev/vg/usr   /usr    ext3    noatime        0 2\n"
+"/dev/vg/home  /home   ext3    noatime        0 2\n"
+"/dev/vg/opt   /opt    ext3    noatime        0 2\n"
+"/dev/vg/var   /var    ext3    noatime        0 2\n"
+"/dev/vg/tmp   /tmp    ext3    noatime        0 2\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:421
+msgid ""
+"When you reach the end of the installation part of the handbook, don't "
+"forget to umount all your LVM2 logical volumes as well and for a good "
+"measure run the following command before you reboot:"
+msgstr "当你来到安装手册中最后的安装步骤时，最好不要忘了卸载你所有的LVM2逻辑卷，并在重启前执行以下命令："
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:426
+#, no-wrap
+msgid "Shutting down LVM2"
+msgstr "关闭LVM2"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:427 lvm2-en.xml:459
+#, no-wrap
+msgid "# <i>vgchange -a n</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:431
+msgid "Restart your machine and all partitions should be visible and mounted."
+msgstr "重新开机，所有的分区都将被正确地显示与挂载。"
+
+#. type: Content of: <guide><chapter><title>
+#: lvm2-en.xml:439
+msgid "Continuing After a Reboot"
+msgstr "重启后如何继续"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:444
+msgid ""
+"If you have interrupted the Gentoo installation at one point and want to "
+"continue, you need to create the volume device nodes first:"
+msgstr "如果你在某处中断了Gentoo的安装又想继续的话，你需要先创建分区节点： "
+
+#. type: Attribute 'caption' of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:448 lvm2-en.xml:457
+#, no-wrap
+msgid "Reactivating the volumes"
+msgstr "重新激活分区"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:449
+#, no-wrap
+msgid "# <i>vgscan --mknodes</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:453
+msgid ""
+"Installation CDs with less recent tools might need to reactivate the volumes "
+"instead:"
+msgstr "在缺少最新工具的安装光盘中，很可能需要用如下方法来重新启用分区："
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:458
+#, no-wrap
+msgid "(Deactivate all volumes first)"
+msgstr "（先将所有分区复位）"
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:460
+#, no-wrap
+msgid "(Export all the volumes)"
+msgstr "（导出所有分区）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:461
+#, no-wrap
+msgid "# <i>vgexport -a</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:462
+#, no-wrap
+msgid "(Import all volumes)"
+msgstr "（导入所有分区）"
+
+#. type: Content of: <guide><chapter><section><body><pre>
+#: lvm2-en.xml:463
+#, no-wrap
+msgid "# <i>vgimport -a</i>\n"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><pre><comment>
+#: lvm2-en.xml:464
+#, no-wrap
+msgid "(Reactivate all volumes)"
+msgstr "（重新激活所有分区）"
+
+#. type: Content of: <guide><chapter><title>
+#: lvm2-en.xml:473
+msgid "Resources"
+msgstr "相关资源"
+
+#. type: Content of: <guide><chapter><section><body><ul><li>
+#: lvm2-en.xml:479
+msgid ""
+"The official <uri link=\"http://sources.redhat.com/lvm2\">LVM2 home "
+"page</uri>"
+msgstr "官方网站<uri link=\"http://sources.redhat.com/lvm2\">LVM2主页</uri>"
+
+#. type: Content of: <guide><chapter><section><body><ul><li>
+#: lvm2-en.xml:482
+msgid "The <uri link=\"http://tldp.org/HOWTO/LVM-HOWTO\">LVM Howto</uri>"
+msgstr ""
+
+#. type: Content of: <guide><chapter><section><body><ul><li>
+#: lvm2-en.xml:485
+msgid ""
+"Daniel Robbins's articles on LVM for IBM's DeveloperWorks: <uri "
+"link=\"/doc/en/articles/lvm-p1.xml\">Part 1</uri> and <uri "
+"link=\"/doc/en/articles/lvm-p2.xml\">Part 2</uri>"
+msgstr "Daniel Robbins写在IBM DeveloperWorks上的关于LVM的文章：<uri link=\"/doc/zh_cn/articles/lvm-p1.xml\">第一部分</uri>以及<uri link=\"/doc/zh_cn/articles/lvm-p2.xml\">第二部分</uri>"
+
+#. type: Content of: <guide><chapter><section><body><ul><li>
+#: lvm2-en.xml:490
+msgid ""
+"How to boot your root FS off of LVM1: "
+"<uri>http://www.the-infinite.org/archive/docs/lvm/howto-boot-off-root-lv.txt</uri>"
+msgstr "如何启动你在LVM1上的根分区：<uri>http://www.the-infinite.org/archive/docs/lvm/howto-boot-off-root-lv.txt</uri>"
+
+#. type: Content of: <guide><chapter><title>
+#: lvm2-en.xml:500
+msgid "Acknowledgements"
+msgstr "特别感谢"
+
+#. type: Content of: <guide><chapter><section><body><p>
+#: lvm2-en.xml:505
+msgid ""
+"Thanks <mail link=\"bangert@gentoo.org\">Thilo Bangert</mail> and <mail "
+"link=\"terjekv@math.uio.no\">Terje Kvernes</mail> for their help and "
+"comments on this document."
+msgstr "非常感谢<mail link=\"bangert@gentoo.org\">Thilo Bangert</mail>以及<mail link=\"terjekv@math.uio.no\">Terje Kvernes</mail>为本文提供的帮助和建议。"

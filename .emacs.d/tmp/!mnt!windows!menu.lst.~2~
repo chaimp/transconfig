@@ -1,0 +1,29 @@
+# This is a sample menu.lst file. You should make some changes to it.
+# The old install method of booting via the stage-files has been removed.
+# Please install GRLDR boot strap code to MBR with the bootlace.com
+# utility under DOS/Win9x or Linux.
+
+color black/cyan yellow/cyan
+timeout 30
+default 2
+
+title Windows XP
+fallback 1
+find --set-root /ntldr
+chainloader /ntldr
+savedefault --wait=2
+
+title gentoo
+root (hd0,7)
+kernel /kernel-2.6.27 video=vesafb:mtrr:3,ywrap,1280x800-32 root=/dev/sda5 CONSOLE=/dev/tty1 resume2=swap:/dev/sda10 quiet udev
+initrd /initramfs
+
+title funtoo
+root (hd0,7)
+kernel /kernel-2.6.28 video=uvesafb:mtrr:3,ywrap,1280x800-32 splash=silent,fadein,theme:livecd-2007.0 root=/dev/sda5 CONSOLE=/dev/tty1 resume2=swap:/dev/sda10 quiet udev
+#initrd /initramfs
+
+title sysrcd
+root (hd0,0)
+kernel /sysrcd/rescuecd subdir=sysrcd
+initrd /sysrcd/initram.igz

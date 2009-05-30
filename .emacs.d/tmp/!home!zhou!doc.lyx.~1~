@@ -1,0 +1,1982 @@
+#LyX 1.5.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass article
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\float_placement h
+\paperfontsize default
+\spacing single
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language swedish
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Gentoo Prefix Installation on Windows
+\end_layout
+
+\begin_layout Author
+Markus Duft
+\end_layout
+
+\begin_layout Date
+06/02/08
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Welcome to the Gentoo on Windows Documentation.
+ This Guide will help you in installing and beginning to use a binary Gentoo
+ Prefix Snapshot.
+ But first of all I want to spend some time explaining the motivation and
+ a little background about how things work on Windows.
+ If you are not interested in this, but rather want to quickly get Gentoo
+ Prefix installed, you can skip to the next chapter.
+\end_layout
+
+\begin_layout Subsection
+Windows / Interix
+\end_layout
+
+\begin_layout Standard
+So what is this Interix after all? Interix is a POSIX compatible Layer on
+ top of the Windows Kernel (not the Windows Subsystem).
+ In general this can be thought of a seperate OS next to Windows.
+ Interix can talk to Windows, but that seems somewhat slow most of the time.
+ Also Interix has no direct hardware access, since the Windows Subsystem
+ has exclusive access to all Hardware.
+ Thus Interix has to do some things with the Windows Subsystem as Proxy
+ (for example filesystem accesses).
+ This also means that it will never be possible to - for example - compile
+ an X11 Server, since this would require access to the Graphics Hardware.
+ But it is possible to install an X11 Server on native Windows (like Xming)
+ and let the Interix X11 client libs talk to that one.
+\end_layout
+
+\begin_layout Standard
+There are two different types of Executables in play when i talk of Interix
+ and Windows.
+ The first on is an 
+\begin_inset Quotes eld
+\end_inset
+
+Interix Executable
+\begin_inset Quotes erd
+\end_inset
+
+, which uses the Interix libc (but still is a normal PE Executable).
+ The second one is a native 
+\begin_inset Quotes eld
+\end_inset
+
+Windows Executable
+\begin_inset Quotes erd
+\end_inset
+
+ which uses the Microsoft libc (msvcrt.dll and others).
+ The difference is, that 
+\begin_inset Quotes eld
+\end_inset
+
+Windows Executables
+\begin_inset Quotes erd
+\end_inset
+
+ can be executed in both the Windows and the Interix Environment, but Interix
+ Executables cannot be executed from Windows without Interix beeing installed.
+\end_layout
+
+\begin_layout Standard
+The Gentoo Prefix you are about to install, is completely made up of 
+\begin_inset Quotes eld
+\end_inset
+
+Interix Executables
+\begin_inset Quotes erd
+\end_inset
+
+, there is no native binary in there, so Interix is required always to run
+ any of the installed Programs.
+\end_layout
+
+\begin_layout Standard
+Please note that all the above is my current notion of Interix and Windows,
+ and may or may not be true, since Microsoft does not offer the Sources
+ of the Interix Subsystem, or any related in-depth Documentation as far
+ as i can tell.
+\end_layout
+
+\begin_layout Subsection
+Motivation
+\end_layout
+
+\begin_layout Standard
+The Motivation for porting Gentoo Prefix to Interix was, to get a sane build
+ environment for our Software which was to be ported to native Windows.
+ It uses Autotools (autoconf, automake, libtool) for building, and at some
+ point in time we decided that bringing our current build system to windows
+ would be easier than moving to something completely new.
+\end_layout
+
+\begin_layout Standard
+Also just moving to a POSIX Layer like Interix was not enough, since we
+ wanted to use native Windows capabilities like printing, etc.
+ We could have done it with CYGWIN, but at that time CYGWIN had some major
+ Problems with I/O on Multi-Core/CPU machines on Windows Versions greater
+ then 2000.
+\end_layout
+
+\begin_layout Standard
+First there was no Gentoo Prefix in our company (not even on Platforms other
+ than Windows), but rather a collection of small handwritten Scripts and
+ Makefiles which configured and builded our Packages, but this quickly became
+ insuficient.
+ So we decided to move to Gentoo Prefix on all the Platforms our Software
+ supported - including Windows.
+\end_layout
+
+\begin_layout Standard
+After porting the required basics to Interix, so that we can at least use
+ parity (a Interix to native Windows cross compiler i wrote, and which we
+ use to build our Software) and confix, i simply kept going (also privately)
+ until i had a 
+\begin_inset Quotes eld
+\end_inset
+
+gnome-terminal
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+audacious
+\begin_inset Quotes erd
+\end_inset
+
+ (through a cygwin-built ESounD daemon i must admit.
+ I cannot build the daemon for Interix, since that would require Hardware
+ access again) running.
+ Also a complete XFCE4 Environment is available - it's still unstable sometimes
+ though.
+\end_layout
+
+\begin_layout Standard
+The reason I put so much effort into Interix, even if we required only about
+ half of what I've ported, is that Interix without help is completely unusable
+ for a working environment.
+ Think of the Windows Shell 鈥� Interix by default uses the same thing, so
+ simple things like copy/paste are a pain.
+ Also most utilities are from the Stone Age.
+ Another Problem is, that many critical things are just patched CVS exports
+ from some random date 鈥� for sure no release date! (binutils and gdb are
+ examples for this).
+ This is a bit better in SUA 6.0, where there is GCC 4 and binutils 2.17 (no
+ CVS exports, but released versions).
+ Working with a gnome-terminal which supports proper text selection and
+ tabbed terminals, working has become a lot easier on windows.
+ And still i can use most Windows Programs from within the Interix terminal
+ too.
+\end_layout
+
+\begin_layout Subsection
+Future Directions
+\end_layout
+
+\begin_layout Standard
+The next big step is, to get native Windows Binaries from within portage.
+ This is a little more complicated than the current setup, since compiling
+ most of the system set, which is done for Interix, is impossible, or very,
+ very hard on Windows.
+ So I decided to do something I call 
+\begin_inset Quotes eld
+\end_inset
+
+Prefix-Chaining
+\begin_inset Quotes erd
+\end_inset
+
+.
+ There is still some work to be done to get Portage to do what i want.
+\end_layout
+
+\begin_layout Standard
+The Plan is, that i use portage from Prefix A (containing Interix Binaries)
+ to build into Prefix B (containing only native Windows Binaries).
+ Also all the DEPEND atoms are resolved from Prefix A (!), so that all the
+ build-time dependencies are not built (again) into Prefix B.
+ All the run time-dependencies need to be resolved from Prefix B, since
+ native Windows and Interix Binaries (Libraries) are completely incompatible.
+\end_layout
+
+\begin_layout Standard
+Once portage is capable of doing what i want here, one could say (just another
+ example) 
+\begin_inset Quotes eld
+\end_inset
+
+emerge orbit
+\begin_inset Quotes erd
+\end_inset
+
+ and have a set of working native Windows ORBit2 libraries (That this example
+ is possible is proven already, since our (native Windows) Software uses
+ ORBit2 already, built using parity).
+\end_layout
+
+\begin_layout Section
+Installation
+\end_layout
+
+\begin_layout Standard
+Finally I wrote an automated Installation Mechanism for a binary Gentoo
+ Prefix distribution, including Interix, and all required Hotfixes to get
+ a more or less sane System.
+ If you got one of the CD Images in your hands, you can skip all the download
+ steps in the below description, since all those Files are included already.
+ Setup makes sure that every component it requires is installed, but just
+ skips a step if it detects it already being done.
+ This means one has to take a little caution if there is an Interix system
+ installed already.
+ Setup will modify a few files under /etc, and by default create .profile
+ files in the home directories of user it sets up.
+\end_layout
+
+\begin_layout Standard
+Setup will 鈥� in good old Microsoft manner 鈥� have to reboot the machine it's
+ installing on 鈥� at least once, depending on the OS Version.
+ It will take approximately half an hour from a fresh Windows install to
+ a usable Gentoo Prefix using the binary installation (time taken inside
+ a virtual machine).
+ If you'd decide to bootstrap Interix yourself on a reasonably new hardware,
+ you would approximately spend two to three days compiling.
+ Also since currently there are not so many users which bootstrap manually,
+ there is no guarantee, that bootstrapping works at all with current package
+ versions.
+\end_layout
+
+\begin_layout Standard
+The Setup program has been written for my company, and so far I didn't spend
+ any time adapting it for the broad masses, so you may find some specific
+ things you don't need (the only ones i can think of at the moment is a
+ domain entry in /etc/resolv.conf, and some stuff in ~/.profile for each user).
+ The .profile that is installed for every user that you tell setup to create/modi
+fy has been written with native Windows compilation in mind, so it will
+ look for Microsoft Visual Studio installations and such things, and spit
+ warnings if they are not present.
+ Of course if you don't intend to compile Software for native Windows (for
+ now possible only manually, without portage), you can safely ignore any
+ such warnings, or even edit .profile to disable them.
+\end_layout
+
+\begin_layout Subsection
+Choosing the correct CD Image
+\end_layout
+
+\begin_layout Standard
+There are three different CD Images available, one for each existing Interix
+ version.
+ Each of the Interix versions can be installed on a limited Windows Version
+ set only, so trying to install Interix 6.0 on Windows XP will fail for example.
+ See 
+\begin_inset LatexCommand prettyref
+reference "tab:Windows-and-Interix"
+
+\end_inset
+
+ for a detailed listing of compatible versions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features booktabs="true">
+<column alignment="left" valignment="top" leftline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Windows version
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+compatible Interix version
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Windows 2000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+SFU 3.5
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Windows XP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+SFU 3.5
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Windows Server 2003
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+SFU 3.5
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Windows Server 2003 R2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+SUA 5.2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Windows Server 2008
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+SUA 6.0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Windows Vista
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+SUA 6.0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "tab:Windows-and-Interix"
+
+\end_inset
+
+Windows and Interix Compatability
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Starting the Installation
+\end_layout
+
+\begin_layout Standard
+Starting the installation is fairly easy, i only recomment that you are
+ logged in as Administrator.
+ If you are not, it will install anyway as far as i can tell 鈥� it's just
+ not tested in every corner.
+ If you have the CD Image, just burn it to a CD, or mount the Image using
+ something like Daemon Tools.
+ If you have the Online Version, just double-click Setup.exe (The Online
+ installer is not available right now).
+\end_layout
+
+\begin_layout Standard
+Setup requests the reuired permissions to execute correctly from Windows,
+ this means that on Windows Server 2008 and Windows Vista, you may be presented
+ with a warning like in 
+\begin_inset LatexCommand prettyref
+reference "fig:Confirming-UAC"
+
+\end_inset
+
+.
+ Just click allow to continue with Setup.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_exec_admin_uac.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Confirming-UAC"
+
+\end_inset
+
+Confirming UAC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+You should now see the main Window of the Gentoo Prefix and Interix Installation
+ Program (
+\begin_inset LatexCommand prettyref
+reference "fig:Installation-Main-Window"
+
+\end_inset
+
+) 鈥� it might differ a little, but at least it should have a 
+\begin_inset Quotes eld
+\end_inset
+
+Start
+\begin_inset Quotes erd
+\end_inset
+
+ and a 
+\begin_inset Quotes eld
+\end_inset
+
+Quit
+\begin_inset Quotes erd
+\end_inset
+
+ button:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_main.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Installation-Main-Window"
+
+\end_inset
+
+Installation Main Window
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Installation of Interix
+\end_layout
+
+\begin_layout Standard
+You can now start the automated installation by clicking on 
+\begin_inset Quotes eld
+\end_inset
+
+Start
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The Window now displays a (marquee) progress bar indicating that there
+ is some work done in the Background.
+ The current status is displayed above the progress bar.
+ Setup will as a first step assure that Interix is installed properly.
+ After that it may restart your computer (
+\begin_inset LatexCommand prettyref
+reference "fig:Restart-request"
+
+\end_inset
+
+) to complete the Interix Installation and to be able to start Shell Scripts
+ for further setup.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_interix_restart.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Restart-request"
+
+\end_inset
+
+Restart request
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Base System Configuration
+\end_layout
+
+\begin_layout Standard
+After rebooting the Computer, Setup will resume automatically (so please
+ don't remove the CD while rebooting).
+ It will continue withe setting up the Base System, so that it is in a sane
+ state for installing the Gentoo Prefix.
+ Also the install script will configure and compile GNU make and GNU tar,
+ to be able to unpack the Gentoo Prefix binary Snapshot 鈥� the Interix tar
+ is a us-tar from the Stone Age again, which is unable to unpack the portage
+ tree, and some other files with long paths.
+\end_layout
+
+\begin_layout Standard
+While checking and fixing the Base System (usually takes a second only),
+ you may see some red '[ !! ]' in the Console Window that pops up (see 
+\begin_inset LatexCommand prettyref
+reference "fig:Base-System-Setup"
+
+\end_inset
+
+).
+ You can safely ignore those, since they only indicate that the existing
+ file is not sufficient, and needs fixing.
+ Setup won't touch a file twice, so if you happen to restart the setup process
+ (because something goes wrong later on), the 
+\begin_inset Quotes eld
+\end_inset
+
+checking ...
+\begin_inset Quotes erd
+\end_inset
+
+ things should have an '[ ok ]' behind them.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_shell_basic.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Base-System-Setup"
+
+\end_inset
+
+Base System Setup
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Gentoo Prefix Installation
+\end_layout
+
+\begin_layout Standard
+Once the Base System is sane enough, Setup will begin unpacking the Gentoo
+ Prefix Snapshot included on the CD (a Snapshot will be downloaded in the
+ Online version of the installer) 鈥� see 
+\begin_inset LatexCommand prettyref
+reference "fig:Unpacking-Gentoo-Prefix"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_shell_unpack.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Unpacking-Gentoo-Prefix"
+
+\end_inset
+
+Unpacking Gentoo Prefix
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Service Configuration
+\end_layout
+
+\begin_layout Standard
+Along with the Gentoo Prefix comes an OpenSSH Server which is installed
+ by default.
+ If you don't want the Server to be started, simply remove the two symbolic
+ links 
+\begin_inset Quotes eld
+\end_inset
+
+/etc/rc2.d/K68sshd
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+/etc/rc2.d/S32sshd
+\begin_inset Quotes erd
+\end_inset
+
+.
+ You can then still manually start the Server by using 
+\begin_inset Quotes eld
+\end_inset
+
+/etc/init.d/sshd start
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Setup will create all the required host keys and symlinks to create the
+ ssh service, and make it ready to go 鈥� see 
+\begin_inset LatexCommand prettyref
+reference "fig:Service-Configuration"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_shell_postsetup.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Service-Configuration"
+
+\end_inset
+
+Service Configuration
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+User Account Setup
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_user_begin.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+User Setup
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The user account setup can be done for either new or existing users.
+ Also domain users should partially work, there are problems here though,
+ since a domain user must get himself a domain admin to issue some commands
+ to set the Home directory and login shell.
+ Another Problem with domain users is, that the Home directory and login
+ shell are set globally for the whole domain, so all the machines need to
+ be set up exactly the same.
+\end_layout
+
+\begin_layout Standard
+Setup will try to create the given groups and users on the local machine,
+ and configure them afterwards.
+ If creation goes wrong, Setup still continues and tries to configure the
+ given account, for the case that there is an existing user.
+ Domain users need to be specified with the fully qualified domain name
+ to be recognized as such (so 
+\begin_inset Quotes eld
+\end_inset
+
+domain
+\backslash
+user
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+domain+user
+\begin_inset Quotes erd
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Configuring a user consists of setting the home directory, the login shell
+ and creating some files in the new home directory.
+ Those files are .profile, .profile.user and .vimrc.
+ The last one is just a little convenience to have vim pre-configured.
+ The first two are more interesting: .profile contains all the things to
+ turn Interix into a sane environment and fire up the Gentoo Prefix.
+ It also contains the things required to do native Windows compilation (for
+ example the Visual Studio environment setup).
+ The file .profile.user contains lots of comments about what you possibly
+ still have to configure, and also is the place to do so for most things.
+\end_layout
+
+\begin_layout Standard
+Most of the user account setup steps have default values pre-set.
+ With only always accepting the defaults, you should come through and on
+ the other end have the current user set up for use with Gentoo Prefix.
+ Still i recommend, that you create a new group 鈥� something like 
+\begin_inset Quotes sld
+\end_inset
+
+gentoo
+\begin_inset Quotes srd
+\end_inset
+
+, or 
+\begin_inset Quotes sld
+\end_inset
+
+interix
+\begin_inset Quotes srd
+\end_inset
+
+ 鈥� and make all users part of this group.
+ Then chgrp the directories you use most frequently to this group, so that
+ any newly created files below this folders get this group too.
+ This is, because sometimes there is a big mess with groups mapped from
+ Windows (so that some files group is 
+\begin_inset Quotes eld
+\end_inset
+
+None
+\begin_inset Quotes erd
+\end_inset
+
+ the others is 
+\begin_inset Quotes eld
+\end_inset
+
+SYSTEM
+\begin_inset Quotes erd
+\end_inset
+
+ and again another's is 
+\begin_inset Quotes eld
+\end_inset
+
+Administrators
+\begin_inset Quotes erd
+\end_inset
+
+ ...).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_user_setup.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:User-Setup-Progress"
+
+\end_inset
+
+User Setup Progress
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset LatexCommand prettyref
+reference "fig:User-Setup-Progress"
+
+\end_inset
+
+ as an example the user 
+\begin_inset Quotes eld
+\end_inset
+
+wie
+\begin_inset Quotes erd
+\end_inset
+
+ existed locally on the machine, so only the rest of the setup is done for
+ it.
+\end_layout
+
+\begin_layout Subsection
+Finishing Touches
+\end_layout
+
+\begin_layout Standard
+These are the final Steps of Setup.
+ If things break after here, it is absolutely non-fatal for the Gentoo Prefix
+ Setup.
+ Setup has the possibility to create a Firewall Exception for the SSH Server
+ which was installed with Gentoo Prefix.
+ If you want your machine to be reachable over SSH, and have an activated
+ Firewall (or plan to activate it sometimes) you should click 
+\begin_inset Quotes eld
+\end_inset
+
+Yes
+\begin_inset Quotes erd
+\end_inset
+
+ 鈥� see 
+\begin_inset LatexCommand prettyref
+reference "fig:Adding-a-Firewall"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_firewall_exception.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Adding-a-Firewall"
+
+\end_inset
+
+Adding a Firewall Exception for SSH Service
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Restart the Computer
+\end_layout
+
+\begin_layout Standard
+Depending on the Windows Version and Interix Version you have installed,
+ a restart will be required here to complete the Gentoo Prefix setup process.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset LatexCommand label
+name "sub:Other-Things-to"
+
+\end_inset
+
+Other things to install
+\end_layout
+
+\begin_layout Standard
+Yet there are some other things that might need to be installed in order
+ to get the more sophisticated stuff working.
+ To get a gnome-terminal to start, you will need an X11 Server for Windows
+ like the open source 
+\begin_inset Quotes eld
+\end_inset
+
+Xming
+\begin_inset Quotes erd
+\end_inset
+
+ (although version 7 doesn't seem to be free of charge anymore).
+ You can also download and install the font package for 
+\begin_inset Quotes eld
+\end_inset
+
+Xming
+\begin_inset Quotes erd
+\end_inset
+
+ although you wont need it for gnome-terminal, since this uses local fonts
+ installed in the Gentoo Prefix.
+\end_layout
+
+\begin_layout Section
+Configuration and First Steps
+\end_layout
+
+\begin_layout Standard
+After setting up the whole thing, there is still some work to be done, mostly
+ to be able to use the system locally.
+ For a SSH login, things should work from here on, also for sending a gnome-term
+inal via X11 to another server should be as simple as setting DISPLAY.
+\end_layout
+
+\begin_layout Standard
+But if you want to use Interix from on-the-glass without SSH, you will want
+ to have a Desktop Icon to start a Bash.
+ Also you will want to explicitly set the HOME variable since the settings
+ that the user account setup step took, only take effect for remote (or
+ better 
+\begin_inset Quotes eld
+\end_inset
+
+indirect
+\begin_inset Quotes erd
+\end_inset
+
+) logins (
+\begin_inset Quotes eld
+\end_inset
+
+ssh
+\begin_inset Quotes erd
+\end_inset
+
+, and 
+\begin_inset Quotes eld
+\end_inset
+
+su
+\begin_inset Quotes erd
+\end_inset
+
+ too), I really don't know why 鈥� however this requires us to take some extra
+ action to be able to use Interix locally.
+\end_layout
+
+\begin_layout Subsection
+HOME Variable for local Shells
+\end_layout
+
+\begin_layout Standard
+For local shells we need to set the HOME environment variable, so that the
+ shell is started in the right location.
+ This cannot be taken by the .profile, since that would be too late (the
+ shell needs to find .profile in the home directory already).
+ So we need to do this in the User Environment Variables setting of Windows
+ (this has to be done for every user!).
+\end_layout
+
+\begin_layout Standard
+Go to 
+\begin_inset Quotes eld
+\end_inset
+
+Control Panel/System/Advanced/Environment Variables
+\begin_inset Quotes erd
+\end_inset
+
+ and click on 
+\begin_inset Quotes eld
+\end_inset
+
+New
+\begin_inset Quotes erd
+\end_inset
+
+ in the upper section of the Window (
+\begin_inset Quotes eld
+\end_inset
+
+User Variables
+\begin_inset Quotes erd
+\end_inset
+
+).
+ This should look like in 
+\begin_inset LatexCommand prettyref
+reference "fig:Adding-HOME-Variable"
+
+\end_inset
+
+.
+ Put 
+\begin_inset Quotes eld
+\end_inset
+
+HOME
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset Quotes eld
+\end_inset
+
+Variable name
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+/home/<user name>
+\begin_inset Quotes erd
+\end_inset
+
+ in 
+\begin_inset Quotes eld
+\end_inset
+
+Variable value
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Then press 
+\begin_inset Quotes eld
+\end_inset
+
+OK
+\begin_inset Quotes erd
+\end_inset
+
+ until you have no more dialogs open.
+ This should make any new shell end up in the right home directory.
+ You can try by launching the normal Interix Korn Shell from the Start Menu.
+ If you see something like in 
+\begin_inset LatexCommand prettyref
+reference "fig:Korn-Shell-after"
+
+\end_inset
+
+, you're done with this.
+ If not, something went wrong; in this case check whether HOME is set correctly,
+ if the directory exists, and if there is a .profile in there.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_sys_home_eng.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Adding-HOME-Variable"
+
+\end_inset
+
+Adding HOME Variable
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_ksh_login.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Korn-Shell-after"
+
+\end_inset
+
+Korn Shell after HOME is set correctly
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Start Gentoo Prefix
+\end_layout
+
+\begin_layout Standard
+You can now start using the Gentoo Prefix by typing 
+\begin_inset Quotes eld
+\end_inset
+
+gentoo
+\begin_inset Quotes erd
+\end_inset
+
+ in the Korn Shell.
+ This will fire up the Gentoo Prefix bash.
+ It should look like in 
+\begin_inset LatexCommand prettyref
+reference "fig:Gentoo-Prefix-started"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_enter_prefix.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Gentoo-Prefix-started"
+
+\end_inset
+
+Gentoo Prefix started from Korn Shell
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Create a Desktop Shortcut
+\end_layout
+
+\begin_layout Standard
+Entering Gentoo Prefix is not really optimal yet, since you have to start
+ a Korn Shell and type 
+\begin_inset Quotes eld
+\end_inset
+
+gentoo
+\begin_inset Quotes erd
+\end_inset
+
+ every time to get to your Bash.
+ To fix this we will now create a Desktop Shortcut.
+ To do this, copy the 
+\begin_inset Quotes eld
+\end_inset
+
+Korn Shell
+\begin_inset Quotes erd
+\end_inset
+
+ Shortcut from your Start menu to the Desktop (Hint for Non-Windows users:
+ Drag the Shortcut with the right mouse button from the Start menu to the
+ desktop, and you will be presented with a context menu.
+ Choose 
+\begin_inset Quotes eld
+\end_inset
+
+Copy here
+\begin_inset Quotes erd
+\end_inset
+
+ to copy the Shortcut).
+\end_layout
+
+\begin_layout Standard
+Rename the Shortcut to 
+\begin_inset Quotes eld
+\end_inset
+
+Bash Shell
+\begin_inset Quotes erd
+\end_inset
+
+ or something else you like.
+ Then right click it, and choose 
+\begin_inset Quotes eld
+\end_inset
+
+Properties
+\begin_inset Quotes erd
+\end_inset
+
+.
+ In 
+\begin_inset LatexCommand prettyref
+reference "fig:Korn-Shell-and"
+
+\end_inset
+
+ you can see both the Property Pages next to each other.
+ In this Figure you can see that only the 
+\begin_inset Quotes eld
+\end_inset
+
+Target
+\begin_inset Quotes erd
+\end_inset
+
+ needs to be modified.
+ Simply change the 
+\begin_inset Quotes eld
+\end_inset
+
+/bin/ksh -l
+\begin_inset Quotes erd
+\end_inset
+
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+/opt/gentoo/bin/bash -l
+\begin_inset Quotes erd
+\end_inset
+
+ (a small 'L' for 
+\begin_inset Quotes eld
+\end_inset
+
+login
+\begin_inset Quotes erd
+\end_inset
+
+ in both cases).
+ Press 
+\begin_inset Quotes eld
+\end_inset
+
+OK
+\begin_inset Quotes erd
+\end_inset
+
+ and the Shortcut is in place.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_bash_link.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Korn-Shell-and"
+
+\end_inset
+
+Korn Shell and Bash Shortcut Properties
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Starting a Bash by double-clicking the new Shortcut should give a picture
+ like in 
+\begin_inset LatexCommand prettyref
+reference "fig:Start-Bash-Shell"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_bash_login.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Start-Bash-Shell"
+
+\end_inset
+
+Start Bash Shell
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+A better Terminal
+\end_layout
+
+\begin_layout Standard
+I think we all agree that if you're used to a sane UNIX terminal, you cannot
+ work with the Microsoft shell window.
+ For this reason there is gnome-terminal pre-built in the binary Gentoo
+ Prefix.
+ All you need is an X11 Server, as i said in 
+\begin_inset LatexCommand vref
+reference "sub:Other-Things-to"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In order to not have to set the DISPLAY variable, i recommend putting the
+ most commonly used DISPLAY in .profile.user (there is a commented section
+ about this), if it is not 
+\begin_inset Quotes eld
+\end_inset
+
+localhost:0
+\begin_inset Quotes erd
+\end_inset
+
+, which is the default.
+\end_layout
+
+\begin_layout Standard
+If the X11 Server is running, simply type 
+\begin_inset Quotes eld
+\end_inset
+
+gnome-terminal --disable-factory
+\begin_inset Quotes erd
+\end_inset
+
+ on the shell prompt.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+--disable-factory
+\begin_inset Quotes erd
+\end_inset
+
+ argument forces gnome-terminal to not register with the 
+\begin_inset Quotes eld
+\end_inset
+
+Bonobo Activation Server
+\begin_inset Quotes erd
+\end_inset
+
+ which doesn't currently work correctly.
+ Starting the Terminal works without this argument too, but it emits an
+ ugly warning.
+ You should be presented with a picture like in 
+\begin_inset LatexCommand prettyref
+reference "fig:A-fresh-Gnome"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_gterm_login.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:A-fresh-Gnome"
+
+\end_inset
+
+A fresh Gnome Terminal
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Configuring the look-and-feel of the Gnome Terminal is up to you.
+ Just a hint: use 
+\begin_inset Quotes eld
+\end_inset
+
+gtk-chtheme
+\begin_inset Quotes erd
+\end_inset
+
+ yo change the GTK+ theme.
+ A Gnome Terminal after investing about a minute for configuration can look
+ like in 
+\begin_inset LatexCommand prettyref
+reference "fig:Updating-Software-with"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+WARNING: You will have to set the option 
+\begin_inset Quotes eld
+\end_inset
+
+Backspace Key generates:
+\begin_inset Quotes erd
+\end_inset
+
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+Control-H
+\begin_inset Quotes erd
+\end_inset
+
+ to get the Backspace key to fully work.
+\end_layout
+
+\begin_layout Subsection
+Portage
+\end_layout
+
+\begin_layout Standard
+The installed Portage can be used only by the user that installed the whole
+ system (most probably Administrator).
+ You will have to 
+\begin_inset Quotes eld
+\end_inset
+
+su
+\begin_inset Quotes erd
+\end_inset
+
+ to that user before being able to use portage to install/update/uninstall
+ software packages.
+\end_layout
+
+\begin_layout Standard
+A detailed portage handbook can be found here: 
+\begin_inset LatexCommand htmlurl
+name "Portage Handbook"
+target "http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?part=2&chap=1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Finally 
+\begin_inset LatexCommand prettyref
+reference "fig:Updating-Software-with"
+
+\end_inset
+
+ shows a Screenshot of 
+\begin_inset Quotes eld
+\end_inset
+
+gnome-terminal
+\begin_inset Quotes erd
+\end_inset
+
+ with two tabs open, and Administrator updating the Gentoo Prefix installation
+ using 
+\begin_inset Quotes eld
+\end_inset
+
+emerge -avuD world
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/iset_portage_update.jpg
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+\begin_inset LatexCommand label
+name "fig:Updating-Software-with"
+
+\end_inset
+
+Updating Software with Portage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

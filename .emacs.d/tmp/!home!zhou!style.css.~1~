@@ -1,0 +1,10 @@
+*{}
+body{}
+a{}
+a:hover{}
+#header{}
+#main{}
+#left{}
+#right{}
+#center{}
+#footer{}

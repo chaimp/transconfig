@@ -241,9 +241,7 @@
 (setq auto-mode-alist (cons '("\\.phtml$" . html-mode) auto-mode-alist))
 ;;【html-helper-mode.el】一个不错的 html 编辑模式。
 
-(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;;; cperl-mode is preferred to perl-mode                                        
 ;;; "Brevity is the soul of wit" <foo at acm.org> 
 (mapc
@@ -280,7 +278,7 @@
 (load-file "~/.emacs.d/lisps/themes/color-theme-tango-light.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-awesome.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-tango-2.el")
-(color-theme-tango-2)
+(color-theme-tango-light)
 
 ;;(require 'tex-site)
 (require 'compile)
@@ -300,11 +298,11 @@
 (ido-mode t)
 
 (define-key global-map "\e\e" 'vi-mode) ;quick switch into vi-mode
-(setq find-file-hook (list
-                     (function (lambda ()
-                               (if (not (or (eq major-mode 'Info-mode)
-                                   (eq major-mode 'vi-mode)))
-                                   (vi-mode))))))
+;;(setq find-file-hook (list
+;;                     (function (lambda ()
+;;                               (if (not (or (eq major-mode 'Info-mode)
+;;                                   (eq major-mode 'vi-mode)))
+;;                                   (vi-mode))))))
 
 (require 'erc)
 ;;(require 'erc-list)

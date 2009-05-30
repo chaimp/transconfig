@@ -1,0 +1,11 @@
+app-emulation/dynagen **
+#=app-i18n/ibus-table-zhengma-9999 **
+#=app-i18n/ibus-table-9999 **
+#=app-i18n/ibus-table-extraphrase-9999 **
+#=app-i18n/ibus-table-wubi-9999 **
+#=app-i18n/ibus-9999 **
+=app-i18n/fcitx-9999 **
+=app-text/apvlv-9999 **
+x11-misc/fqterm **
+x11-misc/tint2 **
+media-video/vlc **
