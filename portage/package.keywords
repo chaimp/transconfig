@@ -9,3 +9,5 @@ app-emulation/dynagen **
 x11-misc/fqterm **
 x11-misc/tint2 **
 media-video/vlc **
+www-client/chromium **
+dev-util/gclient **

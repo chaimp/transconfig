@@ -17,7 +17,8 @@ media-plugins/audacious-plugins gnome chardet wma tta sndfile scrobbler
 media-video/mplayer -gtk -live -oss -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger radio quicktime realcodecs rar dvb
 media-video/vlc -nsplugin dvd ffmpeg mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio live
 media-libs/realcodecs -win32codecs
-media-libs/freetype ubuntu
+media-libs/freetype cleartype
+media-libs/fontconfig -ubuntu
 media-libs/libmng lcms
 media-libs/sdl-mixer mikmod
 media-gfx/comix rar
@@ -36,6 +37,7 @@ app-text/texlive -truetype
 app-text/acroread minimal
 app-emulation/ies4linux -gtk -kde
 app-emulation/qemu-softmmu kqemu
+app-emulation/q4wine winetools
 app-emulation/kvm esd
 app-office/openoffice-bin gnome java
 app-portage/layman git subversion

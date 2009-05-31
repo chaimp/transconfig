@@ -1,7 +1,6 @@
 >=virtual/emacs-23
-app-editors/emacs-cvs
 app-emacs/emacs-w3m
-app-emacs/emacs-daemon
+<app-emacs/emacs-daemon-9999
 media-libs/realcodecs
 media-video/vlc
 
@@ -9,3 +8,12 @@ www-client/opera
 dev-lang/ghc
 #dev-libs/libedit
 
+#awesome-3.3_rc
+=x11-libs/xcb-util-0.3.4
+=x11-proto/xproto-7.0.15
+x11-wm/awesome
+
+#<x11-base/xorg-server-9999
+#x11-drivers/xf86-video-ati
+#x11-libs/libdrm
+#media-libs/mesa
