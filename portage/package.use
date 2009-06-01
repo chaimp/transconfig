@@ -69,6 +69,7 @@ net-misc/rdesktop oss
 net-wireless/aircrack-ng wifi
 net-libs/xulrunner java
 net-libs/libsoup gnome
+net-irc/xchat -xft
 sys-apps/hal laptop
 sys-apps/tuxonice-userui fbsplash
 sys-apps/hwdata-gentoo  binary-drivers
@@ -77,3 +78,4 @@ sys-apps/man-pages -nls -linguas_zh_CN
 sys-libs/pam -nls
 sys-fs/ntfs3g suid
 sys-boot/grub netboot
+gnome-extra/avant-window-navigator xfce
