@@ -15,6 +15,8 @@ import XMonad.Layout.TwoPane
 import XMonad.Layout.MosaicAlt
 import XMonad.Layout.Combo
 import XMonad.Layout.WindowNavigation
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.NoBorders
 
 import qualified XMonad.StackSet as W 
 import qualified System.IO.UTF8 as U
@@ -33,14 +35,14 @@ main = do
     --din <- spawnPipe statusBarCmd
     xmonad $ defaultConfig
             { borderWidth		= 1
-            , focusedBorderColor 	= "#ff6666"
+            , focusedBorderColor 	= "#324c80"
             , normalBorderColor 	= "#2222aa"
             , manageHook   	= manageHook defaultConfig <+>  myManageHook <+> manageDocks
             , terminal		= "lxterminal"
             , modMask      	= mod4Mask
             , workspaces = map show ["1-www", "2-kvm", "3-video", "4-learn", "5-game" ]
             , startupHook  	= myStartupHook
-            , layoutHook  	= windowNavigation $ (avoidStruts (Mirror tall ||| tall ||| mosaic ||| combo ||| Full))
+            , layoutHook  	= windowNavigation $ avoidStruts $ smartBorders $ layoutHook defaultConfig
             , logHook = dynamicLogWithPP $ xmobarPP { 
                           ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "liteskyblue" "" . shorten 50
@@ -53,21 +55,17 @@ main = do
             , keys 			= \c -> myKeys c `M.union` keys defaultConfig c
             }
 	where 
-        tall 	= Tall 1 (3/100) (1/2)
-        mosaic 	= MosaicAlt M.empty
-        combo 	= combineTwo (TwoPane 0.6 0.4) (mosaic) (Full)
-        
         myStartupHook :: X ()
         myStartupHook = do
-                            spawn "tilda"
-        --                    spawn "/home/zhou/kvm.sh"
+          spawn "tilda"
+          --                    spawn "/home/zhou/kvm.sh"
 
         myManageHook :: ManageHook
         myManageHook = composeAll
             [(role =? "gimp-toolbox" <||> role =? "gimp-image-window") --> (ask >>= doF . W.sink)
             ,(className =? "Firefox" <&&> resource =? "Dialog") --> doFloat
             ,(className =? "Gimp")  --> doFloat
-            ,(className =? "GQview")  --> doFloat
+            ,(className =? "Emenese")  --> doFloat
             ,(className =? "Vncviewer")  --> doFloat
             ,(className =? "Thunderbird-bin") --> doShift "3"
             ]
@@ -79,7 +77,7 @@ main = do
             , ((modm, xK_p), runOrRaise "thunar" (className =?"Thunar"))
             , ((modm, xK_s), spawn "sleep 0.2; scrot -s")
             , ((modm .|. shiftMask, xK_s), spawn "scrot '/tmp/%Y-%m-%d_%H:%M:%S_$wx$h_scrot.png' -e 'mv $f ~'")
-            , ((modm, xK_f), runOrRaise "firefox"  (className =?"Firefox"))
+            , ((modm, xK_b), runOrRaise "firefox"  (className =?"Firefox"))
             , ((modm, xK_e), runOrRaise "emacsclient -c"  (className =?"Emacs"))
 
             -- Mosaic 
@@ -100,9 +98,10 @@ main = do
             , ((modm .|. controlMask, xK_Up   ), sendMessage $ Swap U)
             , ((modm .|. controlMask, xK_Down ), sendMessage $ Swap D)
 
-            --audion
-            --, ((modm, xK_f), spawn "") -- toggle mpc playing or not
-            --, ((modm .|. shiftMask, xK_i), spawn "mpc volume +10") -- raise volume
-            --, ((modm .|. shiftMask, xK_d), spawn "mpc volume -10") -- lower volume
+            -- audio
+            , ((0, 0x1008ff13), spawn "amixer -q sset PCM 2dB+") -- raise volume
+            , ((0, 0x1008ff11), spawn "amixer -q sset PCM 2dB-") -- lower volume
 
+            -- function keys
+            
             ]
