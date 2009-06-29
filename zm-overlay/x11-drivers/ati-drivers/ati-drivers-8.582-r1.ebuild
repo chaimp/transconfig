@@ -132,6 +132,9 @@ src_unpack() {
 	if kernel_is 2 6 29; then
 		epatch "${FILESDIR}"/${PV}/ati-drivers-2.6.29.patch || die "epatch failed"
 	fi
+        if kernel_is 2 6 30; then
+                epatch "${FILESDIR}"/${PV}/ati-drivers-2.6.29.patch || die "epatch failed"
+        fi
 
 	# These are the userspace utilities that we also have source for.
 	# We rebuild these later.

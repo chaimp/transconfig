@@ -3,22 +3,18 @@ dev-util/subversion -dso
 dev-lang/python sqlite
 dev-lang/ghc ghcquickbuild
 xfce-base/xfce4 minimal -alsa -oss 
-xfce-base/xfdesktop -file-icons
-xfce-base/thunar -trash-plugin
 xfce-base/xfce4-settings libnotify sound
 xfce-base/xfce-utils -lock
 xfce-extra/exo libnotify
 x11-wm/fvwm -gtk stroke
-x11-libs/cairo cleartype
 x11-themes/redhat-artwork  audacious cursors gdm icons 
 x11-apps/xinit minimal
+x11-terms/rxvt-unicode wcwidth xterm-color
 media-sound/audacious chardet 
 media-plugins/audacious-plugins gnome chardet wma tta sndfile scrobbler
-media-video/mplayer -gtk -live -oss -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger radio quicktime realcodecs rar dvb
+media-video/mplayer -gtk -live -oss -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger -dvb radio quicktime realcodecs rar 
 media-video/vlc -nsplugin dvd ffmpeg mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio live
 media-libs/realcodecs -win32codecs
-media-libs/freetype cleartype
-media-libs/fontconfig -ubuntu
 media-libs/libmng lcms
 media-libs/sdl-mixer mikmod
 media-gfx/comix rar
@@ -64,7 +60,7 @@ net-analyzer/snort inline
 net-analyzer/tcpdump -samba
 net-misc/nxserver-freenx nxclient
 net-misc/nxnode rdesktop -vnc
-net-misc/wicd ioctl
+net-misc/wicd -pm-utils
 net-misc/rdesktop oss
 net-wireless/aircrack-ng wifi
 net-libs/xulrunner java
@@ -74,8 +70,8 @@ sys-apps/hal laptop
 sys-apps/tuxonice-userui fbsplash
 sys-apps/hwdata-gentoo  binary-drivers
 sys-apps/busybox -savedconfig
-sys-apps/man-pages -nls -linguas_zh_CN
 sys-libs/pam -nls
 sys-fs/ntfs3g suid
 sys-boot/grub netboot
 gnome-extra/avant-window-navigator xfce
+

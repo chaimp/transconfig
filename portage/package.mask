@@ -3,13 +3,17 @@
 =media-libs/libfprint-9999
 =sys-auth/pam_fprint-9999
 =x11-misc/fqterm-9999
-
-=media-sound/esound-0.2.41
+=media-sound/gmpc-9999
+=media-sound/mpd-9999
 
 #=x11-libs/xcb-util-0.3.4
 
->=x11-drivers/ati-drivers-8.582
+>x11-drivers/ati-drivers-8.592
+
 >x11-misc/dmenu-3.9
->app-text/asciidoc-8.2.7
+#>app-text/asciidoc-8.2.7
+
 
 >=app-editors/emacs-cvs-23.0.9998
+
+>=x11-libs/vte-0.20
