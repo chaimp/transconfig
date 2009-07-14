@@ -1,0 +1,10 @@
+# ChangeLog for x11-plugins/e_modules-iiirk
+# Copyright 1999-2009 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  18 Apr 2009; evadim <evadim@evadim.ru> e_modules-iiirk-9999.ebuild:
+  Code style: add ESVN_SUB_PROJECT
+
+  18 Apr 2009; evadim <evadim@evadim.ru> e_modules-iiirk-9999.ebuild:
+  fix DESCRIPTION
+

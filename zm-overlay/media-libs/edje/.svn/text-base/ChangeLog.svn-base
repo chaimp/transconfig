@@ -1,0 +1,6 @@
+# ChangeLog for media-libs/edje
+# Copyright 1999-2008 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  30 Nov 2008; Mike Frysinger <vapier@gentoo.org> +edje-0.9.9.050.ebuild:
+  Version bump.

@@ -1,0 +1,49 @@
+10
+
+dir
+309
+svn://overlays.gentoo.org/dev/vapier/enlightenment/x11-libs
+svn://overlays.gentoo.org/dev/vapier
+
+
+
+2009-06-14T17:07:45.108905Z
+307
+evadim
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+c0ac1f25-1727-0410-8044-c31d8e482e80
+
+e_dbus
+dir
+
+etk
+dir
+
+elementary
+dir
+
+ewl
+dir
+
+esmart
+dir
+
+ecore
+dir
+
+evas
+dir
+
