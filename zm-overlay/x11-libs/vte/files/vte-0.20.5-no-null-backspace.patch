@@ -1,0 +1,42 @@
+diff -ru vte.orig-0.20.5/src/vte.c vte-0.20.5/src/vte.c
+--- vte.orig-0.20.5/src/vte.c	2009-07-29 17:45:45.277370494 +0800
++++ vte-0.20.5/src/vte.c	2009-07-29 17:49:30.017118009 +0800
+@@ -4932,6 +4932,7 @@
+ 
+ 	/* Now figure out what to send to the child. */
+ 	if ((event->type == GDK_KEY_PRESS) && !modifier) {
++	        cc_t erase = VTE_VDISABLE;
+ 		handled = FALSE;
+ 		/* Map the key to a sequence name if we can. */
+ 		switch (keyval) {
+@@ -4955,9 +4956,13 @@
+ 				if (terminal->pvt->pty_master != -1 &&
+ 				    tcgetattr(terminal->pvt->pty_master, &tio) != -1)
+ 				{
+-					normal = g_strdup_printf("%c", tio.c_cc[VERASE]);
+-					normal_length = 1;
++					erase = tio.c_cc[VERASE];
+ 				}
++				if (erase == VTE_VDISABLE)
++					normal = g_strdup(""); /* Fallback value. */
++				else
++					normal = g_strdup_printf("%c", erase);
++				normal_length = 1;
+ 				suppress_meta_esc = FALSE;
+ 				break;
+ 			case VTE_ERASE_AUTO:
+diff -ru vte.orig-0.20.5/src/vte-private.h vte-0.20.5/src/vte-private.h
+--- vte.orig-0.20.5/src/vte-private.h	2009-07-29 17:45:45.285370114 +0800
++++ vte-0.20.5/src/vte-private.h	2009-07-29 17:51:42.491120589 +0800
+@@ -95,6 +95,11 @@
+ 
+ #define I_(string) (g_intern_static_string(string))
+ 
++#ifdef _POSIX_VDISABLE /* From unistd.h */
++#define VTE_VDISABLE			_POSIX_VDISABLE
++#else
++#define VTE_VDISABLE			'\0'
++#endi
+ 
+ /* The structure we use to hold characters we're supposed to display -- this
+  * includes any supported visible attributes. */

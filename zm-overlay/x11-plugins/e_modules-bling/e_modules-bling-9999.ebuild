@@ -7,8 +7,8 @@ ESVN_URI_APPEND="${PN#e_modules-}"
 inherit enlightenment
 
 DESCRIPTION="EFLized Composite Manager for E17"
-
-DEPEND=">=x11-wm/enlightenment-9999
+KEYWORDS="~x86 ~amd64"
+DEPEND="x11-wm/enlightenment
 	>=media-libs/edje-0.5.0
 	x11-libs/ecore
 	x11-libs/evas

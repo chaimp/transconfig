@@ -7,5 +7,5 @@ inherit enlightenment
 
 DESCRIPTION="Positions/resizes your windows tilingly, like ion for example"
 
-DEPEND=">=x11-wm/enlightenment-9999
+DEPEND="x11-wm/enlightenment
 	>=media-libs/edje-0.5.0"

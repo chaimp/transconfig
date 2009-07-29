@@ -5,11 +5,11 @@
 inherit enlightenment
 
 DESCRIPTION="A collection of evas smart objects"
-
+KEYWORDS="~x86 ~amd64"
 DEPEND="sys-devel/libtool
-	>=dev-libs/eina-9999
-	>=x11-libs/evas-9999
-	>=x11-libs/ecore-9999
-	>=media-libs/edje-9999
-	>=media-libs/epsilon-9999
-	>=media-libs/imlib2-9999"
+	dev-libs/eina
+	x11-libs/evas
+	x11-libs/ecore
+	media-libs/edje
+	media-libs/epsilon
+	media-libs/imlib2"

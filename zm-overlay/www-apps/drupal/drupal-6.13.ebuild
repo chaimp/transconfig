@@ -1,21 +1,19 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-apps/drupal/drupal-6.11.ebuild,v 1.1 2009/05/01 17:54:02 pva Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-apps/drupal/drupal-6.13.ebuild,v 1.1 2009/07/08 11:54:49 pva Exp $
 
 inherit webapp eutils depend.php
-
-SLOT="6.11"
 
 MY_PV=${PV:0:3}.0
 
 DESCRIPTION="PHP-based open-source platform and content management system"
 HOMEPAGE="http://drupal.org/"
 SRC_URI="http://drupal.org/files/projects/${P}.tar.gz
-		 http://transtone.org/downloads/${P}-zh-hans-1.0.tar.bz2"
+                 http://transtone.org/downloads/${PN}-6.x-zh-hans-1.0.tar.bz2"
 
 LICENSE="GPL-2"
 KEYWORDS="~alpha ~amd64 ~ppc ~x86"
-IUSE="linguas_zh_CN"
+IUSE=""
 
 need_httpd_cgi
 need_php_httpd
