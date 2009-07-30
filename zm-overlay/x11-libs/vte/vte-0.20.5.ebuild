@@ -43,8 +43,8 @@ pkg_setup() {
 src_prepare() {
 	gnome2_src_prepare
 
-	# backspace broken within screen, bug #249618	epatch 
-	"${FILESDIR}/${PV}-no-null-backspace.patch"
+	# backspace broken within screen, bug #249618
+	epatch	"${FILESDIR}/${P}-no-null-backspace.patch"
 
 	# Fix intltoolize broken file, see upstream #577133
 	sed "s:'\^\$\$lang\$\$':\^\$\$lang\$\$:g" -i po/Makefile.in.in || die "sed failed"
