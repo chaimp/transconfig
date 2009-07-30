@@ -30,4 +30,10 @@
 # APNIC, LACNIC, RIPE NCC, or AfriNIC.)
 #
 
-168.143.162.100 twitter.com
+128.121.146.228    twitter.com
+168.143.162.101    assets1.twitter.com
+168.143.162.101    static.twitter.com
+168.143.162.101    assets0.twitter.com
+168.143.162.101    assets2.twitter.com
+168.143.162.101    assets3.twitter.com
+168.143.162.101    assets4.twitter.com
