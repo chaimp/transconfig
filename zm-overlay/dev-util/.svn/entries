@@ -1,37 +1,0 @@
-10
-
-dir
-309
-svn://overlays.gentoo.org/dev/vapier/enlightenment/dev-util
-svn://overlays.gentoo.org/dev/vapier
-
-
-
-2009-06-14T18:55:12.724903Z
-309
-evadim
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-c0ac1f25-1727-0410-8044-c31d8e482e80
-
-enhance
-dir
-
-edje_viewer
-dir
-
-edje_editor
-dir
-
