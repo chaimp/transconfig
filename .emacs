@@ -268,7 +268,12 @@
 	(t (self-insert-command (or arg 1)))))
 ;; 当 % 在括号上按下时，那么匹配括号，否则输入一个 %。			  
 
-
+(global-set-key "\C-ch" 'highline-mode)
+(global-set-key "\C-cg" 'global-highline-mode)
+(global-set-key "\C-cc" 'highline-customize)
+(global-set-key "\C-cv" 'highline-view-mode)
+(global-set-key "\C-c2" 'highline-split-window-vertically)
+(global-set-key "\C-c3" 'highline-split-window-horizontally)
 
 (require 'color-theme)
 (setq theme-load-from-file t)
@@ -334,37 +339,37 @@
 (global-set-key (kbd "<S-right>") 'tabbar-forward)     ; 用 Shift+方向键 切换tab
 
 ;; 改变 "tabbar-buffer-groups-function"
-(setq tabbar-buffer-groups-function 'tabbar-buffer-ignore-groups)
-(defun tabbar-buffer-ignore-groups (buffer)
-  "Return the list of group names BUFFER belongs to.
-   Return only one group for each buffer."
-  (with-current-buffer (get-buffer buffer)
-    (cond
-     ((or (get-buffer-process (current-buffer))
-          (memq major-mode
-                '(comint-mode compilation-mode)))
-      '("Process"))
-     ((member (buffer-name)
-              '("*scratch*" "*Messages*"))
-      '("Common"))
-     ((eq major-mode 'dired-mode)
-      '("Dired"))
-     ((memq major-mode
-            '(help-mode apropos-mode Info-mode Man-mode))
-      '("Help"))
-     ((memq major-mode
-            '(rmail-mode
-              rmail-edit-mode vm-summary-mode vm-mode mail-mode
-              mh-letter-mode mh-show-mode mh-folder-mode
-              gnus-summary-mode message-mode gnus-group-mode
-              gnus-article-mode score-mode gnus-browse-killed-mode))
-      '("Mail"))
-     (t
-      (list 
-       "default"  ;; no-grouping
-       (if (and (stringp mode-name) (string-match "[^ ]" mode-name))
-           mode-name
-         (symbol-name major-mode))))))) 
+;;(setq tabbar-buffer-groups-function 'tabbar-buffer-ignore-groups)
+;;(defun tabbar-buffer-ignore-groups (buffer)
+;;  "Return the list of group names BUFFER belongs to.
+;;   Return only one group for each buffer."
+;;  (with-current-buffer (get-buffer buffer)
+;;    (cond
+;;     ((or (get-buffer-process (current-buffer))
+;;          (memq major-mode
+;;                '(comint-mode compilation-mode)))
+;;      '("Process"))
+;;     ((member (buffer-name)
+;;              '("*scratch*" "*Messages*"))
+;;      '("Common"))
+;;     ((eq major-mode 'dired-mode)
+;;      '("Dired"))
+;;     ((memq major-mode
+;;            '(help-mode apropos-mode Info-mode Man-mode))
+;;      '("Help"))
+;;     ((memq major-mode
+;;            '(rmail-mode
+;;              rmail-edit-mode vm-summary-mode vm-mode mail-mode
+;;              mh-letter-mode mh-show-mode mh-folder-mode
+;;              gnus-summary-mode message-mode gnus-group-mode
+;;             gnus-article-mode score-mode gnus-browse-killed-mode))
+;;      '("Mail"))
+;;     (t
+;;      (list 
+;;       "default"  ;; no-grouping
+;;       (if (and (stringp mode-name) (string-match "[^ ]" mode-name))
+;;           mode-name
+;;         (symbol-name major-mode))))))) 
 (tabbar-mode)
 ;; 把每个 buffer 同时加入它所在的 major mode 的组和一个叫做 "default" 的组，
 ;; 这样在 default 组里就可以方便的浏览到所有的 buffer 了。
