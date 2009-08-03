@@ -50,10 +50,10 @@ RDEPEND="!gnome-base/gnome
 
 	>=gnome-base/gnome-settings-daemon-2.26.1
 	>=gnome-base/gnome-control-center-2.26.0
+	gnome-extra/gnome-power-manager
 
 	>=gnome-base/gvfs-1.2.3
 	>=gnome-base/eel-2.24.1
-	>=gnome-base/nautilus-2.26.3
 
 	>=gnome-base/gnome-desktop-2.26.2
 	>=gnome-base/gnome-session-2.26.1

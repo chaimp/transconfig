@@ -1,25 +1,17 @@
->=virtual/emacs-23
-app-emacs/emacs-w3m
+virtual/emacs
 <app-emacs/emacs-daemon-9999
-media-libs/realcodecs
-media-video/vlc
 
-www-client/opera
+<www-client/opera-10.00_pre4464
 dev-lang/ghc
-#dev-libs/libedit
+app-admin/haskell-updater
 
 #awesome-3.3_rc
 =x11-libs/xcb-util-0.3.4
 =x11-proto/xproto-7.0.15
 x11-wm/awesome
 
-#x11-base/xorg-server
-#x11-drivers/xf86-video-ati
-#x11-libs/libdrm
-#media-libs/mesa
 
 >=www-apps/joomla-1.5.11
 
-dev-libs/nspr
-net-libs/xulrunner
-www-client/mozilla-firefox
+sys-apps/sreadahead
+
