@@ -207,7 +207,7 @@ Fast (tar.gz):
  (2) Interactive backup
 
 
-Best (tar.lzma):
+Best (tar.xz):
  (3) Minimal backup
  (4) Interactive backup\n"
 
@@ -255,8 +255,8 @@ case $option in
         zip="--gzip";;
 
 [3,4])
-        stage4postfix="lzma"
-        zip="--lzma";;
+        stage4postfix="xz"
+        zip="--xz";;
 esac
 
 # mount boot
@@ -328,7 +328,7 @@ if [ "$answer" == 'y' ]; then
         if [ "$zip" == "--gzip" ]; then
                 zip="gzip"
         else
-                zip="lzma"
+                zip="xz"
         fi
 
         if [ "$tar_output" == "--split" ]; then
