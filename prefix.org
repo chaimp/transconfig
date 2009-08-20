@@ -1,0 +1,56 @@
+* TODO prefix
+
+** gentoo in REHL hostmonster
+get http://overlays.gentoo.org/proj/alt/browser/trunk/prefix-overlay/scripts/bootstrap-prefix.sh?format=txt
+$ export EPREFIX="$HOME/gentoo"
+$ export PATH="$EPREFIX/usr/bin:$EPREFIX/bin:$EPREFIX/tmp/usr/bin:$EPREFIX/tmp/bin:$PATH"
+$ chmod 755 bootstrap-prefix.sh
+$ ./bootstrap-prefix.sh $EPREFIX tree
+$ ./bootstrap-prefix.sh $EPREFIX/tmp make
+$ ./bootstrap-prefix.sh $EPREFIX/tmp wget
+$ ./bootstrap-prefix.sh $EPREFIX/tmp sed
+$ ./bootstrap-prefix.sh $EPREFIX/tmp python
+$ ./bootstrap-prefix.sh $EPREFIX/tmp coreutils6
+$ ./bootstrap-prefix.sh $EPREFIX/tmp findutils3
+$ ./bootstrap-prefix.sh $EPREFIX/tmp tar
+$ ./bootstrap-prefix.sh $EPREFIX/tmp patch
+$ ./bootstrap-prefix.sh $EPREFIX/tmp grep
+$ ./bootstrap-prefix.sh $EPREFIX/tmp gawk
+$ ./bootstrap-prefix.sh $EPREFIX/tmp bash
+$ ./bootstrap-prefix.sh $EPREFIX portage
+
+$ export LDFLAGS="-L${EPREFIX}/usr/lib -R${EPREFIX}/usr/lib -L${EPREFIX}/lib -R${EPREFIX}/lib 
+$ export CPPFLAGS="-I${EPREFIX}/usr/include"
+$ hash -r
+$ export USE="-berkdb -fortran -gdbm -nls -pcre -ssl"
+$ emerge --oneshot sed
+$ emerge --oneshot wget
+$ emerge --oneshot bash
+$ emerge --oneshot --nodeps baselayout-prefix
+$ emerge --oneshot --nodeps lzma-utils
+$ emerge --oneshot --nodeps m4
+$ emerge --oneshot --nodeps flex
+$ emerge --oneshot --nodeps bison
+$ emerge --oneshot --nodeps binutils-config
+$ emerge --oneshot --nodeps binutils
+$ emerge --oneshot --nodeps gcc-config
+$ emerge --oneshot --nodeps gcc
+
+$ unset LDFLAGS CPPFLAGS
+$ emerge --oneshot coreutils
+$ emerge --oneshot findutils
+$ emerge --oneshot tar
+$ emerge --oneshot grep
+$ emerge --oneshot patch
+$ emerge --oneshot gawk
+$ emerge --oneshot make
+$ emerge --oneshot --nodeps file
+$ emerge --oneshot --nodeps eselect
+
+$ env FEATURES="-collision-protect" emerge --oneshot portage
+$ rm -Rf $EPREFIX/tmp/*
+$ hash -r
+
+
+
+
