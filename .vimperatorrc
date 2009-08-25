@@ -5,6 +5,11 @@ set editor=emacsclient -f
 set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
 set previouspattern=\s*上一页|上一张|上一篇|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
 
+" User styles as colorschemes in Vimperator 2
+"   * ~/.vimperator/colors/clearlooks.vimp
+"    * http://sysphere.org/~anrxc/local/scr/dotfiles/vimperator-colorscheme.vimp
+colorscheme clearlooks
+
 "键盘映射
 map <S-Up> :set go=m<CR>
 map <S-Down> :set go=mTb<CR>
@@ -45,3 +50,15 @@ map <A-w> Y
 
 "source! ~/_vimperatorrc.local
 " vim: set ft=vimperator:
+
+""" == javascript ==
+js<<EOF
+// Wiki Selected Text
+wiki_selected_text = function () {
+    str = buffer.getCurrentWord()
+    liberator.execute('tabopen wikipedia ' + str);
+}
+EOF
+ 
+" map to js functions 
+map <C-w> :js wiki_selected_text() <CR>

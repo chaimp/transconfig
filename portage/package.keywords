@@ -3,6 +3,7 @@ app-emulation/dynagen **
 x11-misc/fqterm **
 www-client/chromium **
 dev-python/feedparser **
+app-text/chmsee **
 
 games-emulation/hugo **
 
@@ -12,3 +13,4 @@ games-emulation/hugo **
 =x11-plugins/e_modules-tiling-9999 **
 
 =app-i18n/fcitx-9999 **
+=net-im/emesene-9999-r3 **

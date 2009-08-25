@@ -1,11 +1,11 @@
 dev-util/git -gtk subversion
 dev-util/subversion -dso
 dev-lang/python sqlite
-dev-lang/ghc ghcquickbuild
-xfce-base/xfce4 minimal -alsa -oss 
+dev-lang/ghc ghcquickbuild binary
+xfce-base/xfce4-meta minimal -alsa -oss 
 xfce-base/xfce4-settings libnotify sound
 xfce-base/xfce-utils -lock
-xfce-extra/exo libnotify
+xfce-base/exo libnotify
 x11-wm/fvwm -gtk stroke
 x11-themes/redhat-artwork  audacious cursors gdm icons 
 x11-apps/xinit minimal
@@ -21,7 +21,7 @@ media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
 media-tv/gmlive sopcast -totem
 app-arch/p7zip wxwidgets rar
-app-admin/conky hddtemp mpd nano-syntax rss vim-syntax wifi
+app-admin/conky -X hddtemp nano-syntax vim-syntax wifi
 app-admin/testdisk ntfs reiserfs
 app-cdr/recorder vcd
 app-cdr/brasero -totem -cdrtools cdrkit libburn -nautilus 
@@ -73,4 +73,4 @@ sys-fs/ntfs3g suid
 sys-boot/grub netboot
 sys-block/open-iscsi utils
 gnome-extra/avant-window-navigator xfce
-
+gnome-extra/yelp -lzma
