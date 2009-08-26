@@ -51,14 +51,3 @@ map <A-w> Y
 "source! ~/_vimperatorrc.local
 " vim: set ft=vimperator:
 
-""" == javascript ==
-js<<EOF
-// Wiki Selected Text
-wiki_selected_text = function () {
-    str = buffer.getCurrentWord()
-    liberator.execute('tabopen wikipedia ' + str);
-}
-EOF
- 
-" map to js functions 
-map <C-w> :js wiki_selected_text() <CR>
