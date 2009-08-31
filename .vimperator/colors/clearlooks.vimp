@@ -47,7 +47,7 @@ hi Object				color: maroon;
 hi Preview				color: gray;
 hi Question				color: green; background: white; font-weight: bold;
 hi Search				font-size: inherit; padding: 0; color: black; background-color: #86ABD9; padding: 0;
-hi StatusLine				color: black; background: #E6E6E6;
+hi StatusLine				color: black; background: #79B0F0;
 hi StatusLineBroken			color: black; background: #FF6060; /* light-red */
 hi StatusLineSecure			color: black; background: #B0FF00; /* light-green */
 hi String				color: green;

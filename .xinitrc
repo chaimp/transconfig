@@ -1,12 +1,17 @@
 #!/bin/sh
 
 #使.Xresources中的设置生效
-xrdb .Xresources
+xrdb -merge .Xresources
+
+#ck-launch-session lxde-session
 
 #修正OOo界面与系统一致
 export GTK2_RC_FILES="`pwd`/.gtkrc-2.0"
 export SAL_USE_VCLPLUGIN="gtk"
 #export OOO_FORCE_DESKTOP="gnome"
+
+#export GTK_MODULES=globalmenu-gnome
+#gnome-panel &
 
 #桌面背景图片轮换
 #while true;
@@ -32,7 +37,7 @@ xsetroot -cursor_name left_ptr &
 #启动时自动载入程序
 fcitx &
 parcellite &
-wicd-client &
+#wicd-client &
 
 #键盘按键反应速度修正
 xset r rate 280 25
@@ -42,3 +47,7 @@ exec /usr/bin/awesome
 #exec gnome-session
 #exec enlightenment_start
 #exec startkde
+#exec startxfce4
+
+#exec ck-launch-session xmonad
+
