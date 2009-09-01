@@ -15,7 +15,7 @@ EGIT_REPO_URI="git://git.moblin.org/moblin-gtk-engine"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 RDEPEND=">=x11-libs/gtk+-2.8.0"

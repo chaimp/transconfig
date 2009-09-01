@@ -20,6 +20,7 @@ ${URI_PREFIX}/Murrine-Light.tar.gz
 ${URI_PREFIX}/MurrinaChrome.tar.gz
 ${URI_PREFIX}/Murrine-Sky.tar.gz
 ${URI_PREFIX}/MurrineXfwm.tar.bz2
+${URI_PREFIX}/MurrinaTango.tar.bz2
 "
 
 LICENSE="GPL-2"
