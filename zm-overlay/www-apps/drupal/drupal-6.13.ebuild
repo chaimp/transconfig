@@ -9,7 +9,7 @@ MY_PV=${PV:0:3}.0
 DESCRIPTION="PHP-based open-source platform and content management system"
 HOMEPAGE="http://drupal.org/"
 SRC_URI="http://drupal.org/files/projects/${P}.tar.gz
-                 http://transtone.org/downloads/${PN}-6.x-zh-hans-1.0.tar.bz2"
+                 http://transtone.org/downloads/${P}-zh-hans-1.0.tar.bz2"
 
 LICENSE="GPL-2"
 KEYWORDS="~alpha ~amd64 ~ppc ~x86"
