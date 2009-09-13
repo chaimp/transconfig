@@ -30,7 +30,8 @@ set fencs=utf-8,gbk,ucs-bom,gb18030,gb2312,cp936
 "set langmenu=zh_CN.utf-8
 "source $VIMRUNTIME/delmenu.vim
 "source $VIMRUNTIME/menu.vim
-set guifont=Envy\ Code\ R\ 14
+source $VIMRUNTIME/mswin.vim
+set guifont=Envy\ Code\ R\ 9
 "set guifontwide=ÐÂËÎÌå:h10:cGB2312
 
 

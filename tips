@@ -1,0 +1,4 @@
+java font-zh:
+ln -sv /usr/share/fonts/droid/DroidSansFallback.ttf /usr/share/fonts/arphicfonts/bsmi00lp.ttf
+
+

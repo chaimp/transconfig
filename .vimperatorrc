@@ -22,8 +22,8 @@ noremap K <C-u>
 noremap h gT
 noremap l gt
 noremap <C-x><C-s> :saveas<CR>
-:inoremap <Esc> <C-v><C-[>
-:inoremap <Tab> <Esc>
+noremap <Esc> <C-v><C-[>
+noremap <Tab> <Esc>
 
 "复制粘帖键映射
 :imap <C-y> <S-Ins> 

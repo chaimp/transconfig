@@ -37,7 +37,7 @@ xsetroot -cursor_name left_ptr &
 #启动时自动载入程序
 fcitx &
 parcellite &
-#wicd-client &
+wicd-client &
 
 #键盘按键反应速度修正
 xset r rate 280 25
