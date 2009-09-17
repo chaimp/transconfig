@@ -21,7 +21,7 @@ export SAL_USE_VCLPLUGIN="gtk"
 #done &
 
 #桌面背景设置
-feh --bg-scale $HOME/win7-2.jpg &
+#feh --bg-scale $HOME/win7-2.jpg &
 
 #鼠标样式修正
 xsetroot -cursor_name left_ptr &
@@ -37,10 +37,11 @@ xsetroot -cursor_name left_ptr &
 #启动时自动载入程序
 fcitx &
 parcellite &
-wicd-client &
+#wicd-client &
 
 #键盘按键反应速度修正
 xset r rate 280 25
+xset m 5 1
 
 #窗口管理器
 exec /usr/bin/awesome
