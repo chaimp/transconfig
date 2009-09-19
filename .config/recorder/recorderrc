@@ -1,4 +1,0 @@
-[paths]
-temp = /var/tmp/recorder
-dev = /dev/sdc
-
