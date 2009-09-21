@@ -10,6 +10,7 @@ x11-wm/fvwm -gtk stroke
 x11-themes/redhat-artwork  audacious cursors gdm icons 
 x11-apps/xinit minimal
 x11-terms/rxvt-unicode wcwidth xterm-color
+x11-misc/xmobar mail
 media-sound/audacious chardet 
 media-plugins/audacious-plugins gnome chardet wma tta sndfile scrobbler
 media-video/mplayer -gtk -live -oss -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger -dvb  xv radio quicktime realcodecs rar 
@@ -19,13 +20,12 @@ media-libs/libmng lcms
 media-libs/sdl-mixer mikmod
 media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
-media-tv/gmlive sopcast -totem
+media-tv/gmlive sopcast extra -totem
 app-arch/p7zip wxwidgets rar
 app-admin/conky -X hddtemp nano-syntax vim-syntax wifi
 app-admin/testdisk ntfs reiserfs
 app-cdr/recorder vcd
-app-cdr/brasero -totem -cdrtools cdrkit libburn -nautilus 
-app-editors/nano -nls
+app-cdr/brasero -totem -nautilus 
 app-editors/emacs toolkit-scroll-bars gtk -sound spell
 app-dicts/stardict  -festival pronounce qqwry spell 
 app-text/poppler-bindings gtk cairo
@@ -33,7 +33,7 @@ app-text/texlive -truetype
 app-text/acroread minimal
 app-emulation/ies4linux -gtk -kde
 app-emulation/qemu-softmmu kqemu
-app-emulation/q4wine winetools
+app-emulation/q4wine winetools icotools
 app-emulation/kvm esd
 app-office/openoffice-bin gnome java
 app-portage/layman git subversion
@@ -43,7 +43,7 @@ media-sound/sonata lyrics
 media-sound/aumix -gpm
 media-gfx/splashutils fbcondecor
 www-client/opera -qt3
-www-client/mozilla-firefox mozdevelop iceweasel
+www-client/mozilla-firefox mozdevelop iceweasel java
 www-servers/nginx status pcre zlib
 www-servers/lighttpd minimal
 www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp 
@@ -63,8 +63,10 @@ net-misc/rdesktop oss
 net-misc/wicd -pm-utils 
 net-wireless/aircrack-ng wifi
 net-libs/libsoup gnome
+net-libs/xulrunner java
 net-irc/xchat -xft
-sys-apps/hal laptop
+sys-auth/consolekit policykit
+sys-apps/hal laptop policykit
 sys-apps/tuxonice-userui fbsplash
 sys-apps/hwdata-gentoo  binary-drivers
 sys-apps/busybox -savedconfig
@@ -74,3 +76,5 @@ sys-boot/grub netboot
 sys-block/open-iscsi utils
 gnome-extra/avant-window-navigator xfce
 gnome-extra/yelp -lzma
+gnome-extra/gnome-globalmenu gnome
+

@@ -6,7 +6,7 @@
 #>app-text/asciidoc-8.2.7
 
 
->=x11-libs/vte-0.20.0
+#>=x11-libs/vte-0.20.0
 
 =www-client/opera-10.00_pre4464
 =x11-wm/enlightenment-1.0.0
