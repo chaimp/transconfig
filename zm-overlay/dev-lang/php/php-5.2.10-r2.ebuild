@@ -1,10 +1,10 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.2.10-r1.ebuild,v 1.1 2009/07/05 23:26:08 hoffie Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.2.10-r2.ebuild,v 1.1 2009/09/24 23:36:54 cla Exp $
 
 CGI_SAPI_USE="discard-path force-cgi-redirect"
 APACHE2_SAPI_USE="concurrentmodphp threads"
-IUSE="cli cgi ${CGI_SAPI_USE} ${APACHE2_SAPI_USE} fastbuild +fpm"
+IUSE="cli cgi ${CGI_SAPI_USE} ${APACHE2_SAPI_USE} fastbuild fpm"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
 
@@ -23,6 +23,7 @@ RESTRICT="nomirror"
 
 # php patch settings, general
 PHP_PATCHSET_REV="${PR/r/}"
+PHP_PATCHSET_REV="${PHP_PATCHSET_REV/2/1}"
 SUHOSIN_PATCH="suhosin-patch-${MY_PHP_PV}-0.9.7.patch.gz"
 FPM_PATCH="php-5.2.10-fpm-0.5.13.diff"
 MULTILIB_PATCH="${MY_PHP_PV}/opt/multilib-search-path.patch"
@@ -167,6 +168,9 @@ src_unpack() {
 		fi
 	fi
 
+	# Quick fix for bug #279576
+	epatch "${FILESDIR}"/php-${PV}-pdo_dblib.patch
+
 	# fastbuild support
 	if use fastbuild ; then
 		if [[ -n "${FASTBUILD_PATCH}" ]] && [[ -f "${WORKDIR}/${FASTBUILD_PATCH}" ]] ; then
@@ -213,8 +217,7 @@ src_unpack() {
 	rm ext/spl/tests/arrayObject___construct_basic4.phpt \
 		ext/spl/tests/arrayObject___construct_basic5.phpt \
 		ext/spl/tests/arrayObject_exchangeArray_basic3.phpt \
-		ext/spl/tests/arrayObject_setFlags_basic1.phpt \
-		tests/lang/bug45392.phpt
+		ext/spl/tests/arrayObject_setFlags_basic1.phpt
 
 	# those might as well be related to suhosin
 	rm ext/session/tests/session_decode_variation3.phpt \
@@ -284,7 +287,7 @@ src_compile_fastbuild() {
 		if use fpm ; then
 			my_conf="${my_conf} --enable-fpm --with-fpm-conf=/etc/php/cgi-php5/php-fpm.conf --with-fpm-log=/var/log/php-fpm.log --with-fpm-pid=/var/run/php-fpm.pid"
 		fi
-
+		
 		phpconfutils_extension_enable "discard-path" "discard-path" 0
 		phpconfutils_extension_enable "force-cgi-redirect" "force-cgi-redirect" 0
 	else
