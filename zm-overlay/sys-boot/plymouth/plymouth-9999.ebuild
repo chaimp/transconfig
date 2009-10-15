@@ -18,7 +18,7 @@ KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND=""
-RDEPEND="sys-boot/dracut"
+RDEPEND="sys-kernel/dracut"
 
 
 src_prepare() {
