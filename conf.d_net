@@ -19,9 +19,9 @@ routes_eth0=("default via 192.168.2.254")
 
 #config_wlan0=("dhcp")
 
-tuntap_kvm0=("tap") 
-tunctl_kvm0="-u zhou"
-config_kvm0=("192.168.100.1/24")
+tuntap_tap0=("tap") 
+tunctl_tap0="-u zhou"
+config_tap0=("192.168.100.1/24")
 
 
 #brctl_br0=( "setfd 0" "sethello 0" "stp off" )
