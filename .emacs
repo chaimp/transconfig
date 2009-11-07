@@ -241,7 +241,9 @@
 (setq auto-mode-alist (cons '("\\.phtml$" . html-mode) auto-mode-alist))
 ;;【html-helper-mode.el】一个不错的 html 编辑模式。
 
-;;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
 ;;; cperl-mode is preferred to perl-mode                                        
 ;;; "Brevity is the soul of wit" <foo at acm.org> 
 (mapc
