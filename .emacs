@@ -241,7 +241,7 @@
 (setq auto-mode-alist (cons '("\\.phtml$" . html-mode) auto-mode-alist))
 ;;【html-helper-mode.el】一个不错的 html 编辑模式。
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;;; cperl-mode is preferred to perl-mode                                        
 ;;; "Brevity is the soul of wit" <foo at acm.org> 
 (mapc
@@ -476,6 +476,11 @@ occurence of CHAR."
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/lisps/yasnippet/snippets")
+(require 'dropdown-list)
+     (setq yas/prompt-functions '(yas/dropdown-prompt
+                                  yas/ido-prompt
+                                  yas/completing-prompt))
+
 
 
 ;;session和desktop插件,需要放在最后

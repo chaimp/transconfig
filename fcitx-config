@@ -1,3 +1,4 @@
+
 [程序]
 显示字体(中)=*
 显示字体(英)=Monaco
@@ -58,7 +59,7 @@ Enter键行为=2
 中英文快速切换键=L_SHIFT
 双击中英文切换=0
 击键时间间隔=250
-光标跟随=CTRL_K
+光标跟随=CTRL_ALT_M
 隐藏主窗口=CTRL_ALT_H
 GBK支持=CTRL_M
 GBK繁体切换键=CTRL_ALT_F

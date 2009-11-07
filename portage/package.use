@@ -7,6 +7,7 @@ xfce-base/xfce4-settings libnotify sound
 xfce-base/xfce-utils -lock
 xfce-base/exo libnotify
 x11-wm/fvwm -gtk stroke
+x11-wm/compiz-fusion emerald unsupported
 x11-themes/redhat-artwork  audacious cursors gdm icons 
 x11-apps/xinit minimal
 x11-terms/rxvt-unicode wcwidth xterm-color
@@ -22,7 +23,7 @@ media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
 media-tv/gmlive sopcast extra -totem
 app-arch/p7zip wxwidgets rar
-app-admin/conky -X hddtemp nano-syntax vim-syntax wifi
+app-admin/conky X hddtemp nano-syntax vim-syntax wifi audacious rss
 app-admin/testdisk ntfs reiserfs
 app-cdr/recorder vcd
 app-cdr/brasero -totem -nautilus 
@@ -34,7 +35,7 @@ app-text/acroread minimal
 app-emulation/ies4linux -gtk -kde
 app-emulation/qemu-softmmu kqemu
 app-emulation/q4wine winetools icotools
-app-emulation/kvm esd
+app-emulation/kvm esd -modules
 app-office/openoffice-bin gnome java
 app-portage/layman git subversion
 media-sound/amarok mp3tunes  
@@ -61,6 +62,8 @@ net-misc/nxserver-freenx nxclient
 net-misc/nxnode rdesktop -vnc
 net-misc/rdesktop oss
 net-misc/wicd -pm-utils 
+net-misc/openssh -ldap
+net-misc/wget -nls
 net-wireless/aircrack-ng wifi
 net-libs/libsoup gnome
 net-libs/xulrunner java
