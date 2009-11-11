@@ -1,13 +1,14 @@
 (load "/usr/share/emacs/site-lisp/site-gentoo")
 (add-to-list 'load-path "~/.emacs.d/93free")
 (add-to-list 'load-path "~/.emacs.d/lisps")
+(add-to-list 'load-path "~/.emacs.d/lisps/nxhtml/util")
 (add-to-list 'load-path "~/.emacs.d/lisps/themes")
 ;; 载入elisp文件
 
 
 (global-set-key [(f1)] (lambda () (interactive) (manual-entry (current-word))))
 (global-set-key [f2] 'speedbar)         ; 快速浏览
-;;(global-set-key [f3] 'toggle-truncate-lines) ; 自动折行(Warp)
+(global-set-key [f3] 'linum-mode)       ; 显示行号
 (global-set-key [f4] 'view-mode)        ; 只读方式查看文件
 (global-set-key [f5] 'revert-buffer)    ; 重载文件/刷新
 (global-set-key [f6] 'eshell)           ; 一个 elisp 写的 shell
@@ -117,25 +118,35 @@
 ;; 设置时间戳，标识出最后一次保存文件的时间。
 
 (setq version-control t)                       
-(setq kept-old-versions 2)                     
-(setq kept-new-versions 5)                     
+(setq kept-old-versions 1)                     
+(setq kept-new-versions 2)                     
 (setq delete-old-versions t)
 (setq backup-directory-alist '(("." . "~/.emacs.d/tmp")))
 (setq backup-by-copying t)                     
 ;; Emacs 中，改变文件时，默认都会产生备份文件(以 ~ 结尾的文件)。可以完全去掉
 ;; (并不可取)，也可以制定备份的方式。这里采用的是，把所有的文件备份都放在一
-;; 个固定的地方("~/var/tmp")。对于每个备份文件，保留最原始的两个版本和最新的
-;; 五个版本。并且备份的时候，备份文件是复本，而不是原件。
+;; 个固定的地方("~/var/tmp")。对于每个备份文件，保留最原始的一个版本和最新的
+;; 两个版本。并且备份的时候，备份文件是复本，而不是原件。
 
-(setq git-lock-defer-on-scrolling t)
-(setq font-lock-support-mode 'git-lock-mode)
-;; 为什么使用语法显示的大文件在移动时如此之慢
-
+(global-font-lock-mode 1)
 (setq font-lock-maximum-decoration t)
 (setq font-lock-global-modes '(not shell-mode text-mode))
 (setq font-lock-verbose t)
 (setq font-lock-maximum-size '((t . 1048576) (vm-mode . 5250000)))
 ;; 语法高亮。除 shell-mode 和 text-mode 之外的模式中使用语法高亮。
+
+(setq git-lock-defer-on-scrolling t)
+(setq font-lock-support-mode 'git-lock-mode)
+;; 为什么使用语法显示的大文件在移动时如此之慢
+
+(require 'color-theme)
+(setq theme-load-from-file t)
+;;(color-theme-initialize)
+;;(color-theme-sitaramv-nt)
+(load-file "~/.emacs.d/lisps/themes/color-theme-tango-light.el")
+(load-file "~/.emacs.d/lisps/themes/color-theme-awesome.el")
+(load-file "~/.emacs.d/lisps/themes/color-theme-tango-2.el")
+(color-theme-tango-light)
 
 ;; shell 和 eshell 相关设置
 (setq shell-file-name "/bin/bash")
@@ -178,7 +189,6 @@
 (fset 'yes-or-no-p 'y-or-n-p)                   
 ;; 按 y 或空格键表示 yes，n 表示 no。
 
-(global-font-lock-mode 1)               ; 开启语法高亮。
 (auto-compression-mode 1)               ; 打开压缩文件时自动解压缩。
 (column-number-mode 1)                  ; 显示列号。
 (blink-cursor-mode -1)                  ; 光标不要闪烁。
@@ -191,7 +201,6 @@
 (scroll-bar-mode -1)                    ; 不要 scroll-bar
 (display-battery-mode 1)
 (tool-bar-mode -1)			; 不要 tool-bar。
-(global-linum-mode 1)                   ; 显示行号
 
 (autoload 'table-insert "table" "WYGIWYS table editor")
 ;; 可以识别文本文件里本来就存在的表格，而且可以把表格输出为 HTML 和 TeX。
@@ -234,13 +243,9 @@
 (modify-coding-system-alist 'file "\\.nfo\\'" 'cp437)
 ;; 用cp437编码来打开.nfo文件
 
-
-(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
-(setq auto-mode-alist (cons '("\\.html$" . html-mode) auto-mode-alist))
+;;(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
 (setq auto-mode-alist (cons '("\\.asp$" . html-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.phtml$" . html-mode) auto-mode-alist))
-;;【html-helper-mode.el】一个不错的 html 编辑模式。
-
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
@@ -252,11 +257,12 @@
         (setcdr pair 'cperl-mode)))
   (append auto-mode-alist interpreter-mode-alist))
 
+(require 'mumamo-fun)
 (setq auto-mode-alist
    (append '(("\\.py\\'" . python-mode)
-      ("\\.php\\'" . php-mode)
-      ("\\.s?html?\\'" . html-mode)
-      ("\\.css\\'" . css-mode))
+      ("\\.css\\'" . css-mode)
+      ("\\.php\\'" . mumamo-alias-html-mumamo-mode)
+      ("\\.html\\'" . mumamo-alias-html-mumamo-mode))
       auto-mode-alist))
 ;; 将文件模式和文件后缀关联起来。
 
@@ -276,16 +282,6 @@
 (global-set-key "\C-cv" 'highline-view-mode)
 (global-set-key "\C-c2" 'highline-split-window-vertically)
 (global-set-key "\C-c3" 'highline-split-window-horizontally)
-
-(require 'color-theme)
-(setq theme-load-from-file t)
-;;(color-theme-initialize)
-;;(color-theme-sitaramv-nt)
-
-(load-file "~/.emacs.d/lisps/themes/color-theme-tango-light.el")
-(load-file "~/.emacs.d/lisps/themes/color-theme-awesome.el")
-(load-file "~/.emacs.d/lisps/themes/color-theme-tango-2.el")
-(color-theme-tango-light)
 
 ;;(require 'tex-site)
 (require 'compile)
@@ -479,9 +475,9 @@ occurence of CHAR."
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/lisps/yasnippet/snippets")
 (require 'dropdown-list)
-     (setq yas/prompt-functions '(yas/dropdown-prompt
-                                  yas/ido-prompt
-                                  yas/completing-prompt))
+(setq yas/prompt-functions '(yas/dropdown-prompt
+                             yas/ido-prompt
+                             yas/completing-prompt))
 
 
 
