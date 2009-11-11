@@ -1,7 +1,7 @@
 (load "/usr/share/emacs/site-lisp/site-gentoo")
 (add-to-list 'load-path "~/.emacs.d/93free")
 (add-to-list 'load-path "~/.emacs.d/lisps")
-(add-to-list 'load-path "~/.emacs.d/lisps/nxhtml/util")
+(add-to-list 'load-path "~/.emacs.d/lisps/mumamo")
 (add-to-list 'load-path "~/.emacs.d/lisps/themes")
 ;; 载入elisp文件
 

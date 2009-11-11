@@ -2,7 +2,7 @@
 #name : toggle( ) ...
 # --
 toggle(function(){
-   $1
+   $0
 },function(){
-   $2
+   
 });

@@ -1,0 +1,4 @@
+#contributor : rejeep <johan.rejeep@gmail.com>
+#name : left: ...
+# --
+left: $1;

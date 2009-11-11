@@ -2,7 +2,7 @@
 #name : hover(2 functions ) ...
 # --
 hover(function(){
-   $1
+   $0
 },function(){
-   $2
+   
 });

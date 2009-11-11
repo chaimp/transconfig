@@ -1,4 +1,4 @@
 #contributor : transtone <zm3345@gmail.com>
 #name : get( ) ...
 # --
-get("$1",function(data){ $2 });
+get("$1",function(data){ $0 });
