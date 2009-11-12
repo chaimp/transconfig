@@ -52,7 +52,7 @@
 (setq default-major-mode 'text-mode)           
 ;; 任意的打开一个新文件时，缺省使用 text-mode。
 
-(setq require-final-newline t)                 
+;;(setq require-final-newline t)
 ;; 存盘的时候，要求最后一个字符是换行符。
 
 (setq resize-mini-windows nil)                 
@@ -329,50 +329,12 @@
 (global-set-key (kbd "C-x C-k") 'server-edit)
 
 ;; tabbar设置
-;; ------------------------------------------------
 (require 'tabbar)
 (global-set-key (kbd "<S-up>") 'tabbar-backward-group)
 (global-set-key (kbd "<S-down>") 'tabbar-forward-group)
 (global-set-key (kbd "<S-left>") 'tabbar-backward)
 (global-set-key (kbd "<S-right>") 'tabbar-forward)     ; 用 Shift+方向键 切换tab
-
-;; 改变 "tabbar-buffer-groups-function"
-;;(setq tabbar-buffer-groups-function 'tabbar-buffer-ignore-groups)
-;;(defun tabbar-buffer-ignore-groups (buffer)
-;;  "Return the list of group names BUFFER belongs to.
-;;   Return only one group for each buffer."
-;;  (with-current-buffer (get-buffer buffer)
-;;    (cond
-;;     ((or (get-buffer-process (current-buffer))
-;;          (memq major-mode
-;;                '(comint-mode compilation-mode)))
-;;      '("Process"))
-;;     ((member (buffer-name)
-;;              '("*scratch*" "*Messages*"))
-;;      '("Common"))
-;;     ((eq major-mode 'dired-mode)
-;;      '("Dired"))
-;;     ((memq major-mode
-;;            '(help-mode apropos-mode Info-mode Man-mode))
-;;      '("Help"))
-;;     ((memq major-mode
-;;            '(rmail-mode
-;;              rmail-edit-mode vm-summary-mode vm-mode mail-mode
-;;              mh-letter-mode mh-show-mode mh-folder-mode
-;;              gnus-summary-mode message-mode gnus-group-mode
-;;             gnus-article-mode score-mode gnus-browse-killed-mode))
-;;      '("Mail"))
-;;     (t
-;;      (list 
-;;       "default"  ;; no-grouping
-;;       (if (and (stringp mode-name) (string-match "[^ ]" mode-name))
-;;           mode-name
-;;         (symbol-name major-mode))))))) 
 (tabbar-mode)
-;; 把每个 buffer 同时加入它所在的 major mode 的组和一个叫做 "default" 的组，
-;; 这样在 default 组里就可以方便的浏览到所有的 buffer 了。
-;; 而切换到其它组就可以分组浏览。
-;; ------------------------------------------------
 ;; tabbar end here
 
 
@@ -456,6 +418,7 @@ occurence of CHAR."
 
 ;; ecb代码浏览器
 (require 'ecb)
+(setq ecb-options-version "2.40")
 (setq ecb-layout-name "left1")
 (setq ecb-compile-window-height 10)
 (add-hook 'ecb-activate-hook
@@ -463,6 +426,8 @@ occurence of CHAR."
             (ecb-toggle-compile-window -1)))
 (setq ecb-vc-enable-support t)
 (setq ecb-tip-of-the-day nil)
+
+(require 'xcscope)
 
 ;; 中国象棋
 (require 'chinese-chess-pvc)
@@ -484,7 +449,13 @@ occurence of CHAR."
 ;;session和desktop插件,需要放在最后
 ;;(require 'session)
 ;;(add-hook 'after-init-hook 'session-initialize)
-;;(require 'desktop)
-;;(desktop-load-default) 
-;;(desktop-read)
-
+(desktop-save-mode 1)
+(setq desktop-save-directory "~/.emacs.d/desktop/")
+(setq desktop-buffers-not-to-save
+     (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+      "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb" 
+      "\\)$"))
+(add-to-list 'desktop-modes-not-to-save 'dired-mode)
+(add-to-list 'desktop-modes-not-to-save 'Info-mode)
+(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)

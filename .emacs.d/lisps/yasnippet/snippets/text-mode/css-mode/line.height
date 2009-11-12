@@ -1,4 +1,4 @@
 #contributor : transtone <zm3345@gmail.com>
 #name : line-height: ...
 # --
-line-height: $1;
+line-height:${1.7}em;

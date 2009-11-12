@@ -1,4 +1,4 @@
 #contributor : transtone <zm3345@gmail.com>
 #name : load( ) ...
 # --
-load("$1");$0
+load("$1");
