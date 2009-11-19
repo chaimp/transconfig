@@ -1,12 +1,14 @@
 app-emulation/dynagen **
 =app-text/apvlv-9999 **
 x11-misc/fqterm **
-www-client/chromium **
 dev-python/feedparser **
 app-text/chmsee **
 
 games-emulation/hugo **
 
+
+
+app-emacs/mmm-mode **
 
 # ---
 # BEGIN: x11-plugins/e_modules-tiling-9999

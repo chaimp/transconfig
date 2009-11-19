@@ -1,12 +1,12 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.2.10-r2.ebuild,v 1.1 2009/09/24 23:36:54 cla Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.2.11-r1.ebuild,v 1.4 2009/11/19 00:02:15 jer Exp $
 
 CGI_SAPI_USE="discard-path force-cgi-redirect"
 APACHE2_SAPI_USE="concurrentmodphp threads"
-IUSE="cli cgi ${CGI_SAPI_USE} ${APACHE2_SAPI_USE} fastbuild fpm"
+IUSE="cli cgi ${CGI_SAPI_USE} ${APACHE2_SAPI_USE} fastbuild +fpm"
 
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="~alpha amd64 arm hppa ~ia64 ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~x86-fbsd"
 
 # NOTE: Portage doesn't support setting PROVIDE based on the USE flags
 #		that have been enabled, so we have to PROVIDE everything for now
@@ -22,6 +22,7 @@ PHP_PACKAGE="1"
 RESTRICT="nomirror"
 
 # php patch settings, general
+PHP_PATCHSET_URI="http://dev.gentoo.org/~cla/distfiles/php-patchset-${PVR}.tar.bz2"
 PHP_PATCHSET_REV="${PR/r/}"
 PHP_PATCHSET_REV="${PHP_PATCHSET_REV/2/1}"
 SUHOSIN_PATCH="suhosin-patch-${MY_PHP_PV}-0.9.7.patch.gz"
@@ -49,7 +50,8 @@ DEPEND="app-admin/php-toolkit
 	imap? ( >=virtual/imap-c-client-2006k )
 	pcre? ( >=dev-libs/libpcre-7.8 )
 	xml? ( >=dev-libs/libxml2-2.7.2-r2 )
-	xmlrpc? ( >=dev-libs/libxml2-2.7.2-r2 virtual/libiconv )"
+	xmlrpc? ( >=dev-libs/libxml2-2.7.2-r2 virtual/libiconv )
+	suhosin? ( >=dev-php5/suhosin-0.9.29 )"
 
 RDEPEND="${DEPEND}"
 if [[ -n "${KOLAB_PATCH}" ]] ; then
@@ -182,6 +184,9 @@ src_unpack() {
 		use kolab && epatch "${WORKDIR}/${KOLAB_PATCH}"
 	fi
 
+	# Security bug #292132
+	epatch "${WORKDIR}"/${MY_PHP_PV}/gd-maxcolors.patch
+
 	# pretend to not have flex, bug 221357
 	sed -re 's:( +)PHP_SUBST\(LEX\):\1LEX="exit 0;"\n\0:' -i acinclude.m4
 
@@ -284,7 +289,7 @@ src_compile_fastbuild() {
 		if use fpm ; then
 			my_conf="${my_conf} --enable-fpm --with-fpm-conf=/etc/php/cgi-php5/php-fpm.conf --with-fpm-log=/var/log/php-fpm.log --with-fpm-pid=/var/run/php-fpm.pid"
 		fi
-		
+
 		phpconfutils_extension_enable "discard-path" "discard-path" 0
 		phpconfutils_extension_enable "force-cgi-redirect" "force-cgi-redirect" 0
 	else

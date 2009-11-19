@@ -2,7 +2,7 @@ dev-lang/ghc
 app-admin/haskell-updater
 media-libs/realcodecs
 
-
+app-editors/emacs-cvs
 sys-boot/grub
 
 #www-client/mozilla-firefox

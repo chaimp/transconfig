@@ -45,7 +45,7 @@ media-sound/aumix -gpm
 media-gfx/splashutils fbcondecor
 www-client/opera -qt3
 www-client/mozilla-firefox mozdevelop iceweasel java
-www-servers/nginx status pcre zlib
+www-servers/nginx status pcre zlib addition flv imap random-index securelink sub
 www-servers/lighttpd minimal
 www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp 
 dev-lang/php -truetype apache2 filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
