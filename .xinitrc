@@ -11,7 +11,7 @@ export SAL_USE_VCLPLUGIN="gtk"
 #export OOO_FORCE_DESKTOP="gnome"
 
 #export GTK_MODULES=globalmenu-gnome
-#gnome-panel &
+
 
 #桌面背景图片轮换
 #while true;
@@ -21,7 +21,7 @@ export SAL_USE_VCLPLUGIN="gtk"
 #done &
 
 #桌面背景设置
-#feh --bg-scale $HOME/win7-2.jpg &
+feh --bg-scale $HOME/win7-2.jpg &
 
 #鼠标样式修正
 xsetroot -cursor_name left_ptr &
@@ -35,20 +35,32 @@ xsetroot -cursor_name left_ptr &
 #ibus-daemon -d -x &
 
 #启动时自动载入程序
+unclutter &
 fcitx &
 parcellite &
+tilda &
 #wicd-client &
 
 #键盘按键反应速度修正
-xset r rate 280 25
+xset r rate 250 25
 xset m 5 1
 
+#trayer --transparent true --widthtype request --height 18 --align right --edge top --expand true &
+# launch the external 60 second clock, and launch the workspace status bar
+#FG='#a8a3f7' 
+#BG='#3f3c6d' 
+
+ 
+#while true ; do date ; sleep 60 ; done | dzen2 -e '' -x 400 -w $off -ta r -fg $FG -bg $BG -p &
+
+
 #窗口管理器
-exec /usr/bin/awesome
+#exec /usr/bin/awesome
 #exec gnome-session
 #exec enlightenment_start
 #exec startkde
 #exec startxfce4
+#exec startlxde
 
-#exec ck-launch-session xmonad
+exec /usr/bin/xmonad
 
