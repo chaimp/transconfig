@@ -2,7 +2,6 @@
 (add-to-list 'load-path "~/.emacs.d/93free")
 (add-to-list 'load-path "~/.emacs.d/lisps")
 (add-to-list 'load-path "~/.emacs.d/lisps/mumamo")
-(add-to-list 'load-path "~/.emacs.d/lisps/themes")
 ;; 载入elisp文件
 
 
@@ -108,7 +107,6 @@
 
 (setq appt-issue-message t)                    
 ;; 打开约会提醒功能。
-
 (setq x-select-enable-clipboard t)
 ;; 支持emacs和外部程序的粘贴
 
@@ -146,7 +144,9 @@
 (load-file "~/.emacs.d/lisps/themes/color-theme-tango-light.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-awesome.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-tango-2.el")
-(color-theme-tango-light)
+(load-file "~/.emacs.d/lisps/themes/color-theme-desert.el")
+(load-file "~/.emacs.d/lisps/themes/color-theme-subdued.el")
+(color-theme-tango-2)
 
 ;; shell 和 eshell 相关设置
 (setq shell-file-name "/bin/bash")
@@ -155,6 +155,7 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (require 'ansi-color)
+
 
 ;; eshell 的颜色;; 这样可以显示颜色，但是当在文件很多的目录里面显示的时候会很慢
 ;(add-hook 'eshell-preoutput-filter-functions
@@ -182,6 +183,7 @@
      (t
       (apply 'eshell-exec-visual (cons "ssh" args))))))
 
+(require 'hfyview)
 
 (setq-default kill-whole-line t)                
 ;; 在行首 C-k 时，同时删除该行。
@@ -201,6 +203,7 @@
 (scroll-bar-mode -1)                    ; 不要 scroll-bar
 (display-battery-mode 1)
 (tool-bar-mode -1)			; 不要 tool-bar。
+(global-linum-mode 1)                   ; 开启行号。
 
 (autoload 'table-insert "table" "WYGIWYS table editor")
 ;; 可以识别文本文件里本来就存在的表格，而且可以把表格输出为 HTML 和 TeX。
@@ -459,3 +462,10 @@ occurence of CHAR."
 (add-to-list 'desktop-modes-not-to-save 'Info-mode)
 (add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
 (add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
+
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil))))

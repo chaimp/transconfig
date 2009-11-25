@@ -4,6 +4,8 @@
 
 EAPI="2"
 
+inherit autotools git
+
 DESCRIPTION="Mobline cursor theme"
 HOMEPAGE="http://git.moblin.org/cgit.cgi/moblin-cursor-theme/"
 SRC_URI=""

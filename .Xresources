@@ -1,14 +1,17 @@
-Xft.dpi:96
+Xft.dpi:120.4
 Xft.antialias: 1
 Xft.hinting: 1
 Xft.hintstyle: hintslight
 Xft.rgba: rgb
 Xft.font: Microsoft Yahei
-!Emacs.font: Envy Code R-20
-Emacs.font: Envy Code R-10
+!Emacs.font: Envy Code R-16
+Emacs.font: Monaco-12
 !Emacs.font: WenQuanYi Zen Hei Mono-10
 Emacs.useXIM: true 
 
+Xcursor.theme: moblin-cursor-theme
+
+*metaSendsEscape: true
 
 xterm*locale:true
 xterm*utf8:true
@@ -19,3 +22,35 @@ xterm*faceNameDoublesize:Droid Sans Fallback Pro:antialias=true:pixelsize=10
 xterm*xftAntialias:true
 xterm*cjkWidth:false
 xterm*preeditType:Root
+
+
+!!Urxvt set
+!URxvt.background: rgba:0000/0000/0000/cccc
+!URxvt.foreground: white 
+!URxvt.depth: 32
+
+! scroll set 
+URxvt.scrollBar: False
+!URxvt.scrollWithBuffer: false
+URxvt.saveLines: 10000
+
+! font set
+URxvt.font:xft:Monaco:size=8:antialias=true,xft:Droid Sans Mono:size=9:antialias=true
+
+! Input Method set 
+URxvt.inputMethod: fcitx
+!URxvt.imFont: 
+URxvt.preeditType: OverTheSpot
+URxvt.thickness: 0
+
+! window geometry set 
+!URxvt.geometry: 80x28+40+40
+URxvt.title: Rxvt-Unicode
+URxvt.tintColor:lightgray
+!URxvt.shading:30
+!URxvt.inheritPixmap:true
+
+! Perl Script set
+URxvt.urlLauncher: firefox
+URxvt.matcher.button: 1
+
