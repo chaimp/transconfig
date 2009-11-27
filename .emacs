@@ -4,19 +4,18 @@
 (add-to-list 'load-path "~/.emacs.d/lisps/mumamo")
 ;; 载入elisp文件
 
-
 (global-set-key [(f1)] (lambda () (interactive) (manual-entry (current-word))))
-(global-set-key [f2] 'speedbar)         ; 快速浏览
-(global-set-key [f3] 'linum-mode)       ; 显示行号
-(global-set-key [f4] 'view-mode)        ; 只读方式查看文件
-(global-set-key [f5] 'revert-buffer)    ; 重载文件/刷新
-(global-set-key [f6] 'eshell)           ; 一个 elisp 写的 shell
-(global-set-key [f7] 'calendar)         ; Emacs 的日历系统
-;;(global-set-key [f8] 'plan)             ; 计划任务
-(global-set-key [f9] 'other-window)     ; 跳转到 Emacs 的另一个窗口
-;;(global-set-key [f10] ')              ; 文件菜单
-(global-set-key [f11] 'compile)         ; 在 Emacs 中编译
-(global-set-key [f13] 'gdb)             ; 在 Emacs 中调试
+(global-set-key [f2] 'speedbar)             ; 快速浏览
+(global-set-key [f3] 'linum-mode)           ; 显示行号
+(global-set-key [f4] 'global-highline-mode) ; 高亮光标行 
+(global-set-key [f5] 'revert-buffer)        ; 重载文件/刷新
+(global-set-key [f6] 'eshell)               ; 一个 elisp 写的 shell
+(global-set-key [f7] 'calendar)             ; Emacs 的日历系统
+;;(global-set-key [f8] 'plan)               ; 计划任务
+(global-set-key [f9] 'other-window)         ; 跳转到 Emacs 的另一个窗口
+;;(global-set-key [f10] ')                  ; 文件菜单
+(global-set-key [f11] 'compile)             ; 在 Emacs 中编译
+(global-set-key [f13] 'gdb)                 ; 在 Emacs 中调试
 ;; 这些功能键有时候还是很有用的。除了直接设置之外，还可以配合 Shift, Ctrl 设置，比如：
 ;;
 ;; (global-set-key [(shift f1)] 'goto-line)
@@ -92,7 +91,7 @@
 
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)  
-(setq display-time-use-mail-icon t) 
+;;(setq display-time-use-mail-icon t) 
 (setq display-time-interval 10)                
 ;; 在 mode-line 上显示时间。
 
@@ -144,7 +143,6 @@
 (load-file "~/.emacs.d/lisps/themes/color-theme-tango-light.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-awesome.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-tango-2.el")
-(load-file "~/.emacs.d/lisps/themes/color-theme-desert.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-subdued.el")
 (color-theme-tango-2)
 
@@ -279,12 +277,12 @@
 	(t (self-insert-command (or arg 1)))))
 ;; 当 % 在括号上按下时，那么匹配括号，否则输入一个 %。			  
 
-(global-set-key "\C-ch" 'highline-mode)
-(global-set-key "\C-cg" 'global-highline-mode)
-(global-set-key "\C-cc" 'highline-customize)
-(global-set-key "\C-cv" 'highline-view-mode)
-(global-set-key "\C-c2" 'highline-split-window-vertically)
-(global-set-key "\C-c3" 'highline-split-window-horizontally)
+;;(global-set-key "\C-ch" 'highline-mode)
+;;(global-set-key "\C-cg" 'global-highline-mode)
+;;(global-set-key "\C-cc" 'highline-customize)
+;;(global-set-key "\C-cv" 'highline-view-mode)
+;;(global-set-key "\C-c2" 'highline-split-window-vertically)
+;;(global-set-key "\C-c3" 'highline-split-window-horizontally)
 
 ;;(require 'tex-site)
 (require 'compile)
@@ -335,10 +333,95 @@
 (require 'tabbar)
 (global-set-key (kbd "<S-up>") 'tabbar-backward-group)
 (global-set-key (kbd "<S-down>") 'tabbar-forward-group)
+(global-set-key (kbd "M-p") 'tabbar-backward)
+(global-set-key (kbd "M-n") 'tabbar-forward)
 (global-set-key (kbd "<S-left>") 'tabbar-backward)
 (global-set-key (kbd "<S-right>") 'tabbar-forward)     ; 用 Shift+方向键 切换tab
-(tabbar-mode)
+;;(setq tabbar-buffer-groups-function
+;;(lambda ()
+;;(list "All Buffers")))
+
+;;(setq tabbar-buffer-list-function
+;;    (lambda ()
+;;        (remove-if
+;;          (lambda(buffer)
+;;             (find (aref (buffer-name buffer) 0) " *"))
+;;          (buffer-list))))
+
+(defun tabbar-buffer-groups ()
+  "Return the list of group names the current buffer belongs to.
+Return a list of one element based on major mode."
+  (list
+   (cond
+    ((or (get-buffer-process (current-buffer))
+         ;; Check if the major mode derives from `comint-mode' or
+         ;; `compilation-mode'.
+         (tabbar-buffer-mode-derived-p
+          major-mode '(comint-mode compilation-mode)))
+     "Process"
+     )
+    ((member (buffer-name)
+             '("*scratch*" "*Messages*"))
+     "Common"
+     )
+    ((eq major-mode 'dired-mode)
+     "Dired"
+     )
+    ((memq major-mode 
+	   '(html-mode php-mode css-mode javascript-mode js2-mode))
+     "Webcodes"
+     )
+    ((memq major-mode
+           '(help-mode apropos-mode Info-mode Man-mode))
+     "Help"
+     )
+    ((memq major-mode
+           '(rmail-mode
+             rmail-edit-mode vm-summary-mode vm-mode mail-mode
+             mh-letter-mode mh-show-mode mh-folder-mode
+             gnus-summary-mode message-mode gnus-group-mode
+             gnus-article-mode score-mode gnus-browse-killed-mode))
+     "Mail"
+     )
+    (t
+     ;; Return `mode-name' if not blank, `major-mode' otherwise.
+     (if (and (stringp mode-name)
+              ;; Take care of preserving the match-data because this
+              ;; function is called when updating the header line.
+              (save-match-data (string-match "[^ ]" mode-name)))
+         mode-name
+       (symbol-name major-mode))
+     ))))
+
+(tabbar-mode 1)
 ;; tabbar end here
+
+;; 最近打开的文件
+;;(setq recentf-max-saved-items nil)
+;;(recentf-mode 1)
+;;(defvar recentf-open-last-file "" "`recentf-open-files-complete'最近打开的文件")
+;;(defun recentf-open-files-complete ()
+;;  (interactive)
+;;  (let* ((all-files recentf-list)
+;;         (default (file-name-nondirectory (directory-file-name recentf-open-last-file)))
+;;         (collection (mapcar (function (lambda (x) (cons (file-name-nondirectory (directory-file-name x)) x))) all-files))
+;;         (prompt (if (string= default "") "文件名或目录名: " (format "文件名或目录名(缺省为%s): " default)))
+;;         (file ""))
+;;    (while (string= file "")
+;;         (setq file (completing-read prompt collection nil t nil nil default)))
+;;    (find-file (setq recentf-open-last-file (cdr (assoc-ignore-representation file collection))))))
+;;(global-set-key [(control x)(control r)] 'recentf-open-files-complete-sb)
+;;(define-key recentf-dialog-mode-map (kbd "n") 'widget-forward)
+;;(define-key recentf-dialog-mode-map (kbd "j") 'widget-forward)
+;;(define-key recentf-dialog-mode-map (kbd "p") 'widget-backward)
+;;(define-key recentf-dialog-mode-map (kbd "k") 'widget-backward)
+
+;; 记录打开的目录到recentf里面去
+;;(defun recentf-add-dir ()
+;;  "Add directory name to recentf file list."
+;;  (recentf-add-file dired-directory))
+
+;;(add-hook 'dired-mode-hook 'recentf-add-dir)
 
 
 ;; calendar & planner begain
@@ -418,11 +501,27 @@ occurence of CHAR."
 (global-set-key (kbd "C-c L") 'show-all-invisible)
 ;; hide-lines 在操作某些行的时候用起来特别方便。加一个前缀参数可以把不匹配的行都藏起来，只看到匹配的！
 
+;; cedet配置
+;;(require 'cedet)
+;;(require 'semantic-ia)
+;; Enable EDE (Project Management) features
+;;(global-ede-mode 1)
+;;(semantic-load-enable-excessive-code-helpers)
+;;(semantic-load-enable-semantic-debugging-helpers)
+;; Enable SRecode (Template management) minor-mode.
+;;(global-srecode-minor-mode 1)
 
 ;; ecb代码浏览器
+;;(require 'ecb-autoloads)
+;;(defun ecb ()
+;;  "启动ecb"
+;;  (interactive)
+;;  (ecb-activate)
+;  (ecb-layout-switch "left9"))
+
 (require 'ecb)
 (setq ecb-options-version "2.40")
-(setq ecb-layout-name "left1")
+(setq ecb-layout-name "left2")
 (setq ecb-compile-window-height 10)
 (add-hook 'ecb-activate-hook
           (lambda ()
@@ -430,7 +529,7 @@ occurence of CHAR."
 (setq ecb-vc-enable-support t)
 (setq ecb-tip-of-the-day nil)
 
-(require 'xcscope)
+;;(require 'xcscope)
 
 ;; 中国象棋
 (require 'chinese-chess-pvc)
@@ -447,21 +546,30 @@ occurence of CHAR."
                              yas/ido-prompt
                              yas/completing-prompt))
 
+(defun wl-sudo-find-file (file dir)
+  (find-file (concat "/sudo:localhost:" (expand-file-name file dir))))
 
+;; 用来显示当前光标在哪个函数
+;;(require 'which-func)
+;;(which-func-mode 1)
+;;(setq which-func-unknown "unknown")
 
+(require 'find-func)
+(find-function-setup-keys)
+        
 ;;session和desktop插件,需要放在最后
 ;;(require 'session)
 ;;(add-hook 'after-init-hook 'session-initialize)
-(desktop-save-mode 1)
-(setq desktop-save-directory "~/.emacs.d/desktop/")
-(setq desktop-buffers-not-to-save
-     (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-      "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb" 
-      "\\)$"))
-(add-to-list 'desktop-modes-not-to-save 'dired-mode)
-(add-to-list 'desktop-modes-not-to-save 'Info-mode)
-(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
-(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
+;;(desktop-save-mode 1)
+;;(setq desktop-save-directory "~/.emacs.d/desktop/")
+;;(setq desktop-buffers-not-to-save
+;;     (concat "\\(" "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+;;      "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb" 
+;;      "\\)$"))
+;;(add-to-list 'desktop-modes-not-to-save 'dired-mode)
+;;(add-to-list 'desktop-modes-not-to-save 'Info-mode)
+;;(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
+;;(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
 
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -469,3 +577,9 @@ occurence of CHAR."
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil))))
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.40"))
