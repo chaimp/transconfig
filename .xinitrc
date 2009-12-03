@@ -55,12 +55,11 @@ xset m 5 1
 
 
 #´°¿Ú¹ÜÀíÆ÷
-#exec /usr/bin/awesome
-#exec gnome-session
 #exec enlightenment_start
 #exec startkde
 #exec startxfce4
-#exec startlxde
-
-exec /usr/bin/xmonad
+#exec ck-launch-session lxde-session
+#exec ck-launch-session awesome
+#exec ck-launch-session gnome-session
+exec ck-launch-session xmonad
 

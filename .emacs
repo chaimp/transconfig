@@ -1,6 +1,7 @@
 (load "/usr/share/emacs/site-lisp/site-gentoo")
 (add-to-list 'load-path "~/.emacs.d/93free")
 (add-to-list 'load-path "~/.emacs.d/lisps")
+(add-to-list 'load-path "~/.emacs.d/lisps/auto-complete")
 (add-to-list 'load-path "~/.emacs.d/lisps/mumamo")
 ;; 载入elisp文件
 
@@ -267,6 +268,9 @@
       auto-mode-alist))
 ;; 将文件模式和文件后缀关联起来。
 
+;; 显示匹配的括号
+(show-paren-mode t)
+
 ;; 括号匹配			  
 (global-set-key "%" 'match-paren)
 (defun match-paren (arg)
@@ -333,8 +337,8 @@
 (require 'tabbar)
 (global-set-key (kbd "<S-up>") 'tabbar-backward-group)
 (global-set-key (kbd "<S-down>") 'tabbar-forward-group)
-(global-set-key (kbd "M-p") 'tabbar-backward)
-(global-set-key (kbd "M-n") 'tabbar-forward)
+(global-set-key (kbd "M-n") 'tabbar-backward)
+(global-set-key (kbd "M-p") 'tabbar-forward)
 (global-set-key (kbd "<S-left>") 'tabbar-backward)
 (global-set-key (kbd "<S-right>") 'tabbar-forward)     ; 用 Shift+方向键 切换tab
 ;;(setq tabbar-buffer-groups-function
@@ -457,6 +461,26 @@ Return a list of one element based on major mode."
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+(autoload 'remember "remember" nil t)
+(autoload 'remember-region "remember" nil t)
+(setq org-reverse-note-order t)
+(when (file-exists-p "~/gtd/")
+  (define-key global-map [(f8)] 'remember)
+  (setq remember-annotation-functions '(org-remember-annotation))
+  (setq remember-handler-functions '(org-remember-handler))
+  (add-hook 'remember-mode-hook 'org-remember-apply-template)
+
+  (setq org-directory "~/gtd/")
+  (setq org-remember-templates
+        `((?t "* TODO %?\n  %i"
+              ,(expand-file-name "todo.org" org-directory) "Tasks")
+          (?m "* %U\n\n  %?%i\n  %a"
+              ,(expand-file-name "notes.org" org-directory) "Notes")))
+
+  (let ((todo (expand-file-name "todo.org" org-directory)))
+    (when (file-exists-p todo)
+      (add-to-list 'org-agenda-files todo))))
+
 
 ;; 自动补全 "hippie-expand"
 (global-set-key "\M-/" 'hippie-expand)
@@ -502,8 +526,8 @@ occurence of CHAR."
 ;; hide-lines 在操作某些行的时候用起来特别方便。加一个前缀参数可以把不匹配的行都藏起来，只看到匹配的！
 
 ;; cedet配置
-;;(require 'cedet)
-;;(require 'semantic-ia)
+(require 'cedet)
+(require 'semantic-ia)
 ;; Enable EDE (Project Management) features
 ;;(global-ede-mode 1)
 ;;(semantic-load-enable-excessive-code-helpers)
@@ -529,13 +553,14 @@ occurence of CHAR."
 (setq ecb-vc-enable-support t)
 (setq ecb-tip-of-the-day nil)
 
-;;(require 'xcscope)
+(require 'xcscope)
 
 ;; 中国象棋
 (require 'chinese-chess-pvc)
 
 (require 'ange-ftp)
 (require 'tramp)
+(require 'epa) ;;使用EasyPG
 
 ;; yasnippet
 (require 'yasnippet)
@@ -548,11 +573,6 @@ occurence of CHAR."
 
 (defun wl-sudo-find-file (file dir)
   (find-file (concat "/sudo:localhost:" (expand-file-name file dir))))
-
-;; 用来显示当前光标在哪个函数
-;;(require 'which-func)
-;;(which-func-mode 1)
-;;(setq which-func-unknown "unknown")
 
 (require 'find-func)
 (find-function-setup-keys)
@@ -577,9 +597,3 @@ occurence of CHAR."
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil))))
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.40"))

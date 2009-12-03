@@ -1,6 +1,6 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-misc/byobu/byobu-2.24.ebuild,v 1.1 2009/08/03 16:03:01 weaver Exp $
+# $Header: /var/cvsroot/gentoo-x86/app-misc/byobu/byobu-2.38.ebuild,v 1.1 2009/11/25 19:32:53 weaver Exp $
 
 EAPI="2"
 
@@ -8,8 +8,7 @@ inherit eutils
 
 DESCRIPTION="A set of profiles for the GNU Screen console window manager (app-misc/screen)"
 HOMEPAGE="https://launchpad.net/byobu"
-SRC_URI="https://launchpad.net/ubuntu/karmic/+source/byobu/${PV}-0ubuntu1/+files/byobu_${PV}.orig.tar.gz
-	https://launchpad.net/ubuntu/karmic/+source/byobu/${PV}-0ubuntu1/+files/byobu_${PV}-0ubuntu1.diff.gz"
+SRC_URI="https://launchpad.net/byobu/trunk/${PV}/+download/byobu_${PV}.orig.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -23,9 +22,6 @@ RDEPEND="app-misc/screen
 
 S="${WORKDIR}/byobu_${PV}.orig"
 
-src_prepare() {
-	epatch "${WORKDIR}"/*.diff
-}
 
 src_install() {
 	ln -s "${D}" debian/byobu

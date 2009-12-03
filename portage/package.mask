@@ -5,3 +5,4 @@
 =dev-libs/libmowgli-9999
 
 =sys-boot/grub-9999
+>net-misc/wicd-1.6.3

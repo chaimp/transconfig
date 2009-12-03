@@ -14,8 +14,8 @@ x11-terms/rxvt-unicode wcwidth xterm-color
 x11-misc/xmobar mail
 media-sound/audacious chardet 
 media-plugins/audacious-plugins gnome chardet wma tta sndfile scrobbler
-media-video/mplayer -gtk -live -oss -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger -dvb  xv radio quicktime realcodecs rar 
-media-video/vlc -nsplugin dvd ffmpeg mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio live
+media-video/mplayer -gtk -live -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger -dvb xv radio quicktime real rar 
+media-video/vlc nsplugin -xosd dvd mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio 
 media-libs/realcodecs -win32codecs
 media-libs/libmng lcms
 media-libs/sdl-mixer mikmod
@@ -23,7 +23,7 @@ media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
 media-tv/gmlive sopcast extra -totem
 app-arch/p7zip wxwidgets rar
-app-admin/conky X hddtemp nano-syntax vim-syntax wifi audacious rss
+app-admin/conky X hddtemp nano-syntax vim-syntax wifi rss
 app-admin/testdisk ntfs reiserfs
 app-cdr/recorder vcd
 app-cdr/brasero -totem -nautilus 
@@ -32,10 +32,12 @@ app-dicts/stardict  -festival pronounce qqwry spell
 app-text/poppler-bindings gtk cairo
 app-text/texlive -truetype
 app-text/acroread minimal
+app-misc/screen multiuser
 app-emulation/ies4linux -gtk -kde
 app-emulation/qemu-softmmu kqemu
 app-emulation/q4wine winetools icotools
-app-emulation/kvm esd -modules
+app-emulation/qemu-kvm esd -modules
+app-emulation/libvirt iscsi kvm lvm nfs virtualbox
 app-office/openoffice-bin gnome java
 app-portage/layman git subversion
 media-sound/amarok mp3tunes  
@@ -45,7 +47,7 @@ media-sound/aumix -gpm
 media-gfx/splashutils fbcondecor
 www-client/opera -qt3
 www-client/mozilla-firefox mozdevelop iceweasel java
-www-servers/nginx status pcre zlib addition flv imap random-index securelink sub
+www-servers/nginx addition fastcgi flv imap pcre perl random-index securelink ssl status sub zlib 
 www-servers/lighttpd minimal
 www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp 
 dev-lang/php -truetype apache2 filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib

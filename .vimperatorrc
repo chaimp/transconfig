@@ -1,55 +1,66 @@
-"2.0b1 (created: 2009/02/09 17:07:55)
 set guioptions=b
 set editor=emacsclient -f
 
 set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
 set previouspattern=\s*上一页|上一张|上一篇|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
 
-" User styles as colorschemes in Vimperator 2
-"   * ~/.vimperator/colors/clearlooks.vimp
-"    * http://sysphere.org/~anrxc/local/scr/dotfiles/vimperator-colorscheme.vimp
-"colorscheme clearlooks
 
 "键盘映射
 map <S-Up> :set go=m<CR>
 map <S-Down> :set go=mTb<CR>
 map <S-Left> :set go=T<CR>
 map <S-Right> :set go=b<CR>
-"noremap j 2j
-"noremap k 2k
+"norema
+"noremap k e
 noremap J <C-d>
 noremap K <C-u>
-"noremap h gT
-"noremap l gt
-"noremap <C-x><C-s> :saveas<CR>
-"noremap <Esc> <C-v><C-[>
-"noremap <Tab> <Esc>
+unmap h
+unmap l
+unmap <C-x>
 
-"复制粘帖键映射
-":imap <C-y> <S-Ins> 
-":map <C-y> <S-Ins>
-"map <A-w> Y
+set wildoptions=auto
+set cpt=l
 
-" 解决全选、复制、粘帖、剪切和撤销与vimperator冲突的问题
-"noremap <C-V> <C-v>
-"noremap <C-Z> <C-z>
-"noremap <C-c> <C-v><C-c>
-"noremap <C-a> <C-v><C-a>
-"cnoremap <C-c> <C-v><C-c>
-"cnoremap <C-v> <C-v><C-v>
-"cnoremap <C-x> <C-v><C-x>
-"inoremap <C-a> <C-v><C-a>
-"inoremap <C-c> <C-v><C-c>
-"inoremap <C-v> <C-v><C-v>
-"inoremap <C-x> <C-v><C-x>
-"inoremap <C-z> <C-v><C-z>
-"inoremap <C-y> <C-v><C-y>
+js<<EOF
+//UserAgent Switcher 
+liberator.globalVariables['sx_uas'] = 0  
+switch_useragent = function () {
+    pre_useragents_list = [
+    //name, ua, appname, appversion, platform,
+        ['(Firefox) default', '', '', '', ''],
+ 
+        ['M$ IE7', 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
+                 'Microsoft Internet Explorer',,
+                 '4.0 (compatible; MSIE 7.0; Windows NT 6.0)',
+                 'Win32',
+            ],
+ 
+        ['Google Bot', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', '', '', ''
+            ],
+        ['link2', 'Links (2.1pre15; FreeBSD 5.3-RELEASE i386; 196x84)', '', '', 
+    ''],
+        ['Safari', 'Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/125.2 (KHTML, like Gecko) Safari/125.8','','',''],
+        ['Chrome', 'Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.1.1.1 Safari/525.13.','','',''],
+        ['opera', 'opera/9.20 (X11, Linux i686; U; en)', 'opera', '9.20 (Linux i686; U; en)', 'Linux'],
+        ['Safari(iPhone)', 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543a Safari/419.3', '','',''],
+        ['BlackBerry', 'BlackBerry8300/4.5.0Profile/MIDP-2.0 Configuration/CLDC-1.1', '', '', ''], 
+        ['T-Mobile G1', 'Mozilla/5.0 (Linux; U; Android 1.0; en-us; dream) AppleWebKit/5.25.10+ (KHTML, like Gecko) Version/3.0.4 Mobile Safari/523.12.2', '','',''],
+ 
+    ];
+ 
+    if (liberator.globalVariables['sx_uas'] == pre_useragents_list.length-1)
+        liberator.globalVariables['sx_uas'] = 0;
+    else
+        liberator.globalVariables['sx_uas'] += 1;
+ 
+    var key = liberator.globalVariables['sx_uas'];
+    var name = pre_useragents_list[key][0];
+    liberator.execute('set! general.useragent.override=\'' + pre_useragents_list[key][1] + '\'');
+    //`echo` doesn't work? wtf
+    //liberator.execute('echo \'Use UA: '+ name + '\'');
+    document.getElementById('liberator-message').value='Use UserAgent: '+ name; 
+ 
+}
+EOF
 
-:set wildoptions=auto
-:set cpt=l
-
-"autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader).*/.test(buffer.URL)
-
-"source! ~/_vimperatorrc.local
-" vim: set ft=vimperator:
-
+map <silent> <F3> :js switch_useragent()<CR>
