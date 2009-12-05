@@ -6,13 +6,10 @@ app-text/chmsee **
 
 games-emulation/hugo **
 
-
+sys-boot/grub **
 
 app-emacs/mmm-mode **
 
-# ---
-# BEGIN: x11-plugins/e_modules-tiling-9999
-# ---
 =x11-plugins/e_modules-tiling-9999 **
 
 =app-i18n/fcitx-9999 **
@@ -23,4 +20,23 @@ app-emacs/mmm-mode **
 #x11-drivers/xf86-video-ati **
 #x11-libs/libXi **
 #x11-libs/libXext **
+
+
+# ---
+# BEGIN: x11-wm/enlightenment-9999
+# ---
+=x11-wm/enlightenment-9999 **
+=dev-libs/efreet-9999 **
+=dev-libs/embryo-9999 **
+=x11-libs/evas-9999 **
+=dev-libs/eet-9999 **
+=x11-libs/ecore-9999 **
+=media-libs/edje-9999 **
+=x11-libs/e_dbus-9999 **
+=dev-libs/eina-9999 **
+# ---
+# END: x11-wm/enlightenment-9999
+# ---
+
+
 

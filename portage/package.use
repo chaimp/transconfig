@@ -38,6 +38,7 @@ app-emulation/qemu-softmmu kqemu
 app-emulation/q4wine winetools icotools
 app-emulation/qemu-kvm esd -modules
 app-emulation/libvirt iscsi kvm lvm nfs virtualbox
+app-emulation/virtualbox-bin -chm
 app-office/openoffice-bin gnome java
 app-portage/layman git subversion
 media-sound/amarok mp3tunes  
@@ -82,4 +83,20 @@ sys-block/open-iscsi utils
 gnome-extra/avant-window-navigator xfce
 gnome-extra/yelp -lzma
 gnome-extra/gnome-globalmenu gnome
+
+
+# ---
+# BEGIN: x11-wm/enlightenment-9999
+# ---
+# ---
+# END: x11-wm/enlightenment-9999
+# ---
+
+
+# ---
+# BEGIN: dev-lang/perl-5.10.1
+# ---
+# ---
+# END: dev-lang/perl-5.10.1
+# ---
 
