@@ -384,3 +384,7 @@ occurence of CHAR."
                                                  ; ~/.emacs.d/server is unsafe"
                                                  ; on windows.
 (server-start)
+
+(custom-set-faces
+ '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil)))
+)
