@@ -11,7 +11,7 @@ export SAL_USE_VCLPLUGIN="gtk"
 #export OOO_FORCE_DESKTOP="gnome"
 
 #export GTK_MODULES=globalmenu-gnome
-
+#export PHONON_GST_AUDIOSINK=oss4sink
 
 #桌面背景图片轮换
 #while true;
@@ -21,7 +21,7 @@ export SAL_USE_VCLPLUGIN="gtk"
 #done &
 
 #桌面背景设置
-feh --bg-scale $HOME/win7-2.jpg &
+#feh --bg-scale $HOME/win7-2.jpg &
 
 #鼠标样式修正
 xsetroot -cursor_name left_ptr &
@@ -38,12 +38,12 @@ xsetroot -cursor_name left_ptr &
 unclutter &
 fcitx &
 parcellite &
-tilda &
+#tilda &
 #wicd-client &
 
 #键盘按键反应速度修正
-xset r rate 250 25
-xset m 5 1
+#xset r rate 250 25
+#xset m 6 1
 
 #trayer --transparent true --widthtype request --height 18 --align right --edge top --expand true &
 # launch the external 60 second clock, and launch the workspace status bar
@@ -56,10 +56,9 @@ xset m 5 1
 
 #窗口管理器
 #exec enlightenment_start
-#exec startkde
+exec  ck-launch-session startkde
 #exec startxfce4
 #exec ck-launch-session lxde-session
 #exec ck-launch-session awesome
 #exec ck-launch-session gnome-session
-exec ck-launch-session xmonad
-
+#exec ck-launch-session xmonad

@@ -14,9 +14,12 @@ map <S-Right> :set go=b<CR>
 "noremap k e
 noremap J <C-d>
 noremap K <C-u>
-unmap h
-unmap l
-unmap <C-x>
+noremap h e
+noremap l e
+mapclear h
+mapclear l
+noremap <C-x> c
+"unmap <C-x>
 
 set wildoptions=auto
 set cpt=l

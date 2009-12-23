@@ -5,6 +5,9 @@ alias l="ls -ail"
 alias cl="clear"
 alias nano="nano -w"
 alias zhcon="zhcon --utf8"
+alias mocp="mocp -T transparent-background"
+alias emerge="emerge --keep-going"
+
 alias et='emacsclient -t "$@" -a ""'
 alias ex='emacsclient -nc "$@" -a ""'
 

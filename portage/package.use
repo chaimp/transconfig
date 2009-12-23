@@ -2,6 +2,7 @@ dev-util/git -gtk subversion
 dev-util/subversion -dso
 dev-lang/python sqlite
 dev-lang/ghc ghcquickbuild binary
+dev-python/PyQt4 webkit sql
 xfce-base/xfce4-meta minimal -alsa -oss 
 xfce-base/xfce4-settings libnotify sound
 xfce-base/xfce-utils -lock
@@ -12,8 +13,12 @@ x11-themes/redhat-artwork  audacious cursors gdm icons
 x11-apps/xinit minimal
 x11-terms/rxvt-unicode wcwidth xterm-color
 x11-misc/xmobar mail
+x11-libs/qt-qt3support kde
+x11-libs/qt-webkit kde
 media-sound/audacious chardet 
+media-sound/esound -alsa
 media-plugins/audacious-plugins gnome chardet wma tta sndfile scrobbler
+media-plugins/gst-plugins-meta ffmpeg
 media-video/mplayer -gtk -live -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger -dvb xv radio quicktime real rar 
 media-video/vlc nsplugin -xosd dvd mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio 
 media-libs/realcodecs -win32codecs
@@ -21,7 +26,7 @@ media-libs/libmng lcms
 media-libs/sdl-mixer mikmod
 media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
-media-tv/gmlive sopcast extra -totem
+media-tv/gmlive sopcast 
 app-arch/p7zip wxwidgets rar
 app-admin/conky X hddtemp nano-syntax vim-syntax wifi rss
 app-admin/testdisk ntfs reiserfs
@@ -71,6 +76,7 @@ net-wireless/aircrack-ng wifi
 net-libs/libsoup gnome
 net-libs/xulrunner java
 net-irc/xchat -xft
+net-im/skype -qt-static
 sys-auth/consolekit policykit
 sys-apps/hal laptop policykit
 sys-apps/tuxonice-userui fbsplash
@@ -83,20 +89,4 @@ sys-block/open-iscsi utils
 gnome-extra/avant-window-navigator xfce
 gnome-extra/yelp -lzma
 gnome-extra/gnome-globalmenu gnome
-
-
-# ---
-# BEGIN: x11-wm/enlightenment-9999
-# ---
-# ---
-# END: x11-wm/enlightenment-9999
-# ---
-
-
-# ---
-# BEGIN: dev-lang/perl-5.10.1
-# ---
-# ---
-# END: dev-lang/perl-5.10.1
-# ---
-
+app-benchmarks/bootchart java

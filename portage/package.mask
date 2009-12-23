@@ -4,7 +4,7 @@
 
 =dev-libs/libmowgli-9999
 
->net-misc/wicd-1.6.3
+#>net-misc/wicd-1.6.3
 
 >=dev-lang/python-2.7
 
