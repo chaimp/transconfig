@@ -38,7 +38,8 @@ DEPEND="amd64? ( >=app-emulation/emul-linux-x86-xlibs-1.2
 		x11-libs/libXrandr
 		x11-libs/libXrender
 		x11-libs/libX11 )
-	oss4? ( media-sound/oss )
+	oss4?  ( || ( media-sound/oss
+                   media-sound/oss-devel ) )
 		!net-im/skype"
 
 RDEPEND="${DEPEND}"

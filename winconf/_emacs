@@ -297,9 +297,9 @@ Return a list of one element based on major mode."
 (add-hook 'diary-display-hook 'sort-diary-entries)
 (add-hook 'diary-display-hook 'fancy-schedule-display-desk-calendar t)
 
-;;(require 'redo)
+(require 'redo)
 ;; ÉèÖÃRedoµÄ¼ü°ó¶¨
-;;(global-set-key ( kbd "C-.") 'redo)
+(global-set-key ( kbd "C-.") 'redo)
 
 ;;(require 'tex-site)
 ;;(require 'compile)
@@ -378,4 +378,9 @@ occurence of CHAR."
 
 (define-key global-map "\e\e" 'vi-mode) ;quick switch into vi-mode
 
+(require 'server)
+(when (and (= emacs-major-version 23) (equal window-system 'w32))
+  (defun server-ensure-safe-dir (dir) "Noop" t)) ; Suppress error "directory
+                                                 ; ~/.emacs.d/server is unsafe"
+                                                 ; on windows.
 (server-start)
