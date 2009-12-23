@@ -726,7 +726,7 @@ interfere with syntax highlighting."
 (defface mumamo-background-chunk-submode1
   '((((class color) (min-colors 88) (background dark))
      ;;:background "blue3")
-     :background "dark green")
+     :background "gray30")
     (((class color) (min-colors 88) (background light))
      ;;:background "lightgoldenrod2")
      :background "azure")
@@ -747,7 +747,7 @@ interfere with syntax highlighting."
 (defface mumamo-background-chunk-submode2
   '((((class color) (min-colors 88) (background dark))
      ;;:background "blue3")
-     :background "dark green")
+     :background "gray30")
     (((class color) (min-colors 88) (background light))
      ;;:background "lightgoldenrod2")
      :background "#e6ff96")
@@ -768,7 +768,7 @@ interfere with syntax highlighting."
 (defface mumamo-background-chunk-submode3
   '((((class color) (min-colors 88) (background dark))
      ;;:background "blue3")
-     :background "dark green")
+     :background "gray30")
     (((class color) (min-colors 88) (background light))
      ;;:background "lightgoldenrod2")
      :background "#f7d1f4")
@@ -790,7 +790,7 @@ interfere with syntax highlighting."
 (defface mumamo-background-chunk-submode4
   '((((class color) (min-colors 88) (background dark))
      ;;:background "blue3")
-     :background "dark green")
+     :background "gray30")
     (((class color) (min-colors 88) (background light))
      ;;:background "lightgoldenrod2")
      :background "orange")
