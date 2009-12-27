@@ -1,0 +1,8 @@
+background no
+update_interval 2.0
+total_run_times 0
+use_spacer no
+gap_y -10
+
+TEXT
+ ^i(/home/zhou/public_html/glogo-small.xpm) ^fg(black)^i(/home/zhou/.xmonad/dzen/cpu.xbm)^fg(white)$cpu%  ^fg(black)^i(/home/zhou/.xmonad/dzen/mem.xbm) ^fg(white)$memperc% ^fg(black)^i(/home/zhou/.xmonad/dzen/temp.xbm)^fg(white)${acpitemp}  ^fg(black)^i(/home/zhou/.xmonad/dzen/power-ac.xbm)^fg(white)${battery_time C1BA}  ^fg(white)(${battery_percent C1BA}%^fg(white))  ^fg(black)^i(/home/zhou/.xmonad/dzen/net-wifi.xbm)^fg(white)${wireless_essid wlan0} (${wireless_link_qual_perc wlan0}%) ^fg(black)${time %b%d%a %H:%M}
