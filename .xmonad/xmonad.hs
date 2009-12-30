@@ -40,7 +40,7 @@ import qualified XMonad.Actions.FlexibleResize as Flex
 import qualified Data.Map        as M
 
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
+myFocusFollowsMouse = True
 myBorderWidth   = 0
 myNormalBorderColor  = "#729fcf"
 myFocusedBorderColor = "#7292cf"
@@ -105,26 +105,23 @@ myManageHook = composeAll . concat $
     , [resource  =? r  --> doIgnore | r <- myIgnores]
     ]
     where
-    myFloats      = ["Gpick", "Gimp", "MPlayer", "Smplayer", "Realplay", "Lxrandr", "Audacious2", "VirtualBox"]
-    myTitleFloats = ["Downloads", "Preferences", "Save As..."]
+    myFloats      = ["Gpick", "Wicd", "Gimp", "MPlayer", "Smplayer", "Realplay", "Lxrandr", "Audacious2", "VirtualBox"]
+    myTitleFloats = ["Downloads", "Preferences", "Save As...", "Add-ons", "Firefox"]
     myIgnores     = ["trayer", "dzen", "stalonetray"]
 
 -- Dzen+stalonetray > *
 myStatusBar :: String
-myStatusBar = "dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -h '20' -fn '" ++ dzFont ++ "' -sa c -ta l"
+myStatusBar = "dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "'  -h '20' -fn '" ++ dzFont ++ "' -ta l"
 myConkyBar :: String
 --myConkyBar = "conky | dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -x '700' -h '20' -fn '" ++ dzFont ++ "' -sa c -ta r"
 myConkyBar = "sleep 1; conky | dzen2 -e '' -h '20' -x '750' -w '600' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor ++ "' -fn '" ++ dzFont ++ "'"
 mySysTray :: String
-mySysTray = "trayer --expand true  --alpha 255 --edge top --align right --expand true --SetDockType true --SetPartialStrut true --widthtype request --width 16 --tint 0x191970 --height 20 --margin 5"
---mySysTray = "stalonetray -i 18 --max-width 20 --icon-gravity N --geometry 18x18-0+17 -bg '#000000' --sticky --skip-taskbar --window-type dock -w"
-
-
+mySysTray = "sleep 3; trayer --expand true  --alpha 50 --edge top --align right --SetDockType true --transparent true --SetPartialStrut true --widthtype request --tint 0x191970 --height 20 --margin 0"
 
 myLogHook h = dynamicLogWithPP $ defaultPP
 
       { ppCurrent     = dzenColor "#2e3436" "#e2eeea" . pad
-        , ppVisible     = dzenColor "white" "" . pad
+        , ppVisible     = dzenColor "#CCCCCC" "" . pad
         , ppHidden      = dzenColor "white" "" . pad
         , ppHiddenNoWindows = dzenColor "#444444"  "" . pad
         , ppUrgent      = dzenColor "#2e3436" "#fce94f"
@@ -185,8 +182,8 @@ myLayout =  genericLayout
 
 main :: IO ()
 main = do
---  spawn "killall dzen2 trayer"
-  workspaceBarPipe <- spawnPipe myStatusBar
+  spawn "pkill trayer"
+  dzen <- spawnPipe myStatusBar
   spawn myConkyBar
   spawn mySysTray
 --  spawn "xcompmgr"
@@ -196,9 +193,11 @@ main = do
        , borderWidth = myBorderWidth
        , terminal = "lxterminal"
        , manageHook = manageDocks <+> manageHook defaultConfig <+> myManageHook
-       , logHook    = myLogHook workspaceBarPipe >> fadeInactiveLogHook 0xdddddddd
+       , logHook    = myLogHook dzen >> fadeInactiveLogHook 0xdddddddd
+--       , logHook = ewmhDesktopsLogHook >> (dynamicLogWithPP $ myLogHook dzen)
+--       , layoutHook = ewmhDesktopsEventHook $ avoidStruts $ myLayout
        , layoutHook = avoidStruts $ myLayout
-       , workspaces = ["编辑", "冲浪", "文档", "游戏", "虚拟"]
+       , workspaces = ["^fn(OpenLogos-9)Q^fn(Microsoft YaHei-8)编辑","^fn(OpenLogos-11)P^fn(Microsoft YaHei-8)冲浪","^fn(OpenLogos-9)U^fn(Microsoft YaHei-8)文档","^fn(OpenLogos-9)J^fn(Microsoft YaHei-8)虚拟","^fn(OpenLogos-9)T^fn(Microsoft YaHei-8)游戏^fn(WenQuanYi Micro Hei-8:bold)"]
       -- key bindings
        , keys               = myKeys
        , mouseBindings      = myMouseBindings
