@@ -1,6 +1,6 @@
 # Copyright 1999-2009 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/mesa/mesa-7.0.2.ebuild,v 1.6 2007/11/16 18:16:30 dberkholz Exp $
+# $Header: $
 
 EAPI="2"
 
@@ -9,7 +9,6 @@ EGIT_REPO_URI="git://anongit.freedesktop.org/mesa/mesa"
 if [[ ${PV} = 9999* ]]; then
 	GIT_ECLASS="git"
 	EXPERIMENTAL="true"
-	IUSE_VIDEO_CARDS_UNSTABLE="video_cards_nouveau"
 fi
 
 inherit autotools multilib flag-o-matic ${GIT_ECLASS} portability
@@ -23,45 +22,33 @@ DESCRIPTION="OpenGL-like graphic library for Linux"
 HOMEPAGE="http://mesa3d.sourceforge.net/"
 
 #SRC_PATCHES="mirror://gentoo/${P}-gentoo-patches-01.tar.bz2"
-if [[ $PV = *_rc* ]]; then
-	SRC_URI="ftp://ftp.freedesktop.org/pub/mesa/beta/${MY_SRC_P}.tar.gz
-		${SRC_PATCHES}"
-elif [[ $PV = 9999* ]]; then
+if [[ $PV = 9999* ]]; then
 	SRC_URI="${SRC_PATCHES}"
 else
-	SRC_URI="ftp://ftp.freedesktop.org/pub/mesa/${PV}/${MY_SRC_P}.tar.bz2
+	SRC_URI="ftp://ftp.freedesktop.org/pub/mesa/${PV/_rc*/}/${MY_SRC_P}.tar.bz2
 		${SRC_PATCHES}"
 fi
 
 LICENSE="LGPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
 
-IUSE_VIDEO_CARDS="${IUSE_VIDEO_CARDS_UNSTABLE}
-	video_cards_intel
-	video_cards_mach64
-	video_cards_mga
-	video_cards_none
-	video_cards_r128
-	video_cards_radeon
-	video_cards_radeonhd
-	video_cards_s3virge
-	video_cards_savage
-	video_cards_sis
-	video_cards_sunffb
-	video_cards_tdfx
-	video_cards_trident
-	video_cards_via"
+VIDEO_CARDS="intel mach64 mga none nouveau r128 radeon radeonhd savage sis sunffb svga tdfx via"
+for card in ${VIDEO_CARDS}; do
+	IUSE_VIDEO_CARDS+=" video_cards_${card}"
+done
+
 IUSE="${IUSE_VIDEO_CARDS}
-	debug gallium motif nptl pic xcb kernel_FreeBSD"
+	debug +gallium motif +nptl pic selinux +xcb kernel_FreeBSD"
 
 # keep correct libdrm and dri2proto dep
 # keep blocks in rdepend for binpkg
-RDEPEND="!<=x11-base/xorg-x11-6.9
+RDEPEND="
+	!<x11-base/xorg-server-1.7
 	!<=x11-proto/xf86driproto-2.0.3
-	app-admin/eselect-opengl
+	>=app-admin/eselect-opengl-1.1.1-r2
 	dev-libs/expat
-	>=x11-libs/libdrm-9999
+	>=x11-libs/libdrm-2.4.17
 	x11-libs/libICE
 	x11-libs/libX11[xcb?]
 	x11-libs/libXdamage
@@ -77,7 +64,7 @@ DEPEND="${RDEPEND}
 	>=x11-proto/dri2proto-1.99.3
 	>=x11-proto/glproto-1.4.8
 	x11-proto/inputproto
-	x11-proto/xextproto
+	>=x11-proto/xextproto-7.0.99.1
 	x11-proto/xf86driproto
 	x11-proto/xf86vidmodeproto
 "
@@ -127,53 +114,41 @@ src_configure() {
 	# ATI has two implementations as video_cards
 	driver_enable video_cards_radeon radeon r200 r300 r600
 	driver_enable video_cards_radeonhd r300 r600
-	driver_enable video_cards_s3virge s3v
 	driver_enable video_cards_savage savage
 	driver_enable video_cards_sis sis
 	driver_enable video_cards_sunffb ffb
 	driver_enable video_cards_tdfx tdfx
-	driver_enable video_cards_trident trident
 	driver_enable video_cards_via unichrome
-
-	# all live (experimental) stuff is wrapped around with experimental variable
-	# so the users cant get to this parts even with enabled useflags (downgrade
-	# from live to stable for example)
-	if [[ -n ${EXPERIMENTAL} ]]; then
-		# nouveau works only with gallium 
-		use gallium && myconf="${myconf} $(use_enable video_cards_nouveau gallium-nouveau)"
-		if use video_cards_nouveau && ! use gallium ; then
-			elog "Nouveau driver is available only via gallium interface."
-			elog "Enable gallium useflag if you want to use nouveau."
-			echo
-		fi
-	fi
 
 	myconf="${myconf} $(use_enable gallium)"
 	if use gallium; then
-		elog "Warning gallium interface is highly experimental so use"
-		elog "it only if you feel really really brave."
-		elog
-		elog "Intel: works only i915."
-		elog "Nouveau: only available implementation, so no other choice"
-		elog "Radeon: implementation up to the r500."
+		elog "You have enabled gallium infrastructure."
+		elog "This infrastructure currently support these drivers:"
+		elog "    Intel: works only i915."
+		elog "    Nouveau: Support for nVidia NV30 and later cards."
+		elog "    Radeon: Newest implementation of r300-r500 driver."
+		elog "    Svga: VMWare Virtual GPU driver."
 		echo
 		myconf="${myconf}
 			--with-state-trackers=glx,dri,egl
+			$(use_enable video_cards_svga gallium-svga)
 			$(use_enable video_cards_nouveau gallium-nouveau)
 			$(use_enable video_cards_intel gallium-intel)"
-		if ! use video_cards_radeon && ! use video_cards_radeonhd; then
-			myconf="${myconf} --disable-gallium-radeon"
-		else
+		if use video_cards_radeon || use video_cards_radeonhd; then
 			myconf="${myconf} --enable-gallium-radeon"
+		else
+			myconf="${myconf} --disable-gallium-radeon"
+		fi
+	else
+		if use video_cards_nouveau || use video_cards_svga; then
+			elog "SVGA and nouveau drivers are available only via gallium interface."
+			elog "Enable gallium useflag if you want to use them."
 		fi
 	fi
 
-	# Deactivate assembly code for pic build
-	myconf="${myconf} $(use_enable !pic asm)"
-
-	# --with-driver=dri|xlib|osmesa ; might get changed later to something
-	# else than dri
+	# --with-driver=dri|xlib|osmesa || do we need osmesa?
 	econf \
+		--disable-option-checking \
 		--with-driver=dri \
 		--disable-glut \
 		--without-demos \
@@ -182,6 +157,7 @@ src_configure() {
 		$(use_enable motif) \
 		$(use_enable nptl glx-tls) \
 		$(use_enable xcb) \
+		$(use_enable !pic asm) \
 		--with-dri-drivers=${DRI_DRIVERS} \
 		${myconf}
 }
@@ -221,14 +197,6 @@ pkg_postinst() {
 	# Switch to the xorg implementation.
 	echo
 	eselect opengl set --use-old ${OPENGL_DIR}
-
-	# info about removal of .la file
-	elog "Mesa no-longer ships the libGL.la file."
-	elog "This file was broken by design and thus removed."
-	elog "For fixing all sort of configure issues please run:"
-	elog "	lafilefixer --justfixit"
-	elog "or run revdep-rebuild."
-	elog "(lafilefixer package can be found as dev-util/lafilefixer)"
 }
 
 # $1 - VIDEO_CARDS flag
@@ -237,13 +205,13 @@ driver_enable() {
 	case $# in
 		# for enabling unconditionally
 		1)
-			DRI_DRIVERS="${DRI_DRIVERS},$1"
+			DRI_DRIVERS+=",$1"
 			;;
 		*)
 			if use $1; then
 				shift
 				for i in $@; do
-					DRI_DRIVERS="${DRI_DRIVERS},${i}"
+					DRI_DRIVERS+=",${i}"
 				done
 			fi
 			;;

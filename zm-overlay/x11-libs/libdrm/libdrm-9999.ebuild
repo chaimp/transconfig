@@ -2,7 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit x-modular
+EAPI=2
+inherit x-modular-r2
 
 EGIT_REPO_URI="git://anongit.freedesktop.org/git/mesa/drm"
 
@@ -14,7 +15,7 @@ else
 	SRC_URI="http://dri.freedesktop.org/${PN}/${P}.tar.bz2"
 fi
 
-KEYWORDS=""
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
 IUSE=""
 RESTRICT="test" # see bug #236845
 
@@ -24,7 +25,7 @@ DEPEND="${RDEPEND}"
 CONFIGURE_OPTIONS="--enable-udev --enable-nouveau-experimental-api --enable-radeon-experimental-api"
 
 pkg_postinst() {
-	x-modular_pkg_postinst
+	x-modular-r2_pkg_postinst
 
 	ewarn "libdrm's ABI may have changed without change in library name"
 	ewarn "Please rebuild media-libs/mesa, x11-base/xorg-server and"

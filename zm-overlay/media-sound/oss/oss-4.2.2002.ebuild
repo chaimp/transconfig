@@ -36,12 +36,9 @@ src_prepare() {
 	einfo "Replacing init script with gentoo friendly one ..."
 	cp "${FILESDIR}/oss" "${S}/setup/Linux/oss/etc/S89oss"
 
-	# Fix issues with 2.6.30 Linux kernels
-#	epatch "${FILESDIR}/01-2.6.30-kernel-pcidev.patch"
-	# Fix gcc-4.3 warnings (becoming errors by means of -Werror)
-#	epatch "${FILESDIR}/${PN}-4.1.1052-gcc-43.patch"
-	# Fix gcc-4.4 warnings (becoming errors by means of -Werror)
-#	epatch "${FILESDIR}/${PN}-4.1.1052-gcc-44.patch"
+	# Add -nopie to disable PIE for kernel modules
+	gcc-specs-pie && epatch "${FILESDIR}/${P}-nopie.patch"
+
 }
 
 src_configure() {
