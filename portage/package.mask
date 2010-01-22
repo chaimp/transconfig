@@ -6,6 +6,9 @@
 
 #>net-misc/wicd-1.6.3
 
->=dev-lang/python-2.7
+>=dev-lang/python-3.0
+>=dev-python/beautifulsoup-3.1
 
 =sys-boot/grub-9999
+
+>=dev-lang/php-5.2.12

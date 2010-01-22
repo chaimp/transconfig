@@ -50,7 +50,7 @@ myFont               = "xft:WenQuanYi Micro Hei:pixelsize=8"
 -- dzen settings:
 dzFont             = "WenQuanYi Micro Hei-8:Bold"
 --dzFont             = "OpenLogos-8"
-dzFgColor          = "#2e3436"
+dzFgColor          = "skyblue"
 dzBgColor          = "#729fcf"
 
 --
@@ -80,7 +80,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
     ]
     ++
     [((m .|. modm, k), windows $ f i)
@@ -105,13 +105,13 @@ myManageHook = composeAll . concat $
     , [resource  =? r  --> doIgnore | r <- myIgnores]
     ]
     where
-    myFloats      = ["Gpick", "Wicd", "Gimp", "MPlayer", "Smplayer", "Realplay", "Lxrandr", "Audacious2", "VirtualBox"]
-    myTitleFloats = ["Downloads", "Preferences", "Save As...", "Add-ons", "Firefox"]
+    myFloats      = ["Gpick", "Chromium-bin", "Gimp", "MPlayer", "Smplayer", "Realplay", "Lxrandr", "Audacious2", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion"]
+    myTitleFloats = ["Downloads", "Preferences", "Save As...", "Add-ons", "Firefox", "Chromium", "exe", "Options", "首选项", "Wicd Network Manager"]
     myIgnores     = ["trayer", "dzen", "stalonetray"]
 
 -- Dzen+stalonetray > *
 myStatusBar :: String
-myStatusBar = "dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "'  -h '20' -fn '" ++ dzFont ++ "' -ta l"
+myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e '' -h '20' -fn '" ++ dzFont ++ "' -ta l"
 myConkyBar :: String
 --myConkyBar = "conky | dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -x '700' -h '20' -fn '" ++ dzFont ++ "' -sa c -ta r"
 myConkyBar = "sleep 1; conky | dzen2 -e '' -h '20' -x '750' -w '600' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor ++ "' -fn '" ++ dzFont ++ "'"
@@ -120,14 +120,14 @@ mySysTray = "sleep 3; trayer --expand true  --alpha 50 --edge top --align right 
 
 myLogHook h = dynamicLogWithPP $ defaultPP
 
-      { ppCurrent     = dzenColor "#2e3436" "#e2eeea" . pad
-        , ppVisible     = dzenColor "#CCCCCC" "" . pad
-        , ppHidden      = dzenColor "white" "" . pad
-        , ppHiddenNoWindows = dzenColor "#444444"  "" . pad
+      { ppCurrent     = dzenColor "#4386CE" "#E2EDF9" . pad
+        , ppVisible     = dzenColor "skyblue" "" . pad
+        , ppHidden      = dzenColor "#204a87"  "#8fb580" . pad
+        , ppHiddenNoWindows = dzenColor "#4e9a06" "#8FB171" . pad
         , ppUrgent      = dzenColor "#2e3436" "#fce94f"
         , ppWsSep    = ""
         , ppSep      = "|"
-        , ppLayout   = dzenColor "white" "" .
+        , ppLayout   = dzenColor "skyblue" "" .
                           (\ x -> case x of
                               "Tall"                   -> "^i(/home/zhou/.xmonad/dzen/layouts/tile.xpm)"
                               "Mirror Tall"            -> "^i(/home/zhou/.xmonad/dzen/layouts/tilebottom.xpm)"
@@ -154,7 +154,7 @@ myTabConfig = defaultTheme {
             , activeTextColor     = "#FFFFFF"
             , inactiveColor       = "#333344"
             , inactiveBorderColor = "#888888"
-            , inactiveTextColor   = "#FFFFFF"
+            , inactiveTextColor   = "skyblue"
             , decoHeight          = 18
             , fontName            = myFont
             }
@@ -182,7 +182,7 @@ myLayout =  genericLayout
 
 main :: IO ()
 main = do
-  spawn "pkill trayer"
+  spawn "killall trayer"
   dzen <- spawnPipe myStatusBar
   spawn myConkyBar
   spawn mySysTray
@@ -197,7 +197,7 @@ main = do
 --       , logHook = ewmhDesktopsLogHook >> (dynamicLogWithPP $ myLogHook dzen)
 --       , layoutHook = ewmhDesktopsEventHook $ avoidStruts $ myLayout
        , layoutHook = avoidStruts $ myLayout
-       , workspaces = ["^fn(OpenLogos-9)Q^fn(Microsoft YaHei-8)编辑","^fn(OpenLogos-11)P^fn(Microsoft YaHei-8)冲浪","^fn(OpenLogos-9)U^fn(Microsoft YaHei-8)文档","^fn(OpenLogos-9)J^fn(Microsoft YaHei-8)虚拟","^fn(OpenLogos-9)T^fn(Microsoft YaHei-8)游戏^fn(WenQuanYi Micro Hei-8:bold)"]
+       , workspaces = ["^fn(OpenLogos-9)Q^fn(Microsoft YaHei-8)transtone","^fn(OpenLogos-11)P^fn(Microsoft YaHei-8)冲浪","^fn(OpenLogos-9)U^fn(Microsoft YaHei-8)文档","^fn(OpenLogos-9)J^fn(Microsoft YaHei-8)虚拟","^fn(OpenLogos-9)T^fn(Microsoft YaHei-8)游戏^fn(WenQuanYi Micro Hei-8:bold)"]
       -- key bindings
        , keys               = myKeys
        , mouseBindings      = myMouseBindings

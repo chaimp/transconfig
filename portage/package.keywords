@@ -2,7 +2,6 @@ app-emulation/dynagen **
 =app-text/apvlv-9999 **
 x11-misc/fqterm **
 dev-python/feedparser **
-app-text/chmsee **
 
 games-emulation/hugo **
 
@@ -41,4 +40,5 @@ sys-boot/grub **
 # ---
 
 
-
+#=kde-base/libknotificationitem-4.3.9999 **
+#=kde-base/pykde4-9999 **

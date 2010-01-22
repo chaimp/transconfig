@@ -13,22 +13,26 @@ x11-themes/redhat-artwork  audacious cursors gdm icons
 x11-apps/xinit minimal
 x11-terms/rxvt-unicode wcwidth xterm-color
 x11-misc/xmobar mail
+x11-misc/dmenu vertical
 x11-libs/qt-qt3support kde
 x11-libs/qt-webkit kde
 media-sound/audacious chardet 
 media-sound/esound -alsa
+media-sound/moc -alsa vorbis
+media-sound/xmms2 -alsa
 media-plugins/audacious-plugins gnome chardet wma tta sndfile scrobbler
 media-plugins/gst-plugins-meta ffmpeg
 media-video/mplayer -gtk -live -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger -dvb xv radio quicktime real rar 
 media-video/vlc nsplugin -xosd dvd mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio 
+#media-sound/oss salsa
 media-libs/realcodecs -win32codecs
 media-libs/libmng lcms
 media-libs/sdl-mixer mikmod
 media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
-media-tv/gmlive sopcast 
+media-tv/gmlive sopcast extra
 app-arch/p7zip wxwidgets rar
-app-admin/conky X hddtemp nano-syntax vim-syntax wifi rss
+app-admin/conky -X hddtemp nano-syntax vim-syntax wifi rss iostats moc 
 app-admin/testdisk ntfs reiserfs
 app-cdr/recorder vcd
 app-cdr/brasero -totem -nautilus 
@@ -40,7 +44,7 @@ app-text/acroread minimal
 app-misc/screen multiuser
 app-emulation/ies4linux -gtk -kde
 app-emulation/qemu-softmmu kqemu
-app-emulation/q4wine winetools icotools
+app-emulation/q4wine winetriks embedded-fuseiso icoutils
 app-emulation/qemu-kvm esd -modules
 app-emulation/libvirt iscsi kvm lvm nfs virtualbox
 app-emulation/virtualbox-bin -chm
@@ -52,11 +56,11 @@ media-sound/sonata lyrics
 media-sound/aumix -gpm
 media-gfx/splashutils fbcondecor
 www-client/opera -qt3
-www-client/mozilla-firefox mozdevelop iceweasel java
+www-client/mozilla-firefox mozdevelop custom-optimization alsa bindist
 www-servers/nginx addition fastcgi flv imap pcre perl random-index securelink ssl status sub zlib 
 www-servers/lighttpd minimal
 www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp 
-dev-lang/php -truetype apache2 filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
+dev-lang/php -truetype  apache2 filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
 dev-db/mysql embedded 
 dev-util/subversion -berkdb
 net-ftp/proftpd  authfile clamav softquota vroot rewrite
@@ -69,12 +73,12 @@ net-analyzer/tcpdump -samba
 net-misc/nxserver-freenx nxclient
 net-misc/nxnode rdesktop -vnc
 net-misc/rdesktop oss
-net-misc/wicd -pm-utils 
 net-misc/openssh -ldap
 net-misc/wget -nls
+net-misc/ntp openntpd
 net-wireless/aircrack-ng wifi
 net-libs/libsoup gnome
-net-libs/xulrunner java
+net-libs/xulrunner  mozdevelop custom-optimization alsa
 net-irc/xchat -xft
 net-im/skype -qt-static
 sys-auth/consolekit policykit
@@ -84,6 +88,7 @@ sys-apps/hwdata-gentoo  binary-drivers
 sys-apps/busybox -savedconfig
 sys-libs/pam -nls
 sys-fs/ntfs3g suid
+sys-fs/udev extras
 sys-boot/grub netboot
 sys-block/open-iscsi utils
 gnome-extra/avant-window-navigator xfce
