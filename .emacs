@@ -1,27 +1,31 @@
 (load "/usr/share/emacs/site-lisp/site-gentoo")
 (add-to-list 'load-path "~/.emacs.d/93free")
 (add-to-list 'load-path "~/.emacs.d/lisps")
-(add-to-list 'load-path "~/.emacs.d/lisps/auto-complete")
+;;(add-to-list 'load-path "~/.emacs.d/lisps/auto-complete")
 (add-to-list 'load-path "~/.emacs.d/lisps/mumamo")
 ;; 载入elisp文件
 
 (global-set-key [(f1)] (lambda () (interactive) (manual-entry (current-word))))
-(global-set-key [f2] 'speedbar)             ; 快速浏览
+;;(global-set-key [f2] 'speedbar)             ; 快速浏览
+(global-set-key [f2] 'view-mode)            ; 只读模式
 (global-set-key [f3] 'linum-mode)           ; 显示行号
 (global-set-key [f4] 'global-highline-mode) ; 高亮光标行 
-(global-set-key [f5] 'revert-buffer)        ; 重载文件/刷新
+;;(global-set-key [f5] 'revert-buffer)        ; 重载文件/刷新
 (global-set-key [f6] 'eshell)               ; 一个 elisp 写的 shell
 (global-set-key [f7] 'calendar)             ; Emacs 的日历系统
+(global-set-key [f10] 'hs-toggle-hiding)
 ;;(global-set-key [f8] 'plan)               ; 计划任务
 (global-set-key [f9] 'other-window)         ; 跳转到 Emacs 的另一个窗口
 ;;(global-set-key [f10] ')                  ; 文件菜单
 (global-set-key [f11] 'compile)             ; 在 Emacs 中编译
-(global-set-key [f13] 'gdb)                 ; 在 Emacs 中调试
+(global-set-key [f12] 'gdb)                 ; 在 Emacs 中调试
 ;; 这些功能键有时候还是很有用的。除了直接设置之外，还可以配合 Shift, Ctrl 设置，比如：
 ;;
 ;; (global-set-key [(shift f1)] 'goto-line)
 ;;
 ;; 实际上 Shift-F1 也可以用 F13 表示。
+
+(eval-after-load "man" '(require 'man-completion))
 
 (global-set-key (kbd "C-SPC") 'nil)
 (global-set-key "\C-x\C-b" 'electric-buffer-list)
@@ -142,10 +146,35 @@
 ;;(color-theme-initialize)
 ;;(color-theme-sitaramv-nt)
 (load-file "~/.emacs.d/lisps/themes/color-theme-tango-light.el")
-(load-file "~/.emacs.d/lisps/themes/color-theme-awesome.el")
+(load-file "~/.emacs.d/lisps/themes/color-theme-ir-black.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-tango-2.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-subdued.el")
-(color-theme-tango-2)
+(load-file "~/.emacs.d/lisps/themes/color-theme-irblack-2.el")
+;;(if window-system
+;;    (if (> (caddr (decode-time (current-time))) 18)
+;;        (color-theme-tango-light)             ;白天光线好用黑色系的主题
+;;      (color-theme-tango-2))          ;晚上光线差用深蓝系的主题
+;;(color-theme-tty-dark)
+;;)
+(color-theme-irblack-2)
+
+(defun djcb-opacity-modify (&optional dec)
+  "modify the transparency of the emacs frame; if DEC is t,
+    decrease the transparency, otherwise increase it in 10%-steps"
+  (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
+          (oldalpha (if alpha-or-nil alpha-or-nil 100))
+          (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
+    (when (and (>= newalpha frame-alpha-lower-limit) (<= newalpha 100))
+      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))
+
+ ;; C-8 will increase opacity (== decrease transparency)
+ ;; C-9 will decrease opacity (== increase transparency
+ ;; C-0 will returns the state to normal
+(global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify)))
+(global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify t)))
+(global-set-key (kbd "C-0") '(lambda()(interactive)
+                               (modify-frame-parameters nil `((alpha . 100)))))
+
 
 ;; shell 和 eshell 相关设置
 (setq shell-file-name "/bin/bash")
@@ -196,13 +225,14 @@
 (display-time-mode 1)                   ; 显示时间。
 (show-paren-mode 1)                     ; 高亮显示匹配的括号。
 (setq show-paren-style 'parentheses) 	; 括号不来回弹跳。
-;;(menu-bar-mode -1)                      ; 不要 menu-bar。
+(menu-bar-mode -1)                      ; 不要 menu-bar。
 (icomplete-mode 1)                      ; 给出用 M-x foo-bar-COMMAND 输入命令的提示。
 ;;(set-scroll-bar-mode 'right)		; scroll-bar 靠右显示。
 (scroll-bar-mode -1)                    ; 不要 scroll-bar
 (display-battery-mode 1)
 (tool-bar-mode -1)			; 不要 tool-bar。
 (global-linum-mode 1)                   ; 开启行号。
+(setq linum-format "%d ")
 
 (autoload 'table-insert "table" "WYGIWYS table editor")
 ;; 可以识别文本文件里本来就存在的表格，而且可以把表格输出为 HTML 和 TeX。
@@ -288,9 +318,66 @@
 ;;(global-set-key "\C-c2" 'highline-split-window-vertically)
 ;;(global-set-key "\C-c3" 'highline-split-window-horizontally)
 
+
+;; 交换两个窗口的内容
+;; transpose(interchange) two windows
+(defun his-transpose-windows (arg)
+  "Transpose the buffers shown in two windows."
+  (interactive "p")
+  (let ((selector (if (>= arg 0) 'next-window 'previous-window)))
+    (while (/= arg 0)
+      (let ((this-win (window-buffer))
+            (next-win (window-buffer (funcall selector))))
+        (set-window-buffer (selected-window) next-win)
+        (set-window-buffer (funcall selector) this-win)
+        (select-window (funcall selector)))
+      (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
+;; 交换两个窗口内的 buffer
+(global-set-key (kbd "C-c l") 'his-transpose-windows)
+
+;; 水木 ilovecpp 给出一个命令，用于切换 mode，很好用。
+(global-set-key (kbd "C-c m") 'switch-major-mode)
+
+;; 插入 template
+(global-set-key (kbd "C-c t") 'template-expand-template)
+
+;; 这两个命令特别好用，可以根据文件的后缀或者 mode 判断调用的 compile
+;; 命令。当目录下有 makefile 自动使用 make 命令。
+(global-set-key (kbd "C-c r") 'smart-run)
+(global-set-key (kbd "C-c s") 'smart-compile)
+
+;; 最常用的注释命令。
+(global-set-key (kbd "C-'") 'comment-dwim)
+
+;; 这个命令配合 comment-dwim 基本上能满足所有的注释命令
+(global-set-key (kbd "C-c g") 'comment-or-uncomment-region)
+
+;; hide-show 是代码折叠常用的一个 elisp。有自己的一套按键，但是太难按了
+(global-set-key (kbd "C-c h") 'hs-hide-all)
+(global-set-key (kbd "<f5>") 'hs-toggle-hiding)
+
+;; imenu 是一个代码跳转的很好用的命令。这个命令在调用 imenu 同时，显示所有补全
+(global-set-key (kbd "C-c i") 'his-imenu)
+
+;; 使用外部的浏览器打开光标下的网址
+(global-set-key (kbd "C-c o") 'browse-url-at-point)
+
+;; 我写的一个 elisp，树形显示 imenu
+(global-set-key (kbd "C-c v") 'my-tr-imenu)
+
+;; Windmove 是在窗口之间移动的很好用的命令。默认是用 Shift+上下左右键移动。
+(when (featurep 'windmove)
+  (global-set-key (kbd "C-c n") 'windmove-down)
+  (global-set-key (kbd "C-c p") 'windmove-up)
+  (global-set-key (kbd "C-c ,") 'windmove-left)
+  (global-set-key (kbd "C-c .") 'windmove-right)
+  (windmove-default-keybindings))
+
+
 ;;(require 'tex-site)
 (require 'compile)
 
+(require 'redo)
 (global-set-key ( kbd "C-.") 'redo)
 ;; 设置Redo的键绑定
 
@@ -304,6 +391,14 @@
 
 (require 'ido)
 (ido-mode t)
+
+;; 为 view-mode 加入 vim 的按键。
+(setq view-mode-hook
+      (lambda ()
+        (define-key view-mode-map "h" 'backward-char)
+        (define-key view-mode-map "l" 'forward-char)
+        (define-key view-mode-map "j" 'next-line)
+        (define-key view-mode-map "k" 'previous-line)))
 
 (define-key global-map "\e\e" 'vi-mode) ;quick switch into vi-mode
 ;;(setq find-file-hook (list
@@ -457,15 +552,15 @@ Return a list of one element based on major mode."
 
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
+;;(define-key global-map "\C-cl" 'org-store-link)
+;;(define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
 (autoload 'remember "remember" nil t)
 (autoload 'remember-region "remember" nil t)
 (setq org-reverse-note-order t)
 (when (file-exists-p "~/gtd/")
-  (define-key global-map [(f8)] 'remember)
+  (define-key global-map [(f14)] 'remember)
   (setq remember-annotation-functions '(org-remember-annotation))
   (setq remember-handler-functions '(org-remember-handler))
   (add-hook 'remember-mode-hook 'org-remember-apply-template)
@@ -521,7 +616,7 @@ occurence of CHAR."
 (global-set-key (kbd "C-c R") 'hide-region-unhide)
 ;; hide lines
 (require 'hide-lines)
-(global-set-key (kbd "C-c l") 'hide-lines)
+;;(global-set-key (kbd "C-c l") 'hide-lines)
 (global-set-key (kbd "C-c L") 'show-all-invisible)
 ;; hide-lines 在操作某些行的时候用起来特别方便。加一个前缀参数可以把不匹配的行都藏起来，只看到匹配的！
 
@@ -571,11 +666,39 @@ occurence of CHAR."
                              yas/ido-prompt
                              yas/completing-prompt))
 
+(require 'auto-complete)
+(require 'auto-complete-config)
+(require 'ac-anything)
+
+;; dirty fix for having AC everywhere
+(define-globalized-minor-mode real-global-auto-complete-mode
+  auto-complete-mode (lambda ()
+                       (if (not (minibufferp (current-buffer)))
+                         (auto-complete-mode 1))
+                       ))
+(real-global-auto-complete-mode t)
+;;(define-key ac-complete-mode-map "\t" 'ac-expand)
+;;(define-key ac-complete-mode-map "\r" 'ac-complete)
+(define-key ac-complete-mode-map "\M-n" 'ac-next)
+(define-key ac-complete-mode-map "\M-p" 'ac-previous)
+
+(set-default 'ac-sources
+             '(ac-source-semantic
+               ac-source-yasnippet
+               ac-source-abbrev
+               ac-source-words-in-buffer
+               ac-source-words-in-all-buffer
+               ac-source-imenu
+               ac-source-files-in-current-dir
+               ac-source-filename))
+
+
 (defun wl-sudo-find-file (file dir)
   (find-file (concat "/sudo:localhost:" (expand-file-name file dir))))
 
 (require 'find-func)
 (find-function-setup-keys)
+
         
 ;;session和desktop插件,需要放在最后
 ;;(require 'session)
@@ -596,4 +719,5 @@ occurence of CHAR."
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil))))
+ '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil)))
+)
