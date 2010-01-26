@@ -23,7 +23,7 @@
   (interactive)
   (color-theme-install
    '(color-theme-irblack-2
-     (;; (background-color . "#121212")
+     ((background-color . "#121212")
       (background-mode . dark)
       (border-color . "#888a85")
       (cursor-color . "#888888")
