@@ -1,7 +1,6 @@
 import XMonad
 import Data.Monoid
 import System.Exit
-import XMonad.Util.EZConfig
 import XMonad.Prompt
 import XMonad.Prompt.RunOrRaise
 import XMonad.Prompt.Shell
@@ -29,10 +28,16 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.NoBorders
 
 import XMonad.Util.Run
+import XMonad.Util.EZConfig
+import XMonad.Util.XSelection
+import XMonad.Util.WorkspaceCompare
+import XMonad.Util.WindowProperties
+import XMonad.Util.NamedWindows (getName)
+
 import XMonad.Actions.SinkAll
 import XMonad.Actions.CycleWS
 import XMonad.Actions.NoBorders
-import Data.List
+import Data.List(isPrefixOf)
 import Data.Ratio ((%))
 import qualified System.IO.UTF8 as U
 import qualified XMonad.StackSet as W
@@ -109,22 +114,21 @@ myManageHook = composeAll . concat $
     myTitleFloats = ["Downloads", "Preferences", "Save As...", "Add-ons", "Firefox", "Chromium", "exe", "Options", "首选项", "Wicd Network Manager"]
     myIgnores     = ["trayer", "dzen", "stalonetray"]
 
--- Dzen+stalonetray > *
 myStatusBar :: String
-myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e '' -h '20' -fn '" ++ dzFont ++ "' -ta l"
+myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e 'button3=' -h '20' -fn '" ++ dzFont ++ "' -ta l"
 myConkyBar :: String
 --myConkyBar = "conky | dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -x '700' -h '20' -fn '" ++ dzFont ++ "' -sa c -ta r"
 myConkyBar = "sleep 1; conky | dzen2 -e '' -h '20' -x '750' -w '600' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor ++ "' -fn '" ++ dzFont ++ "'"
 mySysTray :: String
 mySysTray = "sleep 3; trayer --expand true  --alpha 50 --edge top --align right --SetDockType true --transparent true --SetPartialStrut true --widthtype request --tint 0x191970 --height 20 --margin 0"
 
+ 
 myLogHook h = dynamicLogWithPP $ defaultPP
-
       { ppCurrent     = dzenColor "#4386CE" "#E2EDF9" . pad
-        , ppVisible     = dzenColor "skyblue" "" . pad
-        , ppHidden      = dzenColor "#204a87"  "#8fb580" . pad
-        , ppHiddenNoWindows = dzenColor "#4e9a06" "#8FB171" . pad
-        , ppUrgent      = dzenColor "#2e3436" "#fce94f"
+        , ppVisible     = dzenColor "skyblue" "" . pad 
+        , ppHidden      = dzenColor "#204a87"  "#8fb580" . pad 
+        , ppHiddenNoWindows = dzenColor "#4e9a06" "#8FB171" . pad 
+        , ppUrgent      = dzenColor "#2e3436" "#fce94f" . pad 
         , ppWsSep    = ""
         , ppSep      = "|"
         , ppLayout   = dzenColor "skyblue" "" .
@@ -148,25 +152,8 @@ myLogHook h = dynamicLogWithPP $ defaultPP
 
 --
 -- Layouts
-myTabConfig = defaultTheme {
-            activeColor           = "#333399"
-            , activeBorderColor   = "#888888"
-            , activeTextColor     = "#FFFFFF"
-            , inactiveColor       = "#333344"
-            , inactiveBorderColor = "#888888"
-            , inactiveTextColor   = "skyblue"
-            , decoHeight          = 18
-            , fontName            = myFont
-            }
-tabbedLayout = tabbedBottom shrinkText myTabConfig
-
 genericLayout = tiled
-            ||| Mirror tiled
-            ||| Full
-            ||| Grid
-            ||| Accordion
-            ||| simpleFloat
-            ||| tabbedLayout
+            ||| Mirror tiled ||| Full ||| Grid ||| Accordion ||| simpleFloat
 --            ||| imLayout
 --            ||| titled
   where
@@ -188,7 +175,7 @@ main = do
   spawn mySysTray
 --  spawn "xcompmgr"
 
-  xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
+  xmonad $ ewmh defaultConfig {
          modMask = mod4Mask
        , borderWidth = myBorderWidth
        , terminal = "lxterminal"
@@ -197,7 +184,7 @@ main = do
 --       , logHook = ewmhDesktopsLogHook >> (dynamicLogWithPP $ myLogHook dzen)
 --       , layoutHook = ewmhDesktopsEventHook $ avoidStruts $ myLayout
        , layoutHook = avoidStruts $ myLayout
-       , workspaces = ["^fn(OpenLogos-9)Q^fn(Microsoft YaHei-8)transtone","^fn(OpenLogos-11)P^fn(Microsoft YaHei-8)冲浪","^fn(OpenLogos-9)U^fn(Microsoft YaHei-8)文档","^fn(OpenLogos-9)J^fn(Microsoft YaHei-8)虚拟","^fn(OpenLogos-9)T^fn(Microsoft YaHei-8)游戏^fn(WenQuanYi Micro Hei-8:bold)"]
+       , workspaces = ["^ca(1,xdotool key super+1)^fn(OpenLogos-9)Q^fn(Microsoft YaHei-8)transtone^ca()","^ca(1,xdotool key super+2)^fn(OpenLogos-11)P^fn(Microsoft YaHei-8)冲浪^ca()","^ca(1,xdotool key super+3)^fn(OpenLogos-9)U^fn(Microsoft YaHei-8)文档^ca()","^ca(1,xdotool key super+4)^fn(OpenLogos-9)J^fn(Microsoft YaHei-8)虚拟^ca()","^ca(1,xdotool key super+5)^fn(OpenLogos-9)T^fn(Microsoft YaHei-8)游戏^ca()^fn(WenQuanYi Micro Hei-8:bold)"]
       -- key bindings
        , keys               = myKeys
        , mouseBindings      = myMouseBindings
