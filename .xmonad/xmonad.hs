@@ -108,19 +108,21 @@ myManageHook = composeAll . concat $
     [ [className =? c  --> doFloat  | c <- myFloats]
     , [title     =? t  --> doFloat  | t <- myTitleFloats]
     , [resource  =? r  --> doIgnore | r <- myIgnores]
+--    , [className =? s  --> doTile   | s <- myTiles]
     ]
     where
-    myFloats      = ["Gpick", "Chromium-bin", "Gimp", "MPlayer", "Smplayer", "Realplay", "Lxrandr", "Audacious2", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion"]
+    myFloats      = ["Gpick", "Chromium-bin", "Gimp", "MPlayer", "Smplayer", "Realplay", "Vlc", "Lxrandr", "Audacious2", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gmlive"]
     myTitleFloats = ["Downloads", "Preferences", "Save As...", "Add-ons", "Firefox", "Chromium", "exe", "Options", "首选项", "Wicd Network Manager"]
     myIgnores     = ["trayer", "dzen", "stalonetray"]
+--    myTiles       = ["tilda", "pcmanfm", "thunar", "dolphin", "lxterminal"]
 
 myStatusBar :: String
 myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e 'button3=' -h '20' -fn '" ++ dzFont ++ "' -ta l"
 myConkyBar :: String
 --myConkyBar = "conky | dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -x '700' -h '20' -fn '" ++ dzFont ++ "' -sa c -ta r"
-myConkyBar = "sleep 1; conky | dzen2 -e '' -h '20' -x '750' -w '600' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor ++ "' -fn '" ++ dzFont ++ "'"
+myConkyBar = "sleep 1; conky | dzen2 -e '' -h '20' -x '780' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor ++ "' -fn '" ++ dzFont ++ "'"
 mySysTray :: String
-mySysTray = "sleep 3; trayer --expand true  --alpha 50 --edge top --align right --SetDockType true --transparent true --SetPartialStrut true --widthtype request --tint 0x191970 --height 20 --margin 0"
+mySysTray = "sleep 3; trayer --expand true  --alpha 0 --edge top --align right --SetDockType true --transparent flase --SetPartialStrut true --widthtype request --tint 0x729fcf --height 20 --margin 53"
 
  
 myLogHook h = dynamicLogWithPP $ defaultPP
