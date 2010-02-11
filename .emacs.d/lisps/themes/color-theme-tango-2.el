@@ -38,7 +38,7 @@
       (ibuffer-special-buffer-face . font-lock-keyword-face)
       (ibuffer-title-face . font-lock-type-face))
      (font-lock-builtin-face ((t (:foreground "#729fcf"))))
-     (font-lock-comment-face ((t (:foreground "#888a85"))))
+     (font-lock-comment-face ((t (:foreground "#888a85" :italic t))))
      (font-lock-constant-face ((t (:foreground "#ad7fa8"))))
      (font-lock-doc-face ((t (:foreground "#888a85"))))
      (font-lock-function-name-face ((t (:foreground "#729fcf"))))

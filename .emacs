@@ -150,13 +150,15 @@
 (load-file "~/.emacs.d/lisps/themes/color-theme-tango-2.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-subdued.el")
 (load-file "~/.emacs.d/lisps/themes/color-theme-irblack-2.el")
+(load-file "~/.emacs.d/lisps/themes/zen-and-art.el")
+(load-file "~/.emacs.d/lisps/themes/zen-and-art2.el")
 ;;(if window-system
 ;;    (if (> (caddr (decode-time (current-time))) 18)
 ;;        (color-theme-tango-light)             ;白天光线好用黑色系的主题
 ;;      (color-theme-tango-2))          ;晚上光线差用深蓝系的主题
 ;;(color-theme-tty-dark)
 ;;)
-(color-theme-irblack-2)
+(color-theme-zen-and-art2)
 
 (defun djcb-opacity-modify (&optional dec)
   "modify the transparency of the emacs frame; if DEC is t,

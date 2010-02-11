@@ -23,10 +23,10 @@
   (interactive)
   (color-theme-install
    '(color-theme-irblack-2
-     ((background-color . "#121212")
+     (;; (background-color . "#121212")
       (background-mode . dark)
       (border-color . "#888a85")
-      (cursor-color . "#888888")
+      (cursor-color . "#FFA560")
       (foreground-color . "#F6F3E8")
       (mouse-color . "#660000"))
      ((help-highlight-face . underline)
@@ -38,26 +38,25 @@
       (ibuffer-special-buffer-face . font-lock-keyword-face)
       (ibuffer-title-face . font-lock-type-face))
      (font-lock-doc-face ((t (:foreground "#888a85"))))
-     (font-lock-comment-face ((t (:foreground "#888a85"  :italic t ))))
+     (font-lock-comment-face ((t (:foreground "#8c8c8c"  :italic t ))))
      (font-lock-constant-face ((t (:foreground "#99CC99"))))
      (font-lock-doc-string-face ((t (:foreground "#A8FF60"))))
-     (font-lock-function-name-face ((t (:foreground "#FFD2A7"))))
-     (font-lock-builtin-face ((t (:foreground "#96CBFE"))))
-     (font-lock-keyword-face ((t (:foreground "#96CBFE"))))
-     (font-lock-preprocessor-face ((t (:foreground "#96CBFE"))))
      (font-lock-string-face ((t (:foreground "#A8FF60"))))
+;;     (font-lock-function-name-face ((t (:foreground "#729fcf"))))
+     (font-lock-function-name-face ((t (:foreground "#FFB774"))))
+     (font-lock-builtin-face ((t (:foreground "#96CBFE"))))
+     (font-lock-keyword-face ((t (:foreground "#66B5FF"))))
+     (font-lock-preprocessor-face ((t (:foreground "#66B5FF"))))
      (font-lock-type-face ((t (:foreground "#FFFFB6"))))
      (font-lock-variable-name-face ((t (:foreground "#C6C5FE"))))
      (font-lock-warning-face ((t (:background "#CC1503" :foreground "#FFFFFF"))))
-     (font-lock-reference-face ((t (:foreground "#C6C5FE"))))
+     (font-lock-reference-face ((t (:foreground "#99CC99"))))
      (font-lock-regexp-grouping-backslash ((t (:foreground "#E9C062"))))
-     (font-lock-regexp-grouping-construct ((t (:foreground "red"))))
-     (font-lock-variable-name-face ((t (:foreground "#fce94f"))))
-     (font-lock-warning-face ((t (:bold t :foreground "#cc0000"))))
+     (font-lock-regexp-grouping-construct ((t (:foreground "#FF6C60"))))
 
      (border ((t (:background "#888a85"))))
      (fringe ((t (:background "#111111"))))
-     (mode-line ((t (:foreground "#eeeeec" :background "#2e3436"))))
+     (mode-line ((t (:foreground "#eeeeec" :background "#3465a4"))))
      (mode-line-inactive ((t (:foreground "#cccddd" :background "#111111"))))
      (region ((t (:background "#555753"))))
 
@@ -73,7 +72,7 @@
      (org-level-4 ((t (:inherit font-lock-string-face))))
      (org-level-5 ((t (:inherit font-lock-constant-face))))
 
-     (linum ((t (:background "#000000" :foreground "firebrick"))))
+     (linum ((t (:foreground "#86453A"))))
 
      (minibuffer-prompt ((t (:foreground "#888888"))))
      (ido-subdir ((t (:foreground "#CF6A4C"))))
@@ -82,8 +81,8 @@
      
      (gui-element ((t (:background "#D4D0C8" :foreground "black"))))
      (region ((t (:background "#660000"))))
-     (highlight ((t (:background "#111111"))))
-     (highline-face ((t (:background "seagreen"))))
+     (highlight ((t (:background "#151515"))))
+     (highline-face ((t (:background "#252525"))))
      (left-margin ((t (nil))))
      (text-cursor ((t (:background "yellow" :foreground "black"))))
 
@@ -97,13 +96,11 @@
 
      ;; yasnippet && auto-complete
      (yas/field-highlight-face ((t (:background "#729fcf"))))
-     (ac-yasnippet-candidate-face ((t (:background "sandybrown" :foreground "black"))))
-     (ac-yasnippet-selection-face ((t (:background "coral3" :foreground "white"))))
-     (popup-face ((t (:background "lightgray" :foreground "black"))))
-     (popup-scroll-bar-foreground-face ((t (:background "black"))))
-     (popup-scroll-bar-background-face ((t (:background "gray"))))
-     (popup-menu-face ((t (:background "lightgray" :foreground "black"))))
-     (popup-menu-selection-face ((t (:background "steelblue" :foreground "white"))))
+     (ac-yasnippet-candidate-face ((t (:background "#ffffe0" :foreground "coral3"))))
+     (ac-yasnippet-selection-face ((t (:background "steelblue" :foreground "white"))))
+     (ac-completion-face ((t (:background "darkblue" :foreground "white"))))
+     (ac-candidate-face ((t (:background "lightgray" :foreground "navy"))))
+     (ac-selection-face ((t (:background "steelblue" :foreground "white"))))
 
 
      ;; diff-mode
