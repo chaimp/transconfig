@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-lang/php/php-5.2.10.ebuild,v 1.7 2009/06/30 13:33:13 armin76 Exp $
 
-CGI_SAPI_USE="discard-path force-cgi-redirect"
+CGI_SAPI_USE=""
 APACHE2_SAPI_USE="concurrentmodphp threads"
 IUSE="cli cgi ${CGI_SAPI_USE} ${APACHE2_SAPI_USE} fastbuild fpm"
 
-KEYWORDS="alpha amd64 arm ppc ppc64 s390 sh sparc x86 ~x86-fbsd"
+KEYWORDS=""
 
 # NOTE: Portage doesn't support setting PROVIDE based on the USE flags
 #		that have been enabled, so we have to PROVIDE everything for now
@@ -15,34 +15,35 @@ PROVIDE="virtual/php virtual/httpd-php"
 
 # php package settings
 SLOT="5"
-MY_PHP_PV="${PV}"
-MY_PHP_P="php-${MY_PHP_PV}"
 PHP_PACKAGE="1"
-RESTRICT="mirror"
+
 # php patch settings, general
 PHP_PATCHSET_REV="${PR/r/}"
 SUHOSIN_PATCH="suhosin-patch-${PV}-0.9.8.patch.gz"
-FPM="http://launchpad.net/php-fpm/master/0.6/+download/php-fpm-0.6~${MY_PHP_PV}.tar.gz"
-MULTILIB_PATCH="${MY_PHP_PV}/opt/multilib-search-path.patch"
+MULTILIB_PATCH="${PV}/opt/multilib-search-path.patch"
+FPM_PV="0.6"
+PHP_PM="${PV%\.[0-9]}"
+FPM_PATCH="php-fpm-${FPM_PV}~${PHP_PM}.patch"
 # php patch settings, ebuild specific
-FASTBUILD_PATCH="${MY_PHP_PV}/opt/fastbuild.patch"
-CONCURRENTMODPHP_PATCH="${MY_PHP_PV}/opt/concurrent_apache_modules.patch"
+FASTBUILD_PATCH="${PV}/opt/fastbuild.patch"
+CONCURRENTMODPHP_PATCH="${PV}/opt/concurrent_apache_modules.patch"
 # kolab patch - http://kolab.org/cgi-bin/viewcvs-kolab.cgi/server/patches/php/
 # bugs about this go to wrobel@gentoo.org
-KOLAB_PATCH="${MY_PHP_PV}/opt/kolab-imap-annotations.patch"
+KOLAB_PATCH="${PV}/opt/kolab-imap-annotations.patch"
 
 inherit versionator php5_3-sapi apache-module
 
 # Suhosin patch support
-[[ -n "${SUHOSIN_PATCH}" ]] && SRC_URI="${SRC_URI} suhosin? ( http://gentoo.longitekk.com/${SUHOSIN_PATCH} )"
-# FPM sapi support
-[[ -n "${FPM}" ]] && SRC_URI="${SRC_URI} fpm? ( ${FPM} )"
+[[ -n "${SUHOSIN_PATCH}" ]] && SRC_URI="${SRC_URI} suhosin? ( http://download.suhosin.org/${SUHOSIN_PATCH} )"
 
-DESCRIPTION="The PHP language runtime engine: CLI, CGI, FPM and Apache2 SAPIs."
+# FPM patch support
+[[ -n "${FPM_PATCH}" ]] && SRC_URI="${SRC_URI} fpm? ( http://launchpad.net/php-fpm/master/0.6/+download/${FPM_PATCH} )"
 
-DEPEND="app-admin/php-toolkit
-	fpm? ( >=dev-libs/libxml2-2.7.2-r2 dev-libs/libevent )
-	imap? ( >=net-libs/c-client-2007e )
+DESCRIPTION="The PHP language runtime engine: CLI, CGI, FPM, and Apache2 SAPIs."
+
+DEPEND=">=app-admin/php-toolkit-1.0.2
+	fpm? ( >=dev-libs/libxml2-2.6.8 >=dev-libs/libevent-1.4.2 )
+	imap? ( >=virtual/imap-c-client-2006k )
 	pcre? ( >=dev-libs/libpcre-7.8 )
 	xml? ( >=dev-libs/libxml2-2.7.2-r2 )
 	xmlrpc? ( >=dev-libs/libxml2-2.7.2-r2 virtual/libiconv )"
@@ -62,6 +63,15 @@ pkg_setup() {
 	# Make sure the user has specified at least one SAPI
 	einfo "Determining SAPI(s) to build"
 	phpconfutils_require_any "  Enabled  SAPI:" "  Disabled SAPI:" cli cgi fpm apache2
+
+	# php-fpm patch support
+	if use fpm && ! use cgi ; then
+		eerror
+		eerror "You must enable CGI SAPI for php-fpm patch to work"
+		eerror
+		ebeep 1
+		die
+	fi
 
 	# Threaded Apache2 support
 	if use apache2 ; then
@@ -141,8 +151,11 @@ src_unpack() {
 	fi
 
 	cd "${S}"
-	mkdir sapi/fpm
-	mv ../php-fpm-0.6-${MY_PHP_PV}/* sapi/fpm/
+
+	# enable php-fpm support
+	if use fpm ; then
+		EPATCH_OPTS="-p1 -d ${S}" epatch "${DISTDIR}/${FPM_PATCH}"
+	fi
 
 	# Concurrent PHP Apache2 modules support
 	if use apache2 ; then
@@ -224,6 +237,9 @@ src_unpack() {
 	# these tests behave differently with suhosin enabled, adapting them...
 	use suhosin && sed -e 's:File(\.\./):File(..):g' -i \
 		tests/security/open_basedir*{.inc,.phpt}
+	if use fpm ; then
+		./buildconf --force
+	fi
 }
 
 src_compile() {
@@ -270,23 +286,16 @@ src_compile_fastbuild() {
 	fi
 
 	if [[ ${build_cgi} = 1 ]] ; then
-		my_conf="${my_conf} --enable-cgi --enable-fastcgi"
-		phpconfutils_extension_enable "discard-path" "discard-path" 0
-		phpconfutils_extension_enable "force-cgi-redirect" "force-cgi-redirect" 0
-	else
-		my_conf="${my_conf} --disable-cgi"
+		my_conf="${my_conf} --enable-cgi"
 	fi
 
 	if [[ ${build_fpm} = 1 ]] ; then
-			my_conf="${my_conf} --disable-cgi --disable-cli"
-			my_conf="${my_conf} --with-fpm"
-			my_conf="${my_conf} --with-libevent=shared,/usr"
-			my_conf="${my_conf} --with-fpm-bin=/usr/sbin/php-fpm"
-			my_conf="${my_conf} --with-fpm-conf=/etc/php/fpm-php5/fpm.conf"
-			my_conf="${my_conf} --with-fpm-init=/etc/init.d/php-fpm"
-			my_conf="${my_conf} --with-fpm-conf=/etc/php/fpm-php5/php-fpm.conf"
-			my_conf="${my_conf} --with-fpm-log=/var/log/php-fpm.log"
-			my_conf="${my_conf} --with-fpm-pid=/var/run/php-fpm.pid"
+		my_conf="${my_conf} \
+			--with-fpm \
+			--with-libevent=shared,/usr/lib \
+			--with-fpm-conf=/etc/php/fpm-php5/php-fpm.conf \
+			--with-fpm-log=/var/log/php-fpm.log \
+			--with-fpm-pid=/var/run/php-fpm.pid"
 	fi
 
 	if [[ ${build_apache2} = 1 ]] ; then
@@ -325,7 +334,7 @@ src_compile_fastbuild() {
 		for x in main/main.o main/main.lo main/php_ini.o main/php_ini.lo ; do
 			[[ -f ${x} ]] && rm -f ${x}
 		done
-		make sapi/cli/php
+		make sapi/cli/php || die "Unable to make CLI SAPI"
 		cp sapi/cli/php php-cli || die "Unable to copy CLI SAPI"
 	fi
 
@@ -339,7 +348,7 @@ src_compile_fastbuild() {
 		for x in main/main.o main/main.lo main/php_ini.o main/php_ini.lo ; do
 			[[ -f ${x} ]] && rm -f ${x}
 		done
-		make sapi/cgi/php-cgi
+		make sapi/cgi/php-cgi || die "Unable to make CGI SAPI"
 		cp sapi/cgi/php-cgi php-cgi || die "Unable to copy CGI SAPI"
 	fi
 
@@ -353,7 +362,7 @@ src_compile_fastbuild() {
 		for x in main/main.o main/main.lo main/php_ini.o main/php_ini.lo ; do
 			[[ -f ${x} ]] && rm -f ${x}
 		done
-		make sapi/fpm/php-fpm
+		make sapi/fpm/php-fpm || die "Unable to make FPM SAPI"
 		cp sapi/fpm/php-fpm php-fpm || die "Unable to copy FPM SAPI"
 	fi
 
@@ -403,6 +412,11 @@ src_compile_normal() {
 			fi
 		fi
 
+		if use fpm ; then
+			# fpm requires libevent
+			my_conf="${my_conf} --with-libevent=shared,/usr/lib"
+		fi
+
 		if [[ "${CLEAN_REQUIRED}" = 1 ]] ; then
 			make clean
 		fi
@@ -416,22 +430,18 @@ src_compile_normal() {
 				cp sapi/cli/php php-cli || die "Unable to copy CLI SAPI"
 				;;
 			cgi)
-				my_conf="${my_conf} --disable-cli --enable-cgi --enable-fastcgi"
-				phpconfutils_extension_enable "discard-path" "discard-path" 0
-				phpconfutils_extension_enable "force-cgi-redirect" "force-cgi-redirect" 0
+				my_conf="${my_conf} --disable-cli --enable-cgi"
 				php5_3-sapi_src_compile
 				cp sapi/cgi/php-cgi php-cgi || die "Unable to copy CGI SAPI"
 				;;
 			fpm)
-				my_conf="${my_conf} --disable-cli --disable-cgi"
-				my_conf="${my_conf} --with-fpm"
-				my_conf="${my_conf} --with-libevent=shared,/usr"
-				my_conf="${my_conf} --with-fpm-bin=/usr/sbin/php-fpm"
-				my_conf="${my_conf} --with-fpm-conf=/etc/php/fpm-php5/fpm.conf"
-				my_conf="${my_conf} --with-fpm-init=/etc/init.d/php-fpm"
-				my_conf="${my_conf} --with-fpm-conf=/etc/php/fpm-php5/php-fpm.conf"
-				my_conf="${my_conf} --with-fpm-log=/var/log/php-fpm.log"
-				my_conf="${my_conf} --with-fpm-pid=/var/run/php-fpm.pid"
+				my_conf="${my_conf} \
+					--disable-cli \
+					--enable-cgi \
+					--with-fpm \
+					--with-fpm-conf=/etc/php/fpm-php5/php-fpm.conf \
+					--with-fpm-log=/var/log/php-fpm.log \
+					--with-fpm-pid=/var/run/php-fpm.pid"
 				php5_3-sapi_src_compile
 				cp sapi/fpm/php-fpm php-fpm || die "Unable to copy FPM SAPI"
 				;;
@@ -476,12 +486,15 @@ src_install() {
 				php5_3-sapi_install_ini
 				;;
 			fpm)
-				einfo "Installing php-fpm config and initscript"
-				cp "${FILESDIR}/php-fpm.conf" "${D}/etc/php/cgi-php5/php-fpm.conf"
-	                        cp "${FILESDIR}/php-fpm.init" "${T}/php-fpm"
+				einfo "Installing php-fpm"
+				into ${destdir}
 				dobin php-fpm || die "Unable to install ${x} sapi"
-        		        doinitd "${T}/php-fpm"
 				php5_3-sapi_install_ini
+				insinto ${PHP_INI_DIR}
+				newins "${S}/sapi/fpm/php-fpm.conf" "php-fpm.conf"
+				newins "${S}/sapi/fpm/php-fpm.conf" "php-fpm.conf.dist"
+				einfo "Installing php-fpm init.d"
+				newinitd "${FILESDIR}/php-fpm.init" "php-fpm"
 				;;
 			apache2)
 				einfo "Installing Apache${APACHE_VERSION} SAPI"
@@ -572,6 +585,20 @@ pkg_postinst() {
 		fi
 	fi
 
+	# Create the symlinks and user for php-fpm
+	if use fpm ; then
+		"${ROOT}/usr/sbin/php-select" -t php-fpm php5 > /dev/null 2>&1
+		exitStatus=$?
+		if [[ ${exitStatus} == 5 ]] ; then
+			php-select php-fpm php5
+		fi
+		ebegin "Creating php-fpm user and group"
+		enewgroup php-fpm
+		enewuser php-fpm -1 -1 /dev/null php-fpm
+		eend ${?}
+		einfo "php-fpm config installed to /etc/php/fpm-php5/php-fpm.conf"
+	fi
+
 	# Create the symlinks for php-devel
 	"${ROOT}/usr/sbin/php-select" -t php-devel php5 > /dev/null 2>&1
 	exitStatus=$?
@@ -587,9 +614,6 @@ pkg_postinst() {
 		ewarn
 	fi
 
-        if use fpm; then
-	    ln -s ${ROOT}/usr/lib/php5/bin/php-fpm ${ROOT}/usr/bin/php-fpm
-	fi
 	php5_3-sapi_pkg_postinst
 }
 

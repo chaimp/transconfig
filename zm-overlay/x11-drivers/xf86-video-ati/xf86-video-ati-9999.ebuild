@@ -7,7 +7,7 @@ inherit x-modular-r2
 
 DESCRIPTION="ATI video driver"
 
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND=">=x11-base/xorg-server-1.6.3[-minimal]"
