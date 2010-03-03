@@ -22,7 +22,7 @@
 #       10.0.0.0        -   10.255.255.255
 #       172.16.0.0      -   172.31.255.255
 #       192.168.0.0     -   192.168.255.255
-# 10.0.0.0 2 80 29 45 07 
+# 10.0.0.0 2 80 29 45 07   / 73 61 52 192
 # In case you want to be able to connect directly to the Internet (i.e. not 
 # behind a NAT, ADSL router, etc...), you need real official assigned 
 # numbers.  Do not try to invent your own network numbers but instead get one 
