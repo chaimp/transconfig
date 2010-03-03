@@ -1,4 +1,4 @@
-(load "/usr/share/emacs/site-lisp/site-gentoo")
+;;(load "/usr/share/emacs/site-lisp/site-gentoo")
 (add-to-list 'load-path "~/.emacs.d/93free")
 (add-to-list 'load-path "~/.emacs.d/lisps")
 ;;(add-to-list 'load-path "~/.emacs.d/lisps/auto-complete")
@@ -13,7 +13,7 @@
 ;;(global-set-key [f5] 'revert-buffer)        ; 重载文件/刷新
 (global-set-key [f6] 'eshell)               ; 一个 elisp 写的 shell
 (global-set-key [f7] 'calendar)             ; Emacs 的日历系统
-(global-set-key [f10] 'hs-toggle-hiding)
+;;(global-set-key [f10] 'hs-toggle-hiding)
 ;;(global-set-key [f8] 'plan)               ; 计划任务
 (global-set-key [f9] 'other-window)         ; 跳转到 Emacs 的另一个窗口
 ;;(global-set-key [f10] ')                  ; 文件菜单
@@ -32,6 +32,11 @@
 (global-set-key "\C-c\C-z" 'pop-global-mark)   
 ;; 很多文件的时候，在几个文件中跳转到曾经用过的 mark 地方。
 
+
+(defadvice ido-switch-buffer (after pulse-advice activate)
+  "Cause the current line of new buffer to pulse when the cursor gets there."
+  (when (and pulse-command-advice-flag (interactive-p))
+    (pulse-momentary-highlight-one-line (point))))
 
 (global-set-key "\C-\\" 'toggle-truncate-lines)
 ;; 基本不用 Emacs 的输入法，绑定给折行命令吧
@@ -158,6 +163,7 @@
 ;;      (color-theme-tango-2))          ;晚上光线差用深蓝系的主题
 ;;(color-theme-tty-dark)
 ;;)
+;;(color-theme-irblack-2)
 (color-theme-zen-and-art2)
 
 (defun djcb-opacity-modify (&optional dec)
@@ -256,6 +262,8 @@
 (add-hook 'perl-mode-hook 'hs-minor-mode)
 (add-hook 'php-mode-hook 'hs-minor-mode)
 (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+(global-set-key [f5] 'hs-hide-all)
+(global-set-key (kbd "M-,") 'hs-toggle-hiding)
 ;; 代码折叠
 
 (require 'thumbs)
@@ -354,9 +362,6 @@
 ;; 这个命令配合 comment-dwim 基本上能满足所有的注释命令
 (global-set-key (kbd "C-c g") 'comment-or-uncomment-region)
 
-;; hide-show 是代码折叠常用的一个 elisp。有自己的一套按键，但是太难按了
-(global-set-key (kbd "C-c h") 'hs-hide-all)
-(global-set-key (kbd "<f5>") 'hs-toggle-hiding)
 
 ;; imenu 是一个代码跳转的很好用的命令。这个命令在调用 imenu 同时，显示所有补全
 (global-set-key (kbd "C-c i") 'his-imenu)
@@ -623,8 +628,8 @@ occurence of CHAR."
 ;; hide-lines 在操作某些行的时候用起来特别方便。加一个前缀参数可以把不匹配的行都藏起来，只看到匹配的！
 
 ;; cedet配置
-(require 'cedet)
-(require 'semantic-ia)
+;;(require 'cedet)
+;;(require 'semantic-ia)
 ;; Enable EDE (Project Management) features
 ;;(global-ede-mode 1)
 ;;(semantic-load-enable-excessive-code-helpers)
