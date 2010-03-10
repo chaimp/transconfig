@@ -4,7 +4,7 @@
 inherit autotools eutils
 
 DESCRIPTION="A drop down, quake-like terminal emulator"
-HOMEPAGE="http://stjerm-terminal.googlecode.com/files/"
+HOMEPAGE="http://code.google.com/p/stjerm-terminal-emulator/"
 SRC_URI="http://stjerm-terminal-emulator.googlecode.com/files/${P}.tar.bz2"
 
 LICENSE="GPL-2"
