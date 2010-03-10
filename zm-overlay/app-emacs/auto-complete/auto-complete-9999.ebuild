@@ -15,4 +15,3 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 SITEFILE="50${PN}-gentoo.el"
-DOCS="README TEST TODO"
