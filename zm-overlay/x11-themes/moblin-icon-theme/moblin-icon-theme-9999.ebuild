@@ -10,6 +10,8 @@ DESCRIPTION="SVG and PNG icon theme from the Moblin project"
 HOMEPAGE="http://repo.or.cz/r/moblin-icon-theme.git"
 SRC_URI=""
 EGIT_REPO_URI="git://repo.or.cz/moblin-icon-theme.git"
+EGIT_BRANCH="one-size"
+EGIT_COMMIT="one-size"
 
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
@@ -40,7 +42,6 @@ src_install() {
 	cd output/moblin
 	emake DESTDIR="${D}" install || die "emake install failed"
 	cd "${S}"
-	dodoc AUTHORS ChangeLog
 }
 
 pkg_preinst() {	gnome2_icon_savelist; }
