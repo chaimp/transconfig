@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://repo.or.cz/moblin-icon-theme.git"
 
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 RDEPEND=">=x11-misc/icon-naming-utils-0.8.7"
