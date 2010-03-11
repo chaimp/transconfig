@@ -7,9 +7,9 @@ EAPI="2"
 inherit autotools git
 
 DESCRIPTION="Mobline cursor theme"
-HOMEPAGE="http://git.moblin.org/cgit.cgi/moblin-cursor-theme/"
+HOMEPAGE="http://repo.or.cz/r/moblin-cursor-theme.git"
 SRC_URI=""
-EGIT_REPO_URI="git://git.moblin.org/moblin-cursor-theme"
+EGIT_REPO_URI="git://repo.or.cz/moblin-cursor-theme.git"
 
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"

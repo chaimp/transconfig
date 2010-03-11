@@ -11,7 +11,7 @@ MY_PN="moblin-gtk-engine"
 DESCRIPTION="Mobline GTK+ Cairo Engine"
 HOMEPAGE="http://www.moblin.org/"
 SRC_URI=""
-EGIT_REPO_URI="git://git.moblin.org/moblin-gtk-engine"
+EGIT_REPO_URI="git://repo.or.cz/moblin-gtk-engine.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
