@@ -25,6 +25,16 @@
 ;;
 ;; 实际上 Shift-F1 也可以用 F13 表示。
 
+(require 'grep-edit)
+
+(require 'twittering-mode)
+(setq twittering-username "transtone")
+(setq twittering-update-status-function
+      'twittering-update-status-from-pop-up-buffer)
+(twittering-icon-mode)                       ; Show icons (requires wget)
+(setq twittering-timer-interval 300) 
+
+
 (eval-after-load "man" '(require 'man-completion))
 
 (global-set-key (kbd "C-SPC") 'nil)
@@ -164,7 +174,8 @@
 ;;(color-theme-tty-dark)
 ;;)
 ;;(color-theme-irblack-2)
-(color-theme-zen-and-art2)
+(color-theme-tango-light)
+;;(color-theme-zen-and-art2)
 
 (defun djcb-opacity-modify (&optional dec)
   "modify the transparency of the emacs frame; if DEC is t,
@@ -233,12 +244,12 @@
 (display-time-mode 1)                   ; 显示时间。
 (show-paren-mode 1)                     ; 高亮显示匹配的括号。
 (setq show-paren-style 'parentheses) 	; 括号不来回弹跳。
-(menu-bar-mode -1)                      ; 不要 menu-bar。
+;;(menu-bar-mode -1)                      ; 不要 menu-bar。
 (icomplete-mode 1)                      ; 给出用 M-x foo-bar-COMMAND 输入命令的提示。
 ;;(set-scroll-bar-mode 'right)		; scroll-bar 靠右显示。
 (scroll-bar-mode -1)                    ; 不要 scroll-bar
 (display-battery-mode 1)
-(tool-bar-mode -1)			; 不要 tool-bar。
+;;(tool-bar-mode -1)			; 不要 tool-bar。
 (global-linum-mode 1)                   ; 开启行号。
 (setq linum-format "%d ")
 
@@ -288,8 +299,7 @@
 ;;(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
 (setq auto-mode-alist (cons '("\\.asp$" . html-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.phtml$" . html-mode) auto-mode-alist))
-(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
 
 ;;; cperl-mode is preferred to perl-mode                                        
 ;;; "Brevity is the soul of wit" <foo at acm.org> 
@@ -437,6 +447,7 @@
 
 ;; tabbar设置
 (require 'tabbar)
+(require 'tabbar-extension) 
 (global-set-key (kbd "<S-up>") 'tabbar-backward-group)
 (global-set-key (kbd "<S-down>") 'tabbar-forward-group)
 (global-set-key (kbd "M-n") 'tabbar-backward)
@@ -447,12 +458,12 @@
 ;;(lambda ()
 ;;(list "All Buffers")))
 
-;;(setq tabbar-buffer-list-function
-;;    (lambda ()
-;;        (remove-if
-;;          (lambda(buffer)
-;;             (find (aref (buffer-name buffer) 0) " *"))
-;;          (buffer-list))))
+(setq tabbar-buffer-list-function
+    (lambda ()
+        (remove-if
+          (lambda(buffer)
+             (find (aref (buffer-name buffer) 0) " *"))
+          (buffer-list))))
 
 (defun tabbar-buffer-groups ()
   "Return the list of group names the current buffer belongs to.
@@ -500,6 +511,35 @@ Return a list of one element based on major mode."
      ))))
 
 (tabbar-mode 1)
+
+;;;; 设置tabbar外观
+;; 设置默认主题: 字体, 背景和前景颜色，大小
+(set-face-attribute 'tabbar-default nil
+;;                    :family "Vera Sans YuanTi Mono"
+                    :background "gray80"
+                    :foreground "gray30"
+                    :height 0.7
+                    )
+;; 设置左边按钮外观：外框框边大小和颜色
+(set-face-attribute 'tabbar-button nil
+                    :inherit 'tabbar-default
+                    :box '(:line-width 1 :color "gray30")
+                    )
+;; 设置当前tab外观：颜色，字体，外框大小和颜色
+(set-face-attribute 'tabbar-selected nil
+                    :inherit 'tabbar-default
+                    :foreground "DarkGreen"
+                    :background "LightGoldenrod"
+                    :box '(:line-width 2 :color "DarkGoldenrod")
+                    ;; :overline "black"
+                    ;; :underline "black"
+                    :weight 'bold
+                    )
+;; 设置非当前tab外观：外框大小和颜色
+(set-face-attribute 'tabbar-unselected nil
+                    :inherit 'tabbar-default
+                    :box '(:line-width 2 :color "gray70")
+                    )
 ;; tabbar end here
 
 ;; 最近打开的文件
@@ -663,6 +703,9 @@ occurence of CHAR."
 (require 'ange-ftp)
 (require 'tramp)
 (require 'epa) ;;使用EasyPG
+
+(require 'zencoding-mode)
+(add-hook 'html-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
 ;; yasnippet
 (require 'yasnippet)

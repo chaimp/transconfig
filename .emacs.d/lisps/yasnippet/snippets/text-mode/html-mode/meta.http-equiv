@@ -1,4 +1,4 @@
 #name : <meta http-equiv="..." content="..." />
 #group : meta
 # --
-<meta http-equiv="${1:content-type}" content="${2:text/html; charset=UTF-8}" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />

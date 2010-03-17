@@ -7,7 +7,7 @@ EAPI="2"
 inherit autotools gnome2-utils git
 
 DESCRIPTION="SVG and PNG icon theme from the Moblin project"
-HOMEPAGE="http://repo.or.cz/r/moblin-icon-theme.git"
+HOMEPAGE="http://repo.or.cz/w/moblin-icon-theme.git"
 SRC_URI=""
 EGIT_REPO_URI="git://repo.or.cz/moblin-icon-theme.git"
 EGIT_BRANCH="one-size"

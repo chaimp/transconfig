@@ -48,6 +48,42 @@
      (info-xref ((t (:foreground "#3465a4"))))
      (info-xref-visited ((t (:foreground "#75507b"))))
      (highlight ((t (:background "#d3d7cf"))))
+
+     (modeline ((t (:background "#3F3B3B" :foreground "white"))))
+     (modeline-buffer-id ((t (:background "#3F3B3B" :foreground
+                                          "white"))))
+     (modeline-mousable ((t (:background "#a5baf1" :foreground
+                                         "black"))))
+     (modeline-mousable-minor-mode ((t (:background
+                                        "#a5baf1" :foreground "black"))))
+     (region ((t (:background "#3B3B3F"))))
+     (primary-selection ((t (:background "#3B3B3F"))))
+     (isearch ((t (:background "#555555"))))
+     (zmacs-region ((t (:background "#555577"))))
+     (secondary-selection ((t (:background "#545459"))))
+     (flymake-errline ((t (:background "LightSalmon" :foreground
+                                       "black"))))
+     (flymake-warnline ((t (:background "LightSteelBlue" :foreground
+                                        "black"))))
+     
+
+     (org-date ((t (:foreground "LightSteelBlue" :underline t))))
+     (org-hide ((t (:foreground "#2e3436"))))
+     (org-todo ((t (:inherit font-lock-keyword-face :bold t))))
+     (org-level-1 ((t (:inherit font-lock-function-name-face))))
+     (org-level-2 ((t (:inherit font-lock-variable-name-face))))
+     (org-level-3 ((t (:inherit font-lock-keyword-face))))
+     (org-level-4 ((t (:inherit font-lock-string-face))))
+     (org-level-5 ((t (:inherit font-lock-constant-face))))
+
+     (ido-subdir ((t (:foreground "#CF6A4C"))))
+     (ido-first-match ((t (:foreground "#8F9D6A"))))
+     (ido-only-match ((t (:foreground "#8F9D6A"))))
+     
+     (gui-element ((t (:background "#D4D0C8" :foreground "black"))))
+     (left-margin ((t (nil))))
+     (text-cursor ((t (:background "yellow" :foreground "black"))))
+
      )))
 
 (provide 'color-theme-tango-light)

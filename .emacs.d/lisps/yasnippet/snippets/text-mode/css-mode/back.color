@@ -1,4 +1,0 @@
-#contributor : transtone <zm3345@gmail.com>
-#name : background-color: ...
-# --
-background-color: #${1:DDD};
