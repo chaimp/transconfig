@@ -11,4 +11,6 @@
 
 =sys-boot/grub-9999
 
->=dev-lang/php-5.2.12
+#>=dev-lang/php-5.2.12
+
+>=x11-libs/fltk-1.2

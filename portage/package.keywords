@@ -1,7 +1,8 @@
 app-emulation/dynagen **
-=app-text/apvlv-9999 **
 x11-misc/fqterm **
 dev-python/feedparser **
+
+net-firewall/west-chamber **
 
 games-emulation/hugo **
 
@@ -35,10 +36,19 @@ sys-boot/grub **
 =media-libs/edje-9999 **
 =x11-libs/e_dbus-9999 **
 =dev-libs/eina-9999 **
+=x11-libs/elementary-9999 **
+
+=media-libs/libplayer-9999 **
+=media-libs/libvalhalla-9999 **
+=media-libs/libsvdrp-9999 **
+=media-tv/enna-9999 **
 # ---
 # END: x11-wm/enlightenment-9999
 # ---
 
+=x11-themes/gtk-engines-qt-9999 **
 
 #=kde-base/libknotificationitem-4.3.9999 **
 #=kde-base/pykde4-9999 **
+www-client/firefox-bin **
+=app-text/chmsee-9999 **
