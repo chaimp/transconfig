@@ -1,0 +1,81 @@
+# Copyright 1999-2010 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+eblit-php-pkg_postinst() {
+	# Output some general info to the user
+	if use apache2 ; then
+		APACHE2_MOD_DEFINE="PHP${PHP_MV}"
+		if use concurrentmodphp ; then
+			APACHE2_MOD_CONF="70_mod_php${PHP_MV}_concurr"
+		else
+			APACHE2_MOD_CONF="70_mod_php${PHP_MV}"
+		fi
+		apache-module_pkg_postinst
+	fi
+
+	# Update Apache2 to use mod_php
+	if use apache2 ; then
+		"${ROOT}/usr/sbin/php-select" -t apache2 php${PHP_MV} > /dev/null 2>&1
+		exitStatus=$?
+		if [[ ${exitStatus} == 2 ]] ; then
+			php-select apache2 php${PHP_MV}
+		elif [[ ${exitStatus} == 4 ]] ; then
+			ewarn "To make Apache2 use php-${PHP_MV}, use"
+			ewarn "    php-select apache2 php${PHP_MV}"
+			ewarn
+		fi
+	fi
+
+	# Create the symlinks for php-cli
+	if use cli ; then
+		"${ROOT}/usr/sbin/php-select" -t php php${PHP_MV} > /dev/null 2>&1
+		exitStatus=$?
+		if [[ ${exitStatus} == 5 ]] ; then
+			php-select php php${PHP_MV}
+		elif [[ ${exitStatus} == 4 ]] ; then
+			ewarn "To make usr/bin/php point to php-${PHP_MV}, use"
+			ewarn "    php-select php php${PHP_MV}"
+			ewarn
+		fi
+	fi
+
+	# Create the symlinks for php-cgi
+	if use cgi ; then
+		"${ROOT}/usr/sbin/php-select" -t php-cgi php${PHP_MV} > /dev/null 2>&1
+		exitStatus=$?
+		if [[ ${exitStatus} == 5 ]] ; then
+			php-select php-cgi php${PHP_MV}
+		elif [[ ${exitStatus} == 4 ]] ; then
+			ewarn "To make usr/bin/php-cgi point to php-${PHP_MV}, use"
+			ewarn "    php-select php-cgi php${PHP_MV}"
+			ewarn
+		fi
+	fi
+
+	# Create the symlinks for php-devel
+	"${ROOT}/usr/sbin/php-select" -t php-devel php${PHP_MV} > /dev/null 2>&1
+	exitStatus=$?
+	if [[ $exitStatus == 5 ]] ; then
+		php-select php-devel php${PHP_MV}
+	elif [[ $exitStatus == 4 ]] ; then
+		ewarn "To make usr/bin/php-config and usr/bin/phpize point to php-${PHP_MV}, use"
+		ewarn "    php-select php-devel php${PHP_MV}"
+		ewarn
+	fi
+
+	if use fpm ; then
+		einfo "See /etc/php/fpm-php5/nginx-site-conf.sample. for example how to  use"
+		einfo "    FPM sapi as nginx backend."
+		einfo
+	fi
+	
+	for flag in ${LEGACY_USE_FLAGS} ; do
+	  ewarn "You use legacy flag ${flag}, which will be removed in nearest future"
+	done
+	
+	ewarn "You may have to recompile third-party extensions now"
+	ewarn
+}
+
+
