@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 45
-/svn/!svn/ver/212/trunk/app-i18n/fbterm-ucimf
+/svn/!svn/ver/278/trunk/app-i18n/fbterm-ucimf
 END
 metadata.xml
 K 25
@@ -13,13 +13,13 @@ fbterm-ucimf-0.2.3.ebuild
 K 25
 svn:wc:ra_dav:version-url
 V 71
-/svn/!svn/ver/154/trunk/app-i18n/fbterm-ucimf/fbterm-ucimf-0.2.3.ebuild
+/svn/!svn/ver/278/trunk/app-i18n/fbterm-ucimf/fbterm-ucimf-0.2.3.ebuild
 END
 fbterm-ucimf-0.2.5.ebuild
 K 25
 svn:wc:ra_dav:version-url
 V 71
-/svn/!svn/ver/212/trunk/app-i18n/fbterm-ucimf/fbterm-ucimf-0.2.5.ebuild
+/svn/!svn/ver/278/trunk/app-i18n/fbterm-ucimf/fbterm-ucimf-0.2.5.ebuild
 END
 Manifest
 K 25
@@ -31,5 +31,5 @@ ChangeLog
 K 25
 svn:wc:ra_dav:version-url
 V 55
-/svn/!svn/ver/212/trunk/app-i18n/fbterm-ucimf/ChangeLog
+/svn/!svn/ver/278/trunk/app-i18n/fbterm-ucimf/ChangeLog
 END
