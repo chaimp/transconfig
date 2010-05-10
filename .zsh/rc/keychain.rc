@@ -1,0 +1,4 @@
+keychain ~/.ssh/vps_dsa
+. ~/.keychain/stonework-sh
+. ~/.keychain/stonework-sh-gpg
+

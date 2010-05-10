@@ -6,7 +6,6 @@ alias cl="clear"
 alias nano="nano -w"
 alias zhcon="zhcon --utf8"
 alias mocp="mocp -T transparent-background"
-alias emerge="emerge --keep-going"
 
 alias et='emacsclient -t "$@" -a ""'
 alias ex='emacsclient -nc "$@" -a ""'
@@ -19,3 +18,6 @@ alias reboot="shutdown -r now"
 
 # do a du -hs on each dir on current path
 alias lsdir="for dir in *;do;if [ -d \$dir ];then;du -hsL \$dir;fi;done"
+
+# Use VIm as man pager
+vman () { vim +"set ft=man" +"Man $*" }
