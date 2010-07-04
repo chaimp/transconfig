@@ -1,6 +1,0 @@
-#name : <ul class="...">...</ul>
-#group : list
-# --
-<ul class="$1">
-  $0
-</ul>

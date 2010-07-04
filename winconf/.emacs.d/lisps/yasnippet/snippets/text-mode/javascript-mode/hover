@@ -1,6 +1,0 @@
-#contributor : transtone <zm3345@gmail.com>
-#name : hover(1 function ) ...
-# --
-hover(function(){
-   $0
-});

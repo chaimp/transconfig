@@ -1,8 +1,7 @@
 ;;(load "/usr/share/emacs/site-lisp/site-gentoo")
 (add-to-list 'load-path "~/.emacs.d/93free")
 (add-to-list 'load-path "~/.emacs.d/lisps")
-;;(add-to-list 'load-path "~/.emacs.d/lisps/auto-complete")
-(add-to-list 'load-path "~/.emacs.d/lisps/mumamo")
+;;(add-to-list 'load-path "~/.emacs.d/lisps/mumamo")
 ;; 载入elisp文件
 
 (global-set-key [(f1)] (lambda () (interactive) (manual-entry (current-word))))
@@ -41,35 +40,6 @@
 (global-set-key "\C-x\C-b" 'electric-buffer-list)
 (global-set-key "\C-c\C-z" 'pop-global-mark)   
 ;; 很多文件的时候，在几个文件中跳转到曾经用过的 mark 地方。
-
-
-(require 'pulse)
-(defadvice exchange-point-and-mark-nomark (after pulse-advice activate)
-  "Cause the line that is `goto'd to pulse when the cursor gets there."
-  (when (and pulse-command-advice-flag (interactive-p)
-	     (> (abs (- (point) (mark))) 400))
-    (pulse-momentary-highlight-one-line (point))))
-(defadvice switch-to-buffer (after pulse-advice activate)
-  "Cause the current line of new buffer to pulse when the cursor gets there."
-  (when (and pulse-command-advice-flag (interactive-p))
-    (pulse-momentary-highlight-one-line (point))))
-(defadvice ido-switch-buffer (after pulse-advice activate)
-  "Cause the current line of new buffer to pulse when the cursor gets there."
-  (when (and pulse-command-advice-flag (interactive-p))
-    (pulse-momentary-highlight-one-line (point))))
-(defadvice switch-to-other-buffer (after pulse-advice activate)
-  "Cause the current line of new buffer to pulse when the cursor gets there."
-  (when (and pulse-command-advice-flag (interactive-p))
-    (pulse-momentary-highlight-one-line (point))))
-(defadvice visit-.emacs (after pulse-advice activate)
-  "Cause the current line of .emacs buffer to pulse when the cursor gets there."
-  (when (and pulse-command-advice-flag (interactive-p))
-    (pulse-momentary-highlight-one-line (point))))
-(defadvice beginning-of-buffer (after pulse-advice activate)
-  "Cause the current line of buffer to pulse when the cursor gets there."
-  (when (and pulse-command-advice-flag (interactive-p))
-    (pulse-momentary-highlight-one-line (point))))
-(pulse-toggle-integration-advice (if window-system 1 -1))
 
 
 (global-set-key "\C-\\" 'toggle-truncate-lines)
@@ -152,6 +122,49 @@
 ;; 打开约会提醒功能。
 (setq x-select-enable-clipboard t)
 ;; 支持emacs和外部程序的粘贴
+
+
+;;###复制一行绑定
+(global-set-key (kbd "M-w") 'huangq-save-line-dwim)
+;;###autoload
+(defun huangq-save-one-line (&optional arg)
+  "save one line. If ARG, save one line from first non-white."
+  (interactive "P")
+  (save-excursion
+    (if arg
+        (progn
+          (back-to-indentation)
+          (kill-ring-save (point) (line-end-position)))
+      (kill-ring-save (line-beginning-position) (line-end-position)))))
+;;;###autoload
+(defun huangq-kill-ring-save (&optional n)
+  "If region is active, copy region. Otherwise, copy line."
+  (interactive "p")
+  (if (and mark-active transient-mark-mode)
+      (kill-ring-save (region-beginning) (region-end))
+    (if (> n 0)
+        (kill-ring-save (line-beginning-position) (line-end-position n))
+      (kill-ring-save (line-beginning-position n) (line-end-position)))))
+;;;###autoload
+(defun huangq-save-line-dwim (&optional arg)
+  "If region is active, copy region.
+If ARG is nil, copy line from first non-white.
+If ARG is numeric, copy ARG lines.
+If ARG is non-numeric, copy line from beginning of the current line."
+  (interactive "P")
+  (if (and mark-active transient-mark-mode)
+      ;; mark-active, save region
+      (kill-ring-save (region-beginning) (region-end))
+    (if arg
+        (if (numberp arg)
+            ;; numeric arg, save ARG lines
+            (huangq-kill-ring-save arg)
+          ;; other ARG, save current line
+          (huangq-save-one-line))
+      ;; no ARG, save current line from first non-white
+      (huangq-save-one-line t))))
+;;==============================================
+
 
 (setq time-stamp-active t)
 (setq time-stamp-warn-inactive t)
@@ -273,7 +286,7 @@
 ;;(set-scroll-bar-mode 'right)		; scroll-bar 靠右显示。
 (scroll-bar-mode -1)                    ; 不要 scroll-bar
 (display-battery-mode 1)
-;;(tool-bar-mode -1)			; 不要 tool-bar。
+(tool-bar-mode -1)			; 不要 tool-bar。
 (global-linum-mode 1)                   ; 开启行号。
 (setq linum-format "%d ")
 
@@ -333,12 +346,29 @@
         (setcdr pair 'cperl-mode)))
   (append auto-mode-alist interpreter-mode-alist))
 
-(require 'mumamo-fun)
+(require 'mmm-mode)
+(setq mmm-global-mode 'maybe)
+(setq mmm-submode-decoration-level 2)
+(set-face-background 'mmm-code-submode-face "#DDEEFF")
+(mmm-add-classes
+  '((php-in-html
+      :submode php-mode
+      :face mmm-code-submode-face
+      :front "<\\?\\(php=?\\)?"
+      :back "\\?>"
+      :include-front t
+      :include-back t)))
+
+(mmm-add-mode-ext-class 'html-mode "\\.php$" 'php-in-html)
+(add-hook 'php-mode-user-hook 'turn-on-font-lock)
+(add-hook 'html-mode-user-hook 'turn-on-font-lock)
+
 (setq auto-mode-alist
    (append '(("\\.py\\'" . python-mode)
       ("\\.css\\'" . css-mode)
-      ("\\.php\\'" . mumamo-alias-html-mumamo-mode)
-      ("\\.html\\'" . mumamo-alias-html-mumamo-mode))
+      ("\\.php\\'" . html-mode)
+      ("\\.tmp\\'" . html-mode)
+      ("\\.html\\'" . html-mode))
       auto-mode-alist))
 ;; 将文件模式和文件后缀关联起来。
 
@@ -509,7 +539,7 @@ Return a list of one element based on major mode."
      "Dired"
      )
     ((memq major-mode 
-	   '(html-mode php-mode css-mode javascript-mode js2-mode))
+	   '(html-mode php-mode nxml-mode sgml-mode css-mode javascript-mode js-mode js2-mode))
      "Webcodes"
      )
     ((memq major-mode
@@ -717,15 +747,16 @@ occurence of CHAR."
 ;;  (ecb-activate)
 ;  (ecb-layout-switch "left9"))
 
-(require 'ecb)
-(setq ecb-options-version "2.40")
-(setq ecb-layout-name "left2")
-(setq ecb-compile-window-height 10)
-(add-hook 'ecb-activate-hook
-          (lambda ()
-            (ecb-toggle-compile-window -1)))
-(setq ecb-vc-enable-support t)
-(setq ecb-tip-of-the-day nil)
+;;(require 'cedet)
+;;(require 'ecb)
+;;(setq ecb-options-version "2.40")
+;;(setq ecb-layout-name "left2")
+;;(setq ecb-compile-window-height 10)
+;;(add-hook 'ecb-activate-hook
+;;          (lambda ()
+;;            (ecb-toggle-compile-window -1)))
+;;(setq ecb-vc-enable-support t)
+;;(setq ecb-tip-of-the-day nil)
 
 (require 'xcscope)
 

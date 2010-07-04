@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://repo.or.cz/moblin-cursor-theme.git"
 
 LICENSE="CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND=""

@@ -1,4 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/93free")
+(add-to-list 'load-path "~/.emacs.d/93free/auto-complete")
 (add-to-list 'load-path "~/.emacs.d/lisps")
 (add-to-list 'load-path "~/.emacs.d/lisps/mumamo")
 (add-to-list 'load-path "C:/Program Files/Emacs/site-lisp")
@@ -13,27 +14,32 @@
 ;;  chinese-gbk:-*-新宋体-normal-r-*-*-14-*-*-*-*-*-iso10646-1" t)
 ;;  "-*-Monaco-normal-r-*-*-12-*-*-*-*-*-fontset-win32,
 (create-fontset-from-fontset-spec
-  "-*-Envy Code R-normal-r-*-*-13-*-*-*-*-*-fontset-win32,
-  chinese-gbk:-*-微软雅黑-normal-r-*-*-12-*-*-*-*-*-iso10646-1" t)
+  "-*-Consolas-normal-r-*-*-14-*-*-*-*-*-fontset-win32,
+  chinese-gbk:-*-微软雅黑-normal-r-*-*-13-*-*-*-*-*-iso10646-1" t)
 (set-default-font "fontset-win32")
+(require 'unicad)
 
-
-(global-set-key [f2] 'dired)            ; 目录浏览
-;;(global-set-key [f3] ')               ; 已经绑定给emms
-(global-set-key [f4] 'view-mode)        ; 只读方式查看文件
-(global-set-key [f5] 'speedbar)         ; 快速浏览
-(global-set-key [f6] 'eshell)           ; 一个 elisp 写的 shell
-(global-set-key [f7] 'calendar)         ; Emacs 的日历系统
-;;(global-set-key [f8] 'plan)             ; 计划任务
-(global-set-key [f9] 'other-window)     ; 跳转到 Emacs 的另一个窗口
-;;(global-set-key [f10] ')              ; 文件菜单
-(global-set-key [f11] 'compile)         ; 在 Emacs 中编译
-(global-set-key [f12] 'gdb)             ; 在 Emacs 中调试
+(global-set-key [(f1)] (lambda () (interactive) (manual-entry (current-word))))
+;;(global-set-key [f2] 'speedbar)             ; 快速浏览
+(global-set-key [f2] 'view-mode)            ; 只读模式
+(global-set-key [f3] 'linum-mode)           ; 显示行号
+(global-set-key [f4] 'global-highline-mode) ; 高亮光标行 
+;;(global-set-key [f5] 'revert-buffer)        ; 重载文件/刷新
+(global-set-key [f6] 'eshell)               ; 一个 elisp 写的 shell
+(global-set-key [f7] 'calendar)             ; Emacs 的日历系统
+;;(global-set-key [f10] 'hs-toggle-hiding)
+;;(global-set-key [f8] 'plan)               ; 计划任务
+(global-set-key [f9] 'other-window)         ; 跳转到 Emacs 的另一个窗口
+;;(global-set-key [f10] ')                  ; 文件菜单
+(global-set-key [f11] 'compile)             ; 在 Emacs 中编译
+(global-set-key [f12] 'gdb)                 ; 在 Emacs 中调试
 ;; 这些功能键有时候还是很有用的。除了直接设置之外，还可以配合 Shift, Ctrl 设置，比如：
 ;;
 ;; (global-set-key [(shift f1)] 'goto-line)
 ;;
 ;; 实际上 Shift-F1 也可以用 F13 表示。
+
+
 
 (global-set-key "\C-x\C-b" 'electric-buffer-list)
 
@@ -70,7 +76,7 @@
 (setq resize-mini-windows nil)
 ;; mini buffer 的大小保持不变。
 
-(mouse-avoidance-mode 'animate)                
+;;(mouse-avoidance-mode 'animate)                
 ;; 鼠标指针避开光标
 ;; 用鼠标快速 copy ,cut , paste
 (require 'mouse-copy)
@@ -102,6 +108,46 @@
 (setq dired-recursive-deletes t)
 ;; 复制(删除)目录的时，第归的复制(删除)其中的子目录。
 
+;;###复制一行绑定
+(global-set-key (kbd "M-w") 'huangq-save-line-dwim)
+;;###autoload
+(defun huangq-save-one-line (&optional arg)
+  "save one line. If ARG, save one line from first non-white."
+  (interactive "P")
+  (save-excursion
+    (if arg
+        (progn
+          (back-to-indentation)
+          (kill-ring-save (point) (line-end-position)))
+      (kill-ring-save (line-beginning-position) (line-end-position)))))
+;;;###autoload
+(defun huangq-kill-ring-save (&optional n)
+  "If region is active, copy region. Otherwise, copy line."
+  (interactive "p")
+  (if (and mark-active transient-mark-mode)
+      (kill-ring-save (region-beginning) (region-end))
+    (if (> n 0)
+        (kill-ring-save (line-beginning-position) (line-end-position n))
+      (kill-ring-save (line-beginning-position n) (line-end-position)))))
+;;;###autoload
+(defun huangq-save-line-dwim (&optional arg)
+  "If region is active, copy region.
+If ARG is nil, copy line from first non-white.
+If ARG is numeric, copy ARG lines.
+If ARG is non-numeric, copy line from beginning of the current line."
+  (interactive "P")
+  (if (and mark-active transient-mark-mode)
+      ;; mark-active, save region
+      (kill-ring-save (region-beginning) (region-end))
+    (if arg
+        (if (numberp arg)
+            ;; numeric arg, save ARG lines
+            (huangq-kill-ring-save arg)
+          ;; other ARG, save current line
+          (huangq-save-one-line))
+      ;; no ARG, save current line from first non-white
+      (huangq-save-one-line t))))
+;;==============================================
 
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
@@ -164,8 +210,8 @@
 ;;(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
 (setq auto-mode-alist (cons '("\\.asp$" . html-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.phtml$" . html-mode) auto-mode-alist))
-(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;;(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . javascript-mode))
 
 ;;; cperl-mode is preferred to perl-mode                                        
 ;;; "Brevity is the soul of wit" <foo at acm.org> 
@@ -188,6 +234,11 @@
 (autoload 'python-mode "python-mode" "Python editing mode." t)
 (autoload 'py-shell "python-mode" "Python shell" t)
 ;;【python-mode.el】www.python.org 上面的 python-mode
+
+(autoload 'xahk-mode "xahk-mode" "Load xahk-mode for editing AutoHotKey scripts." t)
+(add-to-list 'auto-mode-alist '("\\.ahk\\'" . xahk-mode))
+(defalias 'ahk-mode 'xahk-mode)
+;; autohotkey-mode
 
 (autoload 'run-scheme "quack" "Quack scheme editing mode" t)
 (autoload 'scheme-mode "quack" "Quack scheme editing mode" t)
@@ -219,15 +270,27 @@
 (add-to-list 'same-window-regexps "^\\*ssh-.*\\*\\(\\|<[0-9]+>\\)")
 (autoload 'ssh "ssh" "Open a network login connection via `ssh'" t)
 
+
 ;; tabbar设置
-;; ------------------------------------------------
 (require 'tabbar)
+(require 'tabbar-extension) 
 (global-set-key (kbd "<S-up>") 'tabbar-backward-group)
 (global-set-key (kbd "<S-down>") 'tabbar-forward-group)
 (global-set-key (kbd "M-n") 'tabbar-backward)
 (global-set-key (kbd "M-p") 'tabbar-forward)
 (global-set-key (kbd "<S-left>") 'tabbar-backward)
 (global-set-key (kbd "<S-right>") 'tabbar-forward)     ; 用 Shift+方向键 切换tab
+;;(setq tabbar-buffer-groups-function
+;;(lambda ()
+;;(list "All Buffers")))
+
+(setq tabbar-buffer-list-function
+    (lambda ()
+        (remove-if
+          (lambda(buffer)
+             (find (aref (buffer-name buffer) 0) " *"))
+          (buffer-list))))
+
 (defun tabbar-buffer-groups ()
   "Return the list of group names the current buffer belongs to.
 Return a list of one element based on major mode."
@@ -248,7 +311,7 @@ Return a list of one element based on major mode."
      "Dired"
      )
     ((memq major-mode 
-	   '(html-mode php-mode css-mode javascript-mode js2-mode))
+	   '(html-mode php-mode nxml-mode sgml-mode css-mode javascript-mode js-mode js2-mode))
      "Webcodes"
      )
     ((memq major-mode
@@ -274,8 +337,43 @@ Return a list of one element based on major mode."
      ))))
 
 (tabbar-mode 1)
-;; ------------------------------------------------
+
+;;;; 设置tabbar外观
+;; 设置默认主题: 字体, 背景和前景颜色，大小
+(set-face-attribute 'tabbar-default nil
+;;                    :family "Vera Sans YuanTi Mono"
+                    :background "gray80"
+                    :foreground "gray30"
+                    :height 0.7
+                    )
+;; 设置左边按钮外观：外框框边大小和颜色
+(set-face-attribute 'tabbar-button nil
+                    :inherit 'tabbar-default
+                    :box '(:line-width 1 :color "gray30")
+                    )
+;; 设置当前tab外观：颜色，字体，外框大小和颜色
+(set-face-attribute 'tabbar-selected nil
+                    :inherit 'tabbar-default
+                    :foreground "DarkGreen"
+                    :background "LightGoldenrod"
+                    :box '(:line-width 2 :color "DarkGoldenrod")
+                    ;; :overline "black"
+                    ;; :underline "black"
+                    :weight 'bold
+                    )
+;; 设置非当前tab外观：外框大小和颜色
+(set-face-attribute 'tabbar-unselected nil
+                    :inherit 'tabbar-default
+                    :box '(:line-width 2 :color "gray70")
+                    )
 ;; tabbar end here
+
+(require 'highlight-tail)
+(setq highlight-tail-colors
+		'(("#c1e156" . 0)
+		  ("#b8ff07" . 25)
+		  ("#00c377" . 60)))
+(highlight-tail-mode)
 
 
 ;; The following lines are always needed. Choose your own keys.
@@ -376,7 +474,42 @@ occurence of CHAR."
                              yas/ido-prompt
                              yas/completing-prompt))
 
+;; 为 view-mode 加入 vim 的按键。
+(setq view-mode-hook
+      (lambda ()
+        (define-key view-mode-map "h" 'backward-char)
+        (define-key view-mode-map "l" 'forward-char)
+        (define-key view-mode-map "j" 'next-line)
+        (define-key view-mode-map "k" 'previous-line)))
+
 (define-key global-map "\e\e" 'vi-mode) ;quick switch into vi-mode
+
+(require 'auto-complete)
+(require 'auto-complete-config)
+;;(require 'ac-anything)
+
+;; dirty fix for having AC everywhere
+(define-globalized-minor-mode real-global-auto-complete-mode
+  auto-complete-mode (lambda ()
+                       (if (not (minibufferp (current-buffer)))
+                         (auto-complete-mode 1))
+                       ))
+(real-global-auto-complete-mode t)
+;;(define-key ac-complete-mode-map "\t" 'ac-expand)
+;;(define-key ac-complete-mode-map "\r" 'ac-complete)
+(define-key ac-complete-mode-map "\M-n" 'ac-next)
+(define-key ac-complete-mode-map "\M-p" 'ac-previous)
+
+(set-default 'ac-sources
+             '(ac-source-semantic
+               ac-source-yasnippet
+               ac-source-abbrev
+               ac-source-words-in-buffer
+               ac-source-words-in-all-buffer
+               ac-source-imenu
+               ac-source-files-in-current-dir
+               ac-source-filename))
+
 
 (require 'server)
 (when (and (= emacs-major-version 23) (equal window-system 'w32))

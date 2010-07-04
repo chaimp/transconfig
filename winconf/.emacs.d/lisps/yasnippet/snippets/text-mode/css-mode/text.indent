@@ -1,4 +1,0 @@
-#contributor : transtone <zm3345@gmail.com>
-#name : text-ident: ...
-# --
-text-ident: ${2em};
