@@ -3,12 +3,14 @@
 
 inherit multilib
 
-DESCRIPTION="Filesystem baselayout and init scripts"
+BV="2.1.8"
+DESCRIPTION="Filesystem baselayout, initscripts and /sbin/realdev command"
 HOMEPAGE="http://www.funtoo.org/"
-SRC_URI="http://www.funtoo.org/archive/baselayout/baselayout-2.1.1.tar.bz2"
-S=$WORKDIR/baselayout-2.1.1
+SRC_URI="http://www.funtoo.org/archive/baselayout/baselayout-${BV}.tar.bz2 http://www.funtoo.org/archive/realdev/realdev-1.0.tar.bz2"
+S=$WORKDIR/baselayout-${BV}
+S2=$WORKDIR/realdev-1.0
 
-LICENSE="GPL-2"
+LICENSE="GPL-2 BSD-2"
 SLOT="0"
 KEYWORDS="alpha amd64 arm hppa ia64 m68k mips ppc ppc64 s390 sh sparc sparc-fbsd x86 x86-fbsd"
 IUSE="build"
@@ -104,10 +106,16 @@ modfix() {
 			mv $ROOT/etc/modprobe.d/$mod $ROOT/etc/modprobe.d/${mod}.conf || die "mv failed"
 		fi
 	done
-
 }
 
 src_install() {
+
+	cd $S2 || die
+	into /
+	dosbin realdev
+
+	cd $S || die
+
 	local libdir="lib"
 	local rcscripts_dir="/lib/rcscripts"
 
@@ -252,57 +260,8 @@ pkg_postinst() {
 	done
 
 	# create minimal set of device nodes required for boot, if they do not
-	# already exist. The chmod commonds are also run every time to ensure that
-	# proper permissions are set on the device nodes, even if they already
-	# exist.
+	# already exist. We have a separate /sbin/realdev script for this, which
+	# is installed by this ebuild.
 
-	# Below, we want to create a base set of device nodes that will be suitable
-	# for chrooting, for OpenVZ, for emergency/initial booting without udev,
-	# and for stage builds. Some ebuilds require urandom to exist.
-
-	# But we are only going to perform these steps if we are not merging to /:
-
-	[ "${ROOT}" = "/" ] && return 0
-	
-	# BEGINNING OF COMMANDS THAT ONLY RUN IF ROOT != /
-
-	cd "${ROOT}"/dev || die
-
-	[ -e console ] || mknod console c 5 1 || die
-	chmod 600 console
-
-	[ -e null ] || mknod null c 1 3 || die
-	chmod 777 null
-
-	[ -e tty ] || mknod tty c 5 0 || die
-	chmod 666 tty
-
-	[ -e ttyp0 ] || mknod ttyp0 c 3 0 || die
-	chmod 644 ttyp0
-
-	[ -e ptyp0 ] || mknod ptyp0 c 2 0 || die
-	chmod 644 ptyp0
-
-	[ -e ptmx ] || mknod ptmx c 5 2 || die
-	chmod 666 ptmx
-
-	[ -e tty0 ] || mknod tty0 c 4 0 || die
-	chmod 666 tty0
-	
-	[ -e urandom ] || mknod urandom c 1 9 || die
-	chmod 666 urandom
-
-	[ -e random ] || mknod random c 1 8 || die
-	chmod 666 random
-
-	[ -e zero ] || mknod zero c 1 5 || die
-	chmod 666 zero
-
-	for x in 0 1 2 3
-	do
-		[ -e ttyS${x} ] || mknod ttyS${x} c 4 $(( 64 + $x )) || die
-		chmod 600 ttyS${x}
-	done
-
-	# END OF COMMANDS THAT ONLY RUN IF ROOT != /
+	"$ROOT"/sbin/realdev $ROOT/dev
 }

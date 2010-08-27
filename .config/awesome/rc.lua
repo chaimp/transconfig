@@ -93,11 +93,12 @@ for s = 1, screen.count() do
 
 tags[1][1].name = "冲浪"
 --tags[1][1].layout = awful.layout.suit.magnifier
-tags[1][2].name = "虚拟机"
+tags[1][2].name = "文档"
+tags[1][3].name = "虚拟"
 --tags[1][2].layout = awful.layout.suit.floating
-tags[1][3].name = "影音"
-tags[1][4].name = "学习"
-tags[1][5].name = "游戏"
+tags[1][4].name = "影音"
+tags[1][5].name = "学习"
+tags[1][6].name = "游戏"
 -- }}}
 
 -- {{{ Wibox

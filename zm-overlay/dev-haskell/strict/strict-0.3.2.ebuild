@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header:  $
 
-CABAL_FEATURES="bin"
+CABAL_FEATURES="lib profile haddock"
 inherit haskell-cabal
 
-DESCRIPTION="small dmenu wrapper"
-HOMEPAGE="http://www.dmwit.com/yeganesh"
+DESCRIPTION="Strict data types and String IO."
+HOMEPAGE="http://www.cse.unsw.edu.au/~rl/code/strict.html"
 SRC_URI="http://hackage.haskell.org/packages/archive/${PN}/${PV}/${P}.tar.gz"
 
 LICENSE="BSD"
@@ -15,7 +15,4 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=">=dev-lang/ghc-6.6.1
-		>=dev-haskell/cabal-1.2
-		>=dev-haskell/filepath-1.1
-		>=dev-haskell/strict-0.3
-        x11-misc/dmenu"
+		>=dev-haskell/cabal-1.2"

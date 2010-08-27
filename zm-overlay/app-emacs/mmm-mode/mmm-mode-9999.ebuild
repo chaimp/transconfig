@@ -11,7 +11,7 @@ EGIT_REPO_URI="git://github.com/mujaheed/mmm-mode.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 ELISP_PATCHES="${P}-format-mode-line.patch"

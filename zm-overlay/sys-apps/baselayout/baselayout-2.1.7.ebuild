@@ -3,12 +3,14 @@
 
 inherit multilib
 
-DESCRIPTION="Filesystem baselayout and init scripts"
+BV="2.1.7"
+DESCRIPTION="Filesystem baselayout, initscripts and /sbin/realdev command"
 HOMEPAGE="http://www.funtoo.org/"
-SRC_URI="http://www.funtoo.org/archive/baselayout/baselayout-2.1.1.tar.bz2"
-S=$WORKDIR/baselayout-2.1.1
+SRC_URI="http://www.funtoo.org/archive/baselayout/baselayout-${BV}.tar.bz2 http://www.funtoo.org/archive/realdev/realdev-1.0.tar.bz2"
+S=$WORKDIR/baselayout-${BV}
+S2=$WORKDIR/realdev-1.0
 
-LICENSE="GPL-2"
+LICENSE="GPL-2 BSD-2"
 SLOT="0"
 KEYWORDS="alpha amd64 arm hppa ia64 m68k mips ppc ppc64 s390 sh sparc sparc-fbsd x86 x86-fbsd"
 IUSE="build"
@@ -108,6 +110,13 @@ modfix() {
 }
 
 src_install() {
+
+	cd $S2 || die
+	into /
+	dosbin realdev
+
+	cd $S || die
+
 	local libdir="lib"
 	local rcscripts_dir="/lib/rcscripts"
 
@@ -252,73 +261,8 @@ pkg_postinst() {
 	done
 
 	# create minimal set of device nodes required for boot, if they do not
-	# already exist. The chmod commonds are also run every time to ensure that
-	# proper permissions are set on the device nodes, even if they already
-	# exist.
+	# already exist. We have a separate /sbin/realdev script for this, which
+	# is installed by this ebuild.
 
-	# Below, we want to create a base set of device nodes that will be suitable
-	# for chrooting, for OpenVZ, for emergency/initial booting without udev,
-	# and for stage builds. Some ebuilds require urandom to exist.
-
-	# Here are the steps we follow:
-	
-	# First, if we don't have a character device, we remove whatever is there.
-	# This is important in case some bogus file was created in its place, like
-	# if something wrote to /dev/tty before it existed, or redirected something
-	# to /dev/null before it existed.
-
-	# Then, if it's not there, we create the device. If we had to create the
-	# device, we also set default permissions on the device.
-
-	# If the character devices already existed, then they don't get touched.
-	# And the only thing that does not get corrected is a situation where
-	# a character device exists, but has the wrong major or minor numbers.
-	# If the character device is there, we assume it has the right major
-	# and minor numbers.
-
-	# Also new for this revision of baselayout is the fact that we run this
-	# updated code even if you are merging to your local filesystem. While
-	# this has limited value if udev is running (and thus /dev is already
-	# mounted,) we do it anyway as a cautionary measure.
-
-	cd ${ROOT}/dev || die "can't change directories to /dev"
-
-	! [ -c console ] && rm -rf console
-	[ -e console ] || { mknod console c 5 1; chmod 600 console; } || die
-
-	! [ -c null ] && rm -rf null
-	[ -e null ] || { mknod null c 1 3; chmod 777 null; } || die
-
-	! [ -c tty ] && rm -rf tty
-	[ -e tty ] || { mknod tty c 5 0; chmod 666 tty; } || die
-
-	! [ -c ttyp0 ] && rm -rf ttyp0
-	[ -e ttyp0 ] || { mknod ttyp0 c 3 0; chmod 644 ttyp0; } || die
-
-	! [ -c ptyp0 ] && rm -rf ptyp0
-	[ -e ptyp0 ] || { mknod ptyp0 c 2 0; chmod 644 ptyp0; } || die
-
-	! [ -c ptmx ] && rm -rf ptmx
-	[ -e ptmx ] || { mknod ptmx c 5 2; chmod 666 ptmx; } || die
-
-	! [ -c tty0 ] && rm -rf tty0
-	[ -e tty0 ] || { mknod tty0 c 4 0; chmod 666 tty0; } || die
-
-	! [ -c urandom ] && rm -rf urandom
-	[ -e urandom ] || { mknod urandom c 1 9; chmod 666 urandom; } || die
-
-	! [ -c random ] && rm -rf random
-	[ -e random ] || { mknod random c 1 8; chmod 666 random; } || die
-
-	! [ -c zero ] && rm -rf zero
-	[ -e zero ] || { mknod zero c 1 5; chmod 666 zero; } || die
-
-	for x in 0 1 2 3
-	do
-		# These devices are for initial serial console
-		! [ -c ttyS${x} ] && rm -rf ttyS${x}
-		[ -e ttyS${x} ] || { mknod ttyS${x} c 4 $(( 64 + $x )); chmod 600 ttyS${x}; } || die
-	done
-
-	# END OF COMMANDS THAT ONLY RUN IF ROOT != /
+	"$ROOT"/sbin/realdev $ROOT/dev
 }
