@@ -11,7 +11,7 @@ HOMEPAGE="http://xmms2.xmms.se/"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="aac alsa ao avahi curl fam flac ffmpeg jack libvisual mad minimal mms
 modplug mpg123 musepack nocxx ofa perl pulseaudio python readline ruby samba
 shout sid ssl vocoder vorbis wavpack xml"

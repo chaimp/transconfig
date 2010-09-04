@@ -1,4 +1,5 @@
 import XMonad
+
 import Data.Monoid
 import System.Exit
 import XMonad.Prompt
@@ -51,9 +52,9 @@ myNormalBorderColor  = "#729fcf"
 myFocusedBorderColor = "#7292cf"
 
 
-myFont               = "xft:WenQuanYi Micro Hei:pixelsize=8"
+myFont               = "xft:WenQuanYi Micro Hei:pixelsize=9"
 -- dzen settings:
-dzFont             = "WenQuanYi Micro Hei-8:Bold"
+dzFont             = "WenQuanYi Micro Hei-9:Bold"
 --dzFont             = "OpenLogos-8"
 dzFgColor          = "skyblue"
 dzBgColor          = "#729fcf"
@@ -64,6 +65,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_r     ), spawn "exe=`dmenu_run` && eval \"exec $exe\"")
     , ((modm .|. shiftMask, xK_r     ), spawn "gmrun")
     , ((modm .|. shiftMask, xK_c     ), kill)
+    , ((controlMask,        xK_Print ), spawn "sleep 0.2; scrot -s")
+    , ((0 ,                 xK_Print ), spawn "scrot")
     , ((0 ,                0x1008ff11), spawn "ossmix vmix0-outvol -- -1")
     , ((0 ,                0x1008ff13), spawn "ossmix vmix0-outvol -- +1")
     , ((0 ,                0x1008ff2f), spawn "gksudo pm-suspend")
@@ -89,7 +92,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
     ++
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_5]
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_6]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
@@ -111,18 +114,18 @@ myManageHook = composeAll . concat $
 --    , [className =? s  --> doTile   | s <- myTiles]
     ]
     where
-    myFloats      = ["Gpick", "Chromium-bin", "Gimp", "MPlayer", "Smplayer", "Realplay", "Vlc", "Lxrandr", "Audacious2", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gmlive"]
-    myTitleFloats = ["Downloads", "Preferences", "Save As...", "Add-ons", "Firefox", "Chromium", "exe", "Options", "首选项", "Wicd Network Manager"]
+    myFloats      = ["Gpick", "Chromium", "Gimp", "MPlayer", "Smplayer", "Realplay", "VLC", "Lxrandr", "Audacious2", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Kvm" ]
+    myTitleFloats = ["Downloads", "Preferences", "Save As...", "QEMU", "emacs", "Add-ons", "Firefox", "Chromium", "Exe", "Options", "首选项", "Wicd Network Manager"]
     myIgnores     = ["trayer", "dzen", "stalonetray"]
 --    myTiles       = ["tilda", "pcmanfm", "thunar", "dolphin", "lxterminal"]
 
 myStatusBar :: String
-myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e 'button3=' -h '20' -fn '" ++ dzFont ++ "' -ta l"
+myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e 'button3=' -h '18' -fn '" ++ dzFont ++ "' -ta l"
 myConkyBar :: String
 --myConkyBar = "conky | dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -x '700' -h '20' -fn '" ++ dzFont ++ "' -sa c -ta r"
-myConkyBar = "sleep 1; conky | dzen2 -e '' -h '20' -x '780' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor ++ "' -fn '" ++ dzFont ++ "'"
+myConkyBar = "sleep 1; conky | dzen2 -e '' -h '18' -x '750' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor ++ "' -fn '" ++ dzFont ++ "'"
 mySysTray :: String
-mySysTray = "sleep 3; trayer --expand true  --alpha 0 --edge top --align right --SetDockType true --transparent flase --SetPartialStrut true --widthtype request --tint 0x729fcf --height 20 --margin 53"
+mySysTray = "sleep 3; trayer --expand true  --alpha 0 --edge top --align right --SetDockType true --transparent flase --SetPartialStrut true --widthtype request --tint 0x729fcf --height 18 --margin 53"
 
  
 myLogHook h = dynamicLogWithPP $ defaultPP
@@ -186,7 +189,7 @@ main = do
 --       , logHook = ewmhDesktopsLogHook >> (dynamicLogWithPP $ myLogHook dzen)
 --       , layoutHook = ewmhDesktopsEventHook $ avoidStruts $ myLayout
        , layoutHook = avoidStruts $ myLayout
-       , workspaces = ["^ca(1,xdotool key super+1)^fn(OpenLogos-9)Q^fn(Microsoft YaHei-8)transtone^ca()","^ca(1,xdotool key super+2)^fn(OpenLogos-11)P^fn(Microsoft YaHei-8)冲浪^ca()","^ca(1,xdotool key super+3)^fn(OpenLogos-9)U^fn(Microsoft YaHei-8)文档^ca()","^ca(1,xdotool key super+4)^fn(OpenLogos-9)J^fn(Microsoft YaHei-8)虚拟^ca()","^ca(1,xdotool key super+5)^fn(OpenLogos-9)T^fn(Microsoft YaHei-8)游戏^ca()^fn(WenQuanYi Micro Hei-8:bold)"]
+       , workspaces = ["^ca(1,xdotool key super+1)^fn(OpenLogos-13)Q^fn(Microsoft YaHei-9)transtone^ca()","^ca(1,xdotool key super+2)^fn(OpenLogos-15)P^fn(Microsoft YaHei-9)冲浪^ca()","^ca(1,xdotool key super+3)^fn(OpenLogos-13)U^fn(Microsoft YaHei-9)文档^ca()","^ca(1,xdotool key super+4)^fn(OpenLogos-13)J^fn(Microsoft YaHei-9)虚拟^ca()","^ca(1,xdotool key super+5)^fn(OpenLogos-15)R^fn(Microsoft YaHei-9)图像^ca()","^ca(1,xdotool key super+6)^fn(OpenLogos-13)T^fn(Microsoft YaHei-9)游戏^ca()^fn(WenQuanYi Micro Hei-9:bold)"]
       -- key bindings
        , keys               = myKeys
        , mouseBindings      = myMouseBindings
