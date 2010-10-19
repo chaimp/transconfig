@@ -123,6 +123,18 @@
 (setq x-select-enable-clipboard t)
 ;; 支持emacs和外部程序的粘贴
 
+(defun qiang-comment-dwim-line (&optional arg)
+  "Replacement for the comment-dwim command.
+If no region is selected and current line is not blank and we are not at the end of the line,
+then comment current line.
+Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+(global-set-key "\M-;" 'qiang-comment-dwim-line)
+;;do what I mean,注释功能
 
 ;;###复制一行绑定
 (global-set-key (kbd "M-w") 'huangq-save-line-dwim)
@@ -372,6 +384,12 @@ If ARG is non-numeric, copy line from beginning of the current line."
       auto-mode-alist))
 ;; 将文件模式和文件后缀关联起来。
 
+(require 'django-html-mode)
+(require 'django-mode)
+(autoload 'python-mode "python-mode" "Python editing mode." t)
+(autoload 'py-shell "python-mode" "Python shell" t)
+;;【python-mode.el】www.python.org 上面的 python-mode
+
 ;; 显示匹配的括号
 (show-paren-mode t)
 
@@ -539,8 +557,12 @@ Return a list of one element based on major mode."
      "Dired"
      )
     ((memq major-mode 
-	   '(html-mode php-mode nxml-mode sgml-mode css-mode javascript-mode js-mode js2-mode))
+	   '(html-mode php-mode nxml-mode sgml-mode ))
      "Webcodes"
+     )
+    ((memq major-mode 
+	   '(python-mode django-mode django-html-mode css-mode javascript-mode js-mode js2-mode))
+     "Djangocodes"
      )
     ((memq major-mode
            '(help-mode apropos-mode Info-mode Man-mode))
@@ -582,9 +604,9 @@ Return a list of one element based on major mode."
 ;; 设置当前tab外观：颜色，字体，外框大小和颜色
 (set-face-attribute 'tabbar-selected nil
                     :inherit 'tabbar-default
-                    :foreground "DarkGreen"
-                    :background "LightGoldenrod"
-                    :box '(:line-width 2 :color "DarkGoldenrod")
+                    :foreground "Black"
+                    :background "#FAD294"
+                    :box '(:line-width 1 :color "#F58400")
                     ;; :overline "black"
                     ;; :underline "black"
                     :weight 'bold
@@ -592,7 +614,7 @@ Return a list of one element based on major mode."
 ;; 设置非当前tab外观：外框大小和颜色
 (set-face-attribute 'tabbar-unselected nil
                     :inherit 'tabbar-default
-                    :box '(:line-width 2 :color "gray70")
+                    :box '(:line-width 1 :color "gray70")
                     )
 ;; tabbar end here
 
@@ -765,10 +787,11 @@ occurence of CHAR."
 
 (require 'ange-ftp)
 (require 'tramp)
+(setq auto-save-default nil)
 (require 'epa) ;;使用EasyPG
 
-(require 'zencoding-mode)
-(add-hook 'html-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+;;(require 'zencoding-mode)
+;;(add-hook 'html-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
 ;; yasnippet
 (require 'yasnippet)

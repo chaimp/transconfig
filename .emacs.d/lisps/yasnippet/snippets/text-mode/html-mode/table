@@ -1,6 +1,6 @@
 #name : <table ...>...</table>
 #group : table
 # --
-<table cellspacing="1" border="0">
+<table>
   $0
 </table>
