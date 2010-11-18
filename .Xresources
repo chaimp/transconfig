@@ -33,6 +33,7 @@ URxvt*boldFont:                 xft:Monaco:size=10:antialias=true,xft:STHeiti:si
 URxvt*italicFont:               xft:Monaco:size=10:antialias=true,xft:STHeiti:size=12:antialias=true
 URxvt*bolditalicFont:           xft:Monaco:size=10:antialias=true,xft:STHeiti:size=12:antialias=true
 !URxvt.font:xft:Monaco:size=10:antialias=true,xft:LTH:size:9:antialias=true
+!URxvt.cursorColor: whire
 urxvt*foreground: #ffffff
 URxvt.background: rgba:0000/0000/0000/cccc
 !urxvt*background: #101010
@@ -58,15 +59,14 @@ urxvt*transparent: false
 
 !URxvt.visualBell:  true
 !URxvt.cursorBlink: true
-URxvt.internalBorder: 3
+URxvt.internalBorder: 5
 URxvt.cutchars:    "()*,<>[]{}|'"
-URxvt.secondaryScroll: true
 URxvt.scrollBar: False
-!URxvt.scrollWithBuffer: false
+URxvt.scrollWithBuffer: false
 URxvt.buffered:  true
+Urxvt.secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
 URxvt.saveLines: 20000
 URxvt.inputMethod: xim
-!URxvt.imFont: 
 URxvt.preeditType: OverTheSpot
 URxvt.thickness: 0
 !URxvt.geometry: 80x28+40+40
