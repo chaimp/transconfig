@@ -2,55 +2,68 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="1"
+EAPI="2"
 
-ESVN_REPO_URI="http://fcitx.googlecode.com/svn/trunk"
 inherit autotools subversion
 
 DESCRIPTION="Free Chinese Input Toy for X. Another Chinese XIM Input Method"
 HOMEPAGE="http://fcitx.googlecode.com"
-#SRC_URI="http://gentoo-china-overlay.googlecode.com/svn/distfiles/zhengma.tbz2"
+SRC_URI="${HOMEPAGE}/files/pinyin.tar.gz
+		${HOMEPAGE}/files/pinyin.tar.gz.md5
+		${HOMEPAGE}/files/table.tar.gz
+		${HOMEPAGE}/files/table.tar.gz.md5"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
+IUSE="dbus debug +pango"
+
+RDEPEND="media-libs/fontconfig
+	x11-libs/cairo
+	x11-libs/libX11
+	x11-libs/libXrender
+	dbus? ( sys-apps/dbus )
+	pango? ( x11-libs/pango )"
+DEPEND="${RDEPEND}
+	dev-util/intltool
+	dev-util/pkgconfig
+	sys-devel/gettext
+	x11-proto/xproto"
+
+ESVN_REPO_URI="http://fcitx.googlecode.com/svn/trunk"
+
 ESVN_BOOTSTRAP='autogen.sh'
 
-RDEPEND="x11-libs/libX11
-x11-libs/libXpm
-x11-libs/libXrender
-x11-libs/libXt
-x11-libs/libXft"
-DEPEND="${RDEPEND}
-dev-util/pkgconfig"
-
-#src_unpack() {
-	# Add zhengma support
-	#if use zhengma ; then
-#		mv "${S}"/zhm "${S}"/data/table/zhengma.txt
-#		mv "${FILESDIR}"/zhengma.conf "${S}"/data/table/zhengma.conf
-#		mv "${FILESDIR}"/fcitx-zhengma.png "${S}"/png/fcitx-zhengma.png
-#		epatch "${FILESDIR}"/add-zhengma-support.diff
-	#fi
-#}
-
-src_compile() {
-econf --enable-tray=yes --enable-recording=yes --enable-dbus=yes
+src_unpack() {
+	subversion_src_unpack
+	cp -r "${DISTDIR}"/pinyin.tar.gz "${S}"/data
+	cp -r "${DISTDIR}"/pinyin.tar.gz.md5 "${S}"/data
+	cp -r "${DISTDIR}"/table.tar.gz "${S}"/data/table
+	cp -r "${DISTDIR}"/table.tar.gz.md5 "${S}"/data/table
 }
 
+src_compile() {
+	econf --enable-tray=yes --enable-recording=yes \
+	$(use_enable dbus) \
+	$(use_enable debug) \
+	$(use_enable pango)
+}
 
 src_install() {
-emake DESTDIR="${D}" install || die "Install failed"
+	emake DESTDIR="${D}" install || die "Install failed"
+	dodoc AUTHORS ChangeLog README THANKS TODO || die "dodoc failed"
+	rm -rf "${D}"/usr/share/fcitx/doc || die
+	dodoc doc/cjkvinput.txt doc/fcitx4.pdf doc/pinyin.txt
+	dohtml doc/wb_fh.htm || die "dothml failed"
 }
 
 pkg_postinst() {
-einfo "This is not an official release. Please report you bugs to:"
-einfo "http://code.google.com/p/fcitx/issues/list"
-echo
-elog "You should export the following variables to use fcitx"
-elog " export XMODIFIERS=\"@im=fcitx\""
-elog " export XIM=fcitx"
-elog " export XIM_PROGRAM=fcitx"
+	einfo "This is not an official release. Please report you bugs to:"
+	einfo "http://code.google.com/p/fcitx/issues/list"
+	echo
+	elog "You should export the following variables to use fcitx"
+	elog " export XMODIFIERS=\"@im=fcitx\""
+	elog " export XIM=\"fcitx\""
+	elog " export GTK_IM_MODULE=\"fcitx\""
+	elog " export QT_IM_MODULE=\"fcitx\""
 }
-

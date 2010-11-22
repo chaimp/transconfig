@@ -82,8 +82,8 @@ URxvt.depth: 32
 URxvt.perl-lib:/home/zhou/overlays/urxvt-perls
 URxvt.perl-ext-common: default,matcher,clipboard,kuake,keyboard-select,url-select
 URxvt.keysym.Mod4-u: perl:url-select:select_next
-URxvt.keysym.Mod4-c:   perl:clipboard:copy
-URxvt.keysym.Mod4-v:   perl:clipboard:paste
+URxvt.keysym.M-w:   perl:clipboard:copy
+URxvt.keysym.C-y:   perl:clipboard:paste
 URxvt.keysym.Mod4-C-v: perl:clipboard:paste_escaped
 URxvt.keysym.Mod4-Escape: perl:keyboard-select:activate
 URxvt.keysym.Mod4-s: perl:keyboard-select:search
