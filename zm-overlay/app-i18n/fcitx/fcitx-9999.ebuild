@@ -4,7 +4,7 @@
 
 EAPI="2"
 
-inherit autotools subversion
+inherit autotools mercurial
 
 DESCRIPTION="Free Chinese Input Toy for X. Another Chinese XIM Input Method"
 HOMEPAGE="http://fcitx.googlecode.com"
@@ -26,23 +26,23 @@ RDEPEND="media-libs/fontconfig
 	pango? ( x11-libs/pango )"
 DEPEND="${RDEPEND}
 	dev-util/intltool
+	dev-vcs/mercurial
 	dev-util/pkgconfig
 	sys-devel/gettext
 	x11-proto/xproto"
+S="${WORKDIR}/hg"
 
-ESVN_REPO_URI="http://fcitx.googlecode.com/svn/trunk"
+EHG_REPO_URI="http://fcitx.googlecode.com/hg/"
 
-ESVN_BOOTSTRAP='autogen.sh'
-
-src_unpack() {
-	subversion_src_unpack
+src_prepare() {
 	cp -r "${DISTDIR}"/pinyin.tar.gz "${S}"/data
 	cp -r "${DISTDIR}"/pinyin.tar.gz.md5 "${S}"/data
 	cp -r "${DISTDIR}"/table.tar.gz "${S}"/data/table
 	cp -r "${DISTDIR}"/table.tar.gz.md5 "${S}"/data/table
 }
 
-src_compile() {
+src_configure() {
+	./autogen.sh
 	econf --enable-tray=yes --enable-recording=yes \
 	$(use_enable dbus) \
 	$(use_enable debug) \
