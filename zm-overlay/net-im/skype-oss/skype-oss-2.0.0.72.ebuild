@@ -38,8 +38,7 @@ DEPEND="amd64? ( >=app-emulation/emul-linux-x86-xlibs-1.2
 		x11-libs/libXrandr
 		x11-libs/libXrender
 		x11-libs/libX11 )
-	oss4?  ( || ( media-sound/oss
-                   media-sound/oss-devel ) )
+	oss4? ( || ( media-sound/oss media-sound/oss-devel ) )
 		!net-im/skype"
 
 RDEPEND="${DEPEND}"
@@ -82,7 +81,7 @@ src_install() {
 
 	# insinto /usr/share/applications/
 	# doins skype.desktop
-	make_desktop_entry ${PN} "Skype VoIP" ${PN} "Network;InstantMessaging;Telephony"
+	make_desktop_entry ${PN/-oss/} "Skype VoIP" ${PN} "Network;InstantMessaging;Telephony"
 
 	#Fix for no sound notifications
 	dosym /opt/${PN} /usr/share/${PN}
