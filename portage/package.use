@@ -1,8 +1,10 @@
-dev-util/git -gtk subversion
-dev-util/subversion -dso
+# move dev-util/git dev-vcs/git
+dev-vcs/git -gtk subversion
+# move dev-util/subversion dev-vcs/subversion
+dev-vcs/subversion -dso
 dev-lang/python sqlite
 dev-lang/ghc ghcquickbuild binary
-dev-python/PyQt4 webkit sql
+dev-python/PyQt4 webkit sql declarative
 xfce-base/xfce4-meta minimal -alsa -oss 
 xfce-base/xfce4-settings libnotify sound
 xfce-base/xfce-utils -lock
@@ -11,32 +13,37 @@ x11-wm/fvwm -gtk stroke
 x11-wm/compiz-fusion emerald unsupported
 x11-themes/redhat-artwork  audacious cursors gdm icons 
 x11-apps/xinit minimal
-x11-terms/rxvt-unicode wcwidth xterm-color afterimage
+x11-terms/rxvt-unicode wcwidth 256-color iso14755 afterimage
 x11-misc/xmobar mail
 x11-misc/dmenu vertical
+x11-misc/cairo-dock-plugins compiz network-monitor powermanager
+x11-libs/cairo -qt4 drm
 x11-libs/qt-qt3support kde
 x11-libs/qt-webkit kde
+x11-drivers/ati-drivers modules
 media-sound/audacious chardet 
 media-sound/esound -alsa
-media-sound/moc -alsa vorbis ffmpeg
+media-sound/moc alsa vorbis ffmpeg
 media-sound/xmms2 -alsa
-media-plugins/audacious-plugins -alsa ffmpeg chardet sndfile scrobbler
+media-plugins/audacious-plugins alsa ffmpeg chardet sndfile scrobbler cue
 media-plugins/gst-plugins-meta ffmpeg
 media-video/mplayer -gtk -live -dv -mp2 -amrwb -amrnb -dirac -speex -schroedinger -dvb xv radio quicktime real rar 
 media-video/vlc -nsplugin -xosd dvd mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio 
 media-libs/realcodecs -win32codecs
 media-libs/libmng lcms
 media-libs/sdl-mixer mikmod vorbis
+media-libs/mesa gles gallium
 media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
 media-tv/gmlive sopcast extra
 media-tv/enna -vdr -upnp
-app-arch/p7zip wxwidgets rar
+app-arch/p7zip rar
 app-admin/conky -X hddtemp nano-syntax vim-syntax wifi rss iostats moc 
 app-admin/testdisk ntfs reiserfs
 app-cdr/recorder vcd
 app-cdr/brasero -totem -nautilus 
-app-editors/emacs toolkit-scroll-bars gtk -sound spell
+app-editors/emacs toolkit-scroll-bars gtk -sound gconf spell
+app-editors/nano -nls
 app-text/stardict  -festival pronounce qqwry spell 
 app-text/poppler-bindings gtk cairo
 app-text/texlive -truetype
@@ -50,21 +57,26 @@ app-emulation/libvirt iscsi kvm lvm nfs virtualbox
 app-emulation/aqemu  kvm
 app-emulation/virtualbox-bin rdesktop-vrdp -chm
 app-office/openoffice-bin gnome java
-app-portage/layman git subversion
+app-portage/layman git subversion mercurial
+app-portage/eix strong-optimization optimization tools
 media-sound/amarok mp3tunes  
 media-sound/mpd audiofile id3 lame ao
 media-sound/sonata lyrics
 media-sound/aumix -gpm
 media-gfx/splashutils fbcondecor
 www-client/opera -qt3
-www-client/mozilla-firefox mozdevelop custom-optimization 
+# move www-client/mozilla-firefox www-client/firefox
+www-client/firefox mozdevelop custom-optimization 
+www-client/chromium system-sqlite system-v8
+www-servers/cherokee admin threads geoip
 www-servers/nginx addition fastcgi flv imap pcre perl random-index securelink ssl status sub zlib 
 www-servers/lighttpd minimal
 www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp 
-dev-lang/php -truetype  apache2 filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
+dev-lang/php -truetype sockets filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
 dev-db/mysql embedded 
-dev-db/sqlite secure-delete
-dev-util/subversion -berkdb
+dev-db/sqlite secure-delete icu
+# move dev-util/subversion dev-vcs/subversion
+dev-vcs/subversion -berkdb
 net-ftp/proftpd  authfile clamav softquota vroot rewrite
 net-ftp/pure-ftpd anondel anonperm anonren anonres paranoidmsg vchroot noiplog
 net-dns/bind resolvconf
@@ -82,15 +94,20 @@ net-wireless/aircrack-ng wifi
 net-libs/libsoup gnome
 net-libs/xulrunner  mozdevelop custom-optimization 
 net-irc/xchat -xft
+net-p2p/mldonkey bittorrent fasttrack
 net-im/skype -qt-static
 sys-auth/consolekit policykit
+sys-auth/polkit -gtk
 sys-apps/hal laptop policykit
 sys-apps/tuxonice-userui fbsplash
 sys-apps/hwdata-gentoo  binary-drivers
 sys-apps/busybox -savedconfig
+sys-devel/gcc -nls
+sys-libs/glibc -nls
 sys-libs/pam -nls
 sys-fs/ntfs3g suid
 sys-fs/udev extras
+sys-fs/lvm2 -lvm1
 sys-boot/grub netboot
 sys-block/open-iscsi utils
 sys-block/gparted  fat hfs ntfs reiser4 reiserfs xfs

@@ -1,18 +1,18 @@
+sys-apps/portage ~*
 app-emulation/dynagen **
 x11-misc/fqterm **
 dev-python/feedparser **
-
 net-firewall/west-chamber **
-
 games-emulation/hugo **
+#sys-boot/grub **
 
-sys-boot/grub **
+media-libs/libjpeg-turbo **
+#=sys-kernel/zen-sources-9999 **
 
 =x11-plugins/e_modules-tiling-9999 **
 
-=app-i18n/fcitx-9999 **
 =net-im/emesene-9999-r3 **
-
+=net-misc/hotot-9999 **
 =media-plugins/gst-plugins-pps-9999 **
 =media-plugins/totem-pps-9999 **
 =media-libs/libppswrapper-9999 **
@@ -30,11 +30,11 @@ sys-boot/grub **
 =x11-wm/enlightenment-9999 **
 =dev-libs/efreet-9999 **
 =dev-libs/embryo-9999 **
-=x11-libs/evas-9999 **
+=media-libs/evas-9999 **
 =dev-libs/eet-9999 **
-=x11-libs/ecore-9999 **
+=dev-libs/ecore-9999 **
 =media-libs/edje-9999 **
-=x11-libs/e_dbus-9999 **
+=dev-libs/e_dbus-9999 **
 =dev-libs/eina-9999 **
 =x11-libs/elementary-9999 **
 
@@ -51,4 +51,8 @@ sys-boot/grub **
 #=kde-base/libknotificationitem-4.3.9999 **
 #=kde-base/pykde4-9999 **
 www-client/firefox-bin **
-=app-text/chmsee-9999 **
+#=app-text/chmsee-9999 **
+
+#=x11-libs/libfm-9999 **
+#=x11-misc/pcmanfm-9999 **
+=app-emacs/auto-complete-9999 **

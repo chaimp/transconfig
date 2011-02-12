@@ -1,16 +1,12 @@
+=app-i18n/fcitx-9999
 =x11-misc/fqterm-9999
-
->x11-misc/dmenu-3.9
-
+>x11-misc/dmenu-4.1.1
 =dev-libs/libmowgli-9999
 
 #>net-misc/wicd-1.6.3
 
->=dev-lang/python-3.0
 >=dev-python/beautifulsoup-3.1
 
-=sys-boot/grub-9999
-
-#>=dev-lang/php-5.2.12
-
 >=x11-libs/fltk-1.2
+
+=sys-fs/lvm2-2.02.75

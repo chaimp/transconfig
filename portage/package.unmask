@@ -18,7 +18,8 @@ sys-apps/portage
 #sys-devel/libperl
 #app-admin/perl-cleaner
 
-x11-libs/libfm
-x11-misc/pcmanfm
+#x11-libs/libfm
+#x11-misc/pcmanfm
 
 
+#app-i18n/fcitx
