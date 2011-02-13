@@ -3,19 +3,20 @@
 ;; Author: Eduardo de Oliviera Padoan <edcrypt@gmail.com>
 ;;	Michael J. Korman <mike@mkorman.org>
 ;;  Török Gábor <gabor@20y.hu>
+;;  MyFreeWeb <me@myfreeweb.ru>
 ;;  Unknown Original Author
 ;; Keywords: languages
 
 ;;; Commentary:
 ;;
-;; This django-html-mode is mainly derived from html-mode.
+;; This django-html-mode is mainly derived from nxml-mode.
 
 ;;; History:
 ;;
 
 ;; TODO: Make comment-region work with Django comments instead of HTML comments
 
-(require 'sgml-mode)
+(require 'nxml-mode)
 
 ;;; Code:
 (defgroup django-html nil
@@ -74,28 +75,15 @@
 (defconst django-html-close-variable "}}"
   "End keyword for template variables.")
 
-(defconst django-html-font-lock-keywords-1
+(defconst django-html-font-lock-keywords
   (append
-   ;; html-mode keyword
-   sgml-font-lock-keywords-1)
-
-  "First level keyword highlighting.")
-
-(defconst django-html-font-lock-keywords-2
-  (append
-   django-html-font-lock-keywords-1
-   sgml-font-lock-keywords-2))
-
-(defconst django-html-font-lock-keywords-3
-  (append
-   django-html-font-lock-keywords-1
-   django-html-font-lock-keywords-2
+   nxml-font-lock-keywords
 
    `(;; comment
      (,(rx (eval django-html-open-comment)
-              (1+ space)
-              (0+ (not (any "#")))
-              (1+ space)
+           (1+ space)
+           (0+ (not (any "#")))
+           (1+ space)
            (eval django-html-close-comment))
       . font-lock-comment-face)
 
@@ -120,7 +108,7 @@
      (,(rx (eval django-html-open-block)
            (1+ space)
            (group (and "end"
-                        ;; end prefix keywords
+                       ;; end prefix keywords
                        (or "autoescape" "block" "blocktrans" "cache" "comment"
                            "filter" "for" "if" "ifchanged" "ifequal"
                            "ifnotequal" "spaceless" "trans" "with")))
@@ -167,9 +155,6 @@
       (1 font-lock-variable-name-face) (2 font-lock-keyword-face)
       (3 font-lock-variable-name-face) (4 font-lock-keyword-face)))))
 
-(defvar django-html-font-lock-keywords
-  django-html-font-lock-keywords-1)
-
 (defvar django-html-mode-syntax-table
   (let ((django-html-mode-syntax-table (make-syntax-table)))
     django-html-mode-syntax-table)
@@ -199,23 +184,20 @@
    django-html-close-block))
 
 ;;;###autoload
-(define-derived-mode django-html-mode html-mode  "django-html"
+(define-derived-mode django-html-mode nxml-mode  "django-html"
   "Major mode for editing Django html templates (.djhtml).
 
 \\{django-html-mode-map}"
   :group 'django-html
 
-  ;; it mainly from sgml-mode font lock setting
+  ;; it mainly from nxml-mode font lock setting
   (set (make-local-variable 'font-lock-defaults)
-       '((django-html-font-lock-keywords
-          django-html-font-lock-keywords-1
-          django-html-font-lock-keywords-2
-          django-html-font-lock-keywords-3)
+       '((django-html-font-lock-keywords)
          nil t nil nil
          (font-lock-syntactic-keywords
-          . sgml-font-lock-syntactic-keywords))))
+          . nxml-font-lock-keywords))))
 
-(add-to-list 'auto-mode-alist '("\\.djhtml$" . django-html-mode))
+(add-hook 'django-html-mode-hook (lambda () (setq indent-tabs-mode nil)))
 
 (defun django-html-find-open-tag ()
   "Return open tag for closed template tag.
@@ -280,10 +262,10 @@ If tags are unbalanced, raise error."
           (read-string "item: ")
           (read-string "array: ")
           django-html-close-block) ?\n
-    _ ?\n
-    (when (y-or-n-p "\"empty\" clause? ")
-      (django-html-make-opening-tag "empty")) ?\n
-      (django-html-make-closing-tag "for"))
+          _ ?\n
+          (when (y-or-n-p "\"empty\" clause? ")
+            (django-html-make-opening-tag "empty")) ?\n
+            (django-html-make-closing-tag "for"))
 
 (define-skeleton django-html-if-template
   "Insert \"if\" template." nil
@@ -295,7 +277,7 @@ If tags are unbalanced, raise error."
   _ ?\n
   (when (y-or-n-p "\"else\" clause? ")
     (django-html-make-opening-tag "else")) ?\n
-  (django-html-make-closing-tag "if"))
+    (django-html-make-closing-tag "if"))
 
 (define-skeleton django-html-ifequal-template
   "Insert \"ifequal\" template." nil
@@ -304,10 +286,10 @@ If tags are unbalanced, raise error."
           (read-string "variable 1: ")
           (read-string "variable 2: ")
           django-html-close-block) ?\n
-  _ ?\n
-  (when (y-or-n-p "\"else\" clause? ")
-    (django-html-make-opening-tag "else")) ?\n
-  (django-html-make-closing-tag "ifequal"))
+          _ ?\n
+          (when (y-or-n-p "\"else\" clause? ")
+            (django-html-make-opening-tag "else")) ?\n
+            (django-html-make-closing-tag "ifequal"))
 
 (define-skeleton django-html-ifnotequal-template
   "Insert \"ifnotequal\" template." nil
@@ -316,10 +298,10 @@ If tags are unbalanced, raise error."
           (read-string "variable 1: ")
           (read-string "variable 2: ")
           django-html-close-block) ?\n
-  _ ?\n
-  (when (y-or-n-p "\"else\" clause? ")
-    (django-html-make-opening-tag "else")) ?\n
-  (django-html-make-closing-tag "ifnotequal"))
+          _ ?\n
+          (when (y-or-n-p "\"else\" clause? ")
+            (django-html-make-opening-tag "else")) ?\n
+            (django-html-make-closing-tag "ifnotequal"))
 
 (define-skeleton django-html-include-template
   "Insert \"include\" template." nil
@@ -383,8 +365,8 @@ If tags are unbalanced, raise error."
             django-html-open-block
             block-name
             django-html-close-block)) ?\n
-  _ ?\n
-  (django-html-make-closing-tag "block"))
+            _ ?\n
+            (django-html-make-closing-tag "block"))
 
 (define-skeleton django-html-cycle-template
   "Insert \"cycle\" template." nil
@@ -481,6 +463,23 @@ If tags are unbalanced, raise error."
      ["with" django-html-with-template t])))
 
 (easy-menu-add django-html-menu django-html-mode-map)
+
+;; A part from http://garage.pimentech.net/libcommonDjango_django_emacs/
+;; Modified a little
+(defun django-insert-trans (from to &optional buffer)
+  (interactive "*r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region from to)
+      (goto-char from)
+      (iso-iso2sgml from to)
+      (insert "{% trans \"")
+      (goto-char (point-max))
+      (insert "\" %}")
+      (point-max))))
+(define-key django-html-mode-map (kbd "C-t") 'django-insert-trans)
+
+;; This part ends here
 
 (provide 'django-html-mode)
 

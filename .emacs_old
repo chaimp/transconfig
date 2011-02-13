@@ -345,36 +345,10 @@ If ARG is non-numeric, copy line from beginning of the current line."
 (modify-coding-system-alist 'file "\\.nfo\\'" 'cp437)
 ;; 用cp437编码来打开.nfo文件
 
-;; yasnippet
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/lisps/yasnippet/snippets")
-(require 'dropdown-list)
-(setq yas/prompt-functions '(yas/dropdown-prompt
-                             yas/ido-prompt
-                             yas/completing-prompt))
+;;(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
+(setq auto-mode-alist (cons '("\\.asp$" . html-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.phtml$" . html-mode) auto-mode-alist))
 
-;; dirty fix for having AC everywhere
-(define-globalized-minor-mode real-global-auto-complete-mode
-  auto-complete-mode (lambda ()
-                       (if (not (minibufferp (current-buffer)))
-                         (auto-complete-mode 1))
-                       ))
-(real-global-auto-complete-mode t)
-;;(define-key ac-complete-mode-map "\t" 'ac-expand)
-;;(define-key ac-complete-mode-map "\r" 'ac-complete)
-(define-key ac-complete-mode-map "\M-n" 'ac-next)
-(define-key ac-complete-mode-map "\M-p" 'ac-previous)
-
-(set-default 'ac-sources
-             '(ac-source-semantic
-               ac-source-yasnippet
-               ac-source-abbrev
-               ac-source-words-in-buffer
-               ac-source-words-in-all-buffer
-               ac-source-imenu
-               ac-source-files-in-current-dir
-               ac-source-filename))
 
 ;;; cperl-mode is preferred to perl-mode                                        
 ;;; "Brevity is the soul of wit" <foo at acm.org> 
@@ -384,155 +358,41 @@ If ARG is non-numeric, copy line from beginning of the current line."
         (setcdr pair 'cperl-mode)))
   (append auto-mode-alist interpreter-mode-alist))
 
-(setq auto-mode-alist
-      (append '(("\\.php\\'"   . php-mode)
-		("\\.module$"  . php-mode)
-		("\\.inc$"     . php-mode)
-		("\\.install$" . php-mode)
-		("\\.engine$"  . php-mode)
-		("\\.css\\'"   . css-mode)
-		("\\.asp$"     . html-mode)
-		("\\.phtml$"   . html-mode)
-		("\\.html\\'"  . django-html-mode))
-	      auto-mode-alist))
-;; 将文件模式和文件后缀关联起来。
-(require 'auto-complete)
-(require 'auto-complete-config)
-(require 'ac-anything)
-(add-hook 'php-mode-hook
-	  (lambda()
-	    (setq case-fold-search t)
-	    (setq indent-tabs-mode nil)
-	    (setq fill-column 78)
-            (c-set-style "bsd")
-            (setq c-indent-level 4)
-            (setq c-continued-statement-offset 4)
-            (setq c-brace-offset -4)
-            (setq c-argdecl-indent 0)
-            (setq c-label-offset -4)
-            (setq c-basic-offset 2)
-            (setq tab-width 4)
-	    (c-set-offset 'arglist-cont 0)
-	    (c-set-offset 'arglist-intro '+)
-	    (c-set-offset 'case-label 2)
-	    (c-set-offset 'arglist-close 0)
-            (c-set-offset 'arglist-cont-nonempty 'c-lineup-math)
-	    (require 'php-completion)
-	    (php-completion-mode t)
-	    (define-key php-mode-map (kbd "C-c p") 'phpcmp-complete)
-	    (make-variable-buffer-local 'ac-sources)
-	    (add-to-list 'ac-sources 'ac-source-php-completion)
-	    (auto-complete-mode t)))
+(require 'mmm-mode)
+(setq mmm-global-mode 'maybe)
+(setq mmm-submode-decoration-level 2)
+(set-face-background 'mmm-code-submode-face "#DDEEFF")
+(mmm-add-classes
+  '((php-in-html
+      :submode php-mode
+      :face mmm-code-submode-face
+      :front "<\\?\\(php=?\\)?"
+      :back "\\?>"
+      :include-front t
+      :include-back t)))
 
-;; python-mode 设置
-(require 'python)
-;; django-mode
+(mmm-add-mode-ext-class 'html-mode "\\.php$" 'php-in-html)
+(add-hook 'php-mode-user-hook 'turn-on-font-lock)
+(add-hook 'html-mode-user-hook 'turn-on-font-lock)
+
+(setq auto-mode-alist
+   (append '(("\\.py\\'" . python-mode)
+      ("\\.css\\'" . css-mode)
+      ("\\.php\\'" . html-mode)
+      ("\\.tmp\\'" . html-mode)
+      ("\\.html\\'" . html-mode))
+      auto-mode-alist))
+;; 将文件模式和文件后缀关联起来。
+
 (require 'django-html-mode)
 (require 'django-mode)
-
-(autoload 'python-mode "python-mode" "Python Mode." t)
-(autoload 'jython-mode "python-mode" "Python editing mode." t)
-(autoload 'py-shell "python-mode" "Start  interpreter in another window." t)
-
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacs-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
-(pymacs-load "ropemacs" "rope-")
-(setq ropemacs-enable-autoimport t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Auto-completion
-;;;  Integrates:
-;;;   1) Rope
-;;;   2) Yasnippet
-;;;   all with AutoComplete.el
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun prefix-list-elements (list prefix)
-  (let (value)
-    (nreverse
-     (dolist (element list value)
-       (setq value (cons (format "%s%s" prefix element) value))))))
-
-(defvar ac-source-rope
-  '((candidates
-     . (lambda ()
-         (prefix-list-elements (rope-completions) ac-target))))
-  "Source for Rope")
-
-(defun ac-python-find ()
-  "Python `ac-find-function'."
-  (require 'thingatpt)
-  (let ((symbol (car-safe (bounds-of-thing-at-point 'symbol))))
-    (if (null symbol)
-        (if (string= "." (buffer-substring (- (point) 1) (point)))
-            (point)
-          nil)
-      symbol)))
-
-(defun ac-python-candidate ()
-  "Python `ac-candidates-function'"
-  (let (candidates)
-    (dolist (source ac-sources)
-      (if (symbolp source)
-          (setq source (symbol-value source)))
-      (let* ((ac-limit (or (cdr-safe (assq 'limit source)) ac-limit))
-             (requires (cdr-safe (assq 'requires source)))
-             cand)
-        (if (or (null requires)
-                (>= (length ac-target) requires))
-            (setq cand
-                  (delq nil
-                        (mapcar (lambda (candidate)
-                                  (propertize candidate 'source source))
-                                (funcall (cdr (assq 'candidates source)))))))
-        (if (and (> ac-limit 1)
-                 (> (length cand) ac-limit))
-            (setcdr (nthcdr (1- ac-limit) cand) nil))
-        (setq candidates (append candidates cand))))
-    (delete-dups candidates)))
-
-(add-hook 'python-mode-hook
-          (lambda ()
-	    (make-variable-buffer-local 'ac-sources)
-	    (add-to-list 'ac-sources 'ac-source-rope)
-            (rope-open-project "~/.emacs.d/93free/python/")
-            (local-set-key "\C-css" 'cscope-find-this-symbol)
-            (local-set-key "\C-csd" 'cscope-find-global-definition)
-            (local-set-key "\C-csg" 'cscope-find-global-definition)
-            (local-set-key "\C-csG" 'cscope-find-global-definition-no-prompting)
-            (local-set-key "\C-csc" 'cscope-find-functions-calling-this-function)
-            (local-set-key "\C-csC" 'cscope-find-called-functions)
-            (local-set-key "\C-cst" 'cscope-find-this-text-string)
-            (local-set-key "\C-cse" 'cscope-find-egrep-pattern)
-            (local-set-key "\C-csf" 'cscope-find-this-file)
-            (local-set-key "\C-csi" 'cscope-find-files-including-file)
-            (local-set-key "\C-csb" 'cscope-display-buffer)
-            (local-set-key "\C-csB" 'cscope-display-buffer-toggle)
-            (local-set-key "\C-csn" 'cscope-next-symbol)
-            (local-set-key "\C-csN" 'cscope-next-file)
-            (local-set-key "\C-csp" 'cscope-prev-symbol)
-            (local-set-key "\C-csP" 'cscope-prev-file)
-            (local-set-key "\C-csu" 'cscope-pop-mark)
-            (local-set-key "\C-csa" 'cscope-set-initial-directory)
-            (local-set-key "\C-csA" 'cscope-unset-initial-directory)
-            (local-set-key "\C-csL" 'cscope-create-list-of-files-to-index)
-            (local-set-key "\C-csI" 'cscope-index-files)
-            (local-set-key "\C-csE" 'cscope-edit-list-of-files-to-index)
-            (local-set-key "\C-csW" 'cscope-tell-user-about-directory)
-            (local-set-key "\C-csS" 'cscope-tell-user-about-directory)
-            (local-set-key "\C-csT" 'cscope-tell-user-about-directory)
-            (local-set-key "\C-csD" 'cscope-dired-directory)
-            ))
-
-
-
-;;(require 'zencoding-mode)
-;;(add-hook 'html-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+(autoload 'python-mode "python-mode" "Python editing mode." t)
+(autoload 'py-shell "python-mode" "Python shell" t)
+;;【python-mode.el】www.python.org 上面的 python-mode
 
 ;; 显示匹配的括号
 (show-paren-mode t)
+
 ;; 括号匹配			  
 (global-set-key "%" 'match-paren)
 (defun match-paren (arg)
@@ -697,8 +557,12 @@ Return a list of one element based on major mode."
      "Dired"
      )
     ((memq major-mode 
-	   '(html-mode php-mode nxml-mode sgml-mode python-mode django-mode django-html-mode css-mode javascript-mode js-mode js2-mode))
+	   '(html-mode php-mode nxml-mode sgml-mode ))
      "Webcodes"
+     )
+    ((memq major-mode 
+	   '(python-mode django-mode django-html-mode css-mode javascript-mode js-mode js2-mode))
+     "Djangocodes"
      )
     ((memq major-mode
            '(help-mode apropos-mode Info-mode Man-mode))
@@ -759,7 +623,7 @@ Return a list of one element based on major mode."
 		'(("#c1e156" . 0)
 		  ("#b8ff07" . 25)
 		  ("#00c377" . 60)))
-;;(highlight-tail-mode)
+(highlight-tail-mode)
 
 
 ;; 最近打开的文件
@@ -921,10 +785,48 @@ occurence of CHAR."
 ;; 中国象棋
 (require 'chinese-chess-pvc)
 
-;;(require 'ange-ftp)
+(require 'ange-ftp)
 (require 'tramp)
 (setq auto-save-default nil)
 (require 'epa) ;;使用EasyPG
+
+;;(require 'zencoding-mode)
+;;(add-hook 'html-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+
+;; yasnippet
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/lisps/yasnippet/snippets")
+(require 'dropdown-list)
+(setq yas/prompt-functions '(yas/dropdown-prompt
+                             yas/ido-prompt
+                             yas/completing-prompt))
+
+(require 'auto-complete)
+(require 'auto-complete-config)
+(require 'ac-anything)
+
+;; dirty fix for having AC everywhere
+(define-globalized-minor-mode real-global-auto-complete-mode
+  auto-complete-mode (lambda ()
+                       (if (not (minibufferp (current-buffer)))
+                         (auto-complete-mode 1))
+                       ))
+(real-global-auto-complete-mode t)
+;;(define-key ac-complete-mode-map "\t" 'ac-expand)
+;;(define-key ac-complete-mode-map "\r" 'ac-complete)
+(define-key ac-complete-mode-map "\M-n" 'ac-next)
+(define-key ac-complete-mode-map "\M-p" 'ac-previous)
+
+(set-default 'ac-sources
+             '(ac-source-semantic
+               ac-source-yasnippet
+               ac-source-abbrev
+               ac-source-words-in-buffer
+               ac-source-words-in-all-buffer
+               ac-source-imenu
+               ac-source-files-in-current-dir
+               ac-source-filename))
 
 
 (defun wl-sudo-find-file (file dir)
