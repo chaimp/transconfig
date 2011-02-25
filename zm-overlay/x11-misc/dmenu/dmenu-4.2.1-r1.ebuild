@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/x11-misc/dmenu/dmenu-4.1.1.ebuild,v 1.2 2010/07/17 10:49:21 jer Exp $
 
@@ -13,7 +13,7 @@ SRC_URI="http://dl.suckless.org/tools/${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~hppa ~ppc ~ppc64 ~x86 ~x86-fbsd"
-IUSE="xinerama vertical xft"
+IUSE="xinerama -vertical xft"
 
 DEPEND="x11-libs/libX11
 	xinerama? ( x11-libs/libXinerama )"
@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 
 	use vertical && epatch ${FILESDIR}/dmenu-vertical-history.patch
-	use xft && epatch ${FILESDIR}/${P}-xft.patch
+	use xft && epatch ${FILESDIR}/${P}-xft-cleanup-db.patch
 
 	sed -i \
 		-e "s/CFLAGS   = -std=c99 -pedantic -Wall -Os/CFLAGS  += -std=c99 -pedantic -Wall -g/" \
