@@ -1,9 +1,10 @@
-set editor=emacsclient\ -f
+set go=bcrs
+set editor='emacsclient'
 
-set nextpattern=\s*下一页|下一张|下一个|下一章|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
-set previouspattern=\s*上一页|上一张|上一个|上一篇|上一章|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
+set nextpattern=\s*下一页|下一张|下一章|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
+set previouspattern=\s*上一页|上一张|上一篇|上一章|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
 
-set hintchars="asdfg;lkjh"
+set hk="asdfg;lkjh"
 
 "键盘映射
 map <S-Up> :set go=bcrm<CR>
@@ -20,9 +21,9 @@ map <S-Right> :set go=bcr<CR>
 :inoremap <A-w> <C-v><C-c>
 :inoremap <C-y> <C-v><C-v>
 
-"noremap h e
-"noremap l e
-"noremap <C-d> e
+noremap h e
+noremap l e
+noremap <C-d> e
 noremap <C-x> c
 "unmap <C-x>
 :noremap l gt

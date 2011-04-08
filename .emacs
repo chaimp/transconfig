@@ -4,16 +4,15 @@
 ;;(add-to-list 'load-path "~/.emacs.d/lisps/mumamo")
 ;; 载入elisp文件
 
-(global-set-key [(f1)] (lambda () (interactive) (manual-entry (current-word))))
-;;(global-set-key [f2] 'speedbar)             ; 快速浏览
+;;(global-set-key [(f1)] (lambda () (interactive) (manual-entry (current-word))))
+(global-set-key [f1] 'speedbar)             ; 快速浏览
 (global-set-key [f2] 'view-mode)            ; 只读模式
 (global-set-key [f3] 'linum-mode)           ; 显示行号
 (global-set-key [f4] 'global-highline-mode) ; 高亮光标行 
-;;(global-set-key [f5] 'revert-buffer)        ; 重载文件/刷新
+(global-set-key [f5] 'font-lock-mode)       ; 语法高亮
 (global-set-key [f6] 'eshell)               ; 一个 elisp 写的 shell
 (global-set-key [f7] 'calendar)             ; Emacs 的日历系统
-;;(global-set-key [f10] 'hs-toggle-hiding)
-;;(global-set-key [f8] 'plan)               ; 计划任务
+(global-set-key [f8] 'flymake-mode)         
 (global-set-key [f9] 'other-window)         ; 跳转到 Emacs 的另一个窗口
 ;;(global-set-key [f10] ')                  ; 文件菜单
 (global-set-key [f11] 'compile)             ; 在 Emacs 中编译
@@ -84,8 +83,11 @@
 (setq Man-notify-method 'pushy)                
 ;; 当浏览 man page 时，直接跳转到 man buffer。
 
+(require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)     
 ;; 当有两个文件名相同的缓冲时，使用前缀的目录名做 buffer 名字，不用原来的
+
+(setq default-fill-column 78)
 
 (setq line-number-display-limit 1000000)       
 ;; 当行数超过一定数值，不再显示行号。
@@ -123,7 +125,7 @@
 (setq x-select-enable-clipboard t)
 ;; 支持emacs和外部程序的粘贴
 
-(defun qiang-comment-dwim-line (&optional arg)
+(defun zhou-comment-dwim-line (&optional arg)
   "Replacement for the comment-dwim command.
 If no region is selected and current line is not blank and we are not at the end of the line,
 then comment current line.
@@ -133,13 +135,13 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
   (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
       (comment-or-uncomment-region (line-beginning-position) (line-end-position))
     (comment-dwim arg)))
-(global-set-key "\M-;" 'qiang-comment-dwim-line)
+(global-set-key "\M-;" 'zhou-comment-dwim-line)
 ;;do what I mean,注释功能
 
 ;;###复制一行绑定
-(global-set-key (kbd "M-w") 'huangq-save-line-dwim)
+(global-set-key (kbd "M-w") 'zhou-save-line-dwim)
 ;;###autoload
-(defun huangq-save-one-line (&optional arg)
+(defun zhou-save-one-line (&optional arg)
   "save one line. If ARG, save one line from first non-white."
   (interactive "P")
   (save-excursion
@@ -149,7 +151,7 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
           (kill-ring-save (point) (line-end-position)))
       (kill-ring-save (line-beginning-position) (line-end-position)))))
 ;;;###autoload
-(defun huangq-kill-ring-save (&optional n)
+(defun zhou-kill-ring-save (&optional n)
   "If region is active, copy region. Otherwise, copy line."
   (interactive "p")
   (if (and mark-active transient-mark-mode)
@@ -158,7 +160,7 @@ Replaces default behaviour of comment-dwim, when it inserts comment at the end o
         (kill-ring-save (line-beginning-position) (line-end-position n))
       (kill-ring-save (line-beginning-position n) (line-end-position)))))
 ;;;###autoload
-(defun huangq-save-line-dwim (&optional arg)
+(defun zhou-save-line-dwim (&optional arg)
   "If region is active, copy region.
 If ARG is nil, copy line from first non-white.
 If ARG is numeric, copy ARG lines.
@@ -170,11 +172,11 @@ If ARG is non-numeric, copy line from beginning of the current line."
     (if arg
         (if (numberp arg)
             ;; numeric arg, save ARG lines
-            (huangq-kill-ring-save arg)
+            (zhou-kill-ring-save arg)
           ;; other ARG, save current line
-          (huangq-save-one-line))
+          (zhou-save-one-line))
       ;; no ARG, save current line from first non-white
-      (huangq-save-one-line t))))
+      (zhou-save-one-line t))))
 ;;==============================================
 
 
@@ -279,7 +281,7 @@ If ARG is non-numeric, copy line from beginning of the current line."
      (t
       (apply 'eshell-exec-visual (cons "ssh" args))))))
 
-(require 'hfyview)
+;;(require 'hfyview)
 
 (setq-default kill-whole-line t)                
 ;; 在行首 C-k 时，同时删除该行。
@@ -305,26 +307,45 @@ If ARG is non-numeric, copy line from beginning of the current line."
 (autoload 'table-insert "table" "WYGIWYS table editor")
 ;; 可以识别文本文件里本来就存在的表格，而且可以把表格输出为 HTML 和 TeX。
 
-(autoload 'folding-mode          "folding" "Folding mode" t)
-(autoload 'turn-off-folding-mode "folding" "Folding mode" t)
-(autoload 'turn-on-folding-mode  "folding" "Folding mode" t)
-;;【folding.el】编辑文本的一部分，将其他部分折叠起来。
-
-
-
 ;; 设置 sentence-end 可以识别中文标点。不用在 fill 时在句号后插入两个空格。
 (setq sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*")
 (setq sentence-end-double-space nil)
 
+;; 注释style
+;;(setq comment-style 'box)
 
-(load-library "hideshow")
-(add-hook 'java-mode-hook 'hs-minor-mode)
-(add-hook 'perl-mode-hook 'hs-minor-mode)
-(add-hook 'php-mode-hook 'hs-minor-mode)
-(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-(global-set-key [f5] 'hs-hide-all)
-(global-set-key (kbd "M-,") 'hs-toggle-hiding)
-;; 代码折叠
+;; outline-mode
+(setq outline-minor-mode-prefix [(control d)])
+(set-display-table-slot
+ standard-display-table
+ 'selective-display
+ (let ((face-offset (* (face-id 'shadow) (lsh 1 22))))
+   (vconcat (mapcar (lambda (c) (+ face-offset c)) " [...] "))))
+
+;; 有了这段代码之后，当你按 C-c a x (x 是任意一个字符) 时，光标就会到下一个 x 处。
+;; 再次按 x，光标就到下一个 x。比如 C-c a w w w w ..., C-c a b b b b b b ...
+(defun zhou-go-to-char (n char)
+  "Move forward to Nth occurence of CHAR.
+Typing `zhou-go-to-char-key' again will move forwad to the next Nth
+occurence of CHAR."
+  (interactive "Go to char: ")
+  (search-forward (string char) nil nil n)
+  (while (char-equal (read-char)
+		     char)
+    (search-forward (string char) nil nil n))
+  (setq unread-command-events (list last-input-event)))
+(define-key global-map (kbd "C-c a") 'zhou-go-to-char)
+
+;; 这两个函数可以分别把一个区域和匹配某个regexp的行都藏起来，就跟不存在一样……
+;; hide region
+(require 'hide-region)
+(global-set-key (kbd "C-c r") 'hide-region-hide)
+(global-set-key (kbd "C-c R") 'hide-region-unhide)
+;; hide lines
+(require 'hide-lines)
+;;(global-set-key (kbd "C-c l") 'hide-lines)
+(global-set-key (kbd "C-c L") 'show-all-invisible)
+;; hide-lines 在操作某些行的时候用起来特别方便。加一个前缀参数可以把不匹配的行都藏起来，只看到匹配的！
 
 (require 'thumbs)
 (autoload 'thumbs "thumbs" "Preview images in a directory." t)
@@ -338,9 +359,9 @@ If ARG is non-numeric, copy line from beginning of the current line."
 ;; 如果设置为 t，光标在 TAB 字符上会显示为一个大方块 :)。
 
 ;;(require 'un-define)  ;;最新版的mule-ucs不自动加载unicode支持,须照此行方法手动载入.
-(require 'unicad)
+;;(require 'unicad)
 ;;(set-language-environment 'utf-8)
-(set-keyboard-coding-system 'chinese-gbk)
+;;(set-keyboard-coding-system 'chinese-gbk)
 
 (modify-coding-system-alist 'file "\\.nfo\\'" 'cp437)
 ;; 用cp437编码来打开.nfo文件
@@ -390,10 +411,12 @@ If ARG is non-numeric, copy line from beginning of the current line."
 		("\\.inc$"     . php-mode)
 		("\\.install$" . php-mode)
 		("\\.engine$"  . php-mode)
+		("\\.js\\'"    . js-mode)
 		("\\.css\\'"   . css-mode)
 		("\\.asp$"     . html-mode)
 		("\\.phtml$"   . html-mode)
-		("\\.html\\'"  . django-html-mode))
+		("\\.djhtml$"  . django-html-mode)
+		("\\.html\\'"  . html-mode))
 	      auto-mode-alist))
 ;; 将文件模式和文件后缀关联起来。
 (require 'auto-complete)
@@ -424,16 +447,32 @@ If ARG is non-numeric, copy line from beginning of the current line."
 	    (add-to-list 'ac-sources 'ac-source-php-completion)
 	    (auto-complete-mode t)))
 
-;; python-mode 设置
-(require 'python)
+;; python-mode 
+
 ;; django-mode
 (require 'django-html-mode)
 (require 'django-mode)
 
-(autoload 'python-mode "python-mode" "Python Mode." t)
-(autoload 'jython-mode "python-mode" "Python editing mode." t)
-(autoload 'py-shell "python-mode" "Start  interpreter in another window." t)
-
+;; Autofill inside of comments
+(defun python-auto-fill-comments-only ()
+  (auto-fill-mode 1)
+  (set (make-local-variable 'fill-nobreak-predicate)
+       (lambda ()
+         (not (python-in-string/comment)))))
+(add-hook 'python-mode-hook
+          (lambda ()
+            (python-auto-fill-comments-only)))
+;;Autofill comments
+;;TODO: make this work for docstrings too.
+;; but docstrings just use font-lock-string-face unfortunately
+(add-hook 'python-mode-hook
+          (lambda ()
+            (auto-fill-mode 1)
+            (set (make-local-variable 'fill-nobreak-predicate)
+                 (lambda ()
+                   (not (eq (get-text-property (point) 'face)
+                            'font-lock-comment-face))))))
+;; pymacs
 (autoload 'pymacs-apply "pymacs")
 (autoload 'pymacs-call "pymacs")
 (autoload 'pymacs-eval "pymacs" nil t)
@@ -453,14 +492,12 @@ If ARG is non-numeric, copy line from beginning of the current line."
   (let (value)
     (nreverse
      (dolist (element list value)
-       (setq value (cons (format "%s%s" prefix element) value))))))
-
+      (setq value (cons (format "%s%s" prefix element) value))))))
 (defvar ac-source-rope
   '((candidates
      . (lambda ()
          (prefix-list-elements (rope-completions) ac-target))))
   "Source for Rope")
-
 (defun ac-python-find ()
   "Python `ac-find-function'."
   (require 'thingatpt)
@@ -470,7 +507,6 @@ If ARG is non-numeric, copy line from beginning of the current line."
             (point)
           nil)
       symbol)))
-
 (defun ac-python-candidate ()
   "Python `ac-candidates-function'"
   (let (candidates)
@@ -492,11 +528,13 @@ If ARG is non-numeric, copy line from beginning of the current line."
             (setcdr (nthcdr (1- ac-limit) cand) nil))
         (setq candidates (append candidates cand))))
     (delete-dups candidates)))
-
 (add-hook 'python-mode-hook
           (lambda ()
-	    (make-variable-buffer-local 'ac-sources)
-	    (add-to-list 'ac-sources 'ac-source-rope)
+	    (set (make-local-variable 'ac-sources)
+		 (append ac-sources 'ac-source-rope))
+	    (set (make-local-variable 'ac-find-function) 'ac-python-find)
+	    (set (make-local-variable 'ac-candidate-function) 'ac-python-candidate)
+;;	    (set (make-local-variable 'ac-auto-start) nil)
             (rope-open-project "~/.emacs.d/93free/python/")
             (local-set-key "\C-css" 'cscope-find-this-symbol)
             (local-set-key "\C-csd" 'cscope-find-global-definition)
@@ -525,8 +563,6 @@ If ARG is non-numeric, copy line from beginning of the current line."
             (local-set-key "\C-csT" 'cscope-tell-user-about-directory)
             (local-set-key "\C-csD" 'cscope-dired-directory)
             ))
-
-
 
 ;;(require 'zencoding-mode)
 ;;(add-hook 'html-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
@@ -566,45 +602,6 @@ If ARG is non-numeric, copy line from beginning of the current line."
       (setq arg (if (plusp arg) (1- arg) (1+ arg))))))
 ;; 交换两个窗口内的 buffer
 (global-set-key (kbd "C-c l") 'his-transpose-windows)
-
-;; 水木 ilovecpp 给出一个命令，用于切换 mode，很好用。
-(global-set-key (kbd "C-c m") 'switch-major-mode)
-
-;; 插入 template
-(global-set-key (kbd "C-c t") 'template-expand-template)
-
-;; 这两个命令特别好用，可以根据文件的后缀或者 mode 判断调用的 compile
-;; 命令。当目录下有 makefile 自动使用 make 命令。
-(global-set-key (kbd "C-c r") 'smart-run)
-(global-set-key (kbd "C-c s") 'smart-compile)
-
-;; 最常用的注释命令。
-(global-set-key (kbd "C-'") 'comment-dwim)
-
-;; 这个命令配合 comment-dwim 基本上能满足所有的注释命令
-(global-set-key (kbd "C-c g") 'comment-or-uncomment-region)
-
-
-;; imenu 是一个代码跳转的很好用的命令。这个命令在调用 imenu 同时，显示所有补全
-(global-set-key (kbd "C-c i") 'his-imenu)
-
-;; 使用外部的浏览器打开光标下的网址
-(global-set-key (kbd "C-c o") 'browse-url-at-point)
-
-;; 我写的一个 elisp，树形显示 imenu
-(global-set-key (kbd "C-c v") 'my-tr-imenu)
-
-;; Windmove 是在窗口之间移动的很好用的命令。默认是用 Shift+上下左右键移动。
-(when (featurep 'windmove)
-  (global-set-key (kbd "C-c n") 'windmove-down)
-  (global-set-key (kbd "C-c p") 'windmove-up)
-  (global-set-key (kbd "C-c ,") 'windmove-left)
-  (global-set-key (kbd "C-c .") 'windmove-right)
-  (windmove-default-keybindings))
-
-
-;;(require 'tex-site)
-(require 'compile)
 
 (require 'redo)
 (global-set-key ( kbd "C-.") 'redo)
@@ -843,49 +840,356 @@ Return a list of one element based on major mode."
     (when (file-exists-p todo)
       (add-to-list 'org-agenda-files todo))))
 
+(require 'xcscope)
+;; 中国象棋
+(require 'chinese-chess-pvc)
+;;(require 'ange-ftp)
+(require 'tramp)
+(setq auto-save-default nil)
+(require 'epa) ;;使用EasyPG
 
-;; 自动补全 "hippie-expand"
-(global-set-key "\M-/" 'hippie-expand)
-(setq hippie-expand-try-functions-list 
-   '(try-expand-dabbrev
-     try-expand-dabbrev-visible
-     try-expand-dabbrev-all-buffers
-     try-expand-dabbrev-from-kill
-     try-complete-file-name-partially
-     try-complete-file-name
-     try-expand-all-abbrevs
-     try-expand-list
-     try-expand-line
-     try-complete-lisp-symbol-partially
-     try-complete-lisp-symbol))
-;; hippie-expand 的补全方式。它是一个优先列表， hippie-expand 会优先使用表最前面的函数来补全。
+(defun wl-sudo-find-file (file dir)
+  (find-file (concat "/sudo:localhost:" (expand-file-name file dir))))
+(require 'find-func)
+(find-function-setup-keys)
 
-;; 这个函数是一个 vi 的 "f" 命令的替代品。
-(defun wy-go-to-char (n char)
-  "Move forward to Nth occurence of CHAR.
-Typing `wy-go-to-char-key' again will move forwad to the next Nth
-occurence of CHAR."
-  (interactive "p\ncGo to char: ")
-  (search-forward (string char) nil nil n)
-  (while (char-equal (read-char)
-		     char)
-    (search-forward (string char) nil nil n))
-  (setq unread-command-events (list last-input-event)))
+;; flymake
+(require 'flymake)
+(autoload 'flymake-find-file-hook "flymake" "" t)
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+(setq flymake-allowed-file-name-masks '())
+(setq flymake-gui-warnings-enabled nil)
+(setq flymake-log-level 0)
+(setq flymake-no-changes-timeout 5.0)
+(setq flymake-master-file-dirs
+      '("." "./src" "../src" "../../src"
+        "./source" "../source" "../../source"
+        "./Source" "../Source" "../../Source"
+        "./test" "../test" "../../test"
+        "./Test" "../Test" "../../Test"
+        "./UnitTest" "../UnitTest" "../../UnitTest"))
 
-(define-key global-map (kbd "C-c a") 'wy-go-to-char)
-;; 有了这段代码之后，当你按 C-c a x (x 是任意一个字符) 时，光标就会到下一个 x 处。
-;; 再次按 x，光标就到下一个 x。比如 C-c a w w w w ..., C-c a b b b b b b ...
+(defvar flymake-mode-map (make-sparse-keymap))
+(define-key flymake-mode-map (kbd "C-c <f4>") 'flymake-goto-next-error)
+(define-key flymake-mode-map (kbd "C-c <S-f4>") 'flymake-goto-prev-error)
+(define-key flymake-mode-map (kbd "C-c <C-f4>")
+  'flymake-display-err-menu-for-current-line)
+(or (assoc 'flymake-mode minor-mode-map-alist)
+    (setq minor-mode-map-alist
+          (cons (cons 'flymake-mode flymake-mode-map)
+                minor-mode-map-alist)))
+(defadvice flymake-goto-prev-error (after display activate)
+  (message (get-char-property (point) 'help-echo)))
+(defadvice flymake-goto-next-error (after display activate)
+  (message (get-char-property (point) 'help-echo)))
 
-;; 这两个函数可以分别把一个区域和匹配某个regexp的行都藏起来，就跟不存在一样……
-;; hide region
-(require 'hide-region)
-(global-set-key (kbd "C-c r") 'hide-region-hide)
-(global-set-key (kbd "C-c R") 'hide-region-unhide)
-;; hide lines
-(require 'hide-lines)
-;;(global-set-key (kbd "C-c l") 'hide-lines)
-(global-set-key (kbd "C-c L") 'show-all-invisible)
-;; hide-lines 在操作某些行的时候用起来特别方便。加一个前缀参数可以把不匹配的行都藏起来，只看到匹配的！
+(when (executable-find "texify")
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.tex\\'" flymake-simple-tex-init))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("[0-9]+\\.tex\\'"
+                 flymake-master-tex-init flymake-master-cleanup)))
+
+(when (executable-find "xml")
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.xml\\'" flymake-xml-init))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.html?\\'" flymake-xml-init)))
+
+(when (executable-find "perl")
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.p[ml]\\'" flymake-perl-init)))
+
+(when (executable-find "php")
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.php[345]?\\'" flymake-php-init)))
+
+(when (executable-find "make")
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.idl\\'" flymake-simple-make-init))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.java\\'"
+                 flymake-simple-make-java-init flymake-simple-java-cleanup))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.cs\\'" flymake-simple-make-init)))
+
+(defun flymake-elisp-init ()
+  (if (string-match "^ " (buffer-name))
+      nil
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list
+       (expand-file-name invocation-name invocation-directory)
+       (list
+        "-Q" "--batch" "--eval"
+        (prin1-to-string
+         (quote
+          (dolist (file command-line-args-left)
+            (with-temp-buffer
+              (insert-file-contents file)
+              (emacs-lisp-mode)
+              (condition-case data
+                  (scan-sexps (point-min) (point-max))
+                (scan-error
+                 (goto-char(nth 2 data))
+                 (princ (format "%s:%s: error: Unmatched bracket or quote\n"
+                                file (line-number-at-pos)))))))))
+        local-file)))))
+;; (add-to-list 'flymake-allowed-file-name-masks '("\\.el$" flymake-elisp-init))
+;; (add-hook 'write-file-functions (lambda nil
+;; (when (eq major-mode 'emacs-lisp-mode)
+;; (check-parens))))
+
+(defcustom flymake-shell-of-choice "sh"
+  "Path of shell.")
+(defcustom flymake-shell-arguments
+  (list "-n")
+  "Shell arguments to invoke syntax checking.")
+(defun flymake-shell-init ()
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                     'flymake-create-temp-inplace))
+         (local-file (file-relative-name
+                      temp-file
+                      (file-name-directory buffer-file-name))))
+    (list flymake-shell-of-choice
+          (append flymake-shell-arguments (list local-file)))))
+(when (executable-find flymake-shell-of-choice)
+  (add-to-list 'flymake-allowed-file-name-masks '("\\.sh$" flymake-shell-init)))
+
+(defvar flymake-makefile-filenames '("Makefile" "makefile" "GNUmakefile")
+  "File names for make.")
+(defvar flymake-c-file-arguments
+  '(("gcc" ("-I.." "-I../include" "-I../inc" "-I../common" "-I../public"
+            "-I../.." "-I../../include" "-I../../inc"
+            "-I../../common" "-I../../public"
+            "-Wall" "-Wextra" "-pedantic" "-fsyntax-only"))
+    ("clang" ("-I.." "-I../include" "-I../inc" "-I../common" "-I../public"
+              "-I../.." "-I../../include" "-I../../inc"
+              "-I../../common" "-I../../public"
+              "-Wall" "-Wextra" "-pedantic" "-fsyntax-only"))
+    ("cl" ("/I.." "/I../include" "/I../inc" "/I../common" "/I../public"
+           "/I../.." "/I../../include" "/I../../inc"
+           "/I../../common" "/I../../public"
+           "/EHsc" "/W4" (concat "/Fo" (getenv "TEMP") "\\null.obj") "/c"))))
+(defvar flymake-cxx-file-arguments
+  '(("g++" ("-I.." "-I../include" "-I../inc" "-I../common" "-I../public"
+            "-I../.." "-I../../include" "-I../../inc"
+            "-I../../common" "-I../../public"
+            "-Wall" "-Wextra" "-pedantic" "-fsyntax-only"))
+    ("clang++" ("-I.." "-I../include" "-I../inc" "-I../common" "-I../public"
+                "-I../.." "-I../../include" "-I../../inc"
+                "-I../../common" "-I../../public"
+                "-Wall" "-Wextra" "-pedantic" "-fsyntax-only"))
+    ("cl" ("/I.." "/I../include" "/I../inc" "/I../common" "/I../public"
+           "/I../.." "/I../../include" "/I../../inc"
+           "/I../../common" "/I../../public"
+           "/EHsc" "/W4" (concat "/Fo" (getenv "TEMP") "\\null.obj") "/c"))))
+(defun flymake-get-compile (arguments)
+  (let ((compile nil))
+    (while (and (not compile) arguments)
+      (let ((arg (car arguments)))
+        (if (executable-find (car arg))
+            (setq compile arg)
+          (setq arguments (cdr arguments)))))
+    compile))
+(defun flymake-get-c-compile ()
+  (flymake-get-compile flymake-c-file-arguments))
+(defun flymake-get-cxx-compile ()
+  (flymake-get-compile flymake-cxx-file-arguments))
+(defun flymake-get-cc-cmdline (source base-dir)
+  (let ((args nil)
+        (compile (if (string= (file-name-extension source) "c")
+                     (flymake-get-c-compile)
+                   (flymake-get-cxx-compile))))
+    (if compile
+        (setq args (list (car compile)
+                         (append (car (cdr compile)) (list source))))
+      (flymake-report-fatal-status
+       "NOMK" (format "No compile found for %s" source)))
+    args))
+(defun flymake-init-find-makfile-dir (source-file-name)
+  "Find Makefile, store its dir in buffer data and return its dir, if found."
+  (let* ((source-dir (file-name-directory source-file-name))
+         (buildfile-dir nil))
+    (catch 'found
+      (dolist (makefile flymake-makefile-filenames)
+        (let ((found-dir (flymake-find-buildfile makefile source-dir)))
+          (when found-dir
+            (setq buildfile-dir found-dir)
+            (setq flymake-base-dir buildfile-dir)
+            (throw 'found t)))))
+    buildfile-dir))
+(defun flymake-simple-make-cc-init-impl (create-temp-f
+                                         use-relative-base-dir
+                                         use-relative-source)
+  "Create syntax check command line for a directly checked source file.
+Use CREATE-TEMP-F for creating temp copy."
+  (let* ((args nil)
+         (source-file-name buffer-file-name)
+         (source-dir (file-name-directory source-file-name))
+         (buildfile-dir
+          (and (executable-find "make")
+               (flymake-init-find-makfile-dir source-file-name)))
+         (temp-source-file-name
+          (ignore-errors
+            (flymake-init-create-temp-buffer-copy create-temp-f))))
+    (if temp-source-file-name
+        (setq args
+              (flymake-get-syntax-check-program-args
+               temp-source-file-name
+               (if buildfile-dir buildfile-dir source-dir)
+               use-relative-base-dir
+               use-relative-source
+               (if buildfile-dir
+                   'flymake-get-make-cmdline
+                 'flymake-get-cc-cmdline)))
+      (flymake-report-fatal-status
+       "TMPERR" (format "Can't create temp file for %s" source-file-name)))
+    args))
+(defun flymake-simple-make-cc-init ()
+  (flymake-simple-make-cc-init-impl 'flymake-create-temp-inplace t t))
+(defun flymake-master-make-cc-init (get-incl-dirs-f
+                                    master-file-masks
+                                    include-regexp)
+  "Create make command line for a source file
+ checked via master file compilation."
+  (let* ((args nil)
+         (temp-master-file-name
+          (ignore-errors
+            (flymake-init-create-temp-source-and-master-buffer-copy
+             get-incl-dirs-f
+             'flymake-create-temp-inplace
+             master-file-masks
+             include-regexp))))
+    (if temp-master-file-name
+        (let* ((source-file-name buffer-file-name)
+               (source-dir (file-name-directory source-file-name))
+               (buildfile-dir
+                (and (executable-find "make")
+                     (flymake-init-find-makfile-dir temp-master-file-name))))
+          (setq args (flymake-get-syntax-check-program-args
+                      temp-master-file-name
+                      (if buildfile-dir buildfile-dir source-dir)
+                      nil
+                      nil
+                      (if buildfile-dir
+                          'flymake-get-make-cmdline
+                        'flymake-get-cc-cmdline))))
+      (flymake-report-fatal-status
+       "TMPERR" (format "Can't create temp file for %s" source-file-name)))
+    args))
+(defun flymake-master-make-cc-header-init ()
+  (flymake-master-make-cc-init
+   'flymake-get-include-dirs
+   '("\\.cpp\\'" "\\.c\\'")
+   "[ \t]*#[ \t]*include[ \t]*\"\\([[:word:]0-9/\\_.]*%s\\)\""))
+(when (or (executable-find "make")
+          (flymake-get-c-compile)
+          (flymake-get-cxx-compile))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.\\(?:h\\(?:pp\\)?\\)\\'"
+                 flymake-master-make-cc-header-init flymake-master-cleanup))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.\\(?:c\\(?:pp\\|xx\\|\\+\\+\\)?\\|CC\\)\\'"
+                 flymake-simple-make-cc-init)))
+
+
+;; (when (executable-find "pyflakes")
+;;   (defun flymake-pyflakes-init ()
+;;     (let* ((args nil)
+;;            (temp-file (ignore-errors (flymake-init-create-temp-buffer-copy
+;;                                       'flymake-create-temp-inplace))))
+;;       (if temp-file
+;;           (let ((local-file (file-relative-name
+;;                              temp-file
+;;                              (file-name-directory buffer-file-name))))
+;;             (setq args (list "pyflakes" (list local-file))))
+;;         (flymake-report-fatal-status
+;;          "TMPERR" (format "Can't create temp file")))
+;;       args))
+;;   (add-to-list 'flymake-allowed-file-name-masks
+;;                '("\\.py\\'" flymake-pyflakes-init)))
+
+(add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
+;; Drupal-type extensions
+(add-to-list 'flymake-allowed-file-name-masks '("\\.module$" flymake-php-init))
+(add-to-list 'flymake-allowed-file-name-masks '("\\.install$" flymake-php-init))
+(add-to-list 'flymake-allowed-file-name-masks '("\\.inc$" flymake-php-init))
+(add-to-list 'flymake-allowed-file-name-masks '("\\.engine$" flymake-php-init))
+(add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
+;;(define-key php-mode-map '[M-S-up] 'flymake-goto-prev-error)
+;;(define-key php-mode-map '[M-S-down] 'flymake-goto-next-error)
+
+(defun flymake-pylint-init ()
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
+		     'flymake-create-temp-inplace))
+	 (local-file (file-relative-name
+		      temp-file
+		      (file-name-directory buffer-file-name))))
+    (list "epylint" (list local-file))))
+
+(add-to-list 'flymake-allowed-file-name-masks
+	     '("\\.py\\'" flymake-pylint-init))
+
+(defun flymake-css-init ()
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
+		     'flymake-create-temp-inplace))
+	 (local-file (file-relative-name
+		      temp-file
+		      (file-name-directory buffer-file-name))))
+    (list "cssparse" (list local-file))))
+(add-to-list 'flymake-allowed-file-name-masks
+	     '("\\.css$" flymake-css-init))
+(add-to-list 'flymake-err-line-patterns
+	     '("\\(.*\\) \\[\\([0-9]+\\):\\([0-9]+\\): \\(.*\\)\\]"
+	       nil 2 3 1))
+(add-hook 'css-mode-hook
+	  (lambda () (flymake-mode t)))
+
+(defun flymake-html-init ()
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
+		     'flymake-create-temp-inplace))
+	 (local-file (file-relative-name
+		      temp-file
+		      (file-name-directory buffer-file-name))))
+    (list "tidy" (list "-utf8" "--fix-uri" "no" local-file))))
+
+(add-to-list 'flymake-allowed-file-name-masks
+	     '("\\.html$\\|\\.ctp" flymake-html-init))
+
+(add-to-list 'flymake-err-line-patterns
+	     '("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)"
+	       nil 1 2 4))
+
+
+(defconst flymake-allowed-js-file-name-masks '(("\\.json$" flymake-js-init)
+					       ("\\.js$" flymake-js-init)))
+(defcustom flymake-js-detect-trailing-comma t nil :type 'boolean)
+(defvar flymake-js-err-line-patterns '(("^\\(.+\\)\:\\([0-9]+\\)\: \\(SyntaxError\:.+\\)\:$" 1 2 nil 3)))
+(when flymake-js-detect-trailing-comma
+  (setq flymake-js-err-line-patterns (append flymake-js-err-line-patterns
+					     '(("^\\(.+\\)\:\\([0-9]+\\)\: \\(strict warning: trailing comma.+\\)\:$" 1 2 nil 3)))))
+
+(defun flymake-js-init ()
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
+		     'flymake-create-temp-inplace))
+	 (local-file (file-relative-name
+		      temp-file
+		      (file-name-directory buffer-file-name))))
+    (list "js-config" (list "-s" local-file))))
+(defun flymake-js-load ()
+  (interactive)
+  (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
+    (setq flymake-check-was-interrupted t))
+  (ad-activate 'flymake-post-syntax-check)
+  (setq flymake-allowed-file-name-masks (append flymake-allowed-file-name-masks flymake-allowed-js-file-name-masks))
+  (setq flymake-err-line-patterns flymake-js-err-line-patterns)
+  (flymake-mode t))
+
+(add-hook 'javascript-mode-hook '(lambda () (flymake-js-load)))
 
 ;; cedet配置
 ;;(require 'cedet)
@@ -916,24 +1220,7 @@ occurence of CHAR."
 ;;(setq ecb-vc-enable-support t)
 ;;(setq ecb-tip-of-the-day nil)
 
-(require 'xcscope)
 
-;; 中国象棋
-(require 'chinese-chess-pvc)
-
-;;(require 'ange-ftp)
-(require 'tramp)
-(setq auto-save-default nil)
-(require 'epa) ;;使用EasyPG
-
-
-(defun wl-sudo-find-file (file dir)
-  (find-file (concat "/sudo:localhost:" (expand-file-name file dir))))
-
-(require 'find-func)
-(find-function-setup-keys)
-
-        
 ;;session和desktop插件,需要放在最后
 ;;(require 'session)
 ;;(add-hook 'after-init-hook 'session-initialize)
@@ -947,11 +1234,3 @@ occurence of CHAR."
 ;;(add-to-list 'desktop-modes-not-to-save 'Info-mode)
 ;;(add-to-list 'desktop-modes-not-to-save 'info-lookup-mode)
 ;;(add-to-list 'desktop-modes-not-to-save 'fundamental-mode)
-
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(mumamo-background-chunk-major ((((class color) (min-colors 88) (background dark)) nil)))
-)

@@ -1,0 +1,107 @@
+diff -r ab0dc35174fb browser/components/preferences/advanced.js
+--- a/browser/components/preferences/advanced.js	Tue Feb 15 23:54:37 2011 -0800
++++ b/browser/components/preferences/advanced.js	Wed Feb 16 13:42:47 2011 +0100
+@@ -500,7 +500,7 @@
+     var enabledPref = document.getElementById("app.update.enabled");
+     var enableAppUpdate = document.getElementById("enableAppUpdate");
+ 
+-    enableAppUpdate.disabled = !aus.canCheckForUpdates || enabledPref.locked;
++    enableAppUpdate.disabled = true;
+   },
+ 
+   /**
+@@ -515,8 +515,7 @@
+     var updateModeLabel = document.getElementById("updateModeLabel");
+     var updateMode = document.getElementById("updateMode");
+     
+-    var disable = enabledPref.locked || !enabledPref.value ||
+-                  autoPref.locked;
++    var disable = true;
+     updateModeLabel.disabled = updateMode.disabled = disable;
+   },
+ 
+@@ -532,8 +531,7 @@
+     
+     var warnIncompatible = document.getElementById("warnIncompatible");
+     
+-    var disable = enabledPref.locked || !enabledPref.value || autoPref.locked ||
+-                  !autoPref.value || modePref.locked;
++    var disable = true;
+     warnIncompatible.disabled = disable;
+   },
+ 
+diff -r ab0dc35174fb extensions/java/xpcom/interfaces/org/mozilla/xpcom/Mozilla.java
+--- a/extensions/java/xpcom/interfaces/org/mozilla/xpcom/Mozilla.java	Tue Feb 15 23:54:37 2011 -0800
++++ b/extensions/java/xpcom/interfaces/org/mozilla/xpcom/Mozilla.java	Wed Feb 16 13:42:47 2011 +0100
+@@ -470,8 +470,8 @@
+ 
+     final String greUserConfFile = ".gre.config";
+     final String greUserConfDir = ".gre.d";
+-    final String greConfPath = "/etc/gre.conf";
+-    final String greConfDir = "/etc/gre.d";
++    final String greConfPath = "@GENTOO_PORTAGE_EPREFIX@/etc/gre.conf";
++    final String greConfDir = "@GENTOO_PORTAGE_EPREFIX@/etc/gre.d";
+ 
+     env = System.getProperty("user.home");
+     if (env != null) {
+diff -r ab0dc35174fb layout/base/nsPresArena.cpp
+--- a/layout/base/nsPresArena.cpp	Tue Feb 15 23:54:37 2011 -0800
++++ b/layout/base/nsPresArena.cpp	Wed Feb 16 13:42:47 2011 +0100
+@@ -73,6 +73,10 @@
+ #elif !defined(__OS2__)
+ # include <unistd.h>
+ # include <sys/mman.h>
++# ifdef SOLARIS
++/* madvise is not declared for C++ */
++extern "C" int madvise(void *addr, size_t len, int behav);
++# endif
+ # ifndef MAP_ANON
+ #  ifdef MAP_ANONYMOUS
+ #   define MAP_ANON MAP_ANONYMOUS
+diff -r ab0dc35174fb xpcom/build/nsXPCOMPrivate.h
+--- a/xpcom/build/nsXPCOMPrivate.h	Tue Feb 15 23:54:37 2011 -0800
++++ b/xpcom/build/nsXPCOMPrivate.h	Wed Feb 16 13:42:47 2011 +0100
+@@ -279,8 +279,8 @@
+ #endif
+ 
+ #define GRE_CONF_NAME ".gre.config"
+-#define GRE_CONF_PATH "/etc/gre.conf"
+-#define GRE_CONF_DIR  "/etc/gre.d"
++#define GRE_CONF_PATH "@GENTOO_PORTAGE_EPREFIX@/etc/gre.conf"
++#define GRE_CONF_DIR  "@GENTOO_PORTAGE_EPREFIX@/etc/gre.d"
+ #define GRE_USER_CONF_DIR ".gre.d"
+ #endif
+ 
+diff -r ab0dc35174fb xulrunner/app/nsRegisterGREUnix.cpp
+--- a/xulrunner/app/nsRegisterGREUnix.cpp	Tue Feb 15 23:54:37 2011 -0800
++++ b/xulrunner/app/nsRegisterGREUnix.cpp	Wed Feb 16 13:42:47 2011 +0100
+@@ -114,7 +114,7 @@
+ 
+   nsresult rv;
+ 
+-  char root[MAXPATHLEN] = "/etc/gre.d";
++  char root[MAXPATHLEN] = "@GENTOO_PORTAGE_EPREFIX@/etc/gre.d";
+ 
+   if (!aRegisterGlobally) {
+     char *home = PR_GetEnv("HOME");
+@@ -206,7 +206,7 @@
+ {
+   nsresult rv;
+ 
+-  char root[MAXPATHLEN] = "/etc/gre.d";
++  char root[MAXPATHLEN] = "@GENTOO_PORTAGE_EPREFIX@/etc/gre.d";
+ 
+   if (!aRegisterGlobally) {
+     char *home = PR_GetEnv("HOME");
+diff -r ab0dc35174fb xulrunner/installer/Makefile.in
+--- a/xulrunner/installer/Makefile.in	Tue Feb 15 23:54:37 2011 -0800
++++ b/xulrunner/installer/Makefile.in	Wed Feb 16 13:42:47 2011 +0100
+@@ -73,7 +73,7 @@
+ 
+ ifndef SKIP_GRE_REGISTRATION
+ # to register xulrunner per-user, override this with $HOME/.gre.d
+-regdir = /etc/gre.d
++regdir = @sysconfdir@/gre.d
+ 
+ install:: $(MOZILLA_VERSION).system.conf
+ 	$(NSINSTALL) -D $(DESTDIR)$(regdir)
