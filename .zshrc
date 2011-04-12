@@ -19,6 +19,7 @@ autoload -U promptinit
 promptinit
 prompt gentoo
 
+bindkey -e emacs
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
 bindkey '^K' kill-whole-line
