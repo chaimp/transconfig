@@ -38,6 +38,7 @@ import XMonad.Util.NamedWindows (getName)
 import XMonad.Actions.SinkAll
 import XMonad.Actions.CycleWS
 import XMonad.Actions.NoBorders
+import XMonad.Actions.GridSelect
 import Data.List(isPrefixOf)
 import Data.Ratio ((%))
 import qualified System.IO.UTF8 as U
@@ -45,19 +46,17 @@ import qualified XMonad.StackSet as W
 import qualified XMonad.Actions.FlexibleResize as Flex
 import qualified Data.Map        as M
 
-myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
 myBorderWidth   = 0
 myNormalBorderColor  = "#729fcf"
 myFocusedBorderColor = "#7292cf"
 
 
-myFont               = "xft:WenQuanYi Micro Hei:pixelsize=9"
+myFont               = "xft:Droid Serif:pixelsize=9"
 -- dzen settings:
-dzFont             = "WenQuanYi Micro Hei-9:Bold"
+dzFont             = "Droid Serif-9:Bold"
 --dzFont             = "OpenLogos-8"
-dzFgColor          = "skyblue"
-dzBgColor          = "#729fcf"
+dzBgColor          = "#000000"
+dzFgColor          = "#F6F1DB"
 
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -92,7 +91,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
     ++
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_6]
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_7]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
@@ -108,35 +107,36 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
 myManageHook = composeAll . concat $
-    [ [className =? c  --> doFloat  | c <- myFloats]
+    [ [isFullscreen --> doFullFloat, isDialog --> doCenterFloat]
+    , [className =? c  --> doFloat  | c <- myFloats]
     , [title     =? t  --> doFloat  | t <- myTitleFloats]
     , [resource  =? r  --> doIgnore | r <- myIgnores]
 --    , [className =? s  --> doTile   | s <- myTiles]
     ]
     where
-    myFloats      = ["Gpick", "Chromium", "Gimp", "MPlayer", "Smplayer", "Realplay", "VLC", "Lxrandr", "Audacious2", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Kvm" ]
+    myFloats      = ["Gpick", "Chromium", "Gimp", "Volumeicon", "MPlayer", "Smplayer", "Gnome-mplayer", "Tintwizard", "Pcmanfm", "Vlc", "Lxrandr", "Audacious2", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Openfetion", "Vncviewer" ]
     myTitleFloats = ["Downloads", "Preferences", "Save As...", "QEMU", "emacs", "Add-ons", "Firefox", "Chromium", "Exe", "Options", "首选项", "Wicd Network Manager"]
     myIgnores     = ["trayer", "dzen", "stalonetray"]
 --    myTiles       = ["tilda", "pcmanfm", "thunar", "dolphin", "lxterminal"]
 
 myStatusBar :: String
-myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e 'button3=' -h '18' -fn '" ++ dzFont ++ "' -ta l"
+myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e 'button3=' -h '18'  -ta l"
 myConkyBar :: String
 --myConkyBar = "conky | dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -x '700' -h '20' -fn '" ++ dzFont ++ "' -sa c -ta r"
-myConkyBar = "sleep 1; conky | dzen2 -e '' -h '18' -x '750' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor ++ "' -fn '" ++ dzFont ++ "'"
+myConkyBar = "sleep 1; conky | dzen2 -e '' -h '18' -x '750' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor  ++ "'"
 mySysTray :: String
-mySysTray = "sleep 3; trayer --expand true  --alpha 0 --edge top --align right --SetDockType true --transparent flase --SetPartialStrut true --widthtype request --tint 0x729fcf --height 18 --margin 53"
+mySysTray = "sleep 3; trayer --expand true  --alpha 0 --edge top --align right --SetDockType true --transparent flase --SetPartialStrut true --widthtype request --tint 0xffffff --height 18 --margin 65"
 
  
 myLogHook h = dynamicLogWithPP $ defaultPP
-      { ppCurrent     = dzenColor "#4386CE" "#E2EDF9" . pad
-        , ppVisible     = dzenColor "skyblue" "" . pad 
-        , ppHidden      = dzenColor "#204a87"  "#8fb580" . pad 
-        , ppHiddenNoWindows = dzenColor "#4e9a06" "#8FB171" . pad 
+      { ppCurrent     = dzenColor "white" "#326496" . pad
+        , ppVisible     = dzenColor "white" "#000000" . pad 
+        , ppHidden      = dzenColor "#1793D1"  "#000000" . pad 
+        , ppHiddenNoWindows = dzenColor "white" "#000000" . pad 
         , ppUrgent      = dzenColor "#2e3436" "#fce94f" . pad 
         , ppWsSep    = ""
         , ppSep      = "|"
-        , ppLayout   = dzenColor "skyblue" "" .
+        , ppLayout   = dzenColor "skyblue" "black" .
                           (\ x -> case x of
                               "Tall"                   -> "^i(/home/zhou/.xmonad/dzen/layouts/tile.xpm)"
                               "Mirror Tall"            -> "^i(/home/zhou/.xmonad/dzen/layouts/tilebottom.xpm)"
@@ -151,7 +151,7 @@ myLogHook h = dynamicLogWithPP $ defaultPP
                               "Dishes 2 (1%6)"         -> "Dsh"
                               _                        -> pad x
                           )
-        , ppTitle    = (" " ++) . dzenColor "white" "" . dzenEscape
+        , ppTitle    = (" " ++) . dzenColor "white" "#000000" . dzenEscape
         , ppOutput   = hPutStrLn h
       }
 
@@ -177,22 +177,23 @@ main = do
   spawn "killall trayer"
   dzen <- spawnPipe myStatusBar
   spawn myConkyBar
-  spawn mySysTray
+--  spawn mySysTray
 --  spawn "xcompmgr"
 
   xmonad $ ewmh defaultConfig {
          modMask = mod4Mask
+       , focusFollowsMouse  = True
        , borderWidth = myBorderWidth
-       , terminal = "lxterminal"
+       , terminal = "urxvt"
        , manageHook = manageDocks <+> manageHook defaultConfig <+> myManageHook
        , logHook    = myLogHook dzen >> fadeInactiveLogHook 0xdddddddd
 --       , logHook = ewmhDesktopsLogHook >> (dynamicLogWithPP $ myLogHook dzen)
 --       , layoutHook = ewmhDesktopsEventHook $ avoidStruts $ myLayout
        , layoutHook = avoidStruts $ myLayout
-       , workspaces = ["^ca(1,xdotool key super+1)^fn(OpenLogos-13)Q^fn(Microsoft YaHei-9)transtone^ca()","^ca(1,xdotool key super+2)^fn(OpenLogos-15)P^fn(Microsoft YaHei-9)冲浪^ca()","^ca(1,xdotool key super+3)^fn(OpenLogos-13)U^fn(Microsoft YaHei-9)文档^ca()","^ca(1,xdotool key super+4)^fn(OpenLogos-13)J^fn(Microsoft YaHei-9)虚拟^ca()","^ca(1,xdotool key super+5)^fn(OpenLogos-15)R^fn(Microsoft YaHei-9)图像^ca()","^ca(1,xdotool key super+6)^fn(OpenLogos-13)T^fn(Microsoft YaHei-9)游戏^ca()^fn(WenQuanYi Micro Hei-9:bold)"]
+       , workspaces = ["^ca(1,xdotool key super+1)^fn(OpenLogos-13)Q^fn(Waltograph UI-9:bold)TRANSTONE^ca()","^ca(1,xdotool key super+2)^fn(OpenLogos-13)I^ca()","^ca(1,xdotool key super+3)^fn(OpenLogos-13)U^ca()","^ca(1,xdotool key super+4)^fn(OpenLogos-13)T^ca()","^ca(1,xdotool key super+5)^fn(OpenLogos-15)R^ca()","^ca(1,xdotool key super+6)^fn(OpenLogos-13)J^ca()","^ca(1,xdotool key super+7)^fn(OpenLogos-13)P^ca()^fn(Nokia Font YanTi-10)"]
       -- key bindings
        , keys               = myKeys
        , mouseBindings      = myMouseBindings
-       
+--       , handleEventHook = handleEventHook conf `mappend` fullscreenEventHook
        }
 
