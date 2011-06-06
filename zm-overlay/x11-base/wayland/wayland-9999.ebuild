@@ -1,49 +1,24 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=3
 
-inherit xorg-2
+EGIT_REPO_URI="git://anongit.freedesktop.org/wayland/wayland"
+EGIT_BOOTSTRAP="eautoreconf"
 
-DESCRIPTION="A nano display server, relying on kernel modesetting"
-HOMEPAGE="http://wayland.freedesktop.org/"
-EGIT_REPO_URI="git://anongit.freedesktop.org/git/${PN}"
+inherit autotools autotools-utils git-2
 
-LICENSE="CCPL-Attribution-ShareAlike-3.0 MIT"
+DESCRIPTION="wayland is a protocol and library for a (compositing) display server"
+HOMEPAGE="http://wayland.freedesktop.org"
+SRC_URI=""
+
+LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="static-libs"
 
-# cairo opengl is automagic
-RDEPEND="app-text/poppler[cairo]
-	dev-libs/expat
-	dev-libs/glib:2
-	media-libs/mesa[gles,gallium]
-	>=sys-fs/udev-136
-	>=x11-libs/cairo-1.10[opengl]
-	x11-libs/gtk+:2
-	>=x11-libs/libdrm-2.4.23
-	x11-libs/libxcb
-	x11-libs/libxkbcommon
-	virtual/libffi"
-DEPEND="${RDEPEND}"
+DEPEND="dev-libs/libffi
+	dev-libs/expat"
 
-src_prepare() {
-	# install the programs too
-	# this should be fixed in makefile.am
-	sed -i \
-		-e "/PROGRAMS/s/noinst_/bin_/" \
-		{compositor,clients}"/Makefile.am" || die
-
-	xorg-2_src_prepare
-}
-
-src_install() {
-	xorg-2_src_install
-
-	cd "${ED}/usr/bin"
-	for binary in $(echo *); do
-		mv "${binary}" "wayland-${binary}" || die
-	done
-}
+RDEPEND="${DEPEND}"

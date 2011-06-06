@@ -114,18 +114,18 @@ myManageHook = composeAll . concat $
 --    , [className =? s  --> doTile   | s <- myTiles]
     ]
     where
-    myFloats      = ["Gpick", "Chromium", "Gimp", "Volumeicon", "MPlayer", "Smplayer", "Gnome-mplayer", "Tintwizard", "Pcmanfm", "Vlc", "Lxrandr", "Audacious2", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Openfetion", "Vncviewer" ]
+    myFloats      = ["Gpick", "Chromium", "Gimp", "Volumeicon", "MPlayer", "Smplayer", "Gnome-mplayer", "Tintwizard", "Pcmanfm", "Vlc", "Lxrandr", "Audacious", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Openfetion", "Vncviewer" ]
     myTitleFloats = ["Downloads", "Preferences", "Save As...", "QEMU", "emacs", "Add-ons", "Firefox", "Chromium", "Exe", "Options", "首选项", "Wicd Network Manager"]
     myIgnores     = ["trayer", "dzen", "stalonetray"]
 --    myTiles       = ["tilda", "pcmanfm", "thunar", "dolphin", "lxterminal"]
 
 myStatusBar :: String
-myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e 'button3=' -h '18'  -ta l"
+myStatusBar = "dzen2  -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e 'button3=' -h '16'  -ta l"
 myConkyBar :: String
 --myConkyBar = "conky | dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -x '700' -h '20' -fn '" ++ dzFont ++ "' -sa c -ta r"
-myConkyBar = "sleep 1; conky | dzen2 -e '' -h '18' -x '750' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor  ++ "'"
-mySysTray :: String
-mySysTray = "sleep 3; trayer --expand true  --alpha 0 --edge top --align right --SetDockType true --transparent flase --SetPartialStrut true --widthtype request --tint 0xffffff --height 18 --margin 65"
+myConkyBar = "sleep 1; conky | dzen2 -e '' -h '16' -x '800' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor  ++ "'"
+--mySysTray :: String
+--mySysTray = "sleep 3; trayer --expand true  --alpha 0 --edge top --align right --SetDockType true --transparent flase --SetPartialStrut true --widthtype request --tint 0xffffff --height 18 --margin 65"
 
  
 myLogHook h = dynamicLogWithPP $ defaultPP
@@ -190,7 +190,7 @@ main = do
 --       , logHook = ewmhDesktopsLogHook >> (dynamicLogWithPP $ myLogHook dzen)
 --       , layoutHook = ewmhDesktopsEventHook $ avoidStruts $ myLayout
        , layoutHook = avoidStruts $ myLayout
-       , workspaces = ["^ca(1,xdotool key super+1)^fn(OpenLogos-13)Q^fn(Waltograph UI-9:bold)TRANSTONE^ca()","^ca(1,xdotool key super+2)^fn(OpenLogos-13)I^ca()","^ca(1,xdotool key super+3)^fn(OpenLogos-13)U^ca()","^ca(1,xdotool key super+4)^fn(OpenLogos-13)T^ca()","^ca(1,xdotool key super+5)^fn(OpenLogos-15)R^ca()","^ca(1,xdotool key super+6)^fn(OpenLogos-13)J^ca()","^ca(1,xdotool key super+7)^fn(OpenLogos-13)P^ca()^fn(Nokia Font YanTi-10)"]
+       , workspaces = ["^ca(1,xdotool key super+1)^fn(OpenLogos-12)Q^fn(Waltograph UI-8:bold)TRANSTONE^ca()","^ca(1,xdotool key super+2)^fn(OpenLogos-12)I^ca()","^ca(1,xdotool key super+3)^fn(OpenLogos-12)U^ca()","^ca(1,xdotool key super+4)^fn(OpenLogos-12)T^ca()","^ca(1,xdotool key super+5)^fn(OpenLogos-14)R^ca()","^ca(1,xdotool key super+6)^fn(OpenLogos-12)J^ca()","^ca(1,xdotool key super+7)^fn(OpenLogos-12)P^ca()^fn(方正剪纸繁体-8)"]
       -- key bindings
        , keys               = myKeys
        , mouseBindings      = myMouseBindings

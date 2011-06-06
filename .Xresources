@@ -1,12 +1,13 @@
-!Xft.dpi:120.4
 Xft.antialias: 1
+Xft.dpi: 107.05
 Xft.hinting: 1
 Xft.hintstyle: hintslight
 Xft.rgba: rgb
 !Xft.font: Microsoft Yahei
-!Emacs.font: Envy Code R-11
-Emacs.font: Monaco-10
-!Emacs.font: Consolas-11
+!Emacs.font: Envy Code R-10
+Emacs.font: Monaco-9
+!Emacs.font: Consolas-10
+!Emacs.font: Terminus-9
 Emacs.useXIM: true 
 
 Xcursor.theme: moblin-cursor-theme
@@ -28,11 +29,11 @@ xterm*xftAntialias:true
 ! scroll set 
 
 ! font set
-URxvt*font:                     xft:Monaco:size=10:antialias=true,xft:STHeiti:size=12:antialias=true
-URxvt*boldFont:                 xft:Monaco:size=10:antialias=true,xft:STHeiti:size=12:antialias=true
-URxvt*italicFont:               xft:Monaco:size=10:antialias=true,xft:STHeiti:size=12:antialias=true
-URxvt*bolditalicFont:           xft:Monaco:size=10:antialias=true,xft:STHeiti:size=12:antialias=true
-!URxvt.font:xft:Monaco:size=10:antialias=true,xft:LTH:size:9:antialias=true
+URxvt*font:                     xft:Monaco:size=9:antialias=true,xft:STHeiti:size=9:antialias=true
+URxvt*boldFont:                 xft:Monaco:size=9:antialias=true,xft:STHeiti:size=9:antialias=true
+URxvt*italicFont:               xft:Monaco:size=9:antialias=true,xft:STHeiti:size=9:antialias=true
+URxvt*bolditalicFont:           xft:Monaco:size=9:antialias=true,xft:STHeiti:size=9:antialias=true
+!URxvt.font:xft:Envy Code R:size=10:antialias=true,xft:LTH:size:9:antialias=true
 !URxvt.cursorColor: whire
 urxvt*foreground: #ffffff
 URxvt.background: rgba:0000/0000/0000/cccc
@@ -59,6 +60,7 @@ urxvt*transparent: false
 
 !URxvt.visualBell:  true
 !URxvt.cursorBlink: true
+URxvt.fading: 30
 URxvt.internalBorder: 5
 URxvt.cutchars:    "()*,<>[]{}|'"
 URxvt.scrollBar: False
@@ -66,11 +68,11 @@ URxvt.scrollWithBuffer: false
 URxvt.buffered:  true
 Urxvt.secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
 URxvt.saveLines: 20000
-URxvt.inputMethod: xim
+URxvt.inputMethod: fcitx
 URxvt.preeditType: OverTheSpot
 URxvt.thickness: 0
 !URxvt.geometry: 80x28+40+40
-URxvt.termName:        rxvt
+URxvt.termName: rxvt
 URxvt.title: Rxvt-Unicode
 URxvt.tintColor:lightgray
 !URxvt.shading:30
@@ -80,7 +82,7 @@ URxvt.depth: 32
 !urxvt*fading: 50
 
 URxvt.perl-lib:/home/zhou/overlays/urxvt-perls
-URxvt.perl-ext-common: default,matcher,clipboard,kuake,keyboard-select,url-select
+URxvt.perl-ext-common: default,matcher,guake,clipboard,keyboard-select,url-select
 URxvt.keysym.Mod4-u: perl:url-select:select_next
 URxvt.keysym.M-w:   perl:clipboard:copy
 URxvt.keysym.C-y:   perl:clipboard:paste

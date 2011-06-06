@@ -15,7 +15,7 @@ HOMEPAGE="http://www.cimitan.com/murrine/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+themes animation-rtl"
+IUSE="themes animation-rtl"
 
 RDEPEND=">=x11-libs/gtk+-2.12
 	themes? ( x11-themes/murrine-themes )"
