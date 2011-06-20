@@ -21,7 +21,6 @@ sys-apps/mlocate
 sys-apps/usermode-utilities
 sys-block/ms-sys
 sys-boot/grub
-sys-boot/plymouth
 sys-devel/bc
 sys-fs/btrfs-progs
 sys-fs/diskdev_cmds
