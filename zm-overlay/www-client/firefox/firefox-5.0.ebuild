@@ -1,30 +1,32 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/www-client/firefox/firefox-4.0.1-r1.ebuild,v 1.2 2011/05/16 18:00:19 xarthisius Exp $
+# $Header: /var/cvsroot/gentoo-x86/www-client/firefox/firefox-5.0.ebuild,v 1.1 2011/06/24 09:55:00 nirbheek Exp $
 
 EAPI="3"
+VIRTUALX_REQUIRED="pgo"
 WANT_AUTOCONF="2.1"
 
-inherit flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-3 makeedit multilib pax-utils fdo-mime autotools mozextension versionator python
+inherit flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-3 makeedit multilib pax-utils fdo-mime autotools mozextension versionator python virtualx
 
-MAJ_XUL_PV="2.0"
+MAJ_XUL_PV="5.0"
 MAJ_FF_PV="$(get_version_component_range 1-2)" # 3.5, 3.6, 4.0, etc.
 XUL_PV="${MAJ_XUL_PV}${PV/${MAJ_FF_PV}/}" # 1.9.3_alpha6, 1.9.2.3, etc.
 FF_PV="${PV/_alpha/a}" # Handle alpha for SRC_URI
 FF_PV="${FF_PV/_beta/b}" # Handle beta for SRC_URI
 FF_PV="${FF_PV/_rc/rc}" # Handle rc for SRC_URI
 CHANGESET="e56ecd8b3a68"
-PATCH="${PN}-4.0-patches-1.0"
+PATCH="${PN}-5.0-patches-0.4"
 
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="http://www.mozilla.com/firefox"
 
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~ppc ~x86 ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="|| ( MPL-1.1 GPL-2 LGPL-2.1 )"
-IUSE="bindist +ipc system-sqlite +webm"
+IUSE="bindist gconf +ipc pgo system-sqlite +webm"
 
 REL_URI="http://releases.mozilla.org/pub/mozilla.org/firefox/releases"
+FTP_URI="ftp://ftp.mozilla.org/pub/firefox/releases/"
 # More URIs appended below...
 SRC_URI="http://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.bz2"
 
@@ -34,40 +36,43 @@ RDEPEND="
 	>=sys-devel/binutils-2.16.1
 	>=dev-libs/nss-3.12.9
 	>=dev-libs/nspr-4.8.7
+	gconf? ( >=gnome-base/gconf-1.2.1:2 )
 	>=dev-libs/glib-2.26
 	media-libs/libpng[apng]
-	x11-libs/pango[X]
-	dev-libs/libffi
 	system-sqlite? ( >=dev-db/sqlite-3.7.4[fts3,secure-delete,unlock-notify,debug=] )
-	~net-libs/xulrunner-${XUL_PV}[wifi=,libnotify=,system-sqlite=,webm=]
 	webm? ( media-libs/libvpx
 		media-libs/alsa-lib )"
 
 DEPEND="${RDEPEND}
 	dev-util/pkgconfig
+	pgo? ( >=sys-devel/gcc-4.5 )
 	webm? ( x86? ( ${ASM_DEPEND} )
 		amd64? ( ${ASM_DEPEND} ) )"
 
 # No source releases for alpha|beta
-if [[ ${PV} =~ alpha|beta ]]; then
+if [[ ${PV} =~ alpha ]]; then
 	SRC_URI="${SRC_URI}
 		http://dev.gentoo.org/~anarchy/mozilla/firefox/firefox-${FF_PV}_${CHANGESET}.source.tar.bz2"
 	S="${WORKDIR}/mozilla-central"
+elif [[ ${PV} =~ beta ]]; then
+	SRC_URI="${SRC_URI}
+		${FTP_URI}/${FF_PV}/source/firefox-${FF_PV}.source.tar.bz2"
+	S="${WORKDIR}/mozilla-beta"
 else
 	SRC_URI="${SRC_URI}
 		${REL_URI}/${FF_PV}/source/firefox-${FF_PV}.source.tar.bz2"
-	S="${WORKDIR}/mozilla-${MAJ_XUL_PV}"
+	S="${WORKDIR}/mozilla-release"
 fi
 
 # No language packs for alphas
 if ! [[ ${PV} =~ alpha|beta ]]; then
 	# This list can be updated with scripts/get_langs.sh from mozilla overlay
 	LANGS="af ak ar ast be bg bn-BD bn-IN br bs ca cs cy da de
-	el en en-ZA eo es-ES et eu fa fi fr fy-NL ga-IE gd gl gu-IN
+	el en eo es-ES et eu fa fi fr fy-NL ga-IE gd gl gu-IN
 	he hi-IN hr hu hy-AM id is it ja kk kn ko ku lg lt lv mai mk
 	ml mr nb-NO nl nn-NO nso or pa-IN pl pt-PT rm ro ru si sk sl
 	son sq sr sv-SE ta ta-LK te th tr uk vi zu zh-CN"
-	NOSHORTLANGS="en-GB es-AR es-CL es-MX pt-BR zh-TW"
+	NOSHORTLANGS="en-GB en-ZA es-AR es-CL es-MX pt-BR zh-TW"
 
 	for X in ${LANGS} ; do
 		if [ "${X}" != "en" ] && [ "${X}" != "en-US" ]; then
@@ -120,6 +125,12 @@ pkg_setup() {
 		elog "a legal problem with Mozilla Foundation"
 		elog "You can disable it by emerging ${PN} _with_ the bindist USE-flag"
 	fi
+
+	if use pgo; then
+		einfo
+		ewarn "You will do a double build for profile guided optimization. This will result in your"
+		ewarn "build taking at least twice as long as before."
+	fi
 }
 
 src_unpack() {
@@ -138,14 +149,23 @@ src_prepare() {
 	EPATCH_FORCE="yes" \
 	epatch "${WORKDIR}"
 
-	epatch "${FILESDIR}"/fix-preferences-gentoo.patch
-
 	# Allow user to apply any additional patches without modifing ebuild
 	epatch_user
 
+	# Enable gnomebreakpad
+	if use debug ; then
+		sed -i -e "s:GNOME_DISABLE_CRASH_DIALOG=1:GNOME_DISABLE_CRASH_DIALOG=0:g" \
+			"${S}"/build/unix/run-mozilla.sh || die "sed failed!"
+	fi
+
 	# Disable gnomevfs extension
 	sed -i -e "s:gnomevfs::" "${S}/"browser/confvars.sh \
+		-e "s:gnomevfs::" "${S}/"xulrunner/confvars.sh \
 		|| die "Failed to remove gnomevfs extension"
+
+	# Ensure that are plugins dir is enabled as default
+	sed -i -e "s:/usr/lib/mozilla/plugins:/usr/$(get_libdir)/nsbrowser/plugins:" \
+		"${S}"/xpcom/io/nsAppFileLocationProvider.cpp || die "sed failed to replace plugin path!"
 
 	eautoreconf
 
@@ -169,19 +189,22 @@ src_configure() {
 	# It doesn't compile on alpha without this LDFLAGS
 	use alpha && append-ldflags "-Wl,--no-relax"
 
+	mozconfig_annotate '' --prefix=/usr
+	mozconfig_annotate '' --libdir=/usr/$(get_libdir)
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 	mozconfig_annotate '' --disable-mailnews
 	mozconfig_annotate '' --enable-canvas
 	mozconfig_annotate '' --enable-safe-browsing
 	mozconfig_annotate '' --with-system-png
-	mozconfig_annotate '' --enable-system-ffi
-	mozconfig_annotate '' --with-system-libxul
-	mozconfig_annotate '' --with-libxul-sdk="${EPREFIX}"/usr/$(get_libdir)/xulrunner-devel-${MAJ_XUL_PV}
 
 	# Other ff-specific settings
 	mozconfig_annotate '' --with-default-mozilla-five-home=${MOZILLA_FIVE_HOME}
 
 	mozconfig_use_enable system-sqlite
+	mozconfig_use_enable gconf
+
+	# Allow for a proper pgo build
+	use pgo && echo "mk_add_options PROFILE_GEN_SCRIPT='\$(PYTHON) \$(OBJDIR)/_profile/pgo/profileserver.py'" >> "${S}"/.mozconfig
 
 	# Finalize and report settings
 	mozconfig_final
@@ -190,23 +213,37 @@ src_configure() {
 		append-cxxflags -fno-stack-protector
 	fi
 
-	####################################
-	#
-	#  Configure and build
-	#
-	####################################
+	if use amd64 || use x86; then
+		append-flags -mno-avx
+	fi
+}
 
-	CC="$(tc-getCC)" CXX="$(tc-getCXX)" LD="$(tc-getLD)" PYTHON="$(PYTHON)" econf
+src_compile() {
+	if use pgo; then
+		CC="$(tc-getCC)" CXX="$(tc-getCXX)" LD="$(tc-getLD)" \
+		MOZ_MAKE_FLAGS="${MAKEOPTS}" \
+		Xemake -f client.mk profiledbuild || die "Xemake failed"
+	else
+		CC="$(tc-getCC)" CXX="$(tc-getCXX)" LD="$(tc-getLD)" \
+		MOZ_MAKE_FLAGS="${MAKEOPTS}" \
+		emake -f client.mk realbuild || die "emake failed"
+	fi
+
 }
 
 src_install() {
 	MOZILLA_FIVE_HOME="/usr/$(get_libdir)/${PN}"
 
-	# Enable very specific settings not inherited from xulrunner
-	cp "${FILESDIR}"/firefox-default-prefs.js \
-		"${S}/dist/bin/defaults/preferences/all-gentoo.js" || \
-		die "failed to cp firefox-default-prefs.js"
+	# MOZ_BUILD_ROOT, and hence OBJ_DIR change depending on arch, compiler, pgo, etc.
+	local obj_dir="$(echo */config.log)"
+	obj_dir="${obj_dir%/*}"
+	cd "${S}/${obj_dir}"
 
+	# Add our default prefs for firefox + xulrunner
+	cp "${FILESDIR}"/gentoo-default-prefs.js \
+		"${S}/${obj_dir}/dist/bin/defaults/pref/all-gentoo.js" || die
+
+	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
 	emake DESTDIR="${D}" install || die "emake install failed"
 
 	linguas
@@ -218,6 +255,8 @@ src_install() {
 	if use bindist; then
 		sizes="16 32 48"
 		icon_path="${S}/browser/branding/unofficial"
+		# Firefox's new rapid release cycle means no more codenames
+		# Let's just stick with this one...
 		icon="tumucumaque"
 		name="Tumucumaque"
 	else
@@ -253,6 +292,7 @@ src_install() {
 		|| die "failed to symlink"
 
 	# very ugly hack to make firefox not sigbus on sparc
+	# FIXME: is this still needed??
 	use sparc && { sed -e 's/Firefox/FirefoxGentoo/g' \
 					 -i "${ED}/${MOZILLA_FIVE_HOME}/application.ini" || \
 					 die "sparc sed failed"; }
