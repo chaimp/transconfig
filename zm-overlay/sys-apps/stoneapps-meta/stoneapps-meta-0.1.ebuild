@@ -29,7 +29,6 @@ sys-fs/extundelete
 sys-fs/lvm2
 sys-fs/ncdu
 sys-fs/ntfs3g
-sys-fs/traydevice
 sys-fs/xfsprogs
 sys-kernel/genkernel
 sys-kernel/module-rebuild
@@ -50,5 +49,7 @@ app-arch/p7zip
 app-cdr/cdw
 app-editors/emacs
 app-editors/gvim
-dev-util/lafilefixer"
+dev-util/lafilefixer
+net-analyzer/macchanger
+net-analyzer/bmon"
 

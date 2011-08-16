@@ -61,7 +61,7 @@ dzFgColor          = "#F6F1DB"
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-    , ((modm,               xK_r     ), spawn "exe=`dmenu_run` && eval \"exec $exe\"")
+    , ((modm,               xK_r     ), spawn "exe=`dmenu_path | yeganesh -- -fn Monaco-12` && eval \"exec $exe\"")
     , ((modm .|. shiftMask, xK_r     ), spawn "gmrun")
     , ((modm .|. shiftMask, xK_c     ), kill)
     , ((controlMask,        xK_Print ), spawn "sleep 0.2; scrot -s")
@@ -114,9 +114,9 @@ myManageHook = composeAll . concat $
 --    , [className =? s  --> doTile   | s <- myTiles]
     ]
     where
-    myFloats      = ["Gpick", "Chromium", "Gimp", "Volumeicon", "MPlayer", "Smplayer", "Gnome-mplayer", "Tintwizard", "Pcmanfm", "Vlc", "Lxrandr", "Audacious", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Openfetion", "Vncviewer" ]
+    myFloats      = ["Gpick", "Chromium", "Gimp", "Volumeicon", "MPlayer", "Umplayer", "Gnome-mplayer", "Tintwizard", "Pcmanfm", "Vlc", "Lxrandr", "Arandr", "Audacious", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Openfetion", "Vncviewer", "Cairo-dock" ]
     myTitleFloats = ["Downloads", "Preferences", "Save As...", "QEMU", "emacs", "Add-ons", "Firefox", "Chromium", "Exe", "Options", "首选项", "Wicd Network Manager"]
-    myIgnores     = ["trayer", "dzen", "stalonetray"]
+    myIgnores     = ["trayer", "dzen", "stalonetray", "systray", "cairo-dock"]
 --    myTiles       = ["tilda", "pcmanfm", "thunar", "dolphin", "lxterminal"]
 
 myStatusBar :: String

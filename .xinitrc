@@ -3,28 +3,23 @@
 #使.Xresources中的设置生效
 xrdb -merge .Xresources
 
-#ck-launch-session lxde-session
-
 #修正OOo界面与系统一致
 export GTK2_RC_FILES="`pwd`/.gtkrc-2.0"
 export SAL_USE_VCLPLUGIN="gtk"
-#export OOO_FORCE_DESKTOP="gnome"
-
-#export GTK_MODULES=globalmenu-gnome
-#export PHONON_GST_AUDIOSINK=oss4sink
 
 #桌面背景图片轮换
 #while true;
 #do
-#   find $HOME/.wallpaper -type f -name '*.jpg' -o -name '*.png' | shuf -n 1 | xargs feh --bg-scale
+#   find $HOME/.wallpaper -type f -name '*.jpg' -o -name '*.png' | shuf -n 1 | xargs #feh --bg-scale
 #   sleep 15m
 #done &
 
 #桌面背景设置
-feh --bg-scale $HOME/win7-2.jpg &
+#feh --bg-scale $HOME/macosx.jpg &
+#feh -Z --bg-scale $HOME/win8.jpg &
+habak -ms -hi $HOME/win8.jpg &
 
-#鼠标样式修正
-xsetroot -cursor_name left_ptr &
+xmodmap .Xmodmap
 
 #输入法环境变量
 #export XMODIFIERS="@im=ibus"
@@ -36,16 +31,27 @@ xsetroot -cursor_name left_ptr &
 
 #启动时自动载入程序
 parcellite &
-#wicd-client &
+wicd-client &
 #nm-applet &
-#unclutter -root -jitter 40 &
-#tilda &
-stjerm &
+volumeicon &
+tint2 &
+#unclutter -root -jitter 150 &
+urxvt &
+#stjerm &
+
+export XMODIFIERS="@im=fcitx"
+export XIM="fcitx"
+export XIM_PROGRAM="fcitx"
+export GTK_IM_MODULE="fcitx"
+export QT_IM_MODULE="fcitx"
 fcitx &
 
 #键盘按键反应速度修正
 xset r rate 250 25
-xset m 6 1
+#xset m 3 1
+
+#鼠标样式修正
+xsetroot -cursor_name left_ptr &
 
 #窗口管理器
 #exec enlightenment_start
@@ -55,3 +61,4 @@ xset m 6 1
 #exec ck-launch-session awesome
 #exec ck-launch-session gnome-session
 exec ck-launch-session xmonad
+#exec ck-launch-session scrotwm
