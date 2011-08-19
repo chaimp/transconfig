@@ -1,0 +1,22 @@
+--- data/table/CMakeLists.txt.orig	2011-08-19 11:20:39.940440277 +0800
++++ data/table/CMakeLists.txt	2011-08-19 12:46:02.656397514 +0800
+@@ -7,10 +7,11 @@
+  ${CMAKE_CURRENT_BINARY_DIR}/wbx.mb
+  ${CMAKE_CURRENT_BINARY_DIR}/zrm.mb
+  ${CMAKE_CURRENT_BINARY_DIR}/cj.mb
++ ${CMAKE_CURRENT_BINARY_DIR}/zm.mb
+ )
+ set(TABLEORG_DATA db.txt erbi.txt qxm.txt wanfeng.txt wbpy.txt wbx.txt zrm.txt cj.txt)
+ set(TABLE_NAME db erbi qxm wanfeng wbpy wbx zrm cj)
+-set(TABLE_CONF db.conf erbi.conf qxm.conf wanfeng.conf wbpy.conf wbx.conf zrm.conf cangjie.conf)
++set(TABLE_CONF db.conf erbi.conf qxm.conf wanfeng.conf wbpy.conf wbx.conf zrm.conf cangjie.conf zhengma.conf)
+ set(TABLE_URL http://fcitx.googlecode.com/files/table.tar.gz)
+ set(TABLE_TAR ${CMAKE_CURRENT_SOURCE_DIR}/table.tar.gz)
+ 
+@@ -35,4 +36,4 @@
+                    COMMAND txt2mb ${tblname}.txt ${tblname}.mb)
+ endforeach()
+ 
+-install(FILES ${TABLE_DATA} DESTINATION ${pkgdatadir}/table )
+\ 文件尾没有 newline 字符
++install(FILES ${TABLE_DATA} DESTINATION ${pkgdatadir}/table )

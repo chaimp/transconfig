@@ -14,7 +14,7 @@ SRC_URI=""
 ESVN_REPO_URI="http://dzen.googlecode.com/svn/trunk/"
 
 LICENSE="MIT"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="minimal xinerama xpm"
 
 RDEPEND="x11-libs/libX11

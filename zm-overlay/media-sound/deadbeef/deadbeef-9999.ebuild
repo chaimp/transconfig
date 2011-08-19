@@ -11,13 +11,13 @@ HOMEPAGE="http://deadbeef.sourceforge.net/"
 LICENSE="GPL-2"
 
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND="media-libs/libvorbis
 	   media-libs/libmad
 	   media-libs/libogg
-	   x11-libs/gtk+:2
+	   x11-libs/gtk+
 	   media-libs/libsamplerate
 	   media-libs/alsa-lib"
 DEPEND=""

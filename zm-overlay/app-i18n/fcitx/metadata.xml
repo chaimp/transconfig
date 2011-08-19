@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<herd>python</herd>
+	<herd>cjk</herd>
 	<maintainer>
-		<email>maksbotan@gentoo.org</email>
+		<email>qiaomuf@gentoo.org</email>
+		<name>Mu Qiao</name>
 	</maintainer>
-	<maintainer>
-		<email>sterkrig@home.se</email>
-	</maintainer>
+	<use>
+	  <flag name='pango'>Enable support for <pkg>x11-libs/pango</pkg></flag>
+	</use>
 </pkgmetadata>

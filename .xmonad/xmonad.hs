@@ -66,8 +66,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_c     ), kill)
     , ((controlMask,        xK_Print ), spawn "sleep 0.2; scrot -s")
     , ((0 ,                 xK_Print ), spawn "scrot")
-    , ((0 ,                0x1008ff11), spawn "ossmix vmix0-outvol -- -1")
-    , ((0 ,                0x1008ff13), spawn "ossmix vmix0-outvol -- +1")
+    , ((0 ,                0x1008ff11), spawn "amixer set Master 5%- ")
+    , ((0 ,                0x1008ff13), spawn "amixer set Master 5%+ ")
+--    , ((0 ,                0x1008ff11), spawn "ossmix vmix0-outvol -- -1")
+--    , ((0 ,                0x1008ff13), spawn "ossmix vmix0-outvol -- +1")
     , ((0 ,                0x1008ff2f), spawn "gksudo pm-suspend")
     , ((0 ,                0x1008ff93), spawn "gksudo pm-hibernate")
     , ((modm,               xK_space ), sendMessage NextLayout)
@@ -114,7 +116,7 @@ myManageHook = composeAll . concat $
 --    , [className =? s  --> doTile   | s <- myTiles]
     ]
     where
-    myFloats      = ["Gpick", "Chromium", "Gimp", "Volumeicon", "MPlayer", "Umplayer", "Gnome-mplayer", "Tintwizard", "Pcmanfm", "Vlc", "Lxrandr", "Arandr", "Audacious", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Openfetion", "Vncviewer", "Cairo-dock" ]
+    myFloats      = ["Gpick", "Chromium", "Gimp", "Volumeicon", "MPlayer", "Umplayer", "Gnome-mplayer", "Tintwizard", "Pcmanfm", "Vlc", "Lxrandr", "Arandr", "Audacious", "Deadbeef", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Openfetion", "Vncviewer", "Cairo-dock" ]
     myTitleFloats = ["Downloads", "Preferences", "Save As...", "QEMU", "emacs", "Add-ons", "Firefox", "Chromium", "Exe", "Options", "首选项", "Wicd Network Manager"]
     myIgnores     = ["trayer", "dzen", "stalonetray", "systray", "cairo-dock"]
 --    myTiles       = ["tilda", "pcmanfm", "thunar", "dolphin", "lxterminal"]
