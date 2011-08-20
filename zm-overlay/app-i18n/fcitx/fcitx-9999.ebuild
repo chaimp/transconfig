@@ -14,12 +14,12 @@ DESCRIPTION="Free Chinese Input Toy for X. Another Chinese XIM Input Method"
 HOMEPAGE="http://fcitx.googlecode.com"
 SRC_URI="${HOMEPAGE}/files/pinyin.tar.gz
 		 ${HOMEPAGE}/files/table.tar.gz
-		 https://raw.github.com/acevery/ibus-table-zhengma/master/tables/zhengma.txt"
+		 ${HOMEPAGE}/files/zm.mb"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="dbus debug +pango +zhengma"
+IUSE="dbus debug +pango"
 RESTRICT="mirror"
 
 RDEPEND="media-libs/fontconfig
@@ -36,16 +36,16 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	cp -v "${DISTDIR}"/pinyin.tar.gz "${S}"/data && \
-	cp -v "${DISTDIR}"/table.tar.gz "${S}"/data/table && \
-	cp -v "${DISTDIR}"/zhengma.tar.gz "${S}"/data/table || \
+	cp -v "${DISTDIR}"/zm.mb "${S}"/data/table && \
+	cp -v "${DISTDIR}"/table.tar.gz "${S}"/data/table || \
 	die "failed to copy code tables"
 
-	# Add zhengma support
-	if use zhengma ; then
-		cp "${FILESDIR}"/zhengma.conf.in "${S}"/data/table/zhengma.conf.in
-		cp "${FILESDIR}"/fcitx-zhengma.png "${S}"/data/png/fcitx-zhengma.png
-		epatch "${FILESDIR}"/zhengma.diff
-	fi
+	cp "${FILESDIR}"/zhengma.conf.in "${S}"/data/table/zhengma.conf.in
+	cp "${FILESDIR}"/fcitx-zhengma.png "${S}"/data/png/fcitx-zhengma.png
+	cp "${FILESDIR}"/fcitx-zhengma-22.png "${S}"/skin/dark/zhengma.png
+	cp "${FILESDIR}"/fcitx-zhengma-16.png "${S}"/skin/classic/zhengma.png
+	cp "${FILESDIR}"/fcitx-zhengma-16.png "${S}"/skin/default/zhengma.png
+	epatch "${FILESDIR}"/zhengma.diff
 
 }
 

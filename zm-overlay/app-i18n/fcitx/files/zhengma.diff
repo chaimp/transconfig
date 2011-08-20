@@ -1,10 +1,18 @@
---- data/table/CMakeLists.txt.orig	2011-08-19 11:20:39.940440277 +0800
-+++ data/table/CMakeLists.txt	2011-08-19 12:46:02.656397514 +0800
-@@ -7,10 +7,11 @@
-  ${CMAKE_CURRENT_BINARY_DIR}/wbx.mb
-  ${CMAKE_CURRENT_BINARY_DIR}/zrm.mb
-  ${CMAKE_CURRENT_BINARY_DIR}/cj.mb
-+ ${CMAKE_CURRENT_BINARY_DIR}/zm.mb
+diff -ruN data/png/CMakeLists.txt data.new/png/CMakeLists.txt
+--- data/png/CMakeLists.txt	2011-08-19 18:36:55.891195859 +0800
++++ data.new/png/CMakeLists.txt	2011-08-19 18:37:19.215904259 +0800
+@@ -17,6 +17,7 @@
+ fcitx-wbpy.png
+ fcitx-wubi.png
+ fcitx-ziranma.png
++fcitx-zhengma.png
+ fcitx-shuangpin.png
+ fcitx.png
+ )
+diff -ruN data/table/CMakeLists.txt data.new/table/CMakeLists.txt
+--- data/table/CMakeLists.txt	2011-08-19 18:36:55.904195697 +0800
++++ data.new/table/CMakeLists.txt	2011-08-19 18:45:40.868632739 +0800
+@@ -10,7 +10,7 @@
  )
  set(TABLEORG_DATA db.txt erbi.txt qxm.txt wanfeng.txt wbpy.txt wbx.txt zrm.txt cj.txt)
  set(TABLE_NAME db erbi qxm wanfeng wbpy wbx zrm cj)
@@ -13,10 +21,85 @@
  set(TABLE_URL http://fcitx.googlecode.com/files/table.tar.gz)
  set(TABLE_TAR ${CMAKE_CURRENT_SOURCE_DIR}/table.tar.gz)
  
-@@ -35,4 +36,4 @@
+@@ -35,4 +35,15 @@
                     COMMAND txt2mb ${tblname}.txt ${tblname}.mb)
  endforeach()
  
 -install(FILES ${TABLE_DATA} DESTINATION ${pkgdatadir}/table )
 \ 文件尾没有 newline 字符
-+install(FILES ${TABLE_DATA} DESTINATION ${pkgdatadir}/table )
++set(TABLE_DATAS
++ ${CMAKE_CURRENT_BINARY_DIR}/db.mb
++ ${CMAKE_CURRENT_BINARY_DIR}/erbi.mb
++ ${CMAKE_CURRENT_BINARY_DIR}/qxm.mb
++ ${CMAKE_CURRENT_BINARY_DIR}/wanfeng.mb
++ ${CMAKE_CURRENT_BINARY_DIR}/wbpy.mb
++ ${CMAKE_CURRENT_BINARY_DIR}/wbx.mb
++ ${CMAKE_CURRENT_BINARY_DIR}/zrm.mb
++ ${CMAKE_CURRENT_BINARY_DIR}/cj.mb
++ ${CMAKE_CURRENT_SOURCE_DIR}/zm.mb
++)
++install(FILES ${TABLE_DATAS} DESTINATION ${pkgdatadir}/table )
+
+
+--- skin/classic/CMakeLists.txt 2011-08-19 18:36:55.922195471 +0800
++++ skin.new/classic/CMakeLists.txt     2011-08-19 21:04:03.523835264 +0800
+@@ -4,8 +4,8 @@
+ punc_active.png punc_inactive.png
+  active.png  bingchan.png erbi.png  fcitx_skin.conf
+  input.png  remind_active.png remind_inactive.png  quwei.png  vk_active.png vk_inactive.png wubi.png wbpy.png ziranma.png
+- bar.png cangjie.png  cn.png en.png inactive.png logo.png
++ bar.png cangjie.png  cn.png en.png inactive.png logo.png zhengma.png
+  dianbaoma.png shuangpin.png wanfeng.png pinyin.png prev.png next.png menu.png
+ )
+ 
+-install(FILES ${FCITX_CLASSIC_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/classic)
+\ 文件尾没有 newline 字符
++install(FILES ${FCITX_CLASSIC_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/classic)
+diff -urN skin/dark/CMakeLists.txt skin.new/dark/CMakeLists.txt
+--- skin/dark/CMakeLists.txt    2011-08-19 18:36:55.933195335 +0800
++++ skin.new/dark/CMakeLists.txt        2011-08-19 21:04:43.006341665 +0800
+@@ -1,6 +1,6 @@
+ set(FCITX_DARK_SKIN_FILES
+ active.png  bingchan.png erbi.png  fcitx_skin.conf 
+-input.png quwei.png wubi.png wbpy.png ziranma.png
++input.png quwei.png wubi.png wbpy.png ziranma.png zhengma.png
+ bar.png cangjie.png  cn.png en.png  inactive.png logo.png
+ dianbaoma.png shuangpin.png wanfeng.png pinyin.png prev.png next.png menu.png keyboard.png
+ remind_active.png remind_inactive.png vk_active.png vk_inactive.png
+@@ -8,4 +8,4 @@
+ chttrans_active.png chttrans_inactive.png
+ )
+ 
+-install(FILES ${FCITX_DARK_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/dark)
+\ 文件尾没有 newline 字符
++install(FILES ${FCITX_DARK_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/dark)
+diff -urN skin/default/CMakeLists.txt skin.new/default/CMakeLists.txt
+--- skin/default/CMakeLists.txt 2011-08-19 18:36:55.945195185 +0800
++++ skin.new/default/CMakeLists.txt     2011-08-19 21:04:59.575134527 +0800
+@@ -4,9 +4,9 @@
+ punc_active.png punc_inactive.png
+ active.png  bingchan.png erbi.png  fcitx_skin.conf 
+ input.png  remind_active.png remind_inactive.png  quwei.png vk_active.png vk_inactive.png
+-wubi.png wbpy.png ziranma.png
++wubi.png wbpy.png ziranma.png zhengma.png
+ bar.png cangjie.png  cn.png en.png  inactive.png logo.png
+ dianbaoma.png shuangpin.png wanfeng.png pinyin.png prev.png next.png keyboard.png menu.png
+ )
+ 
+-install(FILES ${FCITX_DEFAULT_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/default)
+\ 文件尾没有 newline 字符
++install(FILES ${FCITX_DEFAULT_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/default)
+
+--- po/zh_CN.po.old     2011-08-19 22:54:45.262802101 +0800
++++ po/zh_CN.po 2011-08-19 22:53:21.926843944 +0800
+@@ -396,6 +396,10 @@
+ msgid "Erbi"
+ msgstr "二笔"
+ 
++#: /home/saber/Develop/fcitx/build/po/tmp/zhengma.conf.in.h:1
++msgid "zhengma"
++msgstr "郑码"
++
+ #: /home/saber/Develop/fcitx/build/po/../..//src/ui/cairostuff/font.c:50
+ msgid "Error: Load fontconfig failed"
+ msgstr "错误: fontconfig加载失败"
