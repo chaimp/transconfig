@@ -50,3 +50,11 @@ src_prepare() {
 	fi
 }
 
+pkg_postinst() {
+		elog
+		elog "You should export the following variables to use fcitx"
+		elog " export XMODIFIERS=\"@im=fcitx\""
+		elog " export XIM=fcitx"
+		elog " export XIM_PROGRAM=fcitx"
+		elog
+}
