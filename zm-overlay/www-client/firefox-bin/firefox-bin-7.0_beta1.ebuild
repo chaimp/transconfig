@@ -15,7 +15,7 @@ DESCRIPTION="Firefox Web Browser"
 SRC_URI="${REL_URI}/${MY_PN}-${MY_PV}.tar.bz2 -> ${MY_P}_64.tar.bz2"
 HOMEPAGE="http://www.mozilla.com/firefox"
 
-KEYWORDS="~amd64"
+KEYWORDS=""
 SLOT="0"
 LICENSE="|| ( MPL-1.1 GPL-2 LGPL-2.1 )"
 IUSE="${IUSE}"

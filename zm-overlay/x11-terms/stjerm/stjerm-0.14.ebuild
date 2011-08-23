@@ -1,6 +1,8 @@
 # Copyright 1999-2007 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
+EAPI="3"
+
 inherit autotools eutils
 
 DESCRIPTION="A drop down, quake-like terminal emulator"
@@ -11,8 +13,9 @@ LICENSE="GPL-2"
 KEYWORDS="amd64 x86"
 SLOT="0"
 IUSE=""
+RESTRICT="strip mirror"
 
-DEPEND="x11-libs/vte
+DEPEND="x11-libs/vte:0
 	dev-util/pkgconfig
 	>x11-libs/gtk+-2.6"
 

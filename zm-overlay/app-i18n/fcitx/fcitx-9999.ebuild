@@ -8,7 +8,7 @@ inherit cmake-utils mercurial
 
 EHG_REVISION="default"
 EHG_REPO_URI="https://fcitx.googlecode.com/hg"
-EHG_UP_FREQ="12"
+#EHG_UP_FREQ="12"
 
 DESCRIPTION="Free Chinese Input Toy for X. Another Chinese XIM Input Method"
 HOMEPAGE="http://fcitx.googlecode.com"

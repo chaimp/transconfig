@@ -1,5 +1,5 @@
 diff -ru data/png/CMakeLists.txt data.new/png/CMakeLists.txt
---- data/png/CMakeLists.txt	2011-08-19 18:36:55.891195859 +0800
+--- data/png/CMakeLists.txt	2011-08-22 12:12:14.537912387 +0800
 +++ data.new/png/CMakeLists.txt	2011-08-20 13:39:35.336824564 +0800
 @@ -17,6 +17,7 @@
  fcitx-wbpy.png
@@ -10,7 +10,7 @@ diff -ru data/png/CMakeLists.txt data.new/png/CMakeLists.txt
  fcitx.png
  )
 diff -ru data/table/CMakeLists.txt data.new/table/CMakeLists.txt
---- data/table/CMakeLists.txt	2011-08-19 18:36:55.904195697 +0800
+--- data/table/CMakeLists.txt	2011-08-22 12:12:14.549912236 +0800
 +++ data.new/table/CMakeLists.txt	2011-08-20 13:42:31.320624465 +0800
 @@ -7,12 +7,16 @@
   ${CMAKE_CURRENT_BINARY_DIR}/wbx.mb
@@ -51,7 +51,7 @@ diff -ru data/table/CMakeLists.txt data.new/table/CMakeLists.txt
 \ 文件尾没有 newline 字符
 +install(FILES ${TABLE_DATA} DESTINATION ${pkgdatadir}/table )
 diff -ru skin/classic/CMakeLists.txt skin.new/classic/CMakeLists.txt
---- skin/classic/CMakeLists.txt	2011-08-19 18:36:55.922195471 +0800
+--- skin/classic/CMakeLists.txt	2011-08-22 12:12:14.567912011 +0800
 +++ skin.new/classic/CMakeLists.txt	2011-08-19 21:21:23.188837664 +0800
 @@ -4,8 +4,8 @@
  punc_active.png punc_inactive.png
@@ -66,7 +66,7 @@ diff -ru skin/classic/CMakeLists.txt skin.new/classic/CMakeLists.txt
 \ 文件尾没有 newline 字符
 +install(FILES ${FCITX_CLASSIC_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/classic)
 diff -ru skin/dark/CMakeLists.txt skin.new/dark/CMakeLists.txt
---- skin/dark/CMakeLists.txt	2011-08-19 18:36:55.933195335 +0800
+--- skin/dark/CMakeLists.txt	2011-08-22 12:12:14.580911850 +0800
 +++ skin.new/dark/CMakeLists.txt	2011-08-19 21:04:43.006341665 +0800
 @@ -1,6 +1,6 @@
  set(FCITX_DARK_SKIN_FILES
@@ -84,7 +84,7 @@ diff -ru skin/dark/CMakeLists.txt skin.new/dark/CMakeLists.txt
 \ 文件尾没有 newline 字符
 +install(FILES ${FCITX_DARK_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/dark)
 diff -ru skin/default/CMakeLists.txt skin.new/default/CMakeLists.txt
---- skin/default/CMakeLists.txt	2011-08-19 18:36:55.945195185 +0800
+--- skin/default/CMakeLists.txt	2011-08-22 12:12:14.594911673 +0800
 +++ skin.new/default/CMakeLists.txt	2011-08-19 21:04:59.575134527 +0800
 @@ -4,9 +4,9 @@
  punc_active.png punc_inactive.png
@@ -99,3 +99,17 @@ diff -ru skin/default/CMakeLists.txt skin.new/default/CMakeLists.txt
 -install(FILES ${FCITX_DEFAULT_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/default)
 \ 文件尾没有 newline 字符
 +install(FILES ${FCITX_DEFAULT_SKIN_FILES} DESTINATION ${pkgdatadir}/skin/default)
+diff -ru po/zh_CN.po po.new/zh_CN.po
+--- po/zh_CN.po	2011-08-22 12:12:14.566912023 +0800
++++ po.new/zh_CN.po	2011-08-22 12:20:22.505811948 +0800
+@@ -400,6 +400,10 @@
+ msgid "Erbi"
+ msgstr "二笔"
+ 
++#: /home/saber/Develop/fcitx/build/po/tmp/zhengma.conf.in.h:1
++msgid "Zhengma"
++msgstr "郑码"
++
+ #: /home/saber/Develop/fcitx/build/po/../..//src/ui/cairostuff/font.c:50
+ msgid "Error: Load fontconfig failed"
+ msgstr "错误: fontconfig加载失败"

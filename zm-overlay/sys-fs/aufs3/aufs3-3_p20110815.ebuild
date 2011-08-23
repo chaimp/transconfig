@@ -38,7 +38,7 @@ pkg_setup() {
 
 	get_version
 	kernel_is lt 3 0 0 && die "kernel too old"
-	kernel_is gt 3 0 1 && die "kernel too new"
+	kernel_is gt 3 1 0 && die "kernel too new"
 
 	linux-mod_pkg_setup
 	if ! ( patch -p1 --dry-run --force -R -d ${KV_DIR} < "${FILESDIR}"/${PN}-standalone-${KV_PATCH}.patch >/dev/null && \
