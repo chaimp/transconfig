@@ -129,7 +129,6 @@ myConkyBar = "sleep 1; conky | dzen2 -e '' -h '16' -x '800' -ta r -fg '" ++ dzFg
 --mySysTray :: String
 --mySysTray = "sleep 3; trayer --expand true  --alpha 0 --edge top --align right --SetDockType true --transparent flase --SetPartialStrut true --widthtype request --tint 0xffffff --height 18 --margin 65"
 
- 
 myLogHook h = dynamicLogWithPP $ defaultPP
       { ppCurrent     = dzenColor "white" "#326496" . pad
         , ppVisible     = dzenColor "white" "#000000" . pad 
@@ -176,7 +175,12 @@ myLayout =  genericLayout
 
 main :: IO ()
 main = do
-  spawn "killall trayer"
+  spawn "wicd-client"
+  spawn "parcellite"
+  spawn "volumeicon"
+  spawn "tint2"
+  spawn "urxvt"
+  spawn "fcitx"
   dzen <- spawnPipe myStatusBar
   spawn myConkyBar
 --  spawn mySysTray
