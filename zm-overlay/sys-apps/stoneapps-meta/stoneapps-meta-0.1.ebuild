@@ -49,6 +49,7 @@ app-arch/p7zip
 app-cdr/cdw
 app-editors/emacs
 app-editors/gvim
+media-gfx/fbv
 dev-util/lafilefixer
 net-analyzer/macchanger
 net-analyzer/bmon"
