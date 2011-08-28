@@ -1,64 +1,45 @@
 #!/bin/sh
 
-# π.Xresources÷–µƒ…Ë÷√…˙–ß
-xrdb -merge .Xresources
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+#XSESSION=xmonad
+# merge in defaults and keymaps
 
-#–ﬁ’˝OOoΩÁ√Ê”ÎœµÕ≥“ª÷¬
+if [ -f "$userresources" ]; then
+    xrdb -merge "$userresources"
+fi
+
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
+#‰øÆÊ≠£OOoÁïåÈù¢‰∏éÁ≥ªÁªü‰∏ÄËá¥
 export GTK2_RC_FILES="`pwd`/.gtkrc-2.0"
 export SAL_USE_VCLPLUGIN="gtk"
-
-#◊¿√Ê±≥æ∞Õº∆¨¬÷ªª
-#while true;
-#do
-#   find $HOME/.wallpaper -type f -name '*.jpg' -o -name '*.png' | shuf -n 1 | xargs #feh --bg-scale
-#   sleep 15m
-#done &
-
-#◊¿√Ê±≥æ∞…Ë÷√
-#feh --bg-scale $HOME/macosx.jpg &
-#feh -Z --bg-scale $HOME/win8.jpg &
-habak -ms -hi $HOME/win8.jpg &
-
-xmodmap .Xmodmap
-
-# ‰»Î∑®ª∑æ≥±‰¡ø
-#export XMODIFIERS="@im=ibus"
-#export XIM="ibus"
-#export XIM_PROGRAM="ibus"
-#export GTK_IM_MODULE="ibus"
-#export QT_IM_MODULE="ibus"
-#ibus-daemon -d -x &
-
-#∆Ù∂Ø ±◊‘∂Ø‘ÿ»Î≥Ã–Ú
-parcellite &
-wicd-client &
-#nm-applet &
-volumeicon &
-tint2 &
-#unclutter -root -jitter 150 &
-urxvt &
-#stjerm &
-
 export XMODIFIERS="@im=fcitx"
-export XIM="fcitx"
-export XIM_PROGRAM="fcitx"
-export GTK_IM_MODULE="fcitx"
-export QT_IM_MODULE="fcitx"
-fcitx &
+export XIM=fcitx
+export XIM_PROGRAM=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
 
-#º¸≈Ã∞¥º¸∑¥”¶ÀŸ∂»–ﬁ’˝
-xset r rate 250 25
+habak -ms -hi $HOME/Andromeda_Galaxy.jpg &
+xset r rate 250 25 &
 #xset m 3 1
-
-# Û±Í—˘ Ω–ﬁ’˝
 xsetroot -cursor_name left_ptr &
 
-#¥∞ø⁄π‹¿Ì∆˜
-#exec enlightenment_start
-#exec  ck-launch-session startkde
-#exec startxfce4
-#exec ck-launch-session lxde-session
-#exec ck-launch-session awesome
-#exec ck-launch-session gnome-session
-exec ck-launch-session xmonad
-#exec ck-launch-session scrotwm
+#parcellite &
+#wicd-client &
+#nm-applet &
+#volumeicon &
+#tint2 &
+#cairo-dock -o &
+#unclutter -root -jitter 150 &
+#urxvt &
+xmonad
