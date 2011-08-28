@@ -5,27 +5,30 @@ dev-lang/ghc ghcquickbuild binary
 dev-python/django sqlite
 dev-python/PyQt4 webkit sql declarative
 dev-libs/libxml2 icu
+dev-libs/libgcrypt static-libs
+dev-libs/popt static-libs
+dev-libs/libgpg-error static-libs
 dev-java/swt -xulrunner
 xfce-base/xfce4-meta minimal -alsa -oss 
 xfce-base/xfce4-settings libnotify sound
 xfce-base/xfce-utils -lock
 xfce-base/exo libnotify
 x11-base/xorg-server xvfb
+x11-apps/xinit minimal
 x11-wm/fvwm -gtk stroke
 x11-wm/compiz-fusion emerald unsupported
 x11-wm/musca xlisten
 x11-themes/redhat-artwork  audacious cursors gdm icons 
-x11-apps/xinit minimal
-x11-terms/rxvt-unicode alt-font-width 256-color iso14755 afterimage blink fading-colors pixbuf unicode3 -vanilla
+x11-terms/rxvt-unicode force-hints 256-color iso14755 afterimage blink fading-colors pixbuf unicode3 -vanilla
 x11-misc/xmobar mail
 x11-misc/cairo-dock-plugins compiz network-monitor powermanager gmenu xgamma mail
 x11-drivers/ati-drivers modules
-x11-drivers/xf86-video-intel sna
 media-sound/volumeicon -oss
 media-sound/audacious chardet 
 media-sound/esound -alsa
 media-sound/moc alsa vorbis ffmpeg
 media-sound/xmms2 -alsa mac asf mms 
+media-sound/deadbeef tta zip gme hotkeys ffmpeg gbk
 media-plugins/audacious-plugins alsa ffmpeg chardet sndfile scrobbler cue
 media-plugins/gst-plugins-meta ffmpeg
 media-video/mplayer -gtk -live -dv -mp2 -amrwb -amrnb -dirac -speex -cddb -schroedinger -dvb xv radio quicktime real rar 
@@ -42,7 +45,7 @@ media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
 media-tv/gmlive sopcast extra
 media-tv/enna -vdr -upnp
-app-i18n/fcitx pango
+app-i18n/fcitx pango qt zhengma
 app-i18n/sunpinyin xim
 app-arch/p7zip rar
 app-admin/conky -X hddtemp vim-syntax nano-syntax wifi rss iostats moc xmms2 weather-metar imlib math
@@ -112,14 +115,15 @@ sys-apps/systemd-units server sysv
 sys-apps/hal laptop policykit
 sys-apps/tuxonice-userui fbsplash
 sys-apps/hwdata-gentoo  binary-drivers
-sys-apps/busybox -savedconfig
+sys-apps/busybox -savedconfig static
+sys-kernel/mkinitcpio lvm2
 sys-devel/gcc -nls
 sys-libs/glibc -nls
 sys-libs/pam -nls
 sys-fs/ntfs3g suid
 sys-fs/lvm2 -lvm1
 sys-fs/btrfs-progs debug-utils
-sys-fs/aufs2 hfs inotify kernel-patch nfs ramfs
+sys-fs/aufs3 hfs inotify nfs ramfs fuse kernel-patch
 sys-boot/plymouth gdm
 sys-block/open-iscsi utils
 sys-block/gparted  fat hfs ntfs reiser4 reiserfs xfs

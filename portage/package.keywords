@@ -4,11 +4,10 @@ x11-misc/fqterm **
 dev-python/feedparser **
 net-firewall/west-chamber **
 games-emulation/hugo **
-#=sys-boot/grub-1.99_rc1 **
-app-i18n/fcitx **
 app-i18n/sunpinyin **
 app-i18n/sunpinyin-core **
 app-i18n/libsunpinyin **
+app-i18n/fcitx **
 =net-im/emesene-9999-r3 **
 x11-themes/gtk-engines-murrine **
 sys-devel/spl **
