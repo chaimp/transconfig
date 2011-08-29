@@ -17,17 +17,20 @@
 /dev/sda1		/boot		ext3		noauto,noatime	1 2
 /dev/sda6		/		ext4		noatime		0 1
 #/dev/sda8		none		swap		sw		0 1
-/dev/stone/usr          /sqfs           xfs             defaults        0 1
+/dev/stone/usr          /sqfs           xfs             defaults,noatime,nobarrier,logbufs=8 0 1
 /dev/stone/var          /var            ext4            defaults        0 1
 /dev/stone/work         /home           btrfs           defaults        0 1
 
 /dev/stone/test         /mnt/test       ext4            defaults        0 1
-/dev/stone/zhou         /mnt/stone      xfs             defaults        0 1
+/dev/stone/zhou         /mnt/stone      xfs             defaults,noatime,nobarrier,logbufs=8 0 1
 /dev/sda2               /mnt/c          ntfs-3g         defaults        0 0
 #/dev/sda5               /mnt/mac          hfsplus         ro,defaults     0 0
 
-/sqfs/usr.sfs           /sqfs/usr/ro   squashfs   loop,ro   0 0
+/sqfs/user1.sfs           /sqfs/usr/ro   squashfs   loop,ro   0 0
 usr                     /usr           aufs    udba=reval,br:/sqfs/usr/rw:/sqfs/usr/ro  0 0
+
+#/sqfs/stonework.sfs     /sqfs/zhou/ro   squashfs   loop,ro   0 0
+#zhou                    /sqfs/zhou/home aufs    udba=reval,br:/sqfs/zhou/rw:/sqfs/zhou/ro  0 0
 
 #/dev/cdrom		/mnt/cdrom	auto		noauto,ro	0 0
 #/dev/fd0		/mnt/floppy	auto		noauto		0 0
