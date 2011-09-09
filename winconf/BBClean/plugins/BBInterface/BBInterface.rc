@@ -19,9 +19,9 @@
 !---- Bar ----
 @BBInterface Control Create Frame Bar
 @BBInterface Control SetWindowProperty Bar X 0
-@BBInterface Control SetWindowProperty Bar Y 0
+@BBInterface Control SetWindowProperty Bar Y 774
 @BBInterface Control SetWindowProperty Bar Width 1103
-@BBInterface Control SetWindowProperty Bar Height 27
+@BBInterface Control SetWindowProperty Bar Height 24
 @BBInterface Control SetWindowProperty Bar Border false
 @BBInterface Control SetWindowProperty Bar IsVisible true
 @BBInterface Control SetWindowProperty Bar Style "Toolbar"
@@ -42,14 +42,14 @@
 !---- Bar::ExternalPlugins ----
 @BBInterface Control ExternalPlugin Bar Load "plugins\bbLeanBar\bbLeanBar.dll"
 @BBInterface Control ExternalPlugin Bar SetProperty bbLeanBar IsVisible true
-@BBInterface Control ExternalPlugin Bar SetProperty bbLeanBar Position 240 2
+@BBInterface Control ExternalPlugin Bar SetProperty bbLeanBar Position 240 1
 
 !---- Bar::AppleButtom ----
 @BBInterface Control CreateChild Bar Button AppleButtom
 @BBInterface Control SetWindowProperty AppleButtom X 8
 @BBInterface Control SetWindowProperty AppleButtom Y 0
 @BBInterface Control SetWindowProperty AppleButtom Width 30
-@BBInterface Control SetWindowProperty AppleButtom Height 27
+@BBInterface Control SetWindowProperty AppleButtom Height 24
 @BBInterface Control SetWindowProperty AppleButtom Border false
 @BBInterface Control SetWindowProperty AppleButtom IsVisible true
 @BBInterface Control SetWindowProperty AppleButtom Style "Toolbar"
@@ -64,14 +64,14 @@
 @BBInterface Control SetAgentProperty AppleButtom ImageWhenPressed VAlign "Center"
 @BBInterface Control SetAgentProperty AppleButtom ImageWhenPressed HAlign "Center"
 @BBInterface Control SetAgent AppleButtom LeftMouseDown Bro@m "@BBCore.HideMenu"
-@BBInterface Control SetAgent AppleButtom LeftMouseUp Bro@m "@BBCore.ShowMenu 0 27 start.rc"
+@BBInterface Control SetAgent AppleButtom LeftMouseUp Bro@m "@BBCore.ShowMenu 0 510 start.rc"
 
 !---- Bar::SoftButtom ----
 @BBInterface Control CreateChild Bar Button SoftButtom
 @BBInterface Control SetWindowProperty SoftButtom X 40
 @BBInterface Control SetWindowProperty SoftButtom Y 0
 @BBInterface Control SetWindowProperty SoftButtom Width 79
-@BBInterface Control SetWindowProperty SoftButtom Height 27
+@BBInterface Control SetWindowProperty SoftButtom Height 24
 @BBInterface Control SetWindowProperty SoftButtom Border true
 @BBInterface Control SetWindowProperty SoftButtom IsVisible true
 @BBInterface Control SetWindowProperty SoftButtom Style "Toolbar"
@@ -86,14 +86,14 @@
 @BBInterface Control SetAgentProperty SoftButtom ImageWhenPressed VAlign "Center"
 @BBInterface Control SetAgentProperty SoftButtom ImageWhenPressed HAlign "Center"
 @BBInterface Control SetAgent SoftButtom LeftMouseDown Bro@m "@BBCore.HideMenu"
-@BBInterface Control SetAgent SoftButtom LeftMouseUp Bro@m "@BBCore.ShowMenu 45 27 QuickLine.rc"
+@BBInterface Control SetAgent SoftButtom LeftMouseUp Bro@m "@BBCore.ShowMenu 45 450 QuickLine.rc"
 
 !---- Bar::SearchButtom ----
 @BBInterface Control CreateChild Bar Button SearchButtom
 @BBInterface Control SetWindowProperty SearchButtom X 1078
 @BBInterface Control SetWindowProperty SearchButtom Y 0
 @BBInterface Control SetWindowProperty SearchButtom Width 28
-@BBInterface Control SetWindowProperty SearchButtom Height 27
+@BBInterface Control SetWindowProperty SearchButtom Height 24
 @BBInterface Control SetWindowProperty SearchButtom Border true
 @BBInterface Control SetWindowProperty SearchButtom IsVisible true
 @BBInterface Control SetWindowProperty SearchButtom Style "Toolbar"
@@ -114,7 +114,7 @@
 @BBInterface Control SetWindowProperty Mirror X 115
 @BBInterface Control SetWindowProperty Mirror Y 0
 @BBInterface Control SetWindowProperty Mirror Width 130
-@BBInterface Control SetWindowProperty Mirror Height 27
+@BBInterface Control SetWindowProperty Mirror Height 24
 @BBInterface Control SetWindowProperty Mirror Border true
 @BBInterface Control SetWindowProperty Mirror IsVisible true
 @BBInterface Control SetWindowProperty Mirror Style "Toolbar"
