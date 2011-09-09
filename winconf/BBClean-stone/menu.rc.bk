@@ -1,0 +1,42 @@
+# -----------------------------------------------------------------
+# bblean 1.16 - MENU FILE
+# -----------------------------------------------------------------
+
+# Available menu commands are listed in the documentation.
+
+[begin] (bbLean)
+  [include] {Quickline.rc} 
+  #[path] (Applications) {PROGRAMS|COMMON_PROGRAMS} <Icons\cmd locked.ico> 
+       [separator]
+	[path] (Documents) {PERSONAL} <Icons\Project16.ico>
+	[exec] (Download Files) {e:\DOWNLOAD} <Icons\Downloads Folder.ico>
+	[submenu] (Disk Drivers)  <Icons\hdd2.ico>
+    [exec] (Storage Disks) {DRIVES}<Icons\house2.ico>
+	  [submenu] (Hard Disk)  <Icons\hdd2.ico>
+		     [path] (System Disk C:) {c:} <Icons\hdd2.ico>
+		     [path] (Application Disk D:) {d:} <Icons\hdd2.ico>
+		     [path] (Doc&Temp Disk E:) {e:} <Icons\hdd2.ico>
+	  [end]
+		[submenu] (Remove Disk) <Icons\usb.ico>
+         [path] (Remove Disk G:) {g:} <Icons\usb.ico>
+         [path] (Remove Disk H:) {h:} <Icons\usb.ico>
+         [path] (Remove Disk K:) {k:} <Icons\usb.ico>
+         [path] (Remove Disk L:) {l:} <Icons\usb.ico>
+    [end]
+		[submenu] (CD-ROM) <Icons\cd.ico>
+         [path] (CDROM I:) {i:} <Icons\cd.ico>
+         [path] (Image CDROM J:) {j:} <Icons\cd.ico>
+         [path] (Image CDROM M:) {m:} <Icons\cd.ico>
+    [end]
+	[end]
+        [separator]
+        #Uncomment this line to check out all available system folders
+        #[include] {shellfolders.rc}
+	[exec] (Console) {Soft\console.exe}<*>
+        [separator]
+	[run] (Run) <Icons\Icon_30.ico>
+#	[exec] (GraphicReset) {igfxcfg /SchemeName:reset} <Icons\GraphicsReset.ico>
+	[include] {tools.rc}
+#	[volume] (Volume)
+[end]
+
