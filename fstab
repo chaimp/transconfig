@@ -17,6 +17,7 @@
 /dev/sda1		/boot		ext3		noauto,noatime	1 2
 /dev/sda6		/		ext4		noatime		0 1
 #/dev/sda8		none		swap		sw		0 1
+/dev/sda5	        /mnt/vfs        xfs             defaults,noatime,nobarrier,logbufs=8 0 1
 /dev/stone/usr          /sqfs           xfs             defaults,noatime,nobarrier,logbufs=8 0 1
 /dev/stone/var          /var            ext4            defaults        0 1
 /dev/stone/work         /home           btrfs           defaults        0 1
@@ -39,5 +40,4 @@ usr                     /usr           aufs    udba=reval,br:/sqfs/usr/rw:/sqfs/
 # POSIX shared memory (shm_open, shm_unlink).
 # (tmpfs is a dynamically expandable/shrinkable ramdisk, and will
 #  use almost no memory if not populated with files)
-shm			/dev/shm	tmpfs		nodev,nosuid,noexec	0 0
-tmpfs      /var/tmp/portage   tmpfs  size=512M         0 0
+shm			/dev/shm	tmpfs		size=3G,nodev,nosuid	0 0
