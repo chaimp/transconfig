@@ -42,7 +42,7 @@
 !---- Bar::ExternalPlugins ----
 @BBInterface Control ExternalPlugin Bar Load "plugins\bbLeanBar\bbLeanBar.dll"
 @BBInterface Control ExternalPlugin Bar SetProperty bbLeanBar IsVisible true
-@BBInterface Control ExternalPlugin Bar SetProperty bbLeanBar Position 260 1
+@BBInterface Control ExternalPlugin Bar SetProperty bbLeanBar Position 265 1
 
 !---- Bar::AppleButtom ----
 @BBInterface Control CreateChild Bar Button AppleButtom
@@ -111,9 +111,9 @@
 
 !---- Bar::Mirror ----
 @BBInterface Control CreateChild Bar Label Mirror
-@BBInterface Control SetWindowProperty Mirror X 148
+@BBInterface Control SetWindowProperty Mirror X 145
 @BBInterface Control SetWindowProperty Mirror Y 0
-@BBInterface Control SetWindowProperty Mirror Width 110
+@BBInterface Control SetWindowProperty Mirror Width 125
 @BBInterface Control SetWindowProperty Mirror Height 24
 @BBInterface Control SetWindowProperty Mirror Border true
 @BBInterface Control SetWindowProperty Mirror IsVisible true
