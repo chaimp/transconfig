@@ -32,7 +32,7 @@
 @BBInterface Control SetWindowProperty Bar AutoHide false
 @BBInterface Control SetWindowProperty Bar IsSlitted true
 @BBInterface Control SetWindowProperty Bar IsTransparent true
-@BBInterface Control SetWindowProperty Bar Transparency 88
+@BBInterface Control SetWindowProperty Bar Transparency 77
 @BBInterface Control SetWindowProperty Bar MakeInvisible "Never"
 @BBInterface Control SetControlProperty Bar HAlign "Center"
 @BBInterface Control SetControlProperty Bar VAlign "Center"
@@ -42,7 +42,7 @@
 !---- Bar::ExternalPlugins ----
 @BBInterface Control ExternalPlugin Bar Load "plugins\bbLeanBar\bbLeanBar.dll"
 @BBInterface Control ExternalPlugin Bar SetProperty bbLeanBar IsVisible true
-@BBInterface Control ExternalPlugin Bar SetProperty bbLeanBar Position 240 1
+@BBInterface Control ExternalPlugin Bar SetProperty bbLeanBar Position 260 1
 
 !---- Bar::AppleButtom ----
 @BBInterface Control CreateChild Bar Button AppleButtom
@@ -55,11 +55,11 @@
 @BBInterface Control SetWindowProperty AppleButtom Style "Toolbar"
 @BBInterface Control SetControlProperty AppleButtom HAlign "Center"
 @BBInterface Control SetControlProperty AppleButtom VAlign "Center"
-@BBInterface Control SetAgent AppleButtom Image Bitmap "image\Apple.png"
+@BBInterface Control SetAgent AppleButtom Image Bitmap "image\winflag.png"
 @BBInterface Control SetAgentProperty AppleButtom Image Scale 100
 @BBInterface Control SetAgentProperty AppleButtom Image VAlign "Center"
 @BBInterface Control SetAgentProperty AppleButtom Image HAlign "Center"
-@BBInterface Control SetAgent AppleButtom ImageWhenPressed Bitmap "image\Apple-down.png"
+!@BBInterface Control SetAgent AppleButtom ImageWhenPressed Bitmap "image\Apple-down.png"
 @BBInterface Control SetAgentProperty AppleButtom ImageWhenPressed Scale 100
 @BBInterface Control SetAgentProperty AppleButtom ImageWhenPressed VAlign "Center"
 @BBInterface Control SetAgentProperty AppleButtom ImageWhenPressed HAlign "Center"
@@ -70,14 +70,14 @@
 @BBInterface Control CreateChild Bar Button SoftButtom
 @BBInterface Control SetWindowProperty SoftButtom X 40
 @BBInterface Control SetWindowProperty SoftButtom Y 0
-@BBInterface Control SetWindowProperty SoftButtom Width 79
+@BBInterface Control SetWindowProperty SoftButtom Width 108
 @BBInterface Control SetWindowProperty SoftButtom Height 24
 @BBInterface Control SetWindowProperty SoftButtom Border true
 @BBInterface Control SetWindowProperty SoftButtom IsVisible true
 @BBInterface Control SetWindowProperty SoftButtom Style "Toolbar"
 @BBInterface Control SetControlProperty SoftButtom HAlign "Center"
 @BBInterface Control SetControlProperty SoftButtom VAlign "Center"
-@BBInterface Control SetAgent SoftButtom Image Bitmap "image\Software.png"
+@BBInterface Control SetAgent SoftButtom Image Bitmap "image\files.png"
 @BBInterface Control SetAgentProperty SoftButtom Image Scale 100
 @BBInterface Control SetAgentProperty SoftButtom Image VAlign "Center"
 @BBInterface Control SetAgentProperty SoftButtom Image HAlign "Center"
@@ -92,7 +92,7 @@
 @BBInterface Control CreateChild Bar Button SearchButtom
 @BBInterface Control SetWindowProperty SearchButtom X 1078
 @BBInterface Control SetWindowProperty SearchButtom Y 0
-@BBInterface Control SetWindowProperty SearchButtom Width 28
+@BBInterface Control SetWindowProperty SearchButtom Width 25
 @BBInterface Control SetWindowProperty SearchButtom Height 24
 @BBInterface Control SetWindowProperty SearchButtom Border true
 @BBInterface Control SetWindowProperty SearchButtom IsVisible true
@@ -111,9 +111,9 @@
 
 !---- Bar::Mirror ----
 @BBInterface Control CreateChild Bar Label Mirror
-@BBInterface Control SetWindowProperty Mirror X 115
+@BBInterface Control SetWindowProperty Mirror X 148
 @BBInterface Control SetWindowProperty Mirror Y 0
-@BBInterface Control SetWindowProperty Mirror Width 130
+@BBInterface Control SetWindowProperty Mirror Width 110
 @BBInterface Control SetWindowProperty Mirror Height 24
 @BBInterface Control SetWindowProperty Mirror Border true
 @BBInterface Control SetWindowProperty Mirror IsVisible true

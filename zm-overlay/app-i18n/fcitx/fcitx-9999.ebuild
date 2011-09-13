@@ -19,7 +19,7 @@ SRC_URI="${HOMEPAGE}/files/pinyin.tar.gz
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+cairo +pango +gtk gtk3 +qt opencc debug test static-libs zhengma"
+IUSE="+cairo +pango +gtk gtk3 +qt opencc debug test static-libs +table zhengma "
 RESTRICT="mirror"
 
 RDEPEND="media-libs/fontconfig
