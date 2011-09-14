@@ -8,9 +8,22 @@ set softtabstop=3
 set shiftwidth=3
 set expandtab
 set cindent
+set cursorline
 "颜色类型
-colorscheme desert
+colorscheme github
 
+"关闭自动备份
+set nobackup
+set nowb
+
+"关闭交换文件
+set noswapfile
+
+"开启折叠
+"set nofen
+set fdl=0
+set fdc=2
+set fdm=syntax
 
 " 设置编码
 set encoding=utf-8
@@ -31,8 +44,8 @@ set langmenu=zh_CN.utf-8
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 source $VIMRUNTIME/mswin.vim
-set guifont=Consolas:h10
-set guifontwide=新宋体:h10:cGB2312
+set guifont=Envy\ Code\ R:h10
+" set guifontwide=宋体:h10:cGB2312
 
 
 " 隐藏工具条

@@ -4,13 +4,27 @@ set nu!
 set wrap
 "TAB距离
 set tabstop=3
+
 set softtabstop=3
 set shiftwidth=3
 set expandtab
 set cindent
+set cursorline
 "颜色类型
 colorscheme github
 
+"关闭自动备份
+set nobackup
+set nowb
+
+"关闭交换文件
+set noswapfile
+
+"开启折叠
+"set nofen
+set fdl=0
+set fdc=2
+set fdm=syntax
 
 " 设置编码
 set encoding=utf-8
