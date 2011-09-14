@@ -9,7 +9,7 @@ set shiftwidth=3
 set expandtab
 set cindent
 "颜色类型
-colorscheme desert
+colorscheme github
 
 
 " 设置编码
