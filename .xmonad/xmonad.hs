@@ -109,7 +109,7 @@ dzBgColor                     = "#FDF6E3"
 dzFgColor                     = "#657B83"
 myCurrentBGColor              = "#8FB3D9"
 myCurrentFGColor              = "#002B36"
-myCurrentCornerColor          = "white"
+myCurrentCornerColor          = "#002B36"
 myVisibleBGColor              = "#28618f"
 myVisibleFGColor              = "white"
 myVisibleCornerColor          = ""
@@ -139,7 +139,7 @@ myLogHook h = dynamicLogWithPP $ defaultPP
         , ppUrgent  = \wsId -> rangeId wsId myUrgentCornerColor myUrgentBGColor myUrgentFGColor
         , ppWsSep   = ""
         , ppSep     = " "
-        , ppLayout  = dzenColor "#586E75" "" .
+        , ppLayout  = dzenColor "#859900" "" .
                           (\ x -> case x of
                               "Tall"                   -> "^i(/home/zhou/.xmonad/dzen/layouts/tile.xbm)"
                               "Mirror Tall"            -> "^i(/home/zhou/.xmonad/dzen/layouts/tilebottom.xbm)"
@@ -154,16 +154,6 @@ myLogHook h = dynamicLogWithPP $ defaultPP
 
 -- myWorkspaces = ["1:Term", "2:Surf", "3:Edit", "4:File", "5:View", "6:Pics"]
 myWorkspaces = ["Q1Term", "I2Surf", "U3Edit", "T4File", "J5View", "A6Pics"]
--- myWorkspaces = [
---   supWsNum "1" "Q" "Term",
---   supWsNum "2" "I" "Surf",
---   supWsNum "3" "U" "Edit",
---   supWsNum "4" "T" "File",
---   supWsNum "5" "J" "View",
---   supWsNum "6" "A" "Pics"
---   ]
---   where
---     supWsNum wsNum wsIcon wsName ="^ca(1,xdotool key super+" ++ wsNum ++ ")" ++ wsName ++  "^p(;_TOP)^fn(" ++ mySmallFont ++ ")" ++ wsIcon ++ "^fn()^p()^ca()"
 
 --
 -- Layouts
