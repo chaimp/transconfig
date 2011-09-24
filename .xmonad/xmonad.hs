@@ -96,6 +96,7 @@ myManageHook = composeAll . concat $
     myIgnores     = ["trayer", "dzen", "stalonetray", "systray", "cairo-dock"]
 --    myTiles       = ["tilda", "pcmanfm", "thunar", "dolphin", "lxterminal"]
 
+myIconDir = "/home/zhou/.xmonad/dzen/layouts/"
 myBorderWidth   = 0
 myNormalBorderColor  = "#729fcf"
 myFocusedBorderColor = "#7292cf"
@@ -141,10 +142,10 @@ myLogHook h = dynamicLogWithPP $ defaultPP
         , ppSep     = " "
         , ppLayout  = dzenColor "#859900" "" .
                           (\ x -> case x of
-                              "Tall"                   -> "^i(/home/zhou/.xmonad/dzen/layouts/tile.xbm)"
-                              "Mirror Tall"            -> "^i(/home/zhou/.xmonad/dzen/layouts/tilebottom.xbm)"
+                              "Tall"                   -> wrap "^ca(1,xdotool key super+space)" "^ca()" ("^i(" ++ myIconDir ++ "tile.xbm)")
+                              "Mirror Tall"            -> wrap "^ca(1,xdotool key super+space)" "^ca()" ("^i(" ++ myIconDir ++ "tilebottom.xbm)")
 --                              "magnifier"              -> "^i(/home/zhou/.xmonad/dzen/layouts/magnifier.xbm)"
-                              "Full"                   -> "^i(/home/zhou/.xmonad/dzen/layouts/fullscreen.xbm)"
+                              "Full"                   -> wrap "^ca(1,xdotool key super+space)" "^ca()" ("^i(" ++ myIconDir ++ "fullscreen.xbm)")
                           ) 
         , ppTitle    = ("^fn(SimStone-8)" ++) . dzenColor dzFgColor dzBgColor . dzenEscape
         , ppOutput   = hPutStrLn h
