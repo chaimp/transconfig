@@ -5,4 +5,11 @@ use_spacer no
 gap_y -10
 
 TEXT
- ^fg(\#F6F1DB)^fn(Droid Sans-9:bold)^i(/home/zhou/.xmonad/dzen/cpu.xbm) ^fg(\#d3d7cf)$cpu^fg(skyblue)%  ^fg(\#F6F1DB)^i(/home/zhou/.xmonad/dzen/mem.xbm) ^fg(\#d3d7cf)$memperc^fg(skyblue)% ^fg(\#F6F1DB)^i(/home/zhou/.xmonad/dzen/temp.xbm)^fg(\#d3d7cf)${acpitemp}  ^fg(\#F6F1DB)^i(/home/zhou/.xmonad/dzen/power-ac.xbm)^fg(\#d3d7cf)${battery_time C1BA}^fg(\#4e9a06)(^fg(\#d3d7cf)${battery_percent BAT0}^fg(skyblue)%^fg(\#4e9a06))  ^fg(\#F6F1DB)^i(/home/zhou/.xmonad/dzen/net-wifi.xbm)^fg(skyblue)${wireless_essid wlan0} ^fg(\#4e9a06)(^fg(\#d3d7cf)${wireless_link_qual_perc eth0}^fg(skyblue)%^fg(\#4e9a06))      ^fg(white)^fn(方正剪纸繁体-9)${time %b%d日 星期%a }
+^fg(\#586E75)^fn(SimStone-8)\
+^fg(\#657B83)^i(/home/zhou/.xmonad/dzen/cpu.xbm)^fn(SimStone-5) ^fn(SimStone-8)^fg(\#586E75)$cpu% \
+^fg(\#657B83)^i(/home/zhou/.xmonad/dzen/mem.xbm)^fn(SimStone-4) ^fn(SimStone-8)^fg(\#586E75)$memperc% \
+^fg(\#657B83)^i(/home/zhou/.xmonad/dzen/temp.xbm)${acpitemp}^p(;-1)^fn(SimStone-5)^fg(\#586E75)o^fn(Simstone-8)^p()C \
+^fg(\#657B83)^i(/home/zhou/.xmonad/dzen/power-ac.xbm)^fn(SimStone-4) ^fn(SimStone-8)^fg(\#586E75)${battery_time C23B}(${battery_percent C23B}%) \
+^fg(\#657B83)^i(/home/zhou/.xmonad/dzen/net-wifi.xbm)^fg(\#586E75)${wireless_essid wlan0}(${wireless_link_qual_perc wlan0}%) \
+^fg(\#002B36)^bg(\#e7e7e7) ${time %b%d日 星期%a }
+
