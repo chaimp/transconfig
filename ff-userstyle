@@ -1,0 +1,16 @@
+#appmenu-toolbar-button > .toolbarbutton-menu-dropmarker, 
+#appmenu-toolbar-button > .toolbarbutton-text,
+#appmenu-toolbar-button > .toolbarbutton-icon { 
+  display:none !important;
+}
+
+#toolbar-menubar,
+#navigator-toolbox[tabsontop="true"] #TabsToolbar {
+padding: 0 !important; 
+margin:0 0 0 -15px !important;
+} 
+
+#navigator-toolbox[tabsontop="true"] #nav-bar {
+border: 0px !important;
+margin-top:-1px !important;
+} 
