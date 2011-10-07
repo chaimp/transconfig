@@ -5,3 +5,20 @@ ln -sv /usr/share/fonts/droid/DroidSansFallback.ttf /usr/share/fonts/arphicfonts
 udisks policy
 /usr/share/polkit-1/actions/org.freedesktop.udisks.policy
 
+firebug
+Index: content/firebug/chrome/chrome.js
+===================================================================
+--- content/firebug/chrome/chrome.js	(<a href="http://code.google.com/p/fbug/source/detail?r=11425">revision 11425</a>)
++++ content/firebug/chrome/chrome.js	(working copy)
+@@ -1081,8 +1081,10 @@
+         if (!panelBar1)
+             return;
+ 
++        // Scale the aspect relative to 11pt Lucida Grande
++        // Do not scale if the value is 0 (the default)
+         var zoom = Firebug.Options.getZoomByTextSize(value);
+-        var fontSizeAdjust = zoom * 0.547; // scale the aspect relative to 11pt Lucida Grande
++        var fontSizeAdjust = (value != 0) ? zoom * 0.547 : 0;
+ 
+         var contentBox = Firebug.chrome.$('fbContentBox');
+         contentBox.style.fontSizeAdjust = fontSizeAdjust;

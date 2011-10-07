@@ -1,35 +1,28 @@
-set go=bcrs
+set go=bcrsT
 set editor='emacsclient'
 
-set nextpattern=\s*下一页|下一张|下一章|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
-set previouspattern=\s*上一页|上一张|上一篇|上一章|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
+set nextpattern=\s*下一页|下一张|下一个|下一章|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
+set previouspattern=\s*上一页|上一张|上一个|上一篇|上一章|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
 
 set hk="asdfg;lkjh"
 
 "键盘映射
-map <S-Up> :set go=bcrm<CR>
-map <S-Down> :set go=bncrmT<CR>
-map <S-Left> :set go=bcrT<CR>
-map <S-Right> :set go=bcr<CR>
+map -m n,v,i,c,t  <C-a>	<Pass>
+map -m i,c,t 	  <C-c> <Pass>
+map -m i,c,t 	  <C-v> <Pass>
+map -m i,c,t 	  <C-x> <Pass>
+map -m i,c,t 	  <C-z> <Pass>
+map -m n,v 	  <A-w> -builtin <yank-word>
+map -m n,v,i,c,t  <C-y> -builtin <C-v><C-v>
+map -m i,c,t 	  <A-w> -builtin <C-c>
+map -m n,v 	  l 	-builtin gt
+map -m n,v 	  h 	-builtin gT
+map -m n,v	  <S-Up>         :set go=bcrm<CR>
+map -m n,v	  <S-Down>       :set go=bncrmT<CR>
+map -m n,v	  <S-Left>       :set go=bcrT<CR>
+map -m n,v	  <S-Right>      :set go=bcr<CR>
 
-:noremap <A-w> Y
-:noremap <C-a> <C-v><C-a>
-:cnoremap <A-w> <C-v><C-c>
-:cnoremap <C-y> <C-v><C-v>
-:cnoremap <C-w> <C-v><C-x>
-:inoremap <C-a> <C-v><C-a>
-:inoremap <A-w> <C-v><C-c>
-:inoremap <C-y> <C-v><C-v>
+noremap    	  j 		 2j
+noremap 	  k		 2k
 
-noremap h e
-noremap l e
-noremap <C-d> e
-noremap <C-x> c
-"unmap <C-x>
-:noremap l gt
-:noremap h gT
-:noremap <A-p> gt
-:noremap <A-n> gT
-:noremap j 2j
-:noremap k 2k
-
+colo stone
