@@ -8,12 +8,13 @@ set hk="asdfg;lkjh"
 
 "键盘映射
 map -m n,v,i,c,t  <C-a>	<Pass>
+map -m n,v,i,c,t  <C-v> <Pass>
 map -m i,c,t 	  <C-c> <Pass>
-map -m i,c,t 	  <C-v> <Pass>
 map -m i,c,t 	  <C-x> <Pass>
 map -m i,c,t 	  <C-z> <Pass>
 map -m n,v 	  <A-w> -builtin <yank-word>
-map -m n,v,i,c,t  <C-y> -builtin <C-v><C-v>
+map -m n,v,i,c,t  <C-y> 	 <pass-next-key><C-v>
+map -m i,c,t  	  <C-y> 	 <C-v>
 map -m i,c,t 	  <A-w> -builtin <C-c>
 map -m n,v 	  l 	-builtin gt
 map -m n,v 	  h 	-builtin gT

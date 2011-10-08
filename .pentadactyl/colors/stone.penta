@@ -1,4 +1,4 @@
-hi StatusLineNormal                 color:#002B36 !important; background: #CDD7E3 !important; border-top:1px dashed #657B83 !important; border-bottom:1px dashed #657B83 !important
+hi StatusLineNormal                 color:#002B36 !important; background: #CDD7E3 !important; border-top:1px dashed #93A1A1 !important; border-bottom:1px dashed #93A1A1 !important;
 hi Normal               	    color:#657B83 !important; background: #FDF6E3;
 hi CmdLine              	    color:#000000;
 hi CompGroup            	    color:#afafaf !important;
