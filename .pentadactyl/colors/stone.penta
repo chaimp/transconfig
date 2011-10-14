@@ -1,11 +1,10 @@
-hi StatusLineNormal                 color:#002B36 !important; background: #CDD7E3 !important; border-top:1px dashed #93A1A1 !important; border-bottom:1px dashed #93A1A1 !important;
+hi StatusLineNormal                 color:#002B36 !important; background: #CDD7E3 !important;  border-bottom:1px solid #C1C1C1 !important;
 hi Normal               	    color:#657B83 !important; background: #FDF6E3;
 hi CmdLine              	    color:#000000;
 hi CompGroup            	    color:#afafaf !important;
 hi CompTitle            	    color:#D33682;font-weight:bold; background-color:#002B36;
-hi CompTitleSep         	    background-color:#002B36;
 hi CompItem             	    color:#268BD2; padding:0px 3px; 
-hi CompItem[selected]   	    background:#073642;font-weight:bold; color:#859900;
+hi CompItem[selected]   	    background:#073642; color:#859900;font-weight:bold; opacity:0.9;
 hi CompItem:nth-child(2n+1)         background-color: #EEE8D5;
 hi CompResult                       width:51%;overflow:hidden;
 hi CompDesc             	    color:inherit; font-family:simstone;
