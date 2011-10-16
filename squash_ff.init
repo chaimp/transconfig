@@ -47,8 +47,9 @@ check_support() {
 
 sync() {
 	mksquashfs $FF_AUFS $SQFS_NEW $SQFS_OPTS # 2>/dev/null
-	ln -sf $SQFS_NEW $SQFS_CUR
- 	eend 0
+	stop
+	start
+	eend 0
 }
 
 start() {
