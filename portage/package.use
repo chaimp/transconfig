@@ -1,5 +1,5 @@
 dev-vcs/git -gtk subversion
-dev-vcs/subversion -dso
+dev-vcs/subversion -dso perl
 dev-lang/python sqlite
 dev-lang/ghc ghcquickbuild binary
 dev-python/django sqlite
@@ -9,6 +9,7 @@ dev-libs/libgcrypt static-libs
 dev-libs/popt static-libs
 dev-libs/libgpg-error static-libs
 dev-java/swt -xulrunner
+rox-base/rox -video
 xfce-base/xfce4-meta minimal -alsa -oss 
 xfce-base/xfce4-settings libnotify sound
 xfce-base/xfce-utils -lock
@@ -19,9 +20,11 @@ x11-wm/fvwm -gtk stroke
 x11-wm/compiz-fusion emerald unsupported
 x11-wm/musca xlisten
 x11-themes/redhat-artwork  audacious cursors gdm icons 
+x11-themes/tango-icon-theme -png
 x11-terms/rxvt-unicode force-hints 256-color iso14755 afterimage blink fading-colors pixbuf unicode3 -vanilla
-x11-misc/xmobar mail
+x11-misc/dzen minimal
 x11-misc/cairo-dock-plugins compiz network-monitor powermanager gmenu xgamma mail
+x11-misc/lightdm branding
 x11-drivers/ati-drivers modules
 media-sound/volumeicon -oss
 media-sound/audacious chardet 
@@ -29,6 +32,7 @@ media-sound/esound -alsa
 media-sound/moc alsa vorbis ffmpeg
 media-sound/xmms2 -alsa mac asf mms 
 media-sound/deadbeef tta zip gme hotkeys ffmpeg gbk
+media-sound/split2flac -mp4
 media-plugins/audacious-plugins alsa ffmpeg chardet sndfile scrobbler cue
 media-plugins/gst-plugins-meta ffmpeg
 media-video/mplayer -gtk -live -dv -mp2 -amrwb -amrnb -dirac -speex -cddb -schroedinger -dvb xv radio quicktime real rar 
@@ -41,8 +45,10 @@ media-libs/lcms static-libs
 media-libs/sdl-mixer mikmod vorbis
 media-libs/mesa gles gallium
 media-libs/phonon vlc -xine
+media-libs/freetype fontforge
 media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
+media-gfx/fontforge pango truetype-debugger type3
 media-tv/gmlive sopcast extra
 media-tv/enna -vdr -upnp
 app-i18n/fcitx pango qt zhengma
@@ -59,7 +65,9 @@ app-text/stardict  -festival pronounce qqwry spell
 app-text/poppler-bindings gtk cairo
 app-text/texlive -truetype
 app-text/acroread minimal
+app-text/ghostscript-gpl cups
 app-misc/screen multiuser
+app-emacs/anything extensions
 app-emulation/wine -win64
 app-emulation/ies4linux -gtk -kde
 app-emulation/qemu-softmmu kqemu
@@ -67,9 +75,10 @@ app-emulation/q4wine winetriks embedded-fuseiso icoutils
 app-emulation/qemu-kvm spice qemu-ifup
 app-emulation/libvirt iscsi kvm lvm nfs virtualbox
 app-emulation/aqemu  kvm
-app-emulation/virtualbox-bin rdesktop-vrdp -chm
-app-emulation/virtualbox extensions
+app-emulation/virtualbox-bin rdesktop-vrdp -chm vboxwebsrv
+app-emulation/virtualbox extensions vboxwebsrv java
 app-office/openoffice-bin gnome java
+app-office/lyx -latex
 app-portage/layman git subversion mercurial
 app-portage/eix strong-optimization optimization tools
 media-sound/amarok mp3tunes  
@@ -104,12 +113,15 @@ net-misc/wget -nls
 net-misc/ntp openntpd
 net-misc/networkmanager -nss connection-sharing
 net-misc/pcmanx-gtk2 -nsplugin
+net-misc/curl -nss
 net-wireless/aircrack-ng wifi
 net-libs/libsoup gnome
 net-libs/xulrunner -crashreporter
 net-irc/xchat -xft
-net-p2p/mldonkey bittorrent fasttrack
+net-p2p/mldonkey bittorrent fasttrack -gtk
+net-p2p/transmission utp
 net-im/skype -qt-static
+net-print/cups -usb
 sys-auth/consolekit policykit
 sys-apps/systemd-units server sysv
 sys-apps/hal laptop policykit
@@ -120,6 +132,8 @@ sys-kernel/mkinitcpio lvm2
 sys-devel/gcc -nls
 sys-libs/glibc -nls
 sys-libs/pam -nls
+sys-libs/zlib minizip
+sys-fs/udev gudev hwdb keymap
 sys-fs/ntfs3g suid
 sys-fs/lvm2 -lvm1
 sys-fs/btrfs-progs debug-utils
@@ -133,3 +147,6 @@ gnome-extra/gnome-globalmenu gnome
 app-benchmarks/bootchart java
 virtual/ffmpeg encode
 virtual/jpeg static-libs
+media-video/ffmpeg dirac schroedinger
+
+

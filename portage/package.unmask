@@ -1,2 +1,9 @@
 sys-apps/sreadahead
 sys-apps/portage
+app-i18n/fcitx
+media-gfx/gimp
+
+gnome-base/gvfs
+sys-apps/gnome-disk-utility
+gnome-base/nautilus
+
