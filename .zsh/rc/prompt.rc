@@ -3,7 +3,7 @@ autoload -U colors
 colors
 
 # define your colors here (i hate white background)
-host_color="green" 
+host_color="red" 
 path_color="blue"
 date_color="silver"
 
