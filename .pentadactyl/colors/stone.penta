@@ -12,6 +12,7 @@ hi CompMsg              	    background:#0b0e13;color:#afafaf
 hi Filter               	    color:orange; font-weight:bold; background-color:#D9DADB; border:1px solid #CFCEBE; color: #CB4B16; padding:0 2px 1px;
 hi LinkInfo 			    color:#afafaf !important;
 hi ModeMsg 			    color:white; background:none !important;
+hi InfoMsg 			    color:white; background:none !important;
 
 hi -a Hint			    text-transform: uppercase;
 hi -a Preview                       color:#000; opacity:0.5; 
