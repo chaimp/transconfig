@@ -4,8 +4,8 @@ Xft.hinting: 1
 Xft.hintstyle: hintslight
 Xft.rgba: rgb
 !Xft.font: Microsoft Yahei
-!Emacs.font: Envy Code R-10
-Emacs.font: Monaco-9
+Emacs.font: Envy Code R-9
+!Emacs.font: Monaco-9
 !Emacs.font: Consolas-10
 !Emacs.font: Terminus-9
 Emacs.useXIM: true 
@@ -81,7 +81,7 @@ URxvt.depth: 32
 !urxvt*shading: 50
 !urxvt*fading: 50
 
-URxvt.perl-lib:/home/zhou/overlays/urxvt-perls
+URxvt.perl-lib:/home/zhou/transconfig/urxvt-perls
 URxvt.perl-ext-common: default,matcher,guake,clipboard,keyboard-select,url-select
 URxvt.keysym.Mod4-u: perl:url-select:select_next
 URxvt.keysym.M-w:   perl:clipboard:copy

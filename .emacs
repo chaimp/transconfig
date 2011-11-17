@@ -603,7 +603,8 @@ occurence of CHAR."
 ;; 交换两个窗口内的 buffer
 (global-set-key (kbd "C-c l") 'his-transpose-windows)
 
-(require 'redo)
+(require 'redo+)
+(setq undo-no-redo t)
 (global-set-key ( kbd "C-.") 'redo)
 ;; 设置Redo的键绑定
 
