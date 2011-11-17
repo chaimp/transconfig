@@ -1,5 +1,6 @@
 alias ll="ls -lha"
 alias rm="rm -i"
+alias cp="cp -r"
 alias ls="ls --color=auto"
 alias l="ls -ail"
 alias cl="clear"

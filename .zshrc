@@ -22,7 +22,6 @@ prompt gentoo
 bindkey -e emacs
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
-#bindkey '^K' kill-whole-line
 bindkey "\e[H" beginning-of-line        # Home (xorg)
 bindkey "\e[1~" beginning-of-line       # Home (console)
 bindkey "\e[4~" end-of-line             # End (console)
@@ -38,4 +37,7 @@ for file in $HOME/.zsh/rc/*.rc; do
 	source $file
 done
 
+if [[ $TERM == "screen" || $TERM == "rxvt" ]]; then
+    LC_ALL=en_US.UTF-8
+fi
 
