@@ -24,6 +24,13 @@
 ;; 实际上 Shift-F1 也可以用 F13 表示。
 
 (require 'grep-edit)
+(require 'diff-mode-)
+(defvar diff-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "M-.") 'diff-hunk-next)
+    (define-key map (kbd "M-,") 'diff-hunk-prev)
+  map)
+"Keymap for `diff-mode'.")
 
 (require 'twittering-mode)
 (setq twittering-username "transtone")
