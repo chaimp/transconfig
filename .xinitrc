@@ -22,6 +22,7 @@ fi
 
 #修正OOo界面与系统一致
 export GTK2_RC_FILES="`pwd`/.gtkrc-2.0"
+export XDG_MENU_PREFIX=lxde-
 export SAL_USE_VCLPLUGIN="gtk"
 export XMODIFIERS="@im=fcitx"
 export XIM=fcitx
@@ -29,7 +30,8 @@ export XIM_PROGRAM=fcitx
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 
-habak -ms -hi $HOME/Andromeda_Galaxy.jpg &
+habak -ms -hi /usr/share/wallpapers/Lovelock_Stripes/contents/images/1280x800.png &
+
 xset r rate 250 25 &
 #xset m 3 1
 xsetroot -cursor_name left_ptr &
