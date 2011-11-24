@@ -1,6 +1,10 @@
 =x11-misc/fqterm-9999
 =dev-libs/libmowgli-9999
 =sys-libs/zlib-1.2.5.1-r1
->x11-misc/dmenu-4.4
+>=x11-misc/dmenu-4.4
 #>virtual/jdk-1.7
 #>virtual/jre-1.7
+>=www-client/opera-11.60.1147
+x11-libs/gtk+:1
+dev-libs/libnl:3
+dev-lang/vala:0.14

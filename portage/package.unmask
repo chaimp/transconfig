@@ -4,6 +4,9 @@ app-i18n/fcitx
 media-gfx/gimp
 
 gnome-base/gvfs
-sys-apps/gnome-disk-utility
 gnome-base/nautilus
 
+gnome-extra/gnome-tweak-tool
+app-arch/file-roller
+
+x11-wm/cairo-compmgr

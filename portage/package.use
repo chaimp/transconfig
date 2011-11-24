@@ -8,13 +8,14 @@ dev-libs/libxml2 icu
 dev-libs/libgcrypt static-libs
 dev-libs/popt static-libs
 dev-libs/libgpg-error static-libs
+#dev-libs/libdbusmenu -test
 dev-java/swt -xulrunner
 rox-base/rox -video
 xfce-base/xfce4-meta minimal -alsa -oss 
 xfce-base/xfce4-settings libnotify sound
 xfce-base/xfce-utils -lock
 xfce-base/exo libnotify
-x11-base/xorg-server xvfb
+x11-base/xorg-server kdrive
 x11-apps/xinit minimal
 x11-wm/fvwm -gtk stroke
 x11-wm/compiz-fusion emerald unsupported
@@ -24,7 +25,9 @@ x11-themes/tango-icon-theme -png
 x11-terms/rxvt-unicode force-hints 256-color iso14755 afterimage blink fading-colors pixbuf unicode3 -vanilla
 x11-misc/dzen minimal
 x11-misc/cairo-dock-plugins compiz network-monitor powermanager gmenu xgamma mail
-x11-misc/lightdm branding
+x11-misc/lightdm branding gtk -qt4
+x11-misc/tint2 battery tint2conf
+x11-libs/libdrm libkms
 x11-drivers/ati-drivers modules
 media-sound/volumeicon -oss
 media-sound/audacious chardet 
@@ -60,6 +63,7 @@ app-cdr/recorder vcd
 app-cdr/brasero -totem -nautilus 
 app-editors/qemacs -X
 app-editors/emacs toolkit-scroll-bars gtk gconf spell 
+app-editors/emacs-vcs -gtk3 gconf gsettings gzip-el imagemagick toolkit-scroll-bars libxml2
 app-editors/nano -nls
 app-text/stardict  -festival pronounce qqwry spell 
 app-text/poppler-bindings gtk cairo
@@ -124,10 +128,12 @@ net-im/skype -qt-static
 net-print/cups -usb
 sys-auth/consolekit policykit
 sys-apps/systemd-units server sysv
+sys-apps/systemd plymouth
 sys-apps/hal laptop policykit
 sys-apps/tuxonice-userui fbsplash
 sys-apps/hwdata-gentoo  binary-drivers
 sys-apps/busybox -savedconfig static
+sys-apps/util-linux static-libs
 sys-kernel/mkinitcpio lvm2
 sys-devel/gcc -nls
 sys-libs/glibc -nls
@@ -138,12 +144,10 @@ sys-fs/ntfs3g suid
 sys-fs/lvm2 -lvm1
 sys-fs/btrfs-progs debug-utils
 sys-fs/aufs3 hfs inotify nfs ramfs fuse kernel-patch
-sys-boot/plymouth gdm
 sys-block/open-iscsi utils
 sys-block/gparted  fat hfs ntfs reiser4 reiserfs xfs
 gnome-extra/avant-window-navigator xfce
 gnome-extra/yelp -lzma
-gnome-extra/gnome-globalmenu gnome
 app-benchmarks/bootchart java
 virtual/ffmpeg encode
 virtual/jpeg static-libs
