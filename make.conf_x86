@@ -1,0 +1,70 @@
+# These settings were set by the catalyst build script that automatically built this stage
+# Please consult /etc/make.conf.example for a more detailed example
+CFLAGS="-O2 -march=core2 -pipe"
+CHOST="i686-pc-linux-gnu"
+CXXFLAGS="${CFLAGS}"
+MAKEOPTS="-j3"
+LDFLAGS="-Wl,-O1 -Wl,--enable-new-dtags -Wl,--sort-common -s -Wl,--no-add-needed"
+
+LC_ALL="C"
+LINGUAS="zh_CN zh"
+#LANGS="zh-CN"
+FEATURES="sandbox userfetch parallel-fetch "
+EMERGE_DEFAULT_OPTS="--keep-going=y --quiet-build=y"
+
+USE="-qt -qt3 gtk3 -xine -kde -ccache -hal -doc -networkmanager -debug -xmms -mozilla -arts -gnome -gstreamer \
+-cups -gnome-print -libburn -3dnow -3dnowext -32bit -modules  -lirc -bluetooth -pulseaudio -bonobo \
+gallium llvm perl python smp gtk qt3support cairo gallium opengl glitz X gtkstyle dmx acpi javascript v8 unicode \
+mmx mmxext sse sse2 sse3 ssse3 xft cjk nls i18n sslv2 vim cscope vim-syntax fpm curl openssl fastcgi \
+branding mozsvg gdu xpm jpeg jpeg2k png apng gif svg tiff theora lcms \
+exif nsplugin cgi xulrunner fastcgi bzip2 djvu \
+fontconfig gpg emacs emacs23icons lua xcomposite hibernate-script pdf truetype xcb enca dvdr win32codecs a52 ffmpeg  \ 
+xv ao nas alsa alsa-shared oss oss4 cue vorbis cdda cdio cdaudio musepack wma wma-fixed mp3 mp4 mac mad aac ogg flac dts mtp wavpack devil sndfile \
+music dvd mpeg xine xvid x264 sdl srt mplayer rrdtool threads shadow usb gnutls xosd id3tag charconv \
+bash-completion zsh-completion dbus udev devfs-compat ctype mng xml ldap vhosts tftp cron samba ios gbm drm gallium llvm \
+device-mapper libnotify notify wifi kpathsea xinerama savedconfig logrotate fbcon consolekit lzma mysql dia \
+introspection gnome-keyring sage pari24 hscolour vaapi html xattr nss policykit tcmalloc nis directfb " 
+
+ACCEPT_KEYWORDS="~x86"
+ACCEPT_LICENSE="*"
+
+PORTAGE_TMPFS="/dev/shm"
+PORTAGE_TMPDIR="/dev/shm"
+BUILD_PREFIX="/dev/shm"
+
+PORTAGE_ECLASS_WARNING_ENABLE="0"
+
+PHP_TARGETS="php5-3"
+
+PORTAGE_NICENESS="15"
+PORTAGE_IONICE_COMMAND="ionice -c 3 -p \${PID}"
+
+#DISTDIR="/dev/shm/.distfiles"
+DISTDIR="/mnt/d/distfiles"
+#PORTDIR_OVERLAY="/usr/local/portage"
+#PORTDIR_OVERLAY="/home/zhou/zm-overlay"
+source /sqfs/portages/layman/make.conf
+
+INPUT_DEVICES="synaptics keyboard mouse evdev "
+VIDEO_CARDS="fbdev vesa intel"
+ALSA_CARDS="hda-intel loopback virmidi"
+
+QEMU_SOFTMMU_TARGETS="arm"
+QEMU_USER_TARGETS="arm"
+
+DRACUT_MODULES="plymouth"
+
+GRUB_PLATFORMS="pc"
+
+#XTABLES_ADDONS="cui gfw zhang"
+
+
+#BINHOST="ftp://binpkg:gentoo@192.168.0.1/"
+#GENTOO_MIRRORS="http://mirrors.sohu.com/gentoo/ http://gentoo.osuosl.org/"
+GENTOO_MIRRORS="http://gentoo.osuosl.org/"
+#GENTOO_MIRRORS="http://mirrors.xmu.edu.cn/gentoo  http://gentoo.osuosl.org/ "
+#GENTOO_MIRRORS="216.165.129.135  61.135.158.199"
+#SYNC="rsync://61.135.158.199/gentoo-portage"
+#SYNC="rsync://mirrors.xmu.edu.cn/gentoo-portage"
+DISTCC_DIR=${PORTAGE_TMPDIR}/portage/.distcc
+
