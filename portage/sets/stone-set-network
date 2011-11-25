@@ -1,0 +1,12 @@
+net-analyzer/wireshark
+net-misc/gns3
+net-misc/neatx
+net-analyzer/gtknetcat
+net-firewall/shorewall
+net-nds/ypserv
+net-proxy/haproxy
+net-misc/memcached
+www-servers/cherokee
+www-servers/uwsgi-init-scripts
+net-ftp/vsftpd
+

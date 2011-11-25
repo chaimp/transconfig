@@ -3,12 +3,11 @@ dev-vcs/subversion -dso perl
 dev-lang/python sqlite
 dev-lang/ghc ghcquickbuild binary
 dev-python/django sqlite
-dev-python/PyQt4 webkit sql declarative
+dev-python/PyQt4 sql declarative
 dev-libs/libxml2 icu
 dev-libs/libgcrypt static-libs
 dev-libs/popt static-libs
 dev-libs/libgpg-error static-libs
-#dev-libs/libdbusmenu -test
 dev-java/swt -xulrunner
 rox-base/rox -video
 xfce-base/xfce4-meta minimal -alsa -oss 
@@ -57,13 +56,14 @@ media-tv/enna -vdr -upnp
 app-i18n/fcitx pango qt zhengma
 app-i18n/sunpinyin xim
 app-arch/p7zip rar
-app-admin/conky -X hddtemp vim-syntax nano-syntax wifi rss iostats moc xmms2 weather-metar imlib math
+app-admin/conky -X -hddtemp vim-syntax nano-syntax wifi rss iostats weather-metar imlib math
 app-admin/testdisk ntfs reiserfs
 app-cdr/recorder vcd
 app-cdr/brasero -totem -nautilus 
 app-editors/qemacs -X
-app-editors/emacs toolkit-scroll-bars gtk gconf spell 
-app-editors/emacs-vcs -gtk3 gconf gsettings gzip-el imagemagick toolkit-scroll-bars libxml2
+app-editors/jasspa-microemacs -X nanoemacs
+app-editors/emacs toolkit-scroll-bars gtk gconf spell -svg 
+app-editors/emacs-vcs gsettings gzip-el imagemagick toolkit-scroll-bars libxml2
 app-editors/nano -nls
 app-text/stardict  -festival pronounce qqwry spell 
 app-text/poppler-bindings gtk cairo
@@ -80,7 +80,7 @@ app-emulation/qemu-kvm spice qemu-ifup
 app-emulation/libvirt iscsi kvm lvm nfs virtualbox
 app-emulation/aqemu  kvm
 app-emulation/virtualbox-bin rdesktop-vrdp -chm vboxwebsrv
-app-emulation/virtualbox extensions vboxwebsrv java
+app-emulation/virtualbox extensions -sdk -python 
 app-office/openoffice-bin gnome java
 app-office/lyx -latex
 app-portage/layman git subversion mercurial
@@ -129,13 +129,13 @@ net-print/cups -usb
 sys-auth/consolekit policykit
 sys-apps/systemd-units server sysv
 sys-apps/systemd plymouth
-sys-apps/hal laptop policykit
 sys-apps/tuxonice-userui fbsplash
 sys-apps/hwdata-gentoo  binary-drivers
 sys-apps/busybox -savedconfig static
+sys-apps/net-tools old-output
 sys-apps/util-linux static-libs
 sys-kernel/mkinitcpio lvm2
-sys-devel/gcc -nls
+sys-devel/gcc -gtk -nls
 sys-libs/glibc -nls
 sys-libs/pam -nls
 sys-libs/zlib minizip

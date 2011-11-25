@@ -8,3 +8,5 @@ games-emulation/hugo **
 sys-devel/spl **
 sys-fs/zfs **
 =app-i18n/fcitx-9999 **
+x11-themes/lovelock-backgrounds **
+media-video/umplayer ~*
