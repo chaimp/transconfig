@@ -31,7 +31,6 @@ lxde-base/lxtask
 app-admin/conky
 app-i18n/fcitx
 app-vim/vimacs
-app-editors/emacs
 app-editors/gvim
 app-arch/file-roller
 media-gfx/scrot

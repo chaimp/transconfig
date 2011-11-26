@@ -322,7 +322,7 @@
           <enabled>false</enabled>
           <name>dmenu</name>
         </startupnotify>
-        <command>~/bin/dmenu_wrap</command>
+        <command>sh ~/bin/dmenu_wrap</command>
       </action>
     </keybind>
   </keyboard>

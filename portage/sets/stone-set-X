@@ -2,7 +2,6 @@ media-gfx/fontforge
 media-fonts/sgi-fonts
 media-fonts/terminus-font
 media-fonts/ubuntu-font-family
-www-client/opera
 www-client/google-chrome
 net-p2p/transmission
 net-p2p/mldonkey
@@ -23,5 +22,4 @@ app-text/goldendict
 gnome-extra/gcalctool
 gnome-extra/nm-applet
 gnome-base/dconf
-app-editors/vim
 
