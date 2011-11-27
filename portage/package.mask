@@ -2,4 +2,4 @@
 >=x11-misc/dmenu-4.4
 x11-libs/gtk+:1
 =sys-boot/grub-9999
-=gnome-base/librsvg-2.34.2
+

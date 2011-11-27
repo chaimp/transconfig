@@ -26,7 +26,6 @@ x11-themes/light-themes
 x11-themes/lovelock-backgrounds
 lxde-base/lxappearance
 lxde-base/lxmenu-data
-lxde-base/lxpolkit
 lxde-base/lxtask
 app-admin/conky
 app-i18n/fcitx

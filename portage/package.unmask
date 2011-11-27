@@ -3,11 +3,6 @@ sys-apps/portage
 app-i18n/fcitx
 media-gfx/gimp
 
-gnome-base/gvfs
-gnome-base/nautilus
-
-gnome-extra/gnome-tweak-tool
-app-arch/file-roller
 
 x11-wm/cairo-compmgr
 app-emacs/anything
