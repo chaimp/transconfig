@@ -110,15 +110,15 @@ clock_font_color = #FFFFFF 80
 clock_tooltip = %Y %B %d  %A
 clock_padding = 1 0
 clock_background_id = 0
-clock_lclick_command = gsimplecal
+#clock_lclick_command = gsimplecal
 
 # Tooltips
 tooltip = 1
-tooltip_padding = 5 2
+tooltip_padding = 5 2 5
 tooltip_show_timeout = 0.7
 tooltip_hide_timeout = 0.3
-tooltip_background_id = 0
-tooltip_font = 方正剪纸繁体 11
+tooltip_background_id = 1
+tooltip_font = Ubuntu, 9
 tooltip_font_color = #FFFFFF 80
 
 # Mouse

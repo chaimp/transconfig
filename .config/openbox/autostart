@@ -16,6 +16,7 @@
 #
 #xfce-mcs-manager &
 
+/usr/libexec/polkit-gnome-authentication-agent-1 &
 tint2 &
 #fbpanel &
 sleep 10 && fcitx &
