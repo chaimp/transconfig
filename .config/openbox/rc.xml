@@ -315,6 +315,9 @@
         <direction>down</direction>
       </action>
     </keybind>
+    <keybind key="W-S-q">
+      <action name="Exit"/>
+    </keybind>
     <!-- Keybindings for running applications -->
     <keybind key="W-r">
       <action name="Execute">
