@@ -16,4 +16,4 @@ PORTAGE_AUFS="/sqfs/portages"
 
 # If you need more then just emerge --sync, or are using another
 # package manager add them here. Example SYNC_CMDS="/usr/bin/layman -S; /usr/bin/eix-sync"
-SYNC_CMDS="/usr/bin/layman -S; /usr/bin/eix-sync"
+SYNC_CMDS="layman -S; /usr/bin/eix-sync"

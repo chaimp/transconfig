@@ -20,7 +20,6 @@
 opts="sync"
 
 source /etc/make.globals
-source /etc/make.conf
 SQFS_CUR="$SQFS_DIRNAME/portage.sqfs"
 SQFS_NEW="$SQFS_DIRNAME/portage-current.sqfs"
 SQFS_OLD="$SQFS_DIRNAME/portage-old.sqfs"
@@ -33,6 +32,9 @@ depend() {
 
 
 check_support() {
+	if [ -x $SQFS_DIRNAME/portages/portage ]; then
+		umount -t squashfs $SQFS_CUR
+	fi
 	if ! [ -x /usr/bin/mksquashfs ]; then
 		eerror "ERROR: sys-fs/squashfs-tools is not installed."
 		return 1
@@ -62,7 +64,6 @@ makeImage() {
 sync() {
 	ebegin "Syncing portage tree"
 	eval $SYNC_CMDS
- 	#svc_stop; svc_start
 	stop
 	start
 	eend 0
