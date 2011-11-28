@@ -21,5 +21,6 @@ app-text/kchmviewer
 app-text/goldendict 
 gnome-extra/gcalctool
 gnome-extra/nm-applet
+gnome-extra/gconf-editor
 gnome-base/dconf
 

@@ -14,6 +14,7 @@ sys-apps/logwatch
 sys-apps/lshw
 sys-apps/mlocate
 sys-apps/smartmontools
+sys-apps/fbset
 sys-apps/qingy
 sys-apps/iproute2
 app-text/sdcv
