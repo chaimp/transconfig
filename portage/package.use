@@ -62,8 +62,8 @@ app-cdr/recorder vcd
 app-cdr/brasero -totem -nautilus 
 app-editors/qemacs -X
 app-editors/jasspa-microemacs -X nanoemacs
-app-editors/emacs toolkit-scroll-bars gtk gconf spell -svg 
-app-editors/emacs-vcs gsettings gzip-el imagemagick toolkit-scroll-bars libxml2
+app-editors/emacs toolkit-scroll-bars -gtk gconf spell  
+app-editors/emacs-vcs gzip-el imagemagick toolkit-scroll-bars libxml2
 app-editors/nano -nls
 app-text/stardict  -festival pronounce qqwry spell 
 app-text/poppler-bindings gtk cairo
@@ -91,7 +91,6 @@ media-sound/sonata lyrics
 media-sound/aumix -gpm
 media-gfx/splashutils fbcondecor
 www-client/firefox system-sqlite pgo
-www-client/opera -qt3
 www-client/chromium system-sqlite system-v8
 www-servers/cherokee admin threads geoip
 www-servers/nginx addition fastcgi flv imap pcre perl random-index securelink ssl status sub zlib 

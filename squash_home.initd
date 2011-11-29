@@ -77,7 +77,7 @@ start() {
 	[ -d $HOME_RW ] || mkdir -p $HOME_RW
 	chmod 0750 $HOME_RW
 	chown zhou:zhou $HOME_RW
-	mount -t aufs -o nodev,noexec,br=$HOME_RW=rw:$HOME_RO=ro aufs $HOME_AUFS
+	mount -t aufs -o nodev,br=$HOME_RW=rw:$HOME_RO=ro aufs $HOME_AUFS
 	eend 0
 
 }

@@ -37,7 +37,7 @@ for file in $HOME/.zsh/rc/*.rc; do
 	source $file
 done
 
-if [[ $TERM == "screen" || $TERM == "rxvt" ]]; then
-    LC_ALL=en_US.UTF-8
+if [[ $TERM == "screen" || $TERM == "rxvt" || $TERM == "xterm-256color" ]]; then
+    LC_MESSAGES=en_US.UTF-8
 fi
 

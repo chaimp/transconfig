@@ -128,7 +128,7 @@ myStatusBar :: String
 myStatusBar = "dzen2 -fn '" ++ dzFont ++ "' -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -e 'button3=' -h '18'  -ta l"
 myConkyBar :: String
 --myConkyBar = "conky | dzen2 -fg '" ++ dzFgColor ++ "' -bg '" ++ dzBgColor ++ "' -x '700' -h '20' -fn '" ++ dzFont ++ "' -sa c -ta r"
-myConkyBar = "sleep 5; conky | dzen2 -e '' -h '18' -x '800' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor  ++ "'"
+myConkyBar = "sleep 5; conky | dzen2 -e '' -h '18' -x '920' -ta r -fg '" ++ dzFgColor ++ "' -bg '" ++dzBgColor  ++ "'"
 --mySysTray :: String
 --mySysTray = "sleep 3; trayer --expand true  --alpha 0 --edge top --align right --SetDockType true --transparent flase --SetPartialStrut true --widthtype request --tint 0xffffff --height 18 --margin 65"
 
@@ -182,7 +182,7 @@ main = do
   spawn "tint2"
   spawn "urxvt"
   spawn "cairo-compmgr"  
-  spawn "sleep 10 && fcitx"
+  spawn "fcitx"
 
   dzen <- spawnPipe myStatusBar
   spawn myConkyBar
