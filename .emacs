@@ -302,9 +302,9 @@ If ARG is non-numeric, copy line from beginning of the current line."
 (display-time-mode 1)                   ; 显示时间。
 (show-paren-mode 1)                     ; 高亮显示匹配的括号。
 (setq show-paren-style 'parentheses) 	; 括号不来回弹跳。
-;;(menu-bar-mode -1)                      ; 不要 menu-bar。
+(menu-bar-mode -1)                      ; 不要 menu-bar。
 (icomplete-mode 1)                      ; 给出用 M-x foo-bar-COMMAND 输入命令的提示。
-;;(set-scroll-bar-mode 'right)		; scroll-bar 靠右显示。
+(set-scroll-bar-mode 'right)		; scroll-bar 靠右显示。
 (scroll-bar-mode -1)                    ; 不要 scroll-bar
 (display-battery-mode 1)
 (tool-bar-mode -1)			; 不要 tool-bar。
@@ -428,7 +428,7 @@ occurence of CHAR."
 ;; 将文件模式和文件后缀关联起来。
 (require 'auto-complete)
 (require 'auto-complete-config)
-(require 'ac-anything)
+;;(require 'ac-anything)
 (add-hook 'php-mode-hook
 	  (lambda()
 	    (setq case-fold-search t)
@@ -663,6 +663,7 @@ occurence of CHAR."
 (global-set-key (kbd "C-x C-k") 'server-edit)
 
 ;; tabbar设置
+;;(require 'tabbar-ruler)
 (require 'tabbar)
 (require 'tabbar-extension) 
 (global-set-key (kbd "<S-up>") 'tabbar-backward-group)
@@ -731,31 +732,40 @@ Return a list of one element based on major mode."
 
 ;;;; 设置tabbar外观
 ;; 设置默认主题: 字体, 背景和前景颜色，大小
+
 (set-face-attribute 'tabbar-default nil
-;;                    :family "Vera Sans YuanTi Mono"
-                    :background "gray80"
-                    :foreground "gray30"
+                    :weight 'normal
+                    :width 'normal
+                    :slant 'normal
+                    :underline nil
+                    :strike-through nil
+                    :stipple nil
+                    :box nil
+                    :family "Screen"
+                    :foreground "#657B83"
+                    :background "#fdf6e3"
                     :height 0.7
                     )
-;; 设置左边按钮外观：外框框边大小和颜色
-(set-face-attribute 'tabbar-button nil
-                    :inherit 'tabbar-default
-                    :box '(:line-width 1 :color "gray30")
-                    )
+;; ;; 设置左边按钮外观：外框框边大小和颜色
+;; (set-face-attribute 'tabbar-button nil
+;;                     :inherit 'tabbar-default
+;;                     :box '(:line-width 1 :color "gray30")
+;;                     )
 ;; 设置当前tab外观：颜色，字体，外框大小和颜色
 (set-face-attribute 'tabbar-selected nil
                     :inherit 'tabbar-default
-                    :foreground "Black"
-                    :background "#FAD294"
-                    :box '(:line-width 1 :color "#F58400")
-                    ;; :overline "black"
+                    :foreground "#cb4b16"
+                    :background "#073642"
+                    :box '(:line-width 2 :color "#073642" :style nil)
+                    ;; :overline "#80A4CD"
                     ;; :underline "black"
-                    :weight 'bold
+                    ;; :weight 'bold
                     )
 ;; 设置非当前tab外观：外框大小和颜色
 (set-face-attribute 'tabbar-unselected nil
                     :inherit 'tabbar-default
-                    :box '(:line-width 1 :color "gray70")
+		    :background "#eee8d5"
+                    :box '(:line-width 2 :color "#eee8d5")
                     )
 ;; tabbar end here
 
