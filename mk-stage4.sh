@@ -68,6 +68,7 @@ default_exclude_pattern=""
 default_exclude_list="
 /dev
 /lost+found
+/sqfs
 /mnt
 /proc
 /sys
@@ -88,8 +89,6 @@ default_include_files="
 /dev/null
 /dev/console
 /home
-/mnt
-`find /mnt -name .keep`
 /proc
 /sys
 /tmp
