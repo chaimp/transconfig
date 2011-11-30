@@ -665,16 +665,16 @@ occurence of CHAR."
 ;; tabbar设置
 ;;(require 'tabbar-ruler)
 (require 'tabbar)
-(require 'tabbar-extension) 
+;;(require 'tabbar-extension) 
+(tabbar-mode 1)
+(setq tabbar-separator (quote ("T")))
+
 (global-set-key (kbd "<S-up>") 'tabbar-backward-group)
 (global-set-key (kbd "<S-down>") 'tabbar-forward-group)
 (global-set-key (kbd "M-n") 'tabbar-backward)
 (global-set-key (kbd "M-p") 'tabbar-forward)
 (global-set-key (kbd "<S-left>") 'tabbar-backward)
 (global-set-key (kbd "<S-right>") 'tabbar-forward)     ; 用 Shift+方向键 切换tab
-;;(setq tabbar-buffer-groups-function
-;;(lambda ()
-;;(list "All Buffers")))
 
 (setq tabbar-buffer-list-function
     (lambda ()
@@ -728,15 +728,9 @@ Return a list of one element based on major mode."
        (symbol-name major-mode))
      ))))
 
-(tabbar-mode 1)
-
 ;;;; 设置tabbar外观
 ;; 设置默认主题: 字体, 背景和前景颜色，大小
-
 (set-face-attribute 'tabbar-default nil
-                    :weight 'normal
-                    :width 'normal
-                    :slant 'normal
                     :underline nil
                     :strike-through nil
                     :stipple nil
@@ -744,13 +738,13 @@ Return a list of one element based on major mode."
                     :family "Screen"
                     :foreground "#657B83"
                     :background "#fdf6e3"
-                    :height 0.7
+                    :height 0.6
                     )
-;; ;; 设置左边按钮外观：外框框边大小和颜色
-;; (set-face-attribute 'tabbar-button nil
-;;                     :inherit 'tabbar-default
-;;                     :box '(:line-width 1 :color "gray30")
-;;                     )
+;; 设置左边按钮外观：外框框边大小和颜色
+(set-face-attribute 'tabbar-button nil
+                    :inherit 'tabbar-default
+		    :height 0.6
+                    :box nil)
 ;; 设置当前tab外观：颜色，字体，外框大小和颜色
 (set-face-attribute 'tabbar-selected nil
                     :inherit 'tabbar-default
@@ -766,6 +760,15 @@ Return a list of one element based on major mode."
                     :inherit 'tabbar-default
 		    :background "#eee8d5"
                     :box '(:line-width 2 :color "#eee8d5")
+                    )
+;; 设置tab间空白的外观
+(set-face-attribute 'tabbar-separator nil
+                    :inherit 'tabbar-default
+		    :foreground "#859900"
+		    :family "OpenLogos"
+		    :height 0.8
+		    ;; :background "#"
+                    ;; :box '(:line-width 2 :color "#eee8d5")
                     )
 ;; tabbar end here
 
