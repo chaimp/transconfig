@@ -6,13 +6,15 @@ set previouspattern=\s*上一页|上一张|上一个|上一篇|上一章|上一�
 
 set hk="asdfg;lkjh"
 
+:js editor.defaultRegister="+" 
+
 "键盘映射
 map -m n,v,i,c,t  <C-a>	<Pass>
 map -m n,v,i,c,t  <C-v> <Pass>
 map -m i,c,t 	  <C-c> <Pass>
 map -m i,c,t 	  <C-x> <Pass>
 map -m i,c,t 	  <C-z> <Pass>
-map -m n,v 	  <A-w> -builtin <yank-word>
+map -m n,v 	  <A-w> <yank-selection>
 map -m n,v,i,c,t  <C-y> 	 <pass-next-key><C-v>
 map -m i,c,t  	  <C-y> 	 <C-v>
 map -m i,c,t 	  <A-w> -builtin <C-c>
