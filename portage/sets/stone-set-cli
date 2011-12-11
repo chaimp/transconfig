@@ -19,7 +19,6 @@ sys-apps/iproute2
 app-text/sdcv
 sys-boot/grub
 sys-boot/lilo
-sys-boot/plymouth
 sys-block/btrace
 sys-devel/bc
 sys-fs/ncdu

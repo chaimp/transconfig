@@ -6,3 +6,4 @@ media-gfx/gimp
 
 x11-wm/cairo-compmgr
 app-emacs/anything
+=dev-lang/vala-0.8.1

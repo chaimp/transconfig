@@ -3,7 +3,7 @@ media-sound/ripperx
 media-sound/split2flac
 media-video/libav
 media-video/mplayer2
-media-video/umplayer
+media-video/smplayer2
 media-video/vlc
 media-tv/sopcast-player
 x11-misc/gcolor2

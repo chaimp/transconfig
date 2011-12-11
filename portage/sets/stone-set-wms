@@ -3,7 +3,10 @@ x11-wm/xmonad
 x11-wm/xmonad-contrib
 x11-wm/cairo-compmgr 
 x11-apps/xsetroot
+x11-apps/xmodmap
+x11-apps/xev
 x11-libs/gksu
+x11-misc/xsel
 x11-misc/pcmanfm
 x11-misc/obconf
 x11-misc/obmenu
@@ -18,6 +21,7 @@ x11-misc/tint2
 x11-misc/tintwizard
 x11-misc/parcellite
 x11-misc/unclutter
+x11-terms/rxvt-unicode
 x11-terms/roxterm
 x11-themes/hicolor-icon-theme
 x11-themes/faenza-icon-theme

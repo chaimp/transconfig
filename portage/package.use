@@ -47,7 +47,7 @@ media-libs/lcms static-libs
 media-libs/sdl-mixer mikmod vorbis
 media-libs/mesa gles gallium
 media-libs/phonon vlc -xine
-media-libs/freetype fontforge
+media-libs/freetype static-libs fontforge
 media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
 media-gfx/fontforge pango truetype-debugger type3
@@ -82,7 +82,7 @@ app-emulation/aqemu  kvm
 app-emulation/virtualbox-bin rdesktop-vrdp -chm vboxwebsrv
 app-emulation/virtualbox extensions -sdk -python 
 app-office/openoffice-bin gnome java
-app-office/lyx -latex
+app-office/lyx -latex -xetex
 app-portage/layman git subversion mercurial
 app-portage/eix strong-optimization optimization tools
 media-sound/amarok mp3tunes  
@@ -117,6 +117,7 @@ net-misc/ntp openntpd
 net-misc/networkmanager -nss connection-sharing
 net-misc/pcmanx-gtk2 -nsplugin
 net-misc/curl -nss
+#net-misc/wicd -X -gtk -libnotify
 net-wireless/aircrack-ng wifi
 net-libs/libsoup gnome
 net-libs/xulrunner -crashreporter
@@ -125,7 +126,7 @@ net-p2p/mldonkey bittorrent fasttrack -gtk
 net-p2p/transmission utp
 net-im/skype -qt-static
 net-print/cups -usb
-sys-auth/consolekit policykit
+sys-auth/consolekit policykit debug
 sys-apps/systemd-units server sysv
 sys-apps/systemd plymouth
 sys-apps/tuxonice-userui fbsplash
@@ -142,7 +143,7 @@ sys-fs/udev gudev hwdb keymap
 sys-fs/ntfs3g suid
 sys-fs/lvm2 -lvm1
 sys-fs/btrfs-progs debug-utils
-sys-fs/aufs3 hfs inotify nfs ramfs fuse kernel-patch
+sys-fs/aufs3 hfs inotify nfs ramfs fuse -kernel-patch -kernel_linux
 sys-block/open-iscsi utils
 sys-block/gparted  fat hfs ntfs reiser4 reiserfs xfs
 gnome-extra/avant-window-navigator xfce
@@ -152,4 +153,6 @@ virtual/ffmpeg encode
 virtual/jpeg static-libs
 media-video/ffmpeg dirac schroedinger
 
-
+app-arch/bzip2 static-libs
+sys-libs/zlib  static-libs
+sys-apps/pciutils -zlib

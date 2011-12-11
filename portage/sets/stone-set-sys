@@ -1,4 +1,3 @@
-app-doc/zsh-lovers
 app-shells/bash-completion-pinyin
 app-shells/zsh
 app-shells/zsh-completion
@@ -11,15 +10,20 @@ sys-fs/dosfstools
 sys-fs/ntfs3g
 sys-fs/btrfs-progs
 sys-fs/xfsprogs
+sys-fs/xfsdump
 sys-fs/lvm2
 sys-block/ms-sys
 sys-apps/usermode-utilities
 sys-apps/man-db
 sys-apps/gptfdisk
 sys-apps/pciutils
+sys-apps/pv
 sys-process/dcron
 net-misc/keychain
 app-admin/logrotate
 app-admin/sudo
 dev-util/lafilefixer
 sys-apps/ethtool
+net-dialup/ppp
+net-misc/ntpclient
+net-misc/ntp

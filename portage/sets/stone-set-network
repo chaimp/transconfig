@@ -9,4 +9,4 @@ net-misc/memcached
 www-servers/cherokee
 www-servers/uwsgi-init-scripts
 net-ftp/vsftpd
-
+net-misc/freerdp

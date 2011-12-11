@@ -1,3 +1,4 @@
+x11-base/xorg-server
 media-gfx/fontforge
 media-fonts/sgi-fonts
 media-fonts/terminus-font
@@ -13,6 +14,8 @@ app-text/mupdf
 app-text/pinfo
 app-text/po4a
 app-text/acroread
+app-text/texlive-core
+app-office/lyx
 media-fonts/acroread-asianfonts
 media-libs/phonon
 x11-misc/lightdm
@@ -20,7 +23,7 @@ dev-util/d-feet
 app-text/kchmviewer
 app-text/goldendict 
 gnome-extra/gcalctool
-gnome-extra/nm-applet
+#gnome-extra/nm-applet
 gnome-extra/gconf-editor
 gnome-base/dconf
 
