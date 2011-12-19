@@ -7,3 +7,6 @@ filetype indent on
 :imap <F5> <ESC>:tabprevious<CR>i
 :imap <F6> <ESC>:tabnext<CR>i
 :imap ^T <ESC>:tabnew<CR>i
+
+set paste
+set clipboard+=unnamed
