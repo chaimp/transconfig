@@ -16,15 +16,15 @@
 # NOTE: If your BOOT partition is ReiserFS, add the notail option to opts.
 /dev/sda1		/boot		ext2		noauto,noatime	1 2
 /dev/sda2	        /	        xfs             defaults,noatime,discard,nobarrier,logbufs=8 0 1
-/dev/sda3	        /mnt/gen32      xfs             defaults,noatime,discard,nobarrier,logbufs=8 0 1
+/dev/sda3	        /mnt/custom      xfs             defaults,noatime,discard,nobarrier,logbufs=8 0 1
 /dev/sda4               /sqfs           xfs             defaults,noatime,discard,nobarrier,logbufs=8 0 1
 
 #/dev/stone/zhou         /mnt/stone     xfs             defaults,noatime,nobarrier,logbufs=8 0 1
 #/dev/sda2               /mnt/c         ntfs-3g         defaults        0 0
 #/dev/sda5               /mnt/mac       hfsplus         ro,defaults     0 0
 
-/sqfs/usr64.sfs      	/sqfs/usr64/ro	squashfs        loop,ro   0 0
-aufs                    /usr           aufs            br:/dev/shm/usr/rw:/sqfs/usr64/ro  0 0
+/sqfs/usr64.sqfs      	/sqfs/usr64/ro	squashfs        loop,ro   0 0
+aufs                    /usr            aufs    udba=reval,xino=/dev/shm/aufs.xino,br:/sqfs/usr64/rw1:/sqfs/usr64/ro  0 0
 
 #/sqfs/usr64-new.sfs     /sqfs/usr64/ro squashfs      loop,ro   0 0
 #aufs                    /usr           aufs    udba=reval,xino=/dev/shm/aufs.xino,br:/sqfs/usr64/rw:/sqfs/usr64/ro  0 0
