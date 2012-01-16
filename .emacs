@@ -423,6 +423,7 @@ occurence of CHAR."
 		("\\.asp$"     . html-mode)
 		("\\.phtml$"   . html-mode)
 		("\\.djhtml$"  . django-html-mode)
+		("\\.htm$"     . django-html-mode)
 		("\\.html\\'"  . html-mode))
 	      auto-mode-alist))
 ;; 将文件模式和文件后缀关联起来。
@@ -453,6 +454,9 @@ occurence of CHAR."
 	    (make-variable-buffer-local 'ac-sources)
 	    (add-to-list 'ac-sources 'ac-source-php-completion)
 	    (auto-complete-mode t)))
+
+;; php-mode
+(require 'smarty-mode)
 
 ;; python-mode 
 
