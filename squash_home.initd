@@ -73,11 +73,11 @@ start() {
 	if [ ! $HOME_RW ] ; then
 		einfo "  mounted in tmpfs (RAM)"
 		HOME_RW="${DEF_RW}"
-	fi
 	[ -d $HOME_RW ] || mkdir -p $HOME_RW
 	chmod 0750 $HOME_RW
 	chown zhou:zhou $HOME_RW
-	mount -t aufs -o nodev,br=$HOME_RW=rw:$HOME_RO=ro aufs $HOME_AUFS
+        fi
+	mount -t aufs -o xino=/dev/shm/aufs.xino,br=$HOME_RW=rw:$HOME_RO=ro aufs $HOME_AUFS
 	eend 0
 
 }
@@ -101,6 +101,6 @@ stop() {
 	einfo "  Unmounting the tree"
 	umount -t aufs  $HOME_AUFS
 	umount -t squashfs $HOME_RO
-	rm -rf $HOME_RW
+#	rm -rf $HOME_RW
 	eend 0
 }
