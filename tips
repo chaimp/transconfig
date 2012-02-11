@@ -22,3 +22,6 @@ Index: content/firebug/chrome/chrome.js
  
          var contentBox = Firebug.chrome.$('fbContentBox');
          contentBox.style.fontSizeAdjust = fontSizeAdjust;
+
+google maps api key
+ABQIAAAAq2pWLuZT_SYOx1jvaPFafBT_4wTf_VMNuEBFWeQ_KZL55u6ugxSCUGUy-28WxUGmvVpNB9ZDSlXuVg

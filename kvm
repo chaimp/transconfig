@@ -1,3 +1,0 @@
-#!/bin/sh
-# This script created by AQEMU
-/usr/bin/kvm  -soundhw es1370 -vga qxl -enable-kvm -m 512 -no-fd-bootchk -localtime -cdrom "/dev/sr1" -drive file=/sqfs/vbox/kvm/kvm-xp,if=virtio -boot once=c,menu=off -net nic,vlan=1,macaddr=52:54:00:9f:71:52 -net tap,vlan=1,ifname=tap0,script=no -net nic,vlan=0,macaddr=52:54:00:72:95:06,model=virtio -net user,vlan=0 -name "Windows XP" -spice port=5930,playback-compression=off,disable-ticketing -device virtio-serial -chardev spicevmc,id=vdagent,debug=0,name=vdagent -device virtserialport,chardev=vdagent,name=com.rehat.spice.0 -usbdevice tablet -daemonize
