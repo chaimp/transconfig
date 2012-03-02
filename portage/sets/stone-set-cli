@@ -1,4 +1,5 @@
 app-editors/vim
+app-editors/vile
 app-misc/screen
 app-misc/byobu
 app-misc/ranger
@@ -7,6 +8,7 @@ app-misc/tmux-mem-cpu-load
 sys-apps/ack
 app-arch/atool
 app-cdr/cdw
+app-cdr/cdemu
 sys-apps/dog
 sys-apps/dstat
 sys-apps/fakeroot
@@ -18,6 +20,7 @@ sys-apps/qingy
 sys-apps/iproute2
 app-text/sdcv
 sys-boot/grub
+sys-boot/boot-update
 sys-boot/lilo
 sys-block/btrace
 sys-devel/bc
@@ -33,6 +36,9 @@ app-admin/pydf
 app-arch/p7zip
 app-arch/unrar
 app-arch/unzip
+app-i18n/fbterm
+app-i18n/fbterm-ucimf
+app-i18n/ucimf-sunpinyin
 net-ftp/lftp
 net-analyzer/macchanger
 net-analyzer/traceroute
@@ -40,3 +46,4 @@ net-analyzer/bmon
 net-firewall/shorewall
 net-misc/bridge-utils
 net-misc/aria2
+dev-python/virtualenv

@@ -1,6 +1,7 @@
 x11-wm/openbox
 x11-wm/xmonad
 x11-wm/xmonad-contrib
+x11-wm/jwm
 x11-wm/cairo-compmgr 
 x11-apps/xsetroot
 x11-apps/xmodmap
@@ -33,9 +34,9 @@ lxde-base/lxmenu-data
 lxde-base/lxtask
 app-admin/conky
 app-i18n/fcitx
-app-vim/vimacs
 app-editors/gvim
 app-arch/file-roller
+app-cdr/gcdemu
 media-gfx/scrot
 media-fonts/droid
 media-sound/volumeicon

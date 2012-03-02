@@ -3,7 +3,7 @@ app-shells/zsh
 app-shells/zsh-completion
 sys-kernel/module-rebuild
 sys-libs/libstdc++-v3
-sys-devel/prelink
+#sys-devel/prelink
 sys-fs/diskdev_cmds
 sys-fs/squashfs-tools
 sys-fs/dosfstools
@@ -22,8 +22,11 @@ sys-process/dcron
 net-misc/keychain
 app-admin/logrotate
 app-admin/sudo
+dev-util/schroot
 dev-util/lafilefixer
 sys-apps/ethtool
 net-dialup/ppp
 net-misc/ntpclient
 net-misc/ntp
+app-misc/when
+app-text/tree

@@ -11,6 +11,7 @@ app-emacs/haskell-mode
 app-emacs/org-mode
 app-emacs/php-mode
 dev-python/ropemacs
+dev-python/cssutils
 app-emacs/pymacs
 app-emacs/python-mode
 app-emacs/fold-dwim
@@ -20,3 +21,4 @@ app-emacs/yasnippet
 app-emacs/graphviz-dot-mode
 app-emacs/smex
 app-emacs/zenburn
+app-emacs/nxml-gentoo-schemas

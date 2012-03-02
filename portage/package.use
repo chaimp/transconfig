@@ -14,31 +14,33 @@ xfce-base/xfce4-meta minimal -alsa -oss
 xfce-base/xfce4-settings libnotify sound
 xfce-base/xfce-utils -lock
 xfce-base/exo libnotify
-x11-base/xorg-server kdrive
+x11-base/xorg-server kdrive xnest xvfb
 x11-apps/xinit minimal
 x11-wm/fvwm -gtk stroke
 x11-wm/compiz-fusion emerald unsupported
 x11-wm/musca xlisten
 x11-themes/redhat-artwork  audacious cursors gdm icons 
 x11-themes/tango-icon-theme -png
-x11-terms/rxvt-unicode force-hints 256-color iso14755 afterimage blink fading-colors pixbuf unicode3 -vanilla
+x11-terms/rxvt-unicode 256-color iso14755 afterimage blink fading-colors pixbuf unicode3 -vanilla
 x11-misc/dzen minimal
 x11-misc/cairo-dock-plugins compiz network-monitor powermanager gmenu xgamma mail
 x11-misc/lightdm branding gtk -qt4
 x11-misc/tint2 battery tint2conf
+x11-libs/cairo -qt4
 x11-libs/libdrm libkms
+sci-libs/geos -php
 x11-drivers/ati-drivers modules
 media-sound/volumeicon -oss
-media-sound/audacious chardet 
+media-sound/audacious chardet -gtk gtk3 
 media-sound/esound -alsa
 media-sound/moc alsa vorbis ffmpeg
 media-sound/xmms2 -alsa mac asf mms 
 media-sound/deadbeef tta zip gme hotkeys ffmpeg gbk
 media-sound/split2flac -mp4
-media-plugins/audacious-plugins alsa ffmpeg chardet sndfile scrobbler cue
+media-plugins/audacious-plugins alsa ffmpeg chardet sndfile scrobbler cue -gtk
 media-plugins/gst-plugins-meta ffmpeg
 media-video/mplayer -gtk -live -dv -mp2 -amrwb -amrnb -dirac -speex -cddb -schroedinger -dvb xv radio quicktime real rar 
-media-video/vlc -nsplugin -xosd dvd mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio 
+media-video/vlc -xosd -mtp -nsplugin dvd mpeg mad aac dts a52 ogg flac theora oggvorbis matroska freetype xv svga gnutls stream vlm cdda vcd cdio 
 media-libs/realcodecs -win32codecs
 media-libs/libjpeg-turbo static-libs
 media-libs/libmng lcms static-libs
@@ -46,8 +48,9 @@ media-libs/libpng static-libs
 media-libs/lcms static-libs
 media-libs/sdl-mixer mikmod vorbis
 media-libs/mesa gles gallium
-media-libs/phonon vlc -xine
+media-libs/phonon -gstreamer vlc 
 media-libs/freetype static-libs fontforge
+media-libs/devil -jpeg
 media-gfx/comix rar
 media-gfx/gfxboot themes speech animate beep
 media-gfx/fontforge pango truetype-debugger type3
@@ -55,6 +58,7 @@ media-tv/gmlive sopcast extra
 media-tv/enna -vdr -upnp
 app-i18n/fcitx pango qt zhengma
 app-i18n/sunpinyin xim
+app-i18n/libucimf openvanilla sunpinyin 
 app-arch/p7zip rar
 app-admin/conky -X -hddtemp vim-syntax nano-syntax wifi rss iostats weather-metar imlib math
 app-admin/testdisk ntfs reiserfs
@@ -73,12 +77,14 @@ app-text/ghostscript-gpl cups
 app-misc/screen multiuser
 app-emacs/anything extensions
 app-emulation/wine -win64
+app-emulation/winetricks -gtk
 app-emulation/ies4linux -gtk -kde
 app-emulation/qemu-softmmu kqemu
 app-emulation/q4wine winetriks embedded-fuseiso icoutils
 app-emulation/qemu-kvm spice qemu-ifup
 app-emulation/libvirt iscsi kvm lvm nfs virtualbox
 app-emulation/aqemu  kvm
+app-emulation/spice -gui sasl
 app-emulation/virtualbox-bin rdesktop-vrdp -chm vboxwebsrv
 app-emulation/virtualbox extensions -sdk -python 
 app-office/openoffice-bin gnome java
@@ -90,15 +96,17 @@ media-sound/mpd audiofile id3 lame ao
 media-sound/sonata lyrics
 media-sound/aumix -gpm
 media-gfx/splashutils fbcondecor
-www-client/firefox system-sqlite pgo
+www-client/firefox system-sqlite pgo -crashreporter
 www-client/chromium system-sqlite system-v8
 www-servers/cherokee admin threads geoip
 www-servers/nginx addition fastcgi flv imap pcre perl random-index securelink ssl status sub zlib 
 www-servers/lighttpd minimal
 www-plugins/mplayerplug-in divx gmedia quicktime realmedia wmp 
-dev-lang/php -truetype sockets filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
+dev-lang/php -truetype apache2 sockets filter unicode cgi curl discard-path force-cgi-redirect bzip2 crypt ctype ftp gd hash mysql mysqli pcre posix session simplexml spl tokenizer xml xmlreader xmlwriter tidy json zip-external zlib
 dev-lang/python sage
 dev-db/mysql embedded 
+dev-db/mariadb pbxt
+dev-db/redis -tcmalloc
 dev-db/sqlite secure-delete icu unlock-notify
 dev-vcs/subversion -berkdb
 net-ftp/proftpd  authfile clamav softquota vroot rewrite
@@ -116,8 +124,9 @@ net-misc/wget -nls
 net-misc/ntp openntpd
 net-misc/networkmanager -nss connection-sharing
 net-misc/pcmanx-gtk2 -nsplugin
-net-misc/curl -nss
-#net-misc/wicd -X -gtk -libnotify
+net-misc/curl -gnutls nss
+net-misc/spice-gtk vala sasl
+net-im/gtkqq -gtk3 proxy
 net-wireless/aircrack-ng wifi
 net-libs/libsoup gnome
 net-libs/xulrunner -crashreporter
@@ -143,7 +152,7 @@ sys-fs/udev gudev hwdb keymap
 sys-fs/ntfs3g suid
 sys-fs/lvm2 -lvm1
 sys-fs/btrfs-progs debug-utils
-sys-fs/aufs3 hfs inotify nfs ramfs fuse -kernel-patch -kernel_linux
+sys-fs/aufs3 hfs inotify nfs ramfs fuse kernel-patch
 sys-block/open-iscsi utils
 sys-block/gparted  fat hfs ntfs reiser4 reiserfs xfs
 gnome-extra/avant-window-navigator xfce
@@ -152,7 +161,9 @@ app-benchmarks/bootchart java
 virtual/ffmpeg encode
 virtual/jpeg static-libs
 media-video/ffmpeg dirac schroedinger
-
 app-arch/bzip2 static-libs
 sys-libs/zlib  static-libs
 sys-apps/pciutils -zlib
+sci-libs/gdal  geos
+dev-libs/nettle gmp
+dev-libs/apr-util -sqlite

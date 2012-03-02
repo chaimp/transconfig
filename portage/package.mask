@@ -1,6 +1,10 @@
 =x11-misc/fqterm-9999
->=x11-misc/dmenu-4.4
+#>=x11-misc/dmenu-4.4
 x11-libs/gtk+:1
 =sys-boot/grub-9999
 >=dev-libs/newt-0.52.14
-=media-video/vlc-1.1.12-r1
+www-client/google-chrome:beta
+www-client/google-chrome:unstable
+=x11-themes/faenza-icon-theme-1.2
+=app-emacs/org-mode-7.8.03
+dev-lang/python::progress

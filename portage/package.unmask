@@ -2,8 +2,11 @@ sys-apps/sreadahead
 sys-apps/portage
 app-i18n/fcitx
 media-gfx/gimp
-
+dev-db/mariadb 
+=virtual/mysql-5.2
 
 x11-wm/cairo-compmgr
 app-emacs/anything
 =dev-lang/vala-0.8.1
+
+x11-misc/lightdm

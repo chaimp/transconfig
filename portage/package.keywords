@@ -10,3 +10,5 @@ sys-fs/zfs **
 x11-themes/lovelock-backgrounds **
 media-video/umplayer ~*
 =sys-fs/aufs3-utils-9999 **
+sys-boot/grub:2 **
+app-emacs/auto-complete **

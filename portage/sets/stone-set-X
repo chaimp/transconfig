@@ -3,6 +3,7 @@ media-gfx/fontforge
 media-fonts/sgi-fonts
 media-fonts/terminus-font
 media-fonts/ubuntu-font-family
+media-fonts/ttf-bitstream-vera
 www-client/google-chrome
 net-p2p/transmission
 net-p2p/mldonkey
@@ -19,6 +20,9 @@ app-office/lyx
 media-fonts/acroread-asianfonts
 media-libs/phonon
 x11-misc/lightdm
+x11-misc/notify-osd
+x11-misc/synergy
+x11-misc/x2x
 dev-util/d-feet
 app-text/kchmviewer
 app-text/goldendict 
@@ -26,4 +30,5 @@ gnome-extra/gcalctool
 #gnome-extra/nm-applet
 gnome-extra/gconf-editor
 gnome-base/dconf
+gnome-extra/gdmap
 
