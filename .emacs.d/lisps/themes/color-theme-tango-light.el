@@ -76,6 +76,8 @@
      (org-level-4 ((t (:inherit font-lock-string-face))))
      (org-level-5 ((t (:inherit font-lock-constant-face))))
 
+     (vertical-border ((t (:foreground "#ffffff" :background  "#ffffff"))))
+
      (ido-subdir ((t (:foreground "#CF6A4C"))))
      (ido-first-match ((t (:foreground "#8F9D6A"))))
      (ido-only-match ((t (:foreground "#8F9D6A"))))

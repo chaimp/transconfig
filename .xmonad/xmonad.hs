@@ -1,13 +1,10 @@
 import XMonad
-
 import Data.Monoid
+import System.IO
 import System.Exit
-import XMonad.Prompt
 import XMonad.Prompt.RunOrRaise
-import XMonad.Prompt.Shell
 import XMonad.Prompt.Window
-import XMonad.Prompt.XMonad
-import XMonad.Prompt.AppLauncher
+--import XMonad.Prompt.XMonad
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName 
@@ -30,9 +27,10 @@ import XMonad.Util.NamedWindows (getName)
 
 import Data.List(isPrefixOf)
 import Data.Ratio ((%))
-import qualified System.IO.UTF8 as U
-import qualified XMonad.StackSet as W
+
+--import qualified System.IO.UTF8 as U
 import qualified XMonad.Actions.FlexibleResize as Flex
+import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 --
@@ -50,7 +48,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0 ,                0x1008ff93), spawn "gksudo pm-hibernate")
     , ((modm,               xK_space ), sendMessage NextLayout)
     , ((modm,               xK_n     ), refresh)
-    , ((modm,               xK_b     ), sendMessage ToggleStruts)
     , ((modm,               xK_Tab   ), windows W.focusDown)
     , ((modm,               xK_j     ), windows W.focusDown)
     , ((modm,               xK_k     ), windows W.focusUp  )
@@ -91,12 +88,12 @@ myManageHook = composeAll . concat $
 --    , [className =? s  --> doTile   | s <- myTiles]
     ]
     where
-    myFloats      = ["Gpick", "Chromium", "Gimp", "Volumeicon", "MPlayer", "Umplayer", "Gnome-mplayer", "Tintwizard", "Vlc", "Lxrandr", "Arandr", "Audacious", "Deadbeef", "VirtualBox", "Firefox", "Firefox-bin", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Openfetion", "Vncviewer", "Cairo-dock", "RipperX", "Goldendict" ]
-    myTitleFloats = ["Downloads", "Preferences", "Save As...", "QEMU", "emacs", "Add-ons", "Firefox", "Chromium", "Exe", "Options", "首选项", "Wicd Network Manager"]
+    myFloats      = ["Gpick", "Chromium", "Gimp", "Volumeicon", "MPlayer", "Smplayer2", "Gnome-mplayer", "Tintwizard", "Vlc", "Lxrandr", "Arandr", "Audacious", "Deadbeef", "VirtualBox", "Firefox", "Firefox-bin", "AliWangWang", "Linux-fetion", "Gcalctool", "Gmlive", "Skype", "Ossxmix", "Pidgin", "Emesene", "Openfetion", "Vncviewer", "Cairo-dock", "RipperX", "Goldendict", "Gtkqq", "AQEMU", "PBurn" ]
+    myTitleFloats = ["Downloads", "Preferences", "Save As...", "QEMU", "emacs", "Add-ons", "Firefox", "Chromium", "Exe", "Options", "首选项", "AliWangWang", "阿里旺旺", "Wicd Network Manager"]
     myIgnores     = ["trayer", "dzen", "stalonetray", "systray", "cairo-dock"]
 --    myTiles       = ["tilda", "pcmanfm", "thunar", "dolphin", "lxterminal"]
 
-myIconDir = "/home/zhou/.xmonad/dzen/layouts/"
+myIconDir = "/sqfs/stone/home/.xmonad/dzen/layouts/"
 myBorderWidth   = 0
 myNormalBorderColor  = "#729fcf"
 myFocusedBorderColor = "#7292cf"
@@ -177,12 +174,16 @@ main :: IO ()
 main = do
   spawn "/usr/libexec/polkit-gnome-authentication-agent-1"
   spawn "parcellite"
-  spawn "wicd-client"
+--  spawn "wicd-client"
+  spawn "nm-applet"
   spawn "volumeicon"
   spawn "tint2"
   spawn "urxvt"
   spawn "cairo-compmgr"  
-  spawn "fcitx"
+--  spawn "unagi"
+  spawn "gcdemu"
+--  spawn "yong"
+  spawn "sleep 9; fcitx"
 
   dzen <- spawnPipe myStatusBar
   spawn myConkyBar
